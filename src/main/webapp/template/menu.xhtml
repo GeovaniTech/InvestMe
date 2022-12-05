@@ -30,10 +30,12 @@
 				flex-direction: column;
 				justify-content: flex-start;
 				align-items: center;
+				trasition: 0.4s;
 			}
 			
 			#form-menu > * {
 				width: 100%;
+				trasition: 0.4s;
 			}
 			
 			.ui-menu {
@@ -105,7 +107,8 @@
 					styleClass="submenu">
 					
 					<p:menuitem 
-						icon="pi pi-credit-card">
+						icon="pi pi-credit-card"
+						onclick="PF('dialog-types').show()">
 						Types
 					</p:menuitem>
 					
@@ -148,5 +151,21 @@
 				style="color: white; margin-right: 10px;"
 				icon="pi pi-sign-out"/>
 		</h:form>
+	
+		<p:dialog
+			header="Types"
+			widgetVar="dialog-types"
+			width="80%"
+			height="80%"
+			modal="true">
+			
+			<p:inputText 
+				value="#{MBTYpe.type.name}"
+				placeholder="Name"/>
+			
+			<p:commandButton 
+				value="Register"
+				action="#{MBType.save()}"/>
+		</p:dialog>
 	</h:body>
 </html>

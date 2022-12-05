@@ -8,7 +8,7 @@
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>InvestMe</title>
-		
+		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
 		<style>
 			* {
 				margin: 0px;
@@ -17,10 +17,49 @@
 			}
 			
 			#form-menu {
-				width: 200px;
+				top: 0;
+				left: 0;
+				width: 250px;
 				height: 100vh;
+				padding: 10px;
+				position: fixed;
+				margin-right:250px;
 				color: white;
 				background-color: #292522;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: center;
+				trasition: 0.4s;
+			}
+			
+			#form-menu > * {
+				width: 100%;
+				trasition: 0.4s;
+			}
+			
+			.ui-menu {
+				border: 0px solid #292522 !important;
+				color: white !important;
+				background-color: #292522 !important;
+			}
+			
+			.ui-menuitem-text {
+				color: white !important;
+			}
+			
+			.ui-menuitem:hover .ui-menuitem-text {
+				color: black !important;
+			}
+			
+			.submenu {
+				border: 0px solid #292522 !important;
+				color: white !important;
+				background-color: #292522 !important;
+			}
+			
+			.submenu > * {
+				color: white !important;
 			}
 			
 			.name-logo {
@@ -28,10 +67,23 @@
 				flex-direction: row;
 				justify-content: center;
 				align-center: center;
+				margin-bottom: 10px;
+				font-family: 'Poppins', sans-serif;
+				font-size: 20px;
 			}
 			
 			.name-logo span  {
 				color: #11766d;
+			}
+			
+			#form-menu-header {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+				align-items: center;
+				width: 100%;
+				height: 60px;
+				background-color: #292522;
 			}
 		</style>
 	</h:head>
@@ -45,18 +97,75 @@
 				toggleable="true">
 				
 				<p:menuitem
-					icon="pi pi-bitcoin">
-					All Investments
+					icon="pi pi-wallet"
+					outcome="/pages/wallet.xhtml">
+					Wallet
 				</p:menuitem>
 				
 				<p:submenu
-					label="Records">
+					label="Records"
+					styleClass="submenu">
 					
-					<p:menuitem>Types</p:menuitem>
-					<p:menuitem>Actives</p:menuitem>
-					<p:menuitem>Investment</p:menuitem>
+					<p:menuitem 
+						icon="pi pi-credit-card"
+						onclick="PF('dialog-types').show()">
+						Types
+					</p:menuitem>
+					
+					<p:menuitem 
+						icon="pi pi-bitcoin">
+						Actives
+					</p:menuitem>
+					
+					<p:menuitem
+						icon="pi pi-plus">
+						New Investment
+					</p:menuitem>
+				</p:submenu>
+				
+				<p:submenu
+					label="Reports"
+					styleClass="submenu">
+					
+					<p:menuitem
+						icon="pi pi-file-excel">
+						Excel
+					</p:menuitem>
+					
+					<p:menuitem
+						icon="pi pi-file-pdf">
+						PDF
+					</p:menuitem>
 				</p:submenu>
 			</p:menu>
 		</h:form>
+	
+		<h:form id="form-menu-header">
+			<p:commandButton 
+				styleClass="ui-button-raised ui-button-flat"
+				style="color: white; margin-right: 10px;"
+				icon="pi pi-user"/>
+			
+			<p:commandButton
+				styleClass="ui-button-raised ui-button-flat" 
+				style="color: white; margin-right: 10px;"
+				icon="pi pi-sign-out"/>
+		</h:form>
+	
+		<p:dialog
+			header="Types"
+			widgetVar="dialog-types"
+			width="80%"
+			height="80%"
+			modal="true">
+			
+			<p:inputText 
+				value="#{MBTYpe.type.name}"
+				placeholder="Name"/>
+			
+			<p:commandButton 
+				value="Register"
+				action="#{MBType.save()}"/>
+		</p:dialog>
 	</h:body>
 </html>
