@@ -58,8 +58,6 @@ public class DAOType implements JPAEntity, GenericDAO<DTOType> {
 			to.setId((Integer) o[0]);
 			to.setName((String) o[1]);
 			
-			System.out.println("NAME " + to.getName());
-			
 			convertedResults.add(to);
 		}
 		

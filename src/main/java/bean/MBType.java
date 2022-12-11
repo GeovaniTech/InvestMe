@@ -8,10 +8,11 @@ import javax.inject.Named;
 
 import dao.DAOType;
 import dto.DTOType;
+import interfaces.Messages;
 
 @Named("MBType")
 @ViewScoped
-public class MBType implements Serializable {
+public class MBType implements Serializable, Messages {
 	private static final long serialVersionUID = 1230226415644681012L;
 	
 	private DTOType dtoType = new DTOType();
@@ -28,14 +29,22 @@ public class MBType implements Serializable {
 			this.setDtoType(new DTOType());
 			
 			updateTypes();
+			msg.saveSuccessfully();
 		} else {
-			
+			msg.emptyValues();
 		}
 	}
 	
 	public void remove(DTOType to) {
-		this.getDaoType().remove(to);
-		updateTypes();
+		try {
+			this.getDaoType().remove(to);
+			
+			updateTypes();
+			msg.removeSuccessfully();
+		} catch (Exception e) {
+			msg.emptyValues();
+		}
+		
 	}
 	
 	public void updateTypes() {
