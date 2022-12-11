@@ -1,4 +1,4 @@
-interfaces\JPA.class
+interfaces\JPAEntity.class
 model\Active.class
 model\Investment.class
 utils\JPAUtil.class

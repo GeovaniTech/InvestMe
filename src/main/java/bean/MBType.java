@@ -1,43 +1,64 @@
 package bean;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import dao.DAOType;
-import model.Type;
+import dto.DTOType;
 
-@Named
-public class MBType {
-	private Type type;
+@Named("MBType")
+@ViewScoped
+public class MBType implements Serializable {
+	private static final long serialVersionUID = 1230226415644681012L;
+	
+	private DTOType dtoType = new DTOType();
 	private DAOType daoType = new DAOType();
-	private List<Type> types;
+	private List<DTOType> types;
 	
 	public MBType() {
 		updateTypes();
 	}
 	
+	public void save() {
+		if(!this.getDtoType().getName().equals("")) {
+			this.getDaoType().save(this.getDtoType());
+			this.setDtoType(new DTOType());
+			
+			updateTypes();
+		} else {
+			
+		}
+	}
+	
+	public void remove(DTOType to) {
+		this.getDaoType().remove(to);
+		updateTypes();
+	}
+	
 	public void updateTypes() {
-		this.setTypes(this.getDaoType().listTypes());
+		this.setTypes(this.getDaoType().list());
 	}
 	
 	//Getters and Setters
-	public Type getType() {
-		return type;
-	}
-	public void setType(Type type) {
-		this.type = type;
-	}
 	public DAOType getDaoType() {
 		return daoType;
 	}
 	public void setDaoType(DAOType daoType) {
 		this.daoType = daoType;
 	}
-	public List<Type> getTypes() {
+	public List<DTOType> getTypes() {
 		return types;
 	}
-	public void setTypes(List<Type> types) {
+	public void setTypes(List<DTOType> types) {
 		this.types = types;
+	}
+	public DTOType getDtoType() {
+		return dtoType;
+	}
+	public void setDtoType(DTOType dtoType) {
+		this.dtoType = dtoType;
 	}
 }

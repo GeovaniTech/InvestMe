@@ -9,7 +9,7 @@ public class JPAUtil {
 
 	static {
 		if(emf == null) {
-			emf = Persistence.createEntityManagerFactory("studys");
+			emf = Persistence.createEntityManagerFactory("investme");
 		}
 	}
 	

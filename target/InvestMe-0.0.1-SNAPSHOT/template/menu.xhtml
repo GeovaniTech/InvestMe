@@ -155,17 +155,42 @@
 		<p:dialog
 			header="Types"
 			widgetVar="dialog-types"
-			width="80%"
-			height="80%"
+			width="60%"
+			height="60%"
 			modal="true">
 			
 			<p:inputText 
-				value="#{MBTYpe.type.name}"
+				value="#{MBType.type.name}"
 				placeholder="Name"/>
 			
 			<p:commandButton 
 				value="Register"
 				action="#{MBType.save()}"/>
+			
+			<p:dataTable
+				value="#{MBType.types}"
+				var="type"
+				paginator="true"
+				paginatorPosition="bottom">
+				
+				<p:column headerText="Id">
+					<h:outputLabel value="#{type.id}"></h:outputLabel>
+				</p:column>
+				
+				<p:column headerText="Name">
+					<h:outputLabel varlue="#{type.name}"></h:outputLabel>
+				</p:column>
+				
+				<p:column headerText="Id">
+					<div class="options-menu">
+						<p:commandButton 
+							value="Deletar" />
+						
+						<p:commandButton 
+							value="Editar" />
+					</div>
+				</p:column>
+			</p:dataTable>
 		</p:dialog>
 	</h:body>
 </html>

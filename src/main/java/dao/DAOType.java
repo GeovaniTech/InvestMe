@@ -1,31 +1,69 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import interfaces.JPA;
+import dto.DTOType;
+import interfaces.GenericDAO;
+import interfaces.JPAEntity;
 import model.Type;
 
-public class DAOType implements JPA {
-	public void save(Type type) {
+public class DAOType implements JPAEntity, GenericDAO<DTOType> {
+	@Override
+	public void save(DTOType model) {
+		Type type = new Type(); 
+		
+		type.setName("teste");
+		
 		em.getTransaction().begin();
 		em.persist(type);
 		em.getTransaction().commit();
 	}
-	
-	public void remove(Type type) {
+
+	@Override
+	public void change(DTOType model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(DTOType model) {
 		em.getTransaction().begin();
-		em.remove(em.contains(type) ? type : em.merge(type));
+		
+		em.createQuery("DELETE FROM " + Type.class.getName() + " Type WHERE Type.id = :id")
+			.setParameter("id", model.getId())
+			.executeUpdate();
+	
 		em.getTransaction().commit();
 	}
-	
-	public Type findById(int id) {
-		return em.find(Type.class, id);
-	}
-	
-	public List<Type> listTypes() {
-		String sql = "SELECT T FROM Type T";
+
+	@Override
+	public DTOType findById(int id) {
+		Type type = em.find(Type.class, id);
+		DTOType dtoType = new DTOType();
 		
-		return em.createQuery(sql, Type.class)
-				.getResultList();
+		dtoType.setId(type.getId());
+		dtoType.setName(type.getName());
+		return dtoType;
 	}
+	@Override
+	public List<DTOType> list() {
+		List<DTOType> convertedResults = new ArrayList<DTOType>();
+		
+		List<Object[]> result = em.createQuery("SELECT Type.id, Type.name FROM " + Type.class.getName() + " Type", Object[].class)
+								.getResultList();
+		
+		for(Object[] o : result) {
+			DTOType to = new DTOType();
+			
+			to.setId((Integer) o[0]);
+			to.setName((String) o[1]);
+			
+			System.out.println("NAME " + to.getName());
+			
+			convertedResults.add(to);
+		}
+		
+		return convertedResults;
+	}	
+	
 }

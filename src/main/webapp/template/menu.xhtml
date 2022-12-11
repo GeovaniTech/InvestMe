@@ -155,17 +155,45 @@
 		<p:dialog
 			header="Types"
 			widgetVar="dialog-types"
-			width="80%"
-			height="80%"
+			width="60%"
+			height="60%"
 			modal="true">
 			
 			<p:inputText 
-				value="#{MBTYpe.type.name}"
-				placeholder="Name"/>
+				value="#{MBType.dtoType.name}"
+				placeholder="Name"
+				style="margin-bottom: 10px;"/>
 			
 			<p:commandButton 
 				value="Register"
-				action="#{MBType.save()}"/>
+				action="#{MBType.save()}"
+				update="tableTypes"/>
+			
+			<p:dataTable
+				id="tableTypes"
+				value="#{MBType.types}"
+				var="type"
+				paginator="true"
+				rows="6"
+				paginatorPosition="bottom">
+				
+				<p:column headerText="Id">
+					<h:outputText value="#{type.name}" />
+				</p:column>
+				
+				<p:column headerText="Name">
+					<h:outputText varlue="#{type.name}" />
+				</p:column>
+				
+				<p:column headerText="Id">
+					<div class="options-menu">
+						<p:commandButton 
+							value="Deletar"
+							action="#{MBType.remove(type)}"
+							update="tableTypes" />
+					</div>
+				</p:column>
+			</p:dataTable>
 		</p:dialog>
 	</h:body>
 </html>
