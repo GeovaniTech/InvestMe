@@ -335,6 +335,13 @@
 				<p:column headerText="Total">
 					<h:outputText value="#{investment.amount * investment.active.price}" />
 				</p:column>
+				
+				<p:column headerText="Delete">
+					<p:commandButton 
+						value="Delete"
+						action="#{MBInvestment.remove(investment)}"
+						update="tableInvestments, growl" />
+				</p:column>				
 			</p:dataTable>
 		</p:dialog>
 	</h:body>

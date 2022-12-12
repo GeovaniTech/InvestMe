@@ -38,7 +38,7 @@ public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 	public void remove(DTOInvestment to) {
 		em.getTransaction().begin();
 		
-		em.createQuery("DELETE FROM " + Investment.class +  " Investment WHERE Investment.id = :id")
+		em.createQuery("DELETE FROM " + Investment.class.getName() +  " Investment WHERE Investment.id = :id")
 			.setParameter("id", to.getId())
 			.executeUpdate();
 		
