@@ -4,12 +4,11 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-         xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core">
 	
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>InvestMe</title>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
 		<style>
 			* {
 				margin: 0px;
@@ -299,7 +298,7 @@
 				<p:commandButton 
 					value="Register"
 					action="#{MBInvestment.save()}"
-					update="tableInvestments, growl, @form" />
+					update="tableInvestments, growl, @form, tableWallet" />
 			</h:form>
 			
 			<p:dataTable
@@ -340,7 +339,7 @@
 					<p:commandButton 
 						value="Delete"
 						action="#{MBInvestment.remove(investment)}"
-						update="tableInvestments, growl" />
+						update="tableInvestments, growl, tableWallet" />
 				</p:column>				
 			</p:dataTable>
 		</p:dialog>

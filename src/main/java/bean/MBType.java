@@ -24,7 +24,8 @@ public class MBType implements Serializable, Messages {
 	}
 	
 	public void save() {
-		if(this.getDtoType().getName() != null) {
+		if(this.getDtoType().getName() != null
+				&& !this.getDtoType().getName().equals("")) {
 			this.getDaoType().save(this.getDtoType());
 			this.setDtoType(new DTOType());
 			

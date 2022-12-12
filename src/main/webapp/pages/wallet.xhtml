@@ -4,7 +4,9 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
 	
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,13 +21,75 @@
 						font-family: 'Poppins', sans-serif;
 						font-size: 30px;
 					}
+					
+					.container-cards {
+						display: flex;
+						flex-direction: row;
+						justify-content: space-around;
+						align-items: center;
+					}
 				</style>
 				
-
+				<div class="container-cards">
+					<components:card 
+						value="Total"
+						description="Accumulated Total" />
+					
+					<components:card 
+						value="Total Spent"
+						description="Total Spent" />
+					
+					<components:card 
+						value="Total Spent"
+						description="Total Spent" />
+						
+					<components:card 
+						value="Total Spent"
+						description="Total Spent" />
+				</div>
 				
-				<p:commandButton 
-					value="Update"
-					action="#{MBType.updateTypes}" />
+				<h:form id="tableWallet">
+					<p:dataTable
+						value="#{MBInvestment.investments}"
+						var="investment"
+						paginator="true"
+						rows="15"
+						paginatorPosition="bottom">
+						
+						<p:column headerText="Active">
+							<h:outputText value="#{investment.active.name}" />
+						</p:column>
+		
+						<p:column headerText="Type">
+							<h:outputText value="#{investment.active.type.name}" />
+						</p:column>
+						
+						<p:column headerText="Price">
+							<h:outputText value="#{investment.active.price}" />
+						</p:column>
+		
+						<p:column headerText="Amount">
+							<h:outputText value="#{investment.amount}" />
+						</p:column>
+		
+						<p:column headerText="When">
+							<h:outputText value="#{investment.date}">
+								<f:convertDateTime pattern="dd/mm/yyyy" />  
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Total">
+							<h:outputText value="#{investment.amount * investment.active.price}" />
+						</p:column>
+						
+						<p:column headerText="Delete">
+							<p:commandButton 
+								value="Delete"
+								action="#{MBInvestment.remove(investment)}"
+								update="tableInvestments, growl, @form" />
+						</p:column>				
+					</p:dataTable>
+				</h:form>
 			</ui:define>
 		</ui:composition>
 	</h:body>

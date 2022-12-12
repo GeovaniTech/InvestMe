@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import dto.DTOInvestment;
 import interfaces.GenericDAO;
@@ -13,6 +15,7 @@ import model.Active;
 import model.Investment;
 
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 
 	@Override
@@ -43,7 +46,6 @@ public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 			.executeUpdate();
 		
 		em.getTransaction().commit();
-		
 	}
 
 	@Override
