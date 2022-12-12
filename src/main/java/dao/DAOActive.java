@@ -3,12 +3,18 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
 import dto.DTOActive;
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Active;
 import model.Type;
 
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class DAOActive implements JPAEntity, GenericDAO<DTOActive>{
 
 	@Override
@@ -57,7 +63,16 @@ public class DAOActive implements JPAEntity, GenericDAO<DTOActive>{
 
 	@Override
 	public List<DTOActive> list() {
-		List<Object[]> result = em.createQuery("SELECT Active FROM " + Active.class.getName() + " Active", Object[].class)
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("SELECT Active.id, ");
+		sql.append(" Active.name, ");
+		sql.append(" Active.price, ");
+		sql.append(" Active.type ");
+		sql.append(" FROM " + Active.class.getName());
+		sql.append(" Active ");
+		
+		List<Object[]> result = em.createQuery(sql.toString(), Object[].class)
 				.getResultList();
 		
 		List<DTOActive> convertedResults = new ArrayList<DTOActive>();

@@ -1,7 +1,14 @@
+dao\DAOActive.class
 interfaces\JPAEntity.class
+utils\Messages.class
+bean\MBActive.class
 model\Active.class
+dto\DTOType.class
+bean\MBType.class
+dao\DAOType.class
+dto\DTOActive.class
+interfaces\GenericDAO.class
 model\Investment.class
 utils\JPAUtil.class
 model\Type.class
-bean\MBType.class
-dao\DAOType.class
+interfaces\Messages.class

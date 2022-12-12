@@ -2,17 +2,24 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+
 import dto.DTOType;
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Type;
 
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class DAOType implements JPAEntity, GenericDAO<DTOType> {
 	@Override
 	public void save(DTOType model) {
 		Type type = new Type(); 
 		
-		type.setName("teste");
+		type.setName(model.getName());
 		
 		em.getTransaction().begin();
 		em.persist(type);
@@ -45,6 +52,7 @@ public class DAOType implements JPAEntity, GenericDAO<DTOType> {
 		dtoType.setName(type.getName());
 		return dtoType;
 	}
+	
 	@Override
 	public List<DTOType> list() {
 		List<DTOType> convertedResults = new ArrayList<DTOType>();

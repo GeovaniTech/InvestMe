@@ -3,7 +3,8 @@
 <html 
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+         xmlns:f="http://java.sun.com/jsf/core">
 	
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -113,6 +114,7 @@
 					</p:menuitem>
 					
 					<p:menuitem 
+						onclick="PF('dialog-actives').show()"
 						icon="pi pi-bitcoin">
 						Actives
 					</p:menuitem>
@@ -151,7 +153,8 @@
 				style="color: white; margin-right: 10px;"
 				icon="pi pi-sign-out"/>
 		</h:form>
-	
+		
+		<!-- DIALOG TYPES -->
 		<p:dialog
 			header="Types"
 			widgetVar="dialog-types"
@@ -159,37 +162,100 @@
 			height="60%"
 			modal="true">
 			
-			<p:inputText 
-				value="#{MBType.type.name}"
-				placeholder="Name"/>
-			
-			<p:commandButton 
-				value="Register"
-				action="#{MBType.save()}"/>
+			<h:form>
+				<p:inputText 
+					value="#{MBType.dtoType.name}"
+					placeholder="Name"
+					style="margin-bottom: 10px;"/>
+				
+				<p:commandButton 
+					value="Register"
+					action="#{MBType.save()}"
+					update="tableTypes, growl, @form"/>
+			</h:form>
 			
 			<p:dataTable
+				id="tableTypes"
 				value="#{MBType.types}"
 				var="type"
 				paginator="true"
+				rows="6"
 				paginatorPosition="bottom">
 				
 				<p:column headerText="Id">
-					<h:outputLabel value="#{type.id}"></h:outputLabel>
+					<h:outputText value="#{type.name}" />
 				</p:column>
 				
 				<p:column headerText="Name">
-					<h:outputLabel varlue="#{type.name}"></h:outputLabel>
+					<h:outputText varlue="#{type.name}" />
 				</p:column>
 				
 				<p:column headerText="Id">
 					<div class="options-menu">
 						<p:commandButton 
-							value="Deletar" />
-						
-						<p:commandButton 
-							value="Editar" />
+							value="Deletar"
+							action="#{MBType.remove(type)}"
+							update="tableTypes" />
 					</div>
 				</p:column>
+			</p:dataTable>
+		</p:dialog>
+		
+		<!-- DIALOG ACTIVES -->
+		<p:dialog 
+			header="Actives"
+			widgetVar="dialog-actives"
+			width="60%"
+			height="60%"
+			modal="true">
+			
+			<div class="div-fields" style="margin-bottom: 10px;">
+				<p:inputText 
+					placeholder="Name"
+					value="#{MBActive.dtoActive.name}" />
+				
+				<p:inputNumber 
+					placeholder="Price"
+					value="#{MBActive.dtoActive.price}" />
+				
+				<p:selectOneMenu 
+					value="#{MBActive.dtoActive.type}">
+				
+					<f:selectItems 
+						var="type"
+						value="#{MBType.types}"
+						itemLabel="#{type.name}"
+						itemValue="#{type}" />	
+				</p:selectOneMenu>
+				
+				<p:commandButton 
+					value="Register"
+					action="#{MBActive.save()}"/>			
+			</div>
+				
+			<p:dataTable
+				id="tableActives"
+				value="#{MBActive.actives}"
+				var="active"
+				paginator="true"
+				rows="6"
+				paginatorPosition="bottom">
+				
+				<p:column headerText="Id">
+					<h:outputText value="#{active.id}" />
+				</p:column>
+				
+				<p:column headerText="Name">
+					<h:outputText value="#{active.name}" />
+				</p:column>
+				
+				<p:column headerText="Price">
+					<h:outputText value="#{active.price}" />
+				</p:column>
+				
+				<p:column headerText="Type">
+					<h:outputText value="#{active.type.name}" />
+				</p:column>				
 			</p:dataTable>
 		</p:dialog>
 	</h:body>

@@ -9,7 +9,7 @@ public class Messages {
 	}
 	
 	public void emptyValues() {
-		createMessage(FacesMessage.SEVERITY_ERROR, "Empty Values", "There are emptys values");
+		createMessage(FacesMessage.SEVERITY_ERROR, "Empty Values", "There are empty values");
 	}
 	
 	public void saveSuccessfully() {
