@@ -293,7 +293,9 @@
 				
 				<p:datePicker 
 					placeholder="Date"
-					value="#{MBInvestment.dtoInvestment.date}" />
+					value="#{MBInvestment.dtoInvestment.date}"
+					pattern="MM/dd/yyyy"
+					 />
 				
 				<p:commandButton 
 					value="Register"
@@ -327,7 +329,7 @@
 
 				<p:column headerText="When">
 					<h:outputText value="#{investment.date}">
-						<f:convertDateTime pattern="dd/mm/yyyy" />  
+						<f:convertDateTime pattern="MM/dd/yyyy" />  
 					</h:outputText>
 				</p:column>
 				
