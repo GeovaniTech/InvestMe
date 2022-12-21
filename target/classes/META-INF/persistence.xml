@@ -7,8 +7,6 @@
 
 	<persistence-unit name="investme" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		
-		<class>model.Active</class>
 		<class>model.Type</class>
 		<class>model.Investment</class>
 		

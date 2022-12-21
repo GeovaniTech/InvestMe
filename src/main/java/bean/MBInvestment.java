@@ -7,36 +7,51 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import dao.DAOActive;
 import dao.DAOInvestment;
-import dto.DTOActive;
+import dao.DAOType;
 import dto.DTOInvestment;
+import dto.DTOType;
 import interfaces.Messages;
-import model.Active;
+import model.Type;
 
 @Named("MBInvestment")
 @ViewScoped
 public class MBInvestment implements Serializable, Messages {
 	private static final long serialVersionUID = 4252751160550859892L;
 	
-	private DAOActive daoActive = new DAOActive();
+	private DAOType daoType = new DAOType();
 	private DTOInvestment dtoInvestment = new DTOInvestment();
 	private DAOInvestment daoInvestment = new DAOInvestment();
 	private List<DTOInvestment> investments = new ArrayList<DTOInvestment>();
 	
+	private Double totalSpent;
+	private Double totalActions;
+	private Double totalFiis;
+	private Double totalFixedIncome;
+	private Double totalCriptocurrencys;
+	
 	// ID to convert DTOActve to model
-	private int idActive = 0;
+	private int idType = 0;
 	
 	public MBInvestment() {
+		this.totalSpent = Double.valueOf(0);
+		this.totalActions = Double.valueOf(0);
+		this.totalFiis = Double.valueOf(0);
+		this.totalFixedIncome = Double.valueOf(0);
+		this.totalCriptocurrencys = Double.valueOf(0);
+		
 		updateInvestments();
 	}
 	
 	public void save() {
 		if(this.getDtoInvestment().getAmount() > 0
 			&& this.getDtoInvestment().getDate() != null
-			&& this.getIdActive() > 0) {
+			&& this.getIdType() > 0
+			&& this.getDtoInvestment().getActive() != null
+			&& this.getDtoInvestment().getActualPrice() > 0) {
 			
-			this.getDtoInvestment().setActive(convertActive());
+			this.getDtoInvestment().setType(this.convertType());
+			
 			this.getDaoInvestment().save(this.getDtoInvestment());
 			
 			updateInvestments();
@@ -59,18 +74,45 @@ public class MBInvestment implements Serializable, Messages {
 	
 	public void updateInvestments() {
 		this.setInvestments(this.getDaoInvestment().list());
+		updateDashboard();
 	}
 	
-	public Active convertActive() {
-		DTOActive  dtoActive = daoActive.findById(this.getIdActive());
-		Active active = new Active();
+	public Type convertType() {
+		DTOType dtoType = this.getDaoType().findById(this.getIdType());
 		
-		active.setId(dtoActive.getId());
-		active.setName(dtoActive.getName());
-		active.setPrice(dtoActive.getPrice());
-		active.setType(dtoActive.getType());
+		Type type = new Type();
+		type.setId(dtoType.getId());
+		type.setName(dtoType.getName());
 		
-		return active;
+		return type;
+	}
+	
+	public void updateDashboard() {
+		this.updateActions();
+		this.updateFiis();
+		this.updateFixedIncome();
+		this.updateCriptocurrencys();
+		this.updateTotalSpent();
+	}
+	
+	public void updateActions() {
+		this.setTotalActions(this.getDaoInvestment().totalAction());
+	}
+	
+	public void updateFiis() {
+		this.setTotalFiis(this.getDaoInvestment().totalFii());
+	}
+	
+	public void updateFixedIncome() {
+		this.setTotalFixedIncome(this.getDaoInvestment().totalFixedIncome());
+	}
+	
+	public void updateCriptocurrencys() {
+		this.setTotalCriptocurrencys(this.getDaoInvestment().totalCriptocurrency());
+	}
+	
+	public void updateTotalSpent() {
+		this.setTotalSpent(this.getDaoInvestment().totalSpent());
 	}
 	
 	//Getters and Setters
@@ -98,19 +140,59 @@ public class MBInvestment implements Serializable, Messages {
 		this.investments = investments;
 	}
 
-	public int getIdActive() {
-		return idActive;
+	public int getIdType() {
+		return idType;
 	}
 
-	public void setIdActive(int idActive) {
-		this.idActive = idActive;
+	public void setIdType(int idType) {
+		this.idType = idType;
+	}
+	
+	public DAOType getDaoType() {
+		return daoType;
+	}
+	
+	public void setDaoType(DAOType daoType) {
+		this.daoType = daoType;
 	}
 
-	public DAOActive getDaoActive() {
-		return daoActive;
+	public Double getTotalSpent() {
+		return totalSpent;
 	}
 
-	public void setDaoActive(DAOActive daoActive) {
-		this.daoActive = daoActive;
+	public void setTotalSpent(Double totalSpent) {
+		this.totalSpent = totalSpent;
+	}
+
+	public Double getTotalActions() {
+		return totalActions;
+	}
+
+	public void setTotalActions(Double totalActions) {
+		this.totalActions = totalActions;
+	}
+
+	public Double getTotalFiis() {
+		return totalFiis;
+	}
+
+	public void setTotalFiis(Double totalFiis) {
+		this.totalFiis = totalFiis;
+	}
+
+	public Double getTotalFixedIncome() {
+		return totalFixedIncome;
+	}
+
+	public void setTotalFixedIncome(Double totalFixedIncome) {
+		this.totalFixedIncome = totalFixedIncome;
+	}
+
+	public Double getTotalCriptocurrencys() {
+		return totalCriptocurrencys;
+	}
+
+	public void setTotalCriptocurrencys(Double totalCriptocurrencys) {
+		this.totalCriptocurrencys = totalCriptocurrencys;
 	}
 }

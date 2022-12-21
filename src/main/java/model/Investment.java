@@ -13,18 +13,14 @@ public class Investment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne
-	private Active active;
+	private Double actualPrice;
 	private float amount;
 	private Date date;
+	@ManyToOne
+	private Type type;
+	private String active;
 	
 	//Getters and Setters
-	public Active getActive() {
-		return active;
-	}
-	public void setActive(Active active) {
-		this.active = active;
-	}
 	public float getAmount() {
 		return amount;
 	}
@@ -42,5 +38,23 @@ public class Investment {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Type getType() {
+		return type;
+	}
+	public void setType(Type type) {
+		this.type = type;
+	}
+	public Double getActualPrice() {
+		return actualPrice;
+	}
+	public void setActualPrice(Double actualPrice) {
+		this.actualPrice = actualPrice;
+	}
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
 	}
 }

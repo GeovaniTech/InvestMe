@@ -113,12 +113,6 @@
 						Types
 					</p:menuitem>
 					
-					<p:menuitem 
-						onclick="PF('dialog-actives').show()"
-						icon="pi pi-bitcoin">
-						Actives
-					</p:menuitem>
-					
 					<p:menuitem
 						onclick="PF('dialog-investments').show()"
 						icon="pi pi-plus">
@@ -202,72 +196,6 @@
 			</p:dataTable>
 		</p:dialog>
 		
-		<!-- DIALOG ACTIVES -->
-		<p:dialog 
-			header="Actives"
-			widgetVar="dialog-actives"
-			width="60%"
-			height="60%"
-			modal="true">
-			
-			<h:form class="form-fields" style="margin-bottom: 10px;">
-				<p:inputText 
-					placeholder="Name"
-					value="#{MBActive.dtoActive.name}" />
-				
-				<p:inputNumber 
-					placeholder="Price"
-					value="#{MBActive.dtoActive.price}" />
-				
-				<p:selectOneMenu 
-					value="#{MBActive.idType}">
-				
-					<f:selectItems 
-						var="type"
-						value="#{MBType.types}"
-						itemLabel="#{type.name}"
-						itemValue="#{type.id}" />	
-				</p:selectOneMenu>
-				
-				<p:commandButton 
-					value="Register"
-					action="#{MBActive.save()}"
-					update="tableActives, growl, @form"/>			
-			</h:form>
-				
-			<p:dataTable
-				id="tableActives"
-				value="#{MBActive.actives}"
-				var="active"
-				paginator="true"
-				rows="6"
-				paginatorPosition="bottom">
-				
-				<p:column headerText="Id">
-					<h:outputText value="#{active.id}" />
-				</p:column>
-				
-				<p:column headerText="Name">
-					<h:outputText value="#{active.name}" />
-				</p:column>
-				
-				<p:column headerText="Price">
-					<h:outputText value="#{active.price}" />
-				</p:column>
-				
-				<p:column headerText="Type">
-					<h:outputText value="#{active.type.name}" />
-				</p:column>
-				
-				<p:column headerText="Options">
-					<p:commandButton 
-						value="Delete"
-						action="#{MBActive.remove(active)}"
-						update="tableActives, growl" />
-				</p:column>						
-			</p:dataTable>
-		</p:dialog>
-		
 		<!-- DIALOG INVESTMENTS -->
 		<p:dialog
 			header="Investment"
@@ -278,14 +206,22 @@
 			
 			<h:form class="form-fields" style="margin-bottom: 10px;">
 				<p:selectOneMenu
-					value="#{MBInvestment.idActive}">
+					value="#{MBInvestment.idType}">
 					
 					<f:selectItems 
-						var="active"
-						value="#{MBActive.actives}"
-						itemLabel="#{active.name}"
-						itemValue="#{active.id}" />
+						var="type"
+						value="#{MBType.types}"
+						itemLabel="#{type.name}"
+						itemValue="#{type.id}" />
 				</p:selectOneMenu>
+				
+				<p:inputText 
+					placeholder="Active"
+					value="#{MBInvestment.dtoInvestment.active}"/>
+				
+				<p:inputNumber 
+					placeholder="Actual Price"
+					value="#{MBInvestment.dtoInvestment.actualPrice}"/>
 				
 				<p:inputNumber 
 					placeholder="Amount"
@@ -312,15 +248,15 @@
 				paginatorPosition="bottom">
 				
 				<p:column headerText="Active">
-					<h:outputText value="#{investment.active.name}" />
+					<h:outputText value="#{investment.active}" />
 				</p:column>
 
 				<p:column headerText="Type">
-					<h:outputText value="#{investment.active.type.name}" />
+					<h:outputText value="#{investment.type.name}" />
 				</p:column>
 				
 				<p:column headerText="Price">
-					<h:outputText value="#{investment.active.price}" />
+					<h:outputText value="#{investment.actualPrice}" />
 				</p:column>
 
 				<p:column headerText="Amount">
@@ -334,7 +270,7 @@
 				</p:column>
 				
 				<p:column headerText="Total">
-					<h:outputText value="#{investment.amount * investment.active.price}" />
+					<h:outputText value="#{investment.amount * investment.actualPrice}" />
 				</p:column>
 				
 				<p:column headerText="Delete">

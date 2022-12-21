@@ -2,13 +2,15 @@ package dto;
 
 import java.util.Date;
 
-import model.Active;
+import model.Type;
 
 public class DTOInvestment {
 	private int id;
-	private Active active;
 	private float amount;
+	private Double actualPrice;
 	private Date date;
+	private Type type;
+	private String active;
 	
 	//Getters and Setters
 	public int getId() {
@@ -16,12 +18,6 @@ public class DTOInvestment {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public Active getActive() {
-		return active;
-	}
-	public void setActive(Active active) {
-		this.active = active;
 	}
 	public float getAmount() {
 		return amount;
@@ -34,5 +30,23 @@ public class DTOInvestment {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public Type getType() {
+		return type;
+	}
+	public void setType(Type type) {
+		this.type = type;
+	}
+	public Double getActualPrice() {
+		return actualPrice;
+	}
+	public void setActualPrice(Double actualPrice) {
+		this.actualPrice = actualPrice;
+	}
+	public String getActive() {
+		return active;
+	}
+	public void setActive(String active) {
+		this.active = active;
 	}
 }

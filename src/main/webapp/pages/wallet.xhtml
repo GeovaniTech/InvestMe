@@ -30,22 +30,26 @@
 					}
 				</style>
 				
-				<div class="container-cards">
+				<div class="container-cards">			
 					<components:card 
-						value="Total"
-						description="Accumulated Total" />
-					
-					<components:card 
-						value="Total Spent"
+						value="#{MBInvestment.totalSpent}"
 						description="Total Spent" />
 					
 					<components:card 
-						value="Total Spent"
-						description="Total Spent" />
+						value="#{MBInvestment.totalActions}"
+						description="Total Actions" />
 						
 					<components:card 
-						value="Total Spent"
-						description="Total Spent" />
+						value="#{MBInvestment.totalFiis}"
+						description="Total Fiis" />
+					
+					<components:card 
+						value="#{MBInvestment.totalFixedIncome}"
+						description="Total Fixed Income" />
+						
+					<components:card 
+						value="#{MBInvestment.totalCriptocurrencys}"
+						description="Total Criptos" />
 				</div>
 				
 				<h:form id="tableWallet">
@@ -57,15 +61,15 @@
 						paginatorPosition="bottom">
 						
 						<p:column headerText="Active">
-							<h:outputText value="#{investment.active.name}" />
+							<h:outputText value="#{investment.active}" />
 						</p:column>
 		
 						<p:column headerText="Type">
-							<h:outputText value="#{investment.active.type.name}" />
+							<h:outputText value="#{investment.type.name}" />
 						</p:column>
 						
 						<p:column headerText="Price">
-							<h:outputText value="#{investment.active.price}" />
+							<h:outputText value="#{investment.actualPrice}" />
 						</p:column>
 		
 						<p:column headerText="Amount">
@@ -79,7 +83,7 @@
 						</p:column>
 						
 						<p:column headerText="Total">
-							<h:outputText value="#{investment.amount * investment.active.price}" />
+							<h:outputText value="#{investment.amount * investment.actualPrice}" />
 						</p:column>
 						
 						<p:column headerText="Delete">

@@ -16,7 +16,7 @@
 	<h:body>
 
 		<composite:interface>
-			<composite:attribute name="value" />
+			<composite:attribute name="value" type="java.lang.Double" />
 			<composite:attribute name="description" />
 			<composite:attribute name="icon" />
 		</composite:interface>
@@ -26,19 +26,32 @@
 				.card-wallet {
 					background-color: var(--primary);
 					color: white;
-					font-size: 25px;
+					font-size: 20px;
 					padding: 10px;
 					width: 250px;
 					height: 100px;
 					border-radius: 5px;
 					margin: 10px;
 				}
+				
+				.values {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: stretch;
+				}
 			</style>
 			
 			<div class="card-wallet">
-				<div>
-					<h:outputText value="#{cc.attrs.value}" />
-					<h:outputText value="#{cc.attrs.description}" />
+				<div class="values">
+					<div>
+						<h:outputText value="R$ " />
+						<h:outputText value="#{cc.attrs.value}">
+								<f:convertNumber pattern="#,##0.00" minFractionDigits="2"   />
+						</h:outputText>
+					</div>
+		
+					<p><h:outputText value="#{cc.attrs.description}" /></p>
 				</div>
 				
 				<div class="icon">
