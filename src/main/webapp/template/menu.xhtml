@@ -129,6 +129,12 @@
 						icon="pi pi-plus">
 						New Investment
 					</p:menuitem>
+
+					<p:menuitem
+						onclick="PF('dialog-transactions').show()"
+						icon="pi pi-plus">
+						New Transaction
+					</p:menuitem>
 				</p:submenu>
 				
 				<p:submenu
@@ -292,6 +298,45 @@
 						icon="pi pi-times" />
 				</p:column>				
 			</p:dataTable>
+		</p:dialog>
+		
+		<p:dialog
+			header="Transactions"
+			widgetVar="dialog-transactions">
+			
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:inputText 
+						placeholder="Active" />
+					
+					<p:inputNumber 
+						placeholder="Price" />
+					
+					<p:inputNumber 
+						placeholder="Amount" />
+					
+					<p:datePicker 
+						placeholder="When" />
+					
+					<p:selectOneMenu>
+						<f:selectItem 
+							itemLabel="Investment"
+							itemValue="Investment" />
+							
+						<f:selectItem 
+							itemLabel="Expenditure"
+							itemValue="Expenditure" />
+					</p:selectOneMenu>
+					
+					<p:selectOneMenu>
+						<f:selectItems 
+							var="type"
+							value="#{MBType.types}"
+							itemLabel="#{type.name}"
+							itemValue="#{type.id}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</h:form>
 		</p:dialog>
 	</h:body>
 </html>

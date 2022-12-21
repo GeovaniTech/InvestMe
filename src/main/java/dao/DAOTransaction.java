@@ -1,14 +1,25 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 
 import dto.DTOTransaction;
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Transaction;
+import model.Type;
 
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 
+	DTOTransaction filters = new DTOTransaction();
+	
 	@Override
 	public void save(DTOTransaction to) {
 		Transaction transaction = new Transaction();
@@ -68,11 +79,51 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 
 	@Override
 	public List<DTOTransaction> list() {
-		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" SELECT T.active, ");
+		sql.append(" T.price, ");
+		sql.append(" T.amount, ");
+		sql.append(" T.typeActive, ");
+		sql.append(" T.typeTransaction, ");
+		sql.append(" T.date ");
+		sql.append(" FROM " + Transaction.class.getName() + " T");
+		sql.append(" WHERE T.typeTransaction = :typeTransaction ");
+		
+		if(this.validateFilters() != null) {
+			sql.append(this.validateFilters());
+		}
+		
+		List<Object[]> result = new ArrayList<Object[]>();
+		result = em.createQuery(sql.toString(), Object[].class)
+					.getResultList();
+		
+		List<DTOTransaction> convertedResults = new ArrayList<>();
+		
+		for(Object[] o : result) {
+			DTOTransaction dtoTrasanction = new DTOTransaction();
+			
+			dtoTrasanction.setActive((String) o[0]);
+			dtoTrasanction.setPrice((Double) o[1]);
+			dtoTrasanction.setAmount((Integer) o[2]);
+			dtoTrasanction.setTypeActive((Type) o[3]);
+			dtoTrasanction.setTypeTrasanction((String) o[4]);
+			dtoTrasanction.setDate((Date) o[5]);
+			
+			convertedResults.add(dtoTrasanction);
+		}		
+		return convertedResults;
+	}
+
+	public String validateFilters() {
 		return null;
 	}
 
-	public void validateFilters() {
-		
+	public DTOTransaction getFilters() {
+		return filters;
+	}
+
+	public void setFilters(DTOTransaction filters) {
+		this.filters = filters;
 	}
 }
