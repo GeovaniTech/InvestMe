@@ -33,13 +33,7 @@ public class MBInvestment implements Serializable, Messages {
 	// ID to convert DTOActve to model
 	private int idType = 0;
 	
-	public MBInvestment() {
-		this.totalSpent = Double.valueOf(0);
-		this.totalActions = Double.valueOf(0);
-		this.totalFiis = Double.valueOf(0);
-		this.totalFixedIncome = Double.valueOf(0);
-		this.totalCriptocurrencys = Double.valueOf(0);
-		
+	public MBInvestment() {		
 		updateInvestments();
 	}
 	

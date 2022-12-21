@@ -236,7 +236,7 @@
 				<p:commandButton 
 					value="Register"
 					action="#{MBInvestment.save()}"
-					update="tableInvestments, growl, @form, tableWallet" />
+					update="tableInvestments, growl, @form, tableWallet, dashboard" />
 			</h:form>
 			
 			<p:dataTable
@@ -277,7 +277,7 @@
 					<p:commandButton 
 						value="Delete"
 						action="#{MBInvestment.remove(investment)}"
-						update="tableInvestments, growl, tableWallet" />
+						update="tableInvestments, growl, tableWallet, dashboard" />
 				</p:column>				
 			</p:dataTable>
 		</p:dialog>

@@ -30,27 +30,27 @@
 					}
 				</style>
 				
-				<div class="container-cards">			
+				<h:panelGroup class="container-cards" id="dashboard">			
 					<components:card 
-						value="#{MBInvestment.totalSpent}"
+						value="#{MBInvestment.totalSpent != null ? MBInvestment.totalSpent : 0}"
 						description="Total Spent" />
 					
 					<components:card 
-						value="#{MBInvestment.totalActions}"
+						value="#{MBInvestment.totalActions != null ? MBInvestment.totalActions : 0}"
 						description="Total Actions" />
 						
 					<components:card 
-						value="#{MBInvestment.totalFiis}"
+						value="#{MBInvestment.totalFiis != null ? MBInvestment.totalFiis : 0}"
 						description="Total Fiis" />
 					
 					<components:card 
-						value="#{MBInvestment.totalFixedIncome}"
+						value="#{MBInvestment.totalFixedIncome != null ? MBInvestment.totalFixedIncome : 0}"
 						description="Total Fixed Income" />
 						
 					<components:card 
-						value="#{MBInvestment.totalCriptocurrencys}"
+						value="#{MBInvestment.totalCriptocurrencys != null ? MBInvestment.totalCriptocurrencys : 0}"
 						description="Total Criptos" />
-				</div>
+				</h:panelGroup>
 				
 				<h:form id="tableWallet">
 					<p:dataTable
@@ -90,7 +90,7 @@
 							<p:commandButton 
 								value="Delete"
 								action="#{MBInvestment.remove(investment)}"
-								update="tableInvestments, growl, @form" />
+								update="tableInvestments, growl, @form, dashboard" />
 						</p:column>				
 					</p:dataTable>
 				</h:form>
