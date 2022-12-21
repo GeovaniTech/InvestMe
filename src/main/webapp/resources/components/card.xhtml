@@ -32,6 +32,11 @@
 					height: 100px;
 					border-radius: 5px;
 					margin: 10px;
+					
+					display: flex;
+					flex-direction: row;
+					justify-content: space-evenly;
+					align-items: center;
 				}
 				
 				.values {
@@ -54,8 +59,10 @@
 					<p><h:outputText value="#{cc.attrs.description}" /></p>
 				</div>
 				
+				<p:divider layout="vertical" style="margin-top: 5px; margin-bottom: 5px;" />
+				
 				<div class="icon">
-					
+					<i class="#{cc.attrs.icon}" style="font-size: 50px;"></i>
 				</div>
 			</div>
 		</composite:implementation>

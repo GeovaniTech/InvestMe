@@ -221,7 +221,8 @@
 				
 				<p:inputNumber 
 					placeholder="Actual Price"
-					value="#{MBInvestment.dtoInvestment.actualPrice}"/>
+					value="#{MBInvestment.dtoInvestment.actualPrice}"
+					decimalPlaces="10" />
 				
 				<p:inputNumber 
 					placeholder="Amount"
@@ -277,7 +278,8 @@
 					<p:commandButton 
 						value="Delete"
 						action="#{MBInvestment.remove(investment)}"
-						update="tableInvestments, growl, tableWallet, dashboard" />
+						update="tableInvestments, growl, tableWallet, dashboard"
+						icon="pi pi-times" />
 				</p:column>				
 			</p:dataTable>
 		</p:dialog>

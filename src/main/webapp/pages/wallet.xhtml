@@ -33,23 +33,28 @@
 				<h:panelGroup class="container-cards" id="dashboard">			
 					<components:card 
 						value="#{MBInvestment.totalSpent != null ? MBInvestment.totalSpent : 0}"
-						description="Total Spent" />
+						description="Total Spent"
+						icon="pi pi-dollar" />
 					
 					<components:card 
 						value="#{MBInvestment.totalActions != null ? MBInvestment.totalActions : 0}"
-						description="Total Actions" />
+						description="Total Actions"
+						icon="pi pi-credit-card" />
 						
 					<components:card 
 						value="#{MBInvestment.totalFiis != null ? MBInvestment.totalFiis : 0}"
-						description="Total Fiis" />
+						description="Total Fiis"
+						icon="pi pi-building" />
 					
 					<components:card 
 						value="#{MBInvestment.totalFixedIncome != null ? MBInvestment.totalFixedIncome : 0}"
-						description="Total Fixed Income" />
+						description="Total Fixed Income"
+						icon="pi pi-chart-line" />
 						
 					<components:card 
 						value="#{MBInvestment.totalCriptocurrencys != null ? MBInvestment.totalCriptocurrencys : 0}"
-						description="Total Criptos" />
+						description="Total Criptos"
+						icon="pi pi-bitcoin" />
 				</h:panelGroup>
 				
 				<h:form id="tableWallet">
@@ -90,7 +95,8 @@
 							<p:commandButton 
 								value="Delete"
 								action="#{MBInvestment.remove(investment)}"
-								update="tableInvestments, growl, @form, dashboard" />
+								update="tableInvestments, growl, @form, dashboard"
+								icon="pi pi-times" />
 						</p:column>				
 					</p:dataTable>
 				</h:form>
