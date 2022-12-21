@@ -51,7 +51,7 @@
 				<div class="values">
 					<div>
 						<h:outputText value="R$ " />
-						<h:outputText value="#{cc.attrs.value}">
+						<h:outputText value="#{cc.attrs.value != null ? cc.attrs.value : 0}">
 								<f:convertNumber pattern="#,##0.00" minFractionDigits="2"   />
 						</h:outputText>
 					</div>

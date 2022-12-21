@@ -97,12 +97,23 @@
 			<p:menu 
 				toggleable="true">
 				
-				<p:menuitem
-					icon="pi pi-wallet"
-					outcome="/pages/wallet.xhtml">
-					Wallet
-				</p:menuitem>
-				
+				<p:submenu
+					label="Wallets"
+					styleClass="submenu">
+					
+					<p:menuitem
+						icon="pi pi-chart-line"
+						outcome="/pages/investments.xhtml">
+						Invetments
+					</p:menuitem>
+					
+					<p:menuitem
+						icon="pi pi-euro"
+						outcome="/pages/expenditures.xhtml">
+						Expenditures
+					</p:menuitem>
+				</p:submenu>
+							
 				<p:submenu
 					label="Records"
 					styleClass="submenu">

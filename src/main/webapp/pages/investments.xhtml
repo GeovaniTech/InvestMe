@@ -32,27 +32,27 @@
 				
 				<h:panelGroup class="container-cards" id="dashboard">			
 					<components:card 
-						value="#{MBInvestment.totalSpent != null ? MBInvestment.totalSpent : 0}"
+						value="#{MBInvestment.totalSpent}"
 						description="Spents"
 						icon="pi pi-dollar" />
 					
 					<components:card 
-						value="#{MBInvestment.totalActions != null ? MBInvestment.totalActions : 0}"
+						value="#{MBInvestment.totalActions}"
 						description="Actions"
 						icon="pi pi-credit-card" />
 						
 					<components:card 
-						value="#{MBInvestment.totalFiis != null ? MBInvestment.totalFiis : 0}"
+						value="#{MBInvestment.totalFiis}"
 						description="Fiis"
 						icon="pi pi-building" />
 					
 					<components:card 
-						value="#{MBInvestment.totalFixedIncome != null ? MBInvestment.totalFixedIncome : 0}"
+						value="#{MBInvestment.totalFixedIncome}"
 						description="Fixed Income"
 						icon="pi pi-chart-line" />
 						
 					<components:card 
-						value="#{MBInvestment.totalCriptocurrencys != null ? MBInvestment.totalCriptocurrencys : 0}"
+						value="#{MBInvestment.totalCriptocurrencys}"
 						description="Criptos"
 						icon="pi pi-bitcoin" />
 				</h:panelGroup>
