@@ -17,37 +17,44 @@
 		<ui:composition template="/template/layout.xhtml">
 			<ui:define name="body">
 				
+				<style>
+					.container-cards {
+						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
+						align-items: center;
+					}
+				</style>
+				
 				<h:panelGroup id="dashboard" class="container-cards">
 					<components:card 
 						value=""
-						description=""
-						icon="" />
+						description="Spents"
+						icon="pi pi-dollar" />
 					
 					<components:card 
 						value=""
-						description=""
-						icon="" />
+						description="Recreation"
+						icon="pi pi-home" />
 
 					<components:card 
 						value=""
-						description=""
-						icon="" />
+						description="Market"
+						icon="pi pi-shopping-cart" />
 
 					<components:card 
 						value=""
-						description=""
-						icon="" />
+						description="Ifood"
+						icon="pi pi-apple" />
 						
 					<components:card 
 						value=""
-						description=""
-						icon="" />	
+						description="Others"
+						icon="pi pi-box" />	
 				</h:panelGroup>
 				
 				<h:form id="tableWallet">
-					<p:dataTable id="tableExpenditures">
-						
-					</p:dataTable>				
+			
 				</h:form>
 			</ui:define>
 		</ui:composition>
