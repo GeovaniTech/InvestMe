@@ -123,12 +123,6 @@
 						onclick="PF('dialog-types').show()">
 						Types
 					</p:menuitem>
-					
-					<p:menuitem
-						onclick="PF('dialog-investments').show()"
-						icon="pi pi-plus">
-						New Investment
-					</p:menuitem>
 
 					<p:menuitem
 						onclick="PF('dialog-transactions').show()"
@@ -212,94 +206,8 @@
 				</p:column>
 			</p:dataTable>
 		</p:dialog>
-		
-		<!-- DIALOG INVESTMENTS -->
-		<p:dialog
-			header="Investment"
-			widgetVar="dialog-investments"
-			width="60%"
-			height="60%"
-			modal="true">
-			
-			<h:form class="form-fields" style="margin-bottom: 10px;">
-				<p:selectOneMenu
-					value="#{MBInvestment.idType}">
-					
-					<f:selectItems 
-						var="type"
-						value="#{MBType.types}"
-						itemLabel="#{type.name}"
-						itemValue="#{type.id}" />
-				</p:selectOneMenu>
-				
-				<p:inputText 
-					placeholder="Active"
-					value="#{MBInvestment.dtoInvestment.active}"/>
-				
-				<p:inputNumber 
-					placeholder="Actual Price"
-					value="#{MBInvestment.dtoInvestment.actualPrice}" />
-				
-				<p:inputNumber 
-					placeholder="Amount"
-					value="#{MBInvestment.dtoInvestment.amount}" />
-				
-				<p:datePicker 
-					placeholder="Date"
-					value="#{MBInvestment.dtoInvestment.date}"
-					pattern="MM/dd/yyyy"
-					 />
-				
-				<p:commandButton 
-					value="Register"
-					action="#{MBInvestment.save()}"
-					update="tableInvestments, growl, @form, tableWallet, dashboard" />
-			</h:form>
-			
-			<p:dataTable
-				id="tableInvestments"
-				value="#{MBInvestment.investments}"
-				var="investment"
-				paginator="true"
-				rows="6"
-				paginatorPosition="bottom">
-				
-				<p:column headerText="Active">
-					<h:outputText value="#{investment.active}" />
-				</p:column>
-
-				<p:column headerText="Type">
-					<h:outputText value="#{investment.type.name}" />
-				</p:column>
-				
-				<p:column headerText="Price">
-					<h:outputText value="#{investment.actualPrice}" />
-				</p:column>
-
-				<p:column headerText="Amount">
-					<h:outputText value="#{investment.amount}" />
-				</p:column>
-
-				<p:column headerText="When">
-					<h:outputText value="#{investment.date}">
-						<f:convertDateTime pattern="MM/dd/yyyy" />  
-					</h:outputText>
-				</p:column>
-				
-				<p:column headerText="Total">
-					<h:outputText value="#{investment.amount * investment.actualPrice}" />
-				</p:column>
-				
-				<p:column headerText="Delete">
-					<p:commandButton 
-						value="Delete"
-						action="#{MBInvestment.remove(investment)}"
-						update="tableInvestments, growl, tableWallet, dashboard"
-						icon="pi pi-times" />
-				</p:column>				
-			</p:dataTable>
-		</p:dialog>
-		
+	
+		<!-- DIALOG TRANSACTION -->
 		<p:dialog
 			header="Transactions"
 			widgetVar="dialog-transactions">
@@ -307,18 +215,22 @@
 			<h:form>
 				<h:panelGrid columns="2">
 					<p:inputText 
-						placeholder="Active" />
+						placeholder="Active"
+						value="#{MBTransaction.dtoTransacation.active}" />
 					
 					<p:inputNumber 
-						placeholder="Price" />
+						placeholder="Price"
+						value="#{MBTransaction.dtoTransacation.price}" />
 					
 					<p:inputNumber 
-						placeholder="Amount" />
+						placeholder="Amount"
+						value="#{MBTransaction.dtoTransacation.amount}" />
 					
 					<p:datePicker 
-						placeholder="When" />
+						placeholder="When"
+						value="#{MBTransaction.dtoTransacation.date}" />
 					
-					<p:selectOneMenu>
+					<p:selectOneMenu value="#{MBTransaction.dtoTransacation.typeTrasanction}">
 						<f:selectItem 
 							itemLabel="Investment"
 							itemValue="Investment" />
@@ -328,7 +240,7 @@
 							itemValue="Expenditure" />
 					</p:selectOneMenu>
 					
-					<p:selectOneMenu>
+					<p:selectOneMenu value="#{MBTransaction.convertType}">
 						<f:selectItems 
 							var="type"
 							value="#{MBType.types}"
@@ -336,7 +248,47 @@
 							itemValue="#{type.id}" />
 					</p:selectOneMenu>
 				</h:panelGrid>
+				
+				<p:commandButton 
+					value="Save"
+					action="#{MBTransaction.save()}"/>
 			</h:form>
+			
+			<h:panelGroup id="transactionsTable">
+				<p:dataTable
+					var="transaction"
+					value="#{MBTransaction.transactions}"
+					rows="15"
+					paginator="true"
+					paginatorPosition="bottom">
+					
+					<p:column headerText="Active">
+						<h:outputText value="#{transaction.active}" />
+					</p:column>
+					
+					<p:column headerText="Type">
+						<h:outputText value="#{transaction.typeActive.name}" />
+					</p:column>	
+					
+					<p:column headerText="Price">
+						<h:outputText value="#{transaction.price}" />
+					</p:column>
+					
+					<p:column headerText="Amount">
+						<h:outputText value="#{transaction.amount}" />
+					</p:column>
+
+					<p:column headerText="When">
+						<h:outputText value="#{transaction.date}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>										
+					
+					<p:column headerText="Type Transaction">
+						<h:outputText value="#{transaction.typeTrasanction}" />
+					</p:column>					
+				</p:dataTable>
+			</h:panelGroup>
 		</p:dialog>
 	</h:body>
 </html>
