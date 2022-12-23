@@ -36,7 +36,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		transaction.setPrice(to.getPrice());
 		transaction.setAmount(to.getAmount());
 		transaction.setTypeActive(to.getTypeActive());
-		transaction.setTypeTrasanction(to.getTypeTrasanction());
+		transaction.setTypeTransaction(to.getTypeTrasanction());
 		transaction.setDate(to.getDate());
 		
 		em.getTransaction().begin();
@@ -53,7 +53,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		transaction.setPrice(to.getPrice());
 		transaction.setAmount(to.getAmount());
 		transaction.setTypeActive(to.getTypeActive());
-		transaction.setTypeTrasanction(to.getTypeTrasanction());
+		transaction.setTypeTransaction(to.getTypeTrasanction());
 		transaction.setDate(to.getDate());
 		
 		em.getTransaction().begin();
@@ -79,7 +79,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		dtoTransaction.setPrice(transaction.getPrice());
 		dtoTransaction.setAmount(transaction.getAmount());
 		dtoTransaction.setTypeActive(transaction.getTypeActive());
-		dtoTransaction.setTypeTrasanction(transaction.getTypeTrasanction());
+		dtoTransaction.setTypeTrasanction(transaction.getTypeTransaction());
 		dtoTransaction.setDate(transaction.getDate());
 		
 		return dtoTransaction;
@@ -127,7 +127,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		StringBuilder sql = new StringBuilder();
 		
 		if(filters.getTypeTrasanction() == null) {
-			sql.append(" WHERE T.typeTrasanction IS NOT NULL ");
+			sql.append(" WHERE T.typeTransaction IS NOT NULL ");
 		} else {
 			sql.append(" WHERE T.typeTransaction = :pTypeTransaction");
 			parameters.add(new TOParameter("pTypeTransaction", filters.getTypeTrasanction()));

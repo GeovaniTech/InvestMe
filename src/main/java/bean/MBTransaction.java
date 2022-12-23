@@ -19,31 +19,31 @@ import to.TOType;
 public class MBTransaction implements Serializable, Messages {
 	private static final long serialVersionUID = 2380786016163770521L;
 	
-	private ManterType daoType;
-	private ManterTransaction daoTransaction;
-	private TOTransaction dtoTransacation;
+	private ManterType manterType;
+	private ManterTransaction manterTransaction;
+	private TOTransaction toTransaction;
 	private Integer convertType;
 	private List<TOTransaction> transactions;
 	
 	public MBTransaction() {
-		this.daoTransaction = new ManterTransaction();
-		this.dtoTransacation = new TOTransaction();
-		this.daoTransaction = new ManterTransaction();
+		this.manterTransaction = new ManterTransaction();
+		this.toTransaction = new TOTransaction();
+		this.manterType = new ManterType();
 		this.convertType = null;
 		this.transactions = new ArrayList<TOTransaction>();
 		listTransactions();
 	}
 	
 	public void save() {
-		if(this.getDtoTransacation().getActive() != null
-			&& this.getDtoTransacation().getPrice() != null
-			&& this.getDtoTransacation().getAmount() != null
-			&& this.getDtoTransacation().getTypeTrasanction() != null
-			&& this.getDtoTransacation().getDate() != null) {
+		if(this.getToTransaction().getActive() != null
+			&& this.getToTransaction().getPrice() != null
+			&& this.getToTransaction().getAmount() != null
+			&& this.getToTransaction().getTypeTrasanction() != null
+			&& this.getToTransaction().getDate() != null) {
 			
-			this.getDtoTransacation().setTypeActive(this.convertType());
+			this.getToTransaction().setTypeActive(this.convertType());
 			
-			this.getDaoTransaction().save(this.getDtoTransacation());
+			this.getManterTransaction().save(this.getToTransaction());
 			listTransactions();
 			msg.saveSuccessfully();
 		} else {
@@ -56,16 +56,16 @@ public class MBTransaction implements Serializable, Messages {
 	}
 	
 	public void remove() {
-		this.getDaoTransaction().remove(this.getDtoTransacation());
+		this.getManterTransaction().remove(this.getToTransaction());
 		listTransactions();
 	}
 	
 	public void listTransactions() {
-		this.setTransactions(this.getDaoTransaction().list());
+		this.setTransactions(this.getManterTransaction().list());
 	}
 	
 	public Type convertType() {
-		TOType dtoType = this.getDaoType().findById(this.getConvertType());
+		TOType dtoType = this.getManterType().findById(this.getConvertType());
 		Type type = new Type();
 		
 		type.setId(dtoType.getId());
@@ -74,20 +74,28 @@ public class MBTransaction implements Serializable, Messages {
 		return type;
 	}
 
-	public ManterTransaction getDaoTransaction() {
-		return daoTransaction;
+	public ManterType getManterType() {
+		return manterType;
 	}
 
-	public void setDaoTransaction(ManterTransaction daoTransaction) {
-		this.daoTransaction = daoTransaction;
+	public void setManterType(ManterType manterType) {
+		this.manterType = manterType;
 	}
 
-	public TOTransaction getDtoTransacation() {
-		return dtoTransacation;
+	public ManterTransaction getManterTransaction() {
+		return manterTransaction;
 	}
 
-	public void setDtoTransacation(TOTransaction dtoTransacation) {
-		this.dtoTransacation = dtoTransacation;
+	public void setManterTransaction(ManterTransaction manterTransaction) {
+		this.manterTransaction = manterTransaction;
+	}
+
+	public TOTransaction getToTransaction() {
+		return toTransaction;
+	}
+
+	public void setToTransaction(TOTransaction toTransaction) {
+		this.toTransaction = toTransaction;
 	}
 
 	public Integer getConvertType() {
@@ -96,14 +104,6 @@ public class MBTransaction implements Serializable, Messages {
 
 	public void setConvertType(Integer convertType) {
 		this.convertType = convertType;
-	}
-
-	public ManterType getDaoType() {
-		return daoType;
-	}
-
-	public void setDaoType(ManterType daoType) {
-		this.daoType = daoType;
 	}
 
 	public List<TOTransaction> getTransactions() {

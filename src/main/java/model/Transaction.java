@@ -17,7 +17,7 @@ public class Transaction {
 	private Double price;
 	private Integer amount;
 	private Date date;
-	private String typeTrasanction;
+	private String typeTransaction;
 	@ManyToOne
 	private Type typeActive;
 	
@@ -51,16 +51,16 @@ public class Transaction {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getTypeTrasanction() {
-		return typeTrasanction;
-	}
-	public void setTypeTrasanction(String typeTrasanction) {
-		this.typeTrasanction = typeTrasanction;
-	}
 	public Type getTypeActive() {
 		return typeActive;
 	}
 	public void setTypeActive(Type typeActive) {
 		this.typeActive = typeActive;
+	}
+	public String getTypeTransaction() {
+		return typeTransaction;
+	}
+	public void setTypeTransaction(String typeTransaction) {
+		this.typeTransaction = typeTransaction;
 	}
 }

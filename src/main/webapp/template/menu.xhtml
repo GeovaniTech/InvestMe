@@ -216,21 +216,21 @@
 				<h:panelGrid columns="2">
 					<p:inputText 
 						placeholder="Active"
-						value="#{MBTransaction.dtoTransacation.active}" />
+						value="#{MBTransaction.toTransaction.active}" />
 					
 					<p:inputNumber 
 						placeholder="Price"
-						value="#{MBTransaction.dtoTransacation.price}" />
+						value="#{MBTransaction.toTransaction.price}" />
 					
 					<p:inputNumber 
 						placeholder="Amount"
-						value="#{MBTransaction.dtoTransacation.amount}" />
+						value="#{MBTransaction.toTransaction.amount}" />
 					
 					<p:datePicker 
 						placeholder="When"
-						value="#{MBTransaction.dtoTransacation.date}" />
+						value="#{MBTransaction.toTransaction.date}" />
 					
-					<p:selectOneMenu value="#{MBTransaction.dtoTransacation.typeTrasanction}">
+					<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTrasanction}">
 						<f:selectItem 
 							itemLabel="Todos"
 							itemValue="#{null}"/>
