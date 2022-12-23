@@ -7,30 +7,30 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import dao.DAOTransaction;
-import dao.DAOType;
-import dto.DTOTransaction;
-import dto.DTOType;
 import interfaces.Messages;
+import manter.ManterTransaction;
+import manter.ManterType;
 import model.Type;
+import to.TOTransaction;
+import to.TOType;
 
 @Named("MBTransaction")
 @ViewScoped
 public class MBTransaction implements Serializable, Messages {
 	private static final long serialVersionUID = 2380786016163770521L;
 	
-	private DAOType daoType;
-	private DAOTransaction daoTransaction;
-	private DTOTransaction dtoTransacation;
+	private ManterType daoType;
+	private ManterTransaction daoTransaction;
+	private TOTransaction dtoTransacation;
 	private Integer convertType;
-	private List<DTOTransaction> transactions;
+	private List<TOTransaction> transactions;
 	
 	public MBTransaction() {
-		this.daoTransaction = new DAOTransaction();
-		this.dtoTransacation = new DTOTransaction();
-		this.daoTransaction = new DAOTransaction();
+		this.daoTransaction = new ManterTransaction();
+		this.dtoTransacation = new TOTransaction();
+		this.daoTransaction = new ManterTransaction();
 		this.convertType = null;
-		this.transactions = new ArrayList<DTOTransaction>();
+		this.transactions = new ArrayList<TOTransaction>();
 		listTransactions();
 	}
 	
@@ -65,7 +65,7 @@ public class MBTransaction implements Serializable, Messages {
 	}
 	
 	public Type convertType() {
-		DTOType dtoType = this.getDaoType().findById(this.getConvertType());
+		TOType dtoType = this.getDaoType().findById(this.getConvertType());
 		Type type = new Type();
 		
 		type.setId(dtoType.getId());
@@ -74,19 +74,19 @@ public class MBTransaction implements Serializable, Messages {
 		return type;
 	}
 
-	public DAOTransaction getDaoTransaction() {
+	public ManterTransaction getDaoTransaction() {
 		return daoTransaction;
 	}
 
-	public void setDaoTransaction(DAOTransaction daoTransaction) {
+	public void setDaoTransaction(ManterTransaction daoTransaction) {
 		this.daoTransaction = daoTransaction;
 	}
 
-	public DTOTransaction getDtoTransacation() {
+	public TOTransaction getDtoTransacation() {
 		return dtoTransacation;
 	}
 
-	public void setDtoTransacation(DTOTransaction dtoTransacation) {
+	public void setDtoTransacation(TOTransaction dtoTransacation) {
 		this.dtoTransacation = dtoTransacation;
 	}
 
@@ -98,19 +98,19 @@ public class MBTransaction implements Serializable, Messages {
 		this.convertType = convertType;
 	}
 
-	public DAOType getDaoType() {
+	public ManterType getDaoType() {
 		return daoType;
 	}
 
-	public void setDaoType(DAOType daoType) {
+	public void setDaoType(ManterType daoType) {
 		this.daoType = daoType;
 	}
 
-	public List<DTOTransaction> getTransactions() {
+	public List<TOTransaction> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(List<DTOTransaction> transactions) {
+	public void setTransactions(List<TOTransaction> transactions) {
 		this.transactions = transactions;
 	}
 }

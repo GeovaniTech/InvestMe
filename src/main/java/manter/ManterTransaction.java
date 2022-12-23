@@ -1,4 +1,5 @@
-package dao;
+package manter;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,20 +9,26 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import dto.DTOTransaction;
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Transaction;
 import model.Type;
+import to.TOTransaction;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
+public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 
-	DTOTransaction filters = new DTOTransaction();
+	TOTransaction filters;
+	List<String> parameters; 
+	
+	public ManterTransaction() {
+		this.filters = new TOTransaction();
+		this.parameters = new ArrayList<String>();
+	}
 	
 	@Override
-	public void save(DTOTransaction to) {
+	public void save(TOTransaction to) {
 		Transaction transaction = new Transaction();
 		
 		transaction.setActive(to.getActive());
@@ -37,7 +44,7 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 	}
 
 	@Override
-	public void change(DTOTransaction to) {
+	public void change(TOTransaction to) {
 		Transaction transaction = new Transaction();
 		
 		transaction.setId(to.getId());
@@ -54,7 +61,7 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 	}
 
 	@Override
-	public void remove(DTOTransaction to) {
+	public void remove(TOTransaction to) {
 		Transaction trasaction = em.find(Transaction.class, to.getId());
 		
 		em.getTransaction().begin();
@@ -63,9 +70,9 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 	}
 
 	@Override
-	public DTOTransaction findById(int id) {
+	public TOTransaction findById(int id) {
 		Transaction transaction = em.find(Transaction.class, id);
-		DTOTransaction dtoTransaction = new DTOTransaction();
+		TOTransaction dtoTransaction = new TOTransaction();
 		
 		dtoTransaction.setActive(transaction.getActive());
 		dtoTransaction.setPrice(transaction.getPrice());
@@ -78,7 +85,7 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 	}
 
 	@Override
-	public List<DTOTransaction> list() {
+	public List<TOTransaction> list() {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append(" SELECT T.active, ");
@@ -87,21 +94,21 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 		sql.append(" T.typeActive, ");
 		sql.append(" T.typeTransaction, ");
 		sql.append(" T.date ");
-		sql.append(" FROM " + Transaction.class.getName() + " T");
-		sql.append(" WHERE T.typeTransaction = :typeTransaction ");
+		sql.append(" FROM " + Transaction.class.getName() + " T ");
 		
 		if(this.validateFilters() != null) {
 			sql.append(this.validateFilters());
 		}
 		
 		List<Object[]> result = new ArrayList<Object[]>();
+		
 		result = em.createQuery(sql.toString(), Object[].class)
 					.getResultList();
 		
-		List<DTOTransaction> convertedResults = new ArrayList<>();
+		List<TOTransaction> convertedResults = new ArrayList<>();
 		
 		for(Object[] o : result) {
-			DTOTransaction dtoTrasanction = new DTOTransaction();
+			TOTransaction dtoTrasanction = new TOTransaction();
 			
 			dtoTrasanction.setActive((String) o[0]);
 			dtoTrasanction.setPrice((Double) o[1]);
@@ -116,14 +123,26 @@ public class DAOTransaction implements JPAEntity, GenericDAO<DTOTransaction> {
 	}
 
 	public String validateFilters() {
+		StringBuilder sql = new StringBuilder();
+		
+		if(filters.getTypeTrasanction() == null) {
+			sql.append(" WHERE T.typeTrasanction IS NOT NULL ");
+		} else {
+			sql.append(" ");
+		}
+		
+		if(filters.getActive() != null) {
+			
+		}
+		
 		return null;
 	}
 
-	public DTOTransaction getFilters() {
+	public TOTransaction getFilters() {
 		return filters;
 	}
 
-	public void setFilters(DTOTransaction filters) {
+	public void setFilters(TOTransaction filters) {
 		this.filters = filters;
 	}
 }

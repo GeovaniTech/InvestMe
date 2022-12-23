@@ -1,4 +1,4 @@
-package dao;
+package manter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,18 +8,18 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import dto.DTOInvestment;
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Investment;
 import model.Type;
+import to.TOInvestment;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
+public class ManterInvestment implements JPAEntity, GenericDAO<TOInvestment> {
 
 	@Override
-	public void save(DTOInvestment to) {
+	public void save(TOInvestment to) {
 		Investment investment = new Investment();
 		
 		investment.setAmount(to.getAmount());
@@ -34,13 +34,13 @@ public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 	}
 
 	@Override
-	public void change(DTOInvestment to) {
+	public void change(TOInvestment to) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void remove(DTOInvestment to) {
+	public void remove(TOInvestment to) {
 		em.getTransaction().begin();
 		
 		em.createQuery("DELETE FROM " + Investment.class.getName() +  " Investment WHERE Investment.id = :id")
@@ -51,9 +51,9 @@ public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 	}
 
 	@Override
-	public DTOInvestment findById(int id) {
+	public TOInvestment findById(int id) {
 		Investment investment = em.find(Investment.class, id);
-		DTOInvestment dtoInvestment = new DTOInvestment();
+		TOInvestment dtoInvestment = new TOInvestment();
 		
 		dtoInvestment.setId(investment.getId());
 		dtoInvestment.setAmount(investment.getAmount());
@@ -63,7 +63,7 @@ public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 	}
 
 	@Override
-	public List<DTOInvestment> list() {
+	public List<TOInvestment> list() {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append("SELECT Investment.id, ");
@@ -77,10 +77,10 @@ public class DAOInvestment implements JPAEntity, GenericDAO<DTOInvestment> {
 		List<Object[]> result = em.createQuery(sql.toString(), Object[].class)
 								.getResultList();
 		
-		List<DTOInvestment> convertedResults =  new ArrayList<DTOInvestment>();
+		List<TOInvestment> convertedResults =  new ArrayList<TOInvestment>();
 		
 		for(Object[] o : result) {
-			DTOInvestment dtoInvestment = new DTOInvestment();
+			TOInvestment dtoInvestment = new TOInvestment();
 			
 			dtoInvestment.setId((Integer) o[0]);
 			dtoInvestment.setAmount((float) o[1]);

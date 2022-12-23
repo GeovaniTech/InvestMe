@@ -7,22 +7,22 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import dao.DAOInvestment;
-import dao.DAOType;
-import dto.DTOInvestment;
-import dto.DTOType;
 import interfaces.Messages;
+import manter.ManterInvestment;
+import manter.ManterType;
 import model.Type;
+import to.TOInvestment;
+import to.TOType;
 
 @Named("MBInvestment")
 @ViewScoped
 public class MBInvestment implements Serializable, Messages {
 	private static final long serialVersionUID = 4252751160550859892L;
 	
-	private DAOType daoType = new DAOType();
-	private DTOInvestment dtoInvestment = new DTOInvestment();
-	private DAOInvestment daoInvestment = new DAOInvestment();
-	private List<DTOInvestment> investments = new ArrayList<DTOInvestment>();
+	private ManterType daoType = new ManterType();
+	private TOInvestment dtoInvestment = new TOInvestment();
+	private ManterInvestment daoInvestment = new ManterInvestment();
+	private List<TOInvestment> investments = new ArrayList<TOInvestment>();
 	
 	private Double totalSpent;
 	private Double totalActions;
@@ -55,7 +55,7 @@ public class MBInvestment implements Serializable, Messages {
 		}
 	}
 	
-	public void remove(DTOInvestment to) {
+	public void remove(TOInvestment to) {
 		try {
 			this.getDaoInvestment().remove(to);
 			
@@ -72,7 +72,7 @@ public class MBInvestment implements Serializable, Messages {
 	}
 	
 	public Type convertType() {
-		DTOType dtoType = this.getDaoType().findById(this.getIdType());
+		TOType dtoType = this.getDaoType().findById(this.getIdType());
 		
 		Type type = new Type();
 		type.setId(dtoType.getId());
@@ -110,27 +110,27 @@ public class MBInvestment implements Serializable, Messages {
 	}
 	
 	//Getters and Setters
-	public DTOInvestment getDtoInvestment() {
+	public TOInvestment getDtoInvestment() {
 		return dtoInvestment;
 	}
 
-	public void setDtoInvestment(DTOInvestment dtoInvestment) {
+	public void setDtoInvestment(TOInvestment dtoInvestment) {
 		this.dtoInvestment = dtoInvestment;
 	}
 
-	public DAOInvestment getDaoInvestment() {
+	public ManterInvestment getDaoInvestment() {
 		return daoInvestment;
 	}
 
-	public void setDaoInvestment(DAOInvestment daoInvestment) {
+	public void setDaoInvestment(ManterInvestment daoInvestment) {
 		this.daoInvestment = daoInvestment;
 	}
 
-	public List<DTOInvestment> getInvestments() {
+	public List<TOInvestment> getInvestments() {
 		return investments;
 	}
 
-	public void setInvestments(List<DTOInvestment> investments) {
+	public void setInvestments(List<TOInvestment> investments) {
 		this.investments = investments;
 	}
 
@@ -142,11 +142,11 @@ public class MBInvestment implements Serializable, Messages {
 		this.idType = idType;
 	}
 	
-	public DAOType getDaoType() {
+	public ManterType getDaoType() {
 		return daoType;
 	}
 	
-	public void setDaoType(DAOType daoType) {
+	public void setDaoType(ManterType daoType) {
 		this.daoType = daoType;
 	}
 

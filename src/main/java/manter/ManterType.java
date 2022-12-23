@@ -1,4 +1,4 @@
-package dao;
+package manter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,16 +7,16 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import dto.DTOType;
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Type;
+import to.TOType;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class DAOType implements JPAEntity, GenericDAO<DTOType> {
+public class ManterType implements JPAEntity, GenericDAO<TOType> {
 	@Override
-	public void save(DTOType model) {
+	public void save(TOType model) {
 		Type type = new Type(); 
 		
 		type.setName(model.getName());
@@ -27,13 +27,13 @@ public class DAOType implements JPAEntity, GenericDAO<DTOType> {
 	}
 
 	@Override
-	public void change(DTOType model) {
+	public void change(TOType model) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void remove(DTOType model) {
+	public void remove(TOType model) {
 		em.getTransaction().begin();
 		
 		em.createQuery("DELETE FROM " + Type.class.getName() + " Type WHERE Type.id = :id")
@@ -44,9 +44,9 @@ public class DAOType implements JPAEntity, GenericDAO<DTOType> {
 	}
 
 	@Override
-	public DTOType findById(int id) {
+	public TOType findById(int id) {
 		Type type = em.find(Type.class, id);
-		DTOType dtoType = new DTOType();
+		TOType dtoType = new TOType();
 		
 		dtoType.setId(type.getId());
 		dtoType.setName(type.getName());
@@ -54,14 +54,14 @@ public class DAOType implements JPAEntity, GenericDAO<DTOType> {
 	}
 	
 	@Override
-	public List<DTOType> list() {
-		List<DTOType> convertedResults = new ArrayList<DTOType>();
+	public List<TOType> list() {
+		List<TOType> convertedResults = new ArrayList<TOType>();
 		
 		List<Object[]> result = em.createQuery("SELECT Type.id, Type.name FROM " + Type.class.getName() + " Type", Object[].class)
 								.getResultList();
 		
 		for(Object[] o : result) {
-			DTOType to = new DTOType();
+			TOType to = new TOType();
 			
 			to.setId((Integer) o[0]);
 			to.setName((String) o[1]);

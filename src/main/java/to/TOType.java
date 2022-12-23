@@ -1,6 +1,6 @@
-package dto;
+package to;
 
-public class DTOType {
+public class TOType {
 	private int id;
 	private String name;
 	

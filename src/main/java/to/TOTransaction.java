@@ -1,11 +1,11 @@
-package dto;
+package to;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import model.Type;
 
-public class DTOTransaction implements Serializable {
+public class TOTransaction implements Serializable {
 	private static final long serialVersionUID = -8168060083920299146L;
 	
 	private int id;

@@ -1,10 +1,10 @@
-package dto;
+package to;
 
 import java.util.Date;
 
 import model.Type;
 
-public class DTOInvestment {
+public class TOInvestment {
 	private int id;
 	private float amount;
 	private Double actualPrice;

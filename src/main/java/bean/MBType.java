@@ -6,18 +6,18 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import dao.DAOType;
-import dto.DTOType;
 import interfaces.Messages;
+import manter.ManterType;
+import to.TOType;
 
 @Named("MBType")
 @ViewScoped
 public class MBType implements Serializable, Messages {
 	private static final long serialVersionUID = 1230226415644681012L;
 	
-	private DTOType dtoType = new DTOType();
-	private DAOType daoType = new DAOType();
-	private List<DTOType> types;
+	private TOType dtoType = new TOType();
+	private ManterType daoType = new ManterType();
+	private List<TOType> types;
 	
 	public MBType() {
 		updateTypes();
@@ -27,7 +27,7 @@ public class MBType implements Serializable, Messages {
 		if(this.getDtoType().getName() != null
 				&& !this.getDtoType().getName().equals("")) {
 			this.getDaoType().save(this.getDtoType());
-			this.setDtoType(new DTOType());
+			this.setDtoType(new TOType());
 			
 			updateTypes();
 			msg.saveSuccessfully();
@@ -36,7 +36,7 @@ public class MBType implements Serializable, Messages {
 		}
 	}
 	
-	public void remove(DTOType to) {
+	public void remove(TOType to) {
 		try {
 			this.getDaoType().remove(to);
 			
@@ -53,22 +53,22 @@ public class MBType implements Serializable, Messages {
 	}
 	
 	//Getters and Setters
-	public DAOType getDaoType() {
+	public ManterType getDaoType() {
 		return daoType;
 	}
-	public void setDaoType(DAOType daoType) {
+	public void setDaoType(ManterType daoType) {
 		this.daoType = daoType;
 	}
-	public List<DTOType> getTypes() {
+	public List<TOType> getTypes() {
 		return types;
 	}
-	public void setTypes(List<DTOType> types) {
+	public void setTypes(List<TOType> types) {
 		this.types = types;
 	}
-	public DTOType getDtoType() {
+	public TOType getDtoType() {
 		return dtoType;
 	}
-	public void setDtoType(DTOType dtoType) {
+	public void setDtoType(TOType dtoType) {
 		this.dtoType = dtoType;
 	}
 }
