@@ -13,6 +13,7 @@ import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Transaction;
 import model.Type;
+import to.TOParameter;
 import to.TOTransaction;
 
 @Stateless
@@ -20,11 +21,11 @@ import to.TOTransaction;
 public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 
 	TOTransaction filters;
-	List<String> parameters; 
+	List<TOParameter> parameters; 
 	
 	public ManterTransaction() {
 		this.filters = new TOTransaction();
-		this.parameters = new ArrayList<String>();
+		this.parameters = new ArrayList<TOParameter>();
 	}
 	
 	@Override
@@ -128,7 +129,8 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		if(filters.getTypeTrasanction() == null) {
 			sql.append(" WHERE T.typeTrasanction IS NOT NULL ");
 		} else {
-			sql.append(" ");
+			sql.append(" WHERE T.typeTransaction = :pTypeTransaction");
+			parameters.add(new TOParameter("pTypeTransaction", filters.getTypeTrasanction()));
 		}
 		
 		if(filters.getActive() != null) {
