@@ -1,6 +1,5 @@
 package manter;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,20 +12,11 @@ import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Transaction;
 import model.Type;
-import to.TOParameter;
 import to.TOTransaction;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
-
-	TOTransaction filters;
-	List<TOParameter> parameters; 
-	
-	public ManterTransaction() {
-		this.filters = new TOTransaction();
-		this.parameters = new ArrayList<TOParameter>();
-	}
 	
 	@Override
 	public void save(TOTransaction to) {
@@ -84,67 +74,52 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		
 		return dtoTransaction;
 	}
-
+	
 	@Override
 	public List<TOTransaction> list() {
+		return null;
+	}
+	
+	@Override
+	public List<TOTransaction> list(String typeTransacion) {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append(" SELECT T.active, ");
 		sql.append(" T.price, ");
 		sql.append(" T.amount, ");
+		sql.append(" T.date, ");
 		sql.append(" T.typeActive, ");
-		sql.append(" T.typeTransaction, ");
-		sql.append(" T.date ");
-		sql.append(" FROM " + Transaction.class.getName() + " T ");
-		
-		if(this.validateFilters() != null) {
-			sql.append(this.validateFilters());
-		}
+		sql.append(" T.typeTransaction ");
+		sql.append(" FROM ").append(Transaction.class.getName()).append(" T ");
 		
 		List<Object[]> result = new ArrayList<Object[]>();
+		List<TOTransaction> convertedTransactions = new ArrayList<TOTransaction>();
 		
-		result = em.createQuery(sql.toString(), Object[].class)
+		if(!typeTransacion.equals("")) {
+			
+			sql.append(" WHERE T.typeTransaction = :pTypeTransaction ");
+			
+			result = em.createQuery(sql.toString(), Object[].class)
+					.setParameter("pTypeTransaction", typeTransacion)
 					.getResultList();
-		
-		List<TOTransaction> convertedResults = new ArrayList<>();
+		} else {
+			result = em.createQuery(sql.toString(), Object[].class)
+					.getResultList();
+		}
 		
 		for(Object[] o : result) {
-			TOTransaction dtoTrasanction = new TOTransaction();
+			TOTransaction to = new TOTransaction();
 			
-			dtoTrasanction.setActive((String) o[0]);
-			dtoTrasanction.setPrice((Double) o[1]);
-			dtoTrasanction.setAmount((Integer) o[2]);
-			dtoTrasanction.setTypeActive((Type) o[3]);
-			dtoTrasanction.setTypeTrasanction((String) o[4]);
-			dtoTrasanction.setDate((Date) o[5]);
+			to.setActive((String) o[0]);
+			to.setPrice((Double) o[1]);
+			to.setAmount((Integer) o[2]);
+			to.setDate((Date) o[3]);
+			to.setTypeActive((Type) o[4]);
+			to.setTypeTrasanction((String) o[5]);
 			
-			convertedResults.add(dtoTrasanction);
-		}		
-		return convertedResults;
-	}
-
-	public String validateFilters() {
-		StringBuilder sql = new StringBuilder();
-		
-		if(filters.getTypeTrasanction() == null) {
-			sql.append(" WHERE T.typeTransaction IS NOT NULL ");
-		} else {
-			sql.append(" WHERE T.typeTransaction = :pTypeTransaction");
-			parameters.add(new TOParameter("pTypeTransaction", filters.getTypeTrasanction()));
+			convertedTransactions.add(to);
 		}
 		
-		if(filters.getActive() != null) {
-			
-		}
-		
-		return null;
-	}
-
-	public TOTransaction getFilters() {
-		return filters;
-	}
-
-	public void setFilters(TOTransaction filters) {
-		this.filters = filters;
+		return convertedTransactions;
 	}
 }

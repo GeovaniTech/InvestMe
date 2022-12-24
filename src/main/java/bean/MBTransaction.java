@@ -55,8 +55,8 @@ public class MBTransaction implements Serializable, Messages {
 		
 	}
 	
-	public void remove() {
-		this.getManterTransaction().remove(this.getToTransaction());
+	public void remove(TOTransaction toTransaction) {
+		this.getManterTransaction().remove(toTransaction);
 		listTransactions();
 	}
 	

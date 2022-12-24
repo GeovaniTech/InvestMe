@@ -8,4 +8,5 @@ public interface GenericDAO<to> {
 	public void remove(to to);
 	public to findById(int id);
 	public List<to> list();
+	public List<to> list(String specificType);
 }

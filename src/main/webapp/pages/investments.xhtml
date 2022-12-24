@@ -32,70 +32,70 @@
 				
 				<h:panelGroup class="container-cards" id="dashboard">			
 					<components:card 
-						value="#{MBInvestment.totalSpent}"
+						value="#{MBtransaction.spents}"
 						description="Spents"
 						icon="pi pi-dollar" />
 					
 					<components:card 
-						value="#{MBInvestment.totalActions}"
+						value="#{MBtransaction.actions}"
 						description="Actions"
 						icon="pi pi-credit-card" />
 						
 					<components:card 
-						value="#{MBInvestment.totalFiis}"
+						value="#{MBtransaction.fiis}"
 						description="Fiis"
 						icon="pi pi-building" />
 					
 					<components:card 
-						value="#{MBInvestment.totalFixedIncome}"
+						value="#{MBtransaction.fixedIncome}"
 						description="Fixed Income"
 						icon="pi pi-chart-line" />
 						
 					<components:card 
-						value="#{MBInvestment.totalCriptocurrencys}"
+						value="#{MBtransaction.criptocurrencys}"
 						description="Criptos"
 						icon="pi pi-bitcoin" />
 				</h:panelGroup>
 				
-				<h:form id="tableWallet">
+				<h:form id="tabletransactions">
 					<p:dataTable
-						value="#{MBInvestment.investments}"
-						var="investment"
+						value="#{MBtransaction.transactions}"
+						var="transaction"
 						paginator="true"
 						rows="15"
 						paginatorPosition="bottom">
 						
 						<p:column headerText="Active">
-							<h:outputText value="#{investment.active}" />
+							<h:outputText value="#{transaction.active}" />
 						</p:column>
 		
 						<p:column headerText="Type">
-							<h:outputText value="#{investment.type.name}" />
+							<h:outputText value="#{transaction.typeActive.name}" />
 						</p:column>
 						
 						<p:column headerText="Price">
-							<h:outputText value="#{investment.actualPrice}" />
+							<h:outputText value="#{transaction.price}" />
 						</p:column>
 		
 						<p:column headerText="Amount">
-							<h:outputText value="#{investment.amount}" />
+							<h:outputText value="#{transaction.amount}" />
 						</p:column>
 		
 						<p:column headerText="When">
-							<h:outputText value="#{investment.date}">
+							<h:outputText value="#{transaction.date}">
 								<f:convertDateTime pattern="MM/dd/yyyy" />  
 							</h:outputText>
 						</p:column>
 						
 						<p:column headerText="Total">
-							<h:outputText value="#{investment.amount * investment.actualPrice}" />
+							<h:outputText value="#{transaction.amount * transaction.price}" />
 						</p:column>
 						
 						<p:column headerText="Delete">
 							<p:commandButton 
 								value="Delete"
-								action="#{MBInvestment.remove(investment)}"
-								update="tableInvestments, growl, @form, dashboard"
+								action="#{MBTransaction.remove(transaction)}"
+								update="tabletransactions, growl, @form, dashboard"
 								icon="pi pi-times" />
 						</p:column>				
 					</p:dataTable>

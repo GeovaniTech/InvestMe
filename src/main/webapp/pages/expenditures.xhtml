@@ -53,8 +53,48 @@
 						icon="pi pi-box" />	
 				</h:panelGroup>
 				
-				<h:form id="tableWallet">
-			
+				<h:form id="tabletransactions">
+					<p:dataTable
+						value="#{MBExpenditure.expenditures}"
+						var="transaction"
+						paginator="true"
+						rows="15"
+						paginatorPosition="bottom">
+						
+						<p:column headerText="Active">
+							<h:outputText value="#{transaction.active}" />
+						</p:column>
+		
+						<p:column headerText="Type">
+							<h:outputText value="#{transaction.typeActive.name}" />
+						</p:column>
+						
+						<p:column headerText="Price">
+							<h:outputText value="#{transaction.price}" />
+						</p:column>
+		
+						<p:column headerText="Amount">
+							<h:outputText value="#{transaction.amount}" />
+						</p:column>
+		
+						<p:column headerText="When">
+							<h:outputText value="#{transaction.date}">
+								<f:convertDateTime pattern="MM/dd/yyyy" />  
+							</h:outputText>
+						</p:column>
+						
+						<p:column headerText="Total">
+							<h:outputText value="#{transaction.amount * transaction.price}" />
+						</p:column>
+						
+						<p:column headerText="Delete">
+							<p:commandButton 
+								value="Delete"
+								action="#{MBTransaction.remove(transaction)}"
+								update="tabletransactions, growl, @form, dashboard"
+								icon="pi pi-times" />
+						</p:column>				
+					</p:dataTable>
 				</h:form>
 			</ui:define>
 		</ui:composition>

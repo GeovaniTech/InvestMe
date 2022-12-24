@@ -85,6 +85,17 @@
 				height: 60px;
 				background-color: #292522;
 			}
+			
+			.panel-inputs {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+			}
+			
+			.panel-inputs > * {
+				width: 100% !important;
+			}
 		</style>
 	</h:head>
 	
@@ -210,49 +221,55 @@
 		<!-- DIALOG TRANSACTION -->
 		<p:dialog
 			header="Transactions"
-			widgetVar="dialog-transactions">
+			widgetVar="dialog-transactions"
+			width="60%"
+			height="60%">
 			
 			<h:form>
-				<h:panelGrid columns="2">
-					<p:inputText 
-						placeholder="Active"
-						value="#{MBTransaction.toTransaction.active}" />
-					
-					<p:inputNumber 
-						placeholder="Price"
-						value="#{MBTransaction.toTransaction.price}" />
-					
-					<p:inputNumber 
-						placeholder="Amount"
-						value="#{MBTransaction.toTransaction.amount}" />
-					
-					<p:datePicker 
-						placeholder="When"
-						value="#{MBTransaction.toTransaction.date}" />
-					
-					<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTrasanction}">
-						<f:selectItem 
-							itemLabel="Todos"
-							itemValue="#{null}"/>
+			
+				<div class="panel-inputs">
+					<div>
+						<p:inputText 
+							placeholder="Active"
+							value="#{MBTransaction.toTransaction.active}" />
 						
-						<f:selectItem 
-							itemLabel="Investment"
-							itemValue="Investment" />
-							
-						<f:selectItem 
-							itemLabel="Expenditure"
-							itemValue="Expenditure" />
-					</p:selectOneMenu>
+						<p:inputNumber 
+							placeholder="Price"
+							value="#{MBTransaction.toTransaction.price}" />
+						
+						<p:inputNumber 
+							placeholder="Amount"
+							value="#{MBTransaction.toTransaction.amount}" />
+					</div>
 					
-					<p:selectOneMenu value="#{MBTransaction.convertType}">
-						<f:selectItems 
-							var="type"
-							value="#{MBType.types}"
-							itemLabel="#{type.name}"
-							itemValue="#{type.id}" />
-					</p:selectOneMenu>
-				</h:panelGrid>
-				
+					<div>
+						<p:datePicker 
+							placeholder="When"
+							value="#{MBTransaction.toTransaction.date}" />
+						
+						<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTrasanction}">
+							<f:selectItem 
+								itemLabel="Todos"
+								itemValue="#{null}"/>
+							
+							<f:selectItem 
+								itemLabel="Investment"
+								itemValue="Investment" />
+								
+							<f:selectItem 
+								itemLabel="Expenditure"
+								itemValue="Expenditure" />
+						</p:selectOneMenu>
+						
+						<p:selectOneMenu value="#{MBTransaction.convertType}">
+							<f:selectItems 
+								var="type"
+								value="#{MBType.types}"
+								itemLabel="#{type.name}"
+								itemValue="#{type.id}" />
+						</p:selectOneMenu>					
+					</div>
+				</div>
 				<p:commandButton 
 					value="Save"
 					action="#{MBTransaction.save()}"/>

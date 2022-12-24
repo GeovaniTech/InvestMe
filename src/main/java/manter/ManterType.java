@@ -70,6 +70,12 @@ public class ManterType implements JPAEntity, GenericDAO<TOType> {
 		}
 		
 		return convertedResults;
+	}
+
+	@Override
+	public List<TOType> list(String specificType) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }
