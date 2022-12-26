@@ -9,49 +9,49 @@ import model.Transaction;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterExpenditure implements JPAEntity {
+public class ManterInvestment implements JPAEntity {
 	private StringBuilder sql;
 	
-	public ManterExpenditure() {
-		this.sql = new  StringBuilder();
+	public ManterInvestment() {
+		this.sql = new StringBuilder();
 		
 		sql.append(" SELECT SUM(T.price * T.amount) ");
 		sql.append(" FROM ").append(Transaction.class.getName()).append(" T ");
-		sql.append(" WHERE T.typeTransaction = 'Expenditure' ");
+		sql.append(" WHERE T.typeTransaction = 'Investment' ");
 	}
 	
-	public Double spents() {
+	public Double spents() {		
 		return em.createQuery(sql.toString(), Double.class).getSingleResult();
 	}
 	
-	public Double recreation() {
+	public Double actions() {
 		StringBuilder filters = new StringBuilder();
-		filters.append(" AND T.typeActive.name = 'Recreation' ");
+		filters.append(" AND T.typeActive.name = 'Action' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
 	}
 	
-	public Double market() {
+	public Double fiis() {
 		StringBuilder filters = new StringBuilder();
-		filters.append(" AND T.typeActive.name = 'Market' ");
-		
-		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
-	}
-
-	public Double ifood() {
-		StringBuilder filters = new StringBuilder();
-		filters.append(" AND T.typeActive.name = 'Ifood' ");
+		filters.append(" AND T.typeActive.name = 'Fiis' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
 	}
 	
-	public Double others() {
+	public Double fixedIncome() {
 		StringBuilder filters = new StringBuilder();
-		filters.append(" AND T.typeActive.name = 'Others' ");
+		filters.append(" AND T.typeActive.name = 'Fixed Income' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
 	}
-
+	
+	public Double criptocurrencys() {
+		StringBuilder filters = new StringBuilder();
+		filters.append(" AND T.typeActive.name = 'Criptocurrencys' ");
+		
+		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
+	}
+	
 	public StringBuilder getSql() {
 		return sql;
 	}
@@ -60,4 +60,3 @@ public class ManterExpenditure implements JPAEntity {
 		this.sql = sql;
 	}
 }
-
