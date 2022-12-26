@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import manter.ManterExpenditure;
 import manter.ManterTransaction;
 import to.TOTransaction;
 
@@ -16,6 +17,7 @@ public class MBExpenditure implements Serializable {
 	private static final long serialVersionUID = 6177450877846959657L;
 
 	private ManterTransaction manterTransaction;
+	private ManterExpenditure manterExpenditure;
 	private List<TOTransaction> expenditures;
 	
 	private Double spents;
@@ -26,6 +28,7 @@ public class MBExpenditure implements Serializable {
 	
 	public MBExpenditure() {
 		this.manterTransaction = new ManterTransaction();
+		this.manterExpenditure = new ManterExpenditure();
 		this.expenditures = new ArrayList<TOTransaction>();
 		this.spents = Double.valueOf(0);
 		this.recreation = Double.valueOf(0);
@@ -34,12 +37,21 @@ public class MBExpenditure implements Serializable {
 		this.others = Double.valueOf(0);
 		
 		listExpendiures();
+		updateDashboard();
 	}
-	
+
 	public void listExpendiures() {
 		this.setExpenditures(this.getManterTransaction().list("Expenditure"));
 	}
 
+	public void updateDashboard() {
+		this.setSpents(this.getManterExpenditure().spents());
+		this.setRecreation(this.getManterExpenditure().recreation());
+		this.setMarket(this.getManterExpenditure().market());
+		this.setIfood(this.getManterExpenditure().ifood());
+		this.setOthers(this.getManterExpenditure().others());
+	}
+	
 	public ManterTransaction getManterTransaction() {
 		return manterTransaction;
 	}
@@ -94,5 +106,13 @@ public class MBExpenditure implements Serializable {
 
 	public void setOthers(Double others) {
 		this.others = others;
+	}
+
+	public ManterExpenditure getManterExpenditure() {
+		return manterExpenditure;
+	}
+
+	public void setManterExpenditure(ManterExpenditure manterExpenditure) {
+		this.manterExpenditure = manterExpenditure;
 	}
 }

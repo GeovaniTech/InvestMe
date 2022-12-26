@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import manter.ManterInvestment;
 import manter.ManterTransaction;
 import to.TOTransaction;
 
@@ -16,6 +17,7 @@ public class MBInvestment implements Serializable {
 	private static final long serialVersionUID = 4252751160550859892L;
 	
 	private ManterTransaction manterTransaction;
+	private ManterInvestment manterInvetment;
 	private List<TOTransaction> investments;
 	
 	private Double spents;
@@ -26,6 +28,7 @@ public class MBInvestment implements Serializable {
 	
 	public MBInvestment() {
 		this.manterTransaction = new ManterTransaction();
+		this.manterInvetment = new ManterInvestment();
 		this.investments = new ArrayList<TOTransaction>();
 		this.spents = Double.valueOf(0);
 		this.actions = Double.valueOf(0);
@@ -34,12 +37,21 @@ public class MBInvestment implements Serializable {
 		this.criptocurrencys = Double.valueOf(0);
 		
 		listInvestments();
+		updateDashboard();
 	}
 	
 	public void listInvestments() {
 		this.setInvestments(this.getManterTransaction().list("Investment"));
 	}
 
+	public void updateDashboard() {
+		this.setSpents(this.getManterInvetment().spents());
+		this.setActions(this.getManterInvetment().actions());
+		this.setFiis(this.getManterInvetment().fiis());
+		this.setFixedIncome(this.getManterInvetment().fixedIncome());
+		this.setCriptocurrencys(this.getManterInvetment().criptocurrencys());
+	}
+	
 	public ManterTransaction getManterTransaction() {
 		return manterTransaction;
 	}
@@ -94,5 +106,13 @@ public class MBInvestment implements Serializable {
 
 	public void setCriptocurrencys(Double criptocurrencys) {
 		this.criptocurrencys = criptocurrencys;
+	}
+
+	public ManterInvestment getManterInvetment() {
+		return manterInvetment;
+	}
+
+	public void setManterInvetment(ManterInvestment manterInvetment) {
+		this.manterInvetment = manterInvetment;
 	}
 }
