@@ -13,7 +13,7 @@ public class TOTransaction implements Serializable {
 	private Double price;
 	private Integer amount;
 	private Date date;
-	private String typeTrasanction;
+	private String typeTransaction;
 	private Type typeActive;
 	
 	public int getId() {
@@ -46,16 +46,16 @@ public class TOTransaction implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public String getTypeTrasanction() {
-		return typeTrasanction;
-	}
-	public void setTypeTrasanction(String typeTrasanction) {
-		this.typeTrasanction = typeTrasanction;
-	}
 	public Type getTypeActive() {
 		return typeActive;
 	}
 	public void setTypeActive(Type typeActive) {
 		this.typeActive = typeActive;
+	}
+	public String getTypeTransaction() {
+		return typeTransaction;
+	}
+	public void setTypeTransaction(String typeTransaction) {
+		this.typeTransaction = typeTransaction;
 	}
 }

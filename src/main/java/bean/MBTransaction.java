@@ -38,7 +38,7 @@ public class MBTransaction implements Serializable, Messages {
 		if(this.getToTransaction().getActive() != null
 			&& this.getToTransaction().getPrice() != null
 			&& this.getToTransaction().getAmount() != null
-			&& this.getToTransaction().getTypeTrasanction() != null
+			&& this.getToTransaction().getTypeTransaction() != null
 			&& this.getToTransaction().getDate() != null) {
 			
 			this.getToTransaction().setTypeActive(this.convertType());

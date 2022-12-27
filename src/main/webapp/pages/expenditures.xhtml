@@ -53,7 +53,7 @@
 						icon="pi pi-box" />	
 				</h:panelGroup>
 				
-				<h:form id="tabletransactions">
+				<h:form id="tableTransactions">
 					<p:dataTable
 						value="#{MBExpenditure.expenditures}"
 						var="transaction"
@@ -91,7 +91,7 @@
 							<p:commandButton 
 								value="Delete"
 								action="#{MBTransaction.remove(transaction)}"
-								update="tabletransactions, growl, @form, dashboard"
+								update="tableTransactions, growl, @form, dashboard"
 								icon="pi pi-times" />
 						</p:column>				
 					</p:dataTable>

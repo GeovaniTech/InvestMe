@@ -247,11 +247,7 @@
 							placeholder="When"
 							value="#{MBTransaction.toTransaction.date}" />
 						
-						<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTrasanction}">
-							<f:selectItem 
-								itemLabel="Todos"
-								itemValue="#{null}"/>
-							
+						<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTransaction}">							
 							<f:selectItem 
 								itemLabel="Investment"
 								itemValue="Investment" />
@@ -272,10 +268,11 @@
 				</div>
 				<p:commandButton 
 					value="Save"
-					action="#{MBTransaction.save()}"/>
+					action="#{MBTransaction.save()}"
+					update="growl, @form, tableTransactions, dashboard"/>
 			</h:form>
 			
-			<h:panelGroup id="transactionsTable">
+			<h:panelGroup id="tableTransactionsDialog">
 				<p:dataTable
 					var="transaction"
 					value="#{MBTransaction.transactions}"

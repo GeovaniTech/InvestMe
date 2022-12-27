@@ -57,9 +57,9 @@
 						icon="pi pi-bitcoin" />
 				</h:panelGroup>
 				
-				<h:form id="tabletransactions">
+				<h:form id="tableTransactions">
 					<p:dataTable
-						value="#{MBtransaction.transactions}"
+						value="#{MBInvestment.investments}"
 						var="transaction"
 						paginator="true"
 						rows="15"
@@ -95,7 +95,7 @@
 							<p:commandButton 
 								value="Delete"
 								action="#{MBTransaction.remove(transaction)}"
-								update="tabletransactions, growl, @form, dashboard"
+								update="tableTransactions, growl, @form, dashboard"
 								icon="pi pi-times" />
 						</p:column>				
 					</p:dataTable>

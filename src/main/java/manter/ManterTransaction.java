@@ -26,7 +26,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		transaction.setPrice(to.getPrice());
 		transaction.setAmount(to.getAmount());
 		transaction.setTypeActive(to.getTypeActive());
-		transaction.setTypeTransaction(to.getTypeTrasanction());
+		transaction.setTypeTransaction(to.getTypeTransaction());
 		transaction.setDate(to.getDate());
 		
 		em.getTransaction().begin();
@@ -43,7 +43,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		transaction.setPrice(to.getPrice());
 		transaction.setAmount(to.getAmount());
 		transaction.setTypeActive(to.getTypeActive());
-		transaction.setTypeTransaction(to.getTypeTrasanction());
+		transaction.setTypeTransaction(to.getTypeTransaction());
 		transaction.setDate(to.getDate());
 		
 		em.getTransaction().begin();
@@ -69,7 +69,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		dtoTransaction.setPrice(transaction.getPrice());
 		dtoTransaction.setAmount(transaction.getAmount());
 		dtoTransaction.setTypeActive(transaction.getTypeActive());
-		dtoTransaction.setTypeTrasanction(transaction.getTypeTransaction());
+		dtoTransaction.setTypeTransaction(transaction.getTypeTransaction());
 		dtoTransaction.setDate(transaction.getDate());
 		
 		return dtoTransaction;
@@ -115,7 +115,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 			to.setAmount((Integer) o[2]);
 			to.setDate((Date) o[3]);
 			to.setTypeActive((Type) o[4]);
-			to.setTypeTrasanction((String) o[5]);
+			to.setTypeTransaction((String) o[5]);
 			
 			convertedTransactions.add(to);
 		}
