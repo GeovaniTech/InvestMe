@@ -53,10 +53,10 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 
 	@Override
 	public void remove(TOTransaction to) {
-		Transaction trasaction = em.find(Transaction.class, to.getId());
-		
 		em.getTransaction().begin();
-		em.remove(em.contains(trasaction) ? trasaction : em.merge(trasaction));
+		em.createQuery("DELETE FROM " + Transaction.class.getName() + " T WHERE T.id = :id")
+		.setParameter("id", to.getId())
+		.executeUpdate();
 		em.getTransaction().commit();
 	}
 
@@ -84,7 +84,8 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 	public List<TOTransaction> list(String typeTransacion) {
 		StringBuilder sql = new StringBuilder();
 		
-		sql.append(" SELECT T.active, ");
+		sql.append(" SELECT T.id, ");
+		sql.append(" T.active, ");
 		sql.append(" T.price, ");
 		sql.append(" T.amount, ");
 		sql.append(" T.date, ");
@@ -110,12 +111,13 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		for(Object[] o : result) {
 			TOTransaction to = new TOTransaction();
 			
-			to.setActive((String) o[0]);
-			to.setPrice((Double) o[1]);
-			to.setAmount((Integer) o[2]);
-			to.setDate((Date) o[3]);
-			to.setTypeActive((Type) o[4]);
-			to.setTypeTransaction((String) o[5]);
+			to.setId((int) o[0]);
+			to.setActive((String) o[1]);
+			to.setPrice((Double) o[2]);
+			to.setAmount((Integer) o[3]);
+			to.setDate((Date) o[4]);
+			to.setTypeActive((Type) o[5]);
+			to.setTypeTransaction((String) o[6]);
 			
 			convertedTransactions.add(to);
 		}

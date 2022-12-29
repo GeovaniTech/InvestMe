@@ -10,7 +10,10 @@ import javax.inject.Named;
 import interfaces.Messages;
 import manter.ManterInvestment;
 import manter.ManterTransaction;
+import manter.ManterType;
+import model.Type;
 import to.TOTransaction;
+import to.TOType;
 
 @Named("MBInvestment")
 @ViewScoped
@@ -19,6 +22,7 @@ public class MBInvestment implements Serializable, Messages {
 	
 	private ManterTransaction manterTransaction;
 	private ManterInvestment manterInvetment;
+	private ManterType manterType;
 	private List<TOTransaction> investments;
 	private TOTransaction toTransaction;
 	
@@ -28,15 +32,20 @@ public class MBInvestment implements Serializable, Messages {
 	private Double fixedIncome;
 	private Double criptocurrencys;
 	
+	private int convertType;
+	
 	public MBInvestment() {
 		this.manterTransaction = new ManterTransaction();
 		this.manterInvetment = new ManterInvestment();
+		this.manterType = new ManterType();
 		this.investments = new ArrayList<TOTransaction>();
+		this.toTransaction = new TOTransaction();
 		this.spents = Double.valueOf(0);
 		this.actions = Double.valueOf(0);
 		this.fiis = Double.valueOf(0);
 		this.fixedIncome = Double.valueOf(0);
 		this.criptocurrencys = Double.valueOf(0);
+		
 		
 		listInvestments();
 		updateDashboard();
@@ -47,12 +56,15 @@ public class MBInvestment implements Serializable, Messages {
 			&& toTransaction.getAmount() != null
 			&& toTransaction.getDate() != null
 			&& toTransaction.getPrice() != null
-			&& toTransaction.getTypeActive() != null
 			&& toTransaction.getTypeTransaction() != null) {
 			
+			toTransaction.setTypeActive(convertType());
+			
 			this.getManterTransaction().save(this.getToTransaction());
+			
 			updateDashboard();
 			listInvestments();
+			
 			msg.saveSuccessfully();
 		} else {
 			msg.emptyValues();
@@ -60,11 +72,35 @@ public class MBInvestment implements Serializable, Messages {
 	}
 	
 	public void change() {
-		
+		if(toTransaction.getActive() != null
+				&& toTransaction.getAmount() != null
+				&& toTransaction.getDate() != null
+				&& toTransaction.getPrice() != null
+				&& toTransaction.getTypeTransaction() != null) {
+			
+			toTransaction.setTypeActive(convertType());
+			
+			this.getManterTransaction().change(this.getToTransaction());
+			
+			updateDashboard();
+			listInvestments();
+			
+			msg.changedSuccessfully();
+		}
 	}
 	
 	public void remove(TOTransaction toTransaction) {
-		
+		try {
+			this.getManterTransaction().remove(toTransaction);
+			
+			updateDashboard();
+			listInvestments();
+			
+			msg.saveSuccessfully();
+		} catch (Exception e) {
+			msg.errorRemoving();
+			e.printStackTrace();
+		}
 	}
 	
 	public void listInvestments() {
@@ -77,6 +113,16 @@ public class MBInvestment implements Serializable, Messages {
 		this.setFiis(this.getManterInvetment().fiis());
 		this.setFixedIncome(this.getManterInvetment().fixedIncome());
 		this.setCriptocurrencys(this.getManterInvetment().criptocurrencys());
+	}
+	
+	public Type convertType() {
+		TOType dtoType = this.getManterType().findById(this.getConvertType());
+		Type type = new Type();
+		
+		type.setId(dtoType.getId());
+		type.setName(dtoType.getName());
+		
+		return type;
 	}
 	
 	public ManterTransaction getManterTransaction() {
@@ -149,5 +195,21 @@ public class MBInvestment implements Serializable, Messages {
 
 	public void setToTransaction(TOTransaction toTransaction) {
 		this.toTransaction = toTransaction;
+	}
+
+	public ManterType getManterType() {
+		return manterType;
+	}
+
+	public void setManterType(ManterType manterType) {
+		this.manterType = manterType;
+	}
+
+	public int getConvertType() {
+		return convertType;
+	}
+
+	public void setConvertType(int convertType) {
+		this.convertType = convertType;
 	}
 }

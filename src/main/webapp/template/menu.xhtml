@@ -271,42 +271,6 @@
 					action="#{MBTransaction.save()}"
 					update="growl, @form, tableTransactions, dashboard"/>
 			</h:form>
-			
-			<h:panelGroup id="tableTransactionsDialog">
-				<p:dataTable
-					var="transaction"
-					value="#{MBTransaction.transactions}"
-					rows="15"
-					paginator="true"
-					paginatorPosition="bottom">
-					
-					<p:column headerText="Active">
-						<h:outputText value="#{transaction.active}" />
-					</p:column>
-					
-					<p:column headerText="Type">
-						<h:outputText value="#{transaction.typeActive.name}" />
-					</p:column>	
-					
-					<p:column headerText="Price">
-						<h:outputText value="#{transaction.price}" />
-					</p:column>
-					
-					<p:column headerText="Amount">
-						<h:outputText value="#{transaction.amount}" />
-					</p:column>
-
-					<p:column headerText="When">
-						<h:outputText value="#{transaction.date}">
-							<f:convertDateTime pattern="dd/MM/yyyy"/>
-						</h:outputText>
-					</p:column>										
-					
-					<p:column headerText="Type Transaction">
-						<h:outputText value="#{transaction.typeTrasanction}" />
-					</p:column>					
-				</p:dataTable>
-			</h:panelGroup>
 		</p:dialog>
 	</h:body>
 </html>
