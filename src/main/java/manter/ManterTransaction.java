@@ -95,6 +95,8 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		List<Object[]> result = new ArrayList<Object[]>();
 		List<TOTransaction> convertedTransactions = new ArrayList<TOTransaction>();
 		
+		em.getTransaction().begin();
+		
 		if(!typeTransacion.equals("")) {
 			
 			sql.append(" WHERE T.typeTransaction = :pTypeTransaction ");
@@ -106,6 +108,8 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 			result = em.createQuery(sql.toString(), Object[].class)
 					.getResultList();
 		}
+		
+		em.getTransaction().commit();
 		
 		for(Object[] o : result) {
 			TOTransaction to = new TOTransaction();
