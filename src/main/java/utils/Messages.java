@@ -15,6 +15,10 @@ public class Messages {
 	public void saveSuccessfully() {
 		createMessage(FacesMessage.SEVERITY_INFO, "Saved Successfully", "Successful registration");
 	}
+
+	public void changedSuccessfully() {
+		createMessage(FacesMessage.SEVERITY_INFO, "Change Successfully", "Changed registration");
+	}
 	
 	public void removeSuccessfully() {
 		createMessage(FacesMessage.SEVERITY_INFO, "Removed Successfully", "Record removed successfully");

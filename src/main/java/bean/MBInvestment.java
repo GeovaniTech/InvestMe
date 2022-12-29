@@ -7,18 +7,20 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import interfaces.Messages;
 import manter.ManterInvestment;
 import manter.ManterTransaction;
 import to.TOTransaction;
 
 @Named("MBInvestment")
 @ViewScoped
-public class MBInvestment implements Serializable {
+public class MBInvestment implements Serializable, Messages {
 	private static final long serialVersionUID = 4252751160550859892L;
 	
 	private ManterTransaction manterTransaction;
 	private ManterInvestment manterInvetment;
 	private List<TOTransaction> investments;
+	private TOTransaction toTransaction;
 	
 	private Double spents;
 	private Double actions;
@@ -38,6 +40,31 @@ public class MBInvestment implements Serializable {
 		
 		listInvestments();
 		updateDashboard();
+	}
+	
+	public void save() {
+		if(toTransaction.getActive() != null
+			&& toTransaction.getAmount() != null
+			&& toTransaction.getDate() != null
+			&& toTransaction.getPrice() != null
+			&& toTransaction.getTypeActive() != null
+			&& toTransaction.getTypeTransaction() != null) {
+			
+			this.getManterTransaction().save(this.getToTransaction());
+			updateDashboard();
+			listInvestments();
+			msg.saveSuccessfully();
+		} else {
+			msg.emptyValues();
+		}
+	}
+	
+	public void change() {
+		
+	}
+	
+	public void remove(TOTransaction toTransaction) {
+		
 	}
 	
 	public void listInvestments() {
@@ -114,5 +141,13 @@ public class MBInvestment implements Serializable {
 
 	public void setManterInvetment(ManterInvestment manterInvetment) {
 		this.manterInvetment = manterInvetment;
+	}
+
+	public TOTransaction getToTransaction() {
+		return toTransaction;
+	}
+
+	public void setToTransaction(TOTransaction toTransaction) {
+		this.toTransaction = toTransaction;
 	}
 }
