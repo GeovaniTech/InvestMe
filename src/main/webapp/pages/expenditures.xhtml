@@ -53,6 +53,13 @@
 						icon="pi pi-box" />	
 				</h:panelGroup>
 				
+				<p:commandButton 
+					value="New Expenditure"
+					icon="pi pi-plus"
+					onclick="PF('dialog-new-expenditure').show()"
+					styleClass="ui-button-outlined ui-button-danger"
+					style="margin-left: 10px; margin-bottom: 10px; background-color: white !important;" />
+				
 				<h:form id="tableTransactions">
 					<p:dataTable
 						value="#{MBExpenditure.expenditures}"
@@ -90,12 +97,68 @@
 						<p:column headerText="Delete">
 							<p:commandButton 
 								value="Delete"
-								action="#{MBTransaction.remove(transaction)}"
-								update="tableTransactions, growl, @form, dashboard"
+								action="#{MBExpenditure.remove(transaction)}"
+								update=":tableTransactions, growl, @form, dashboard"
 								icon="pi pi-times" />
 						</p:column>				
 					</p:dataTable>
 				</h:form>
+				
+				<!-- DIALOG TRANSACTION -->
+				<p:dialog
+					header="Transactions"
+					widgetVar="dialog-new-expenditure"
+					width="60%"
+					height="60%">
+					
+					<h:form>
+						<div class="panel-inputs">
+							<div>
+								<p:inputText 
+									placeholder="Active"
+									value="#{MBExpenditure.toTransaction.active}" />
+								
+								<p:inputNumber 
+									placeholder="Price"
+									value="#{MBExpenditure.toTransaction.price}" />
+								
+								<p:inputNumber 
+									placeholder="Amount"
+									value="#{MBExpenditure.toTransaction.amount}" />
+							</div>
+							
+							<div>
+								<p:datePicker 
+									placeholder="When"
+									value="#{MBExpenditure.toTransaction.date}" />
+								
+								<p:selectOneMenu value="#{MBExpenditure.toTransaction.typeTransaction}">							
+									<f:selectItem 
+										itemLabel="Investment"
+										itemValue="Investment" />
+										
+									<f:selectItem 
+										itemLabel="Expenditure"
+										itemValue="Expenditure" />
+								</p:selectOneMenu>
+								
+								<p:selectOneMenu value="#{MBExpenditure.convertId}">
+									<f:selectItems 
+										var="type"
+										value="#{MBType.types}"
+										itemLabel="#{type.name}"
+										itemValue="#{type.id}" />
+								</p:selectOneMenu>					
+							</div>
+						</div>
+						
+						<p:commandButton 
+							value="Save"
+							action="#{MBExpenditure.save()}"
+							icon="pi pi-check"
+							update="growl, :tableTransactions, dashboard"/>
+					</h:form>
+				</p:dialog>		
 			</ui:define>
 		</ui:composition>
 	</h:body>
