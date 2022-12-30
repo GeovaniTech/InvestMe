@@ -33,7 +33,7 @@ public class ManterInvestment implements JPAEntity {
 	
 	public Double fiis() {
 		StringBuilder filters = new StringBuilder();
-		filters.append(" AND T.typeActive.name = 'Fiis' ");
+		filters.append(" AND T.typeActive.name = 'Fii' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
 	}
@@ -47,7 +47,7 @@ public class ManterInvestment implements JPAEntity {
 	
 	public Double criptocurrencys() {
 		StringBuilder filters = new StringBuilder();
-		filters.append(" AND T.typeActive.name = 'Criptocurrencys' ");
+		filters.append(" AND T.typeActive.name = 'Criptocurrency' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class).getSingleResult();
 	}

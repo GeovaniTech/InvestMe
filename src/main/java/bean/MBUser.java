@@ -22,7 +22,9 @@ public class MBUser implements Serializable {
 	}
 
 	public void validateAccess() {
-		
+		if(this.getManterUser().validateAccess(user)) {
+			
+		}
 	}
 	
 	public TOUser getUser() {

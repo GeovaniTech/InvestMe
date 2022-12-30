@@ -7,6 +7,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 
 public class UserLogged implements Filter {
     public UserLogged() {
@@ -18,6 +19,7 @@ public class UserLogged implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		System.out.println("OLHANDO");
 		chain.doFilter(request, response);
 	}
 
