@@ -8,6 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Client;
 
 public class UserLogged implements Filter {
     public UserLogged() {
@@ -18,9 +23,20 @@ public class UserLogged implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("OLHANDO");
-		chain.doFilter(request, response);
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest request = (HttpServletRequest)req;
+		HttpServletResponse response = (HttpServletResponse) res;
+		
+		HttpSession session = request.getSession(true);
+	
+		Client client = (Client) session.getAttribute("client");
+		
+		if(client != null && !client.getName().equals("")) {
+			chain.doFilter(request, response);
+		} else {
+        	response.setStatus(401);
+        	response.sendRedirect("/investme/login.xhtml");
+		}
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

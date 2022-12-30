@@ -8,15 +8,15 @@ import javax.ejb.TransactionManagementType;
 
 import interfaces.GenericDAO;
 import interfaces.JPAEntity;
-import model.User;
-import to.TOUser;
+import model.Client;
+import to.TOClient;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterUser implements GenericDAO<TOUser>, JPAEntity {
+public class ManterClient implements GenericDAO<TOClient>, JPAEntity {
 	
-	public boolean validateAccess(TOUser toUser) {
-		User user = (User) em.createQuery(" SELECT U FROM User U WHERE U.name = :pName AND U.password = :pPassword")
+	public boolean validateAccess(TOClient toUser) {
+		Client user = (Client) em.createQuery(" SELECT U FROM User U WHERE U.name = :pName AND U.password = :pPassword")
 			.setParameter("pName", toUser.getName())
 			.setParameter("pPassword", toUser.getPassword())
 			.getSingleResult();
@@ -26,37 +26,37 @@ public class ManterUser implements GenericDAO<TOUser>, JPAEntity {
 	}
 
 	@Override
-	public void save(TOUser to) {
+	public void save(TOClient to) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void change(TOUser to) {
+	public void change(TOClient to) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void remove(TOUser to) {
+	public void remove(TOClient to) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public TOUser findById(int id) {
+	public TOClient findById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<TOUser> list() {
+	public List<TOClient> list() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<TOUser> list(String specificType) {
+	public List<TOClient> list(String specificType) {
 		// TODO Auto-generated method stub
 		return null;
 	}

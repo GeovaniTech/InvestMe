@@ -17,6 +17,6 @@
   </filter>
   <filter-mapping>
     <filter-name>UserLogged</filter-name>
-    <url-pattern>investme/pages/*</url-pattern>
+    <url-pattern>/pages/*</url-pattern>
   </filter-mapping>
 </web-app>
