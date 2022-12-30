@@ -64,7 +64,7 @@
 					styleClass="ui-button-outlined ui-button-success"
 					style="margin-left: 10px; margin-bottom: 10px; background-color: white !important;" />
 				
-				<h:form id="tableTransactions">
+				<h:form id="tableInvestments">
 					<p:dataTable
 						value="#{MBInvestment.investments}"
 						var="transaction"
@@ -102,7 +102,7 @@
 							<p:commandButton 
 								value="Delete"
 								action="#{MBInvestment.remove(transaction)}"
-								update=":tableTransactions, growl, @form, dashboard"
+								update="tableInvestments growl, @form, dashboard"
 								icon="pi pi-times" />
 						</p:column>				
 					</p:dataTable>
@@ -116,28 +116,27 @@
 					height="60%">
 					
 					<h:form>
-					
 						<div class="panel-inputs">
 							<div>
 								<p:inputText 
 									placeholder="Active"
-									value="#{MBTransaction.toTransaction.active}" />
+									value="#{MBInvestment.toTransaction.active}" />
 								
 								<p:inputNumber 
 									placeholder="Price"
-									value="#{MBTransaction.toTransaction.price}" />
+									value="#{MBInvestment.toTransaction.price}" />
 								
 								<p:inputNumber 
 									placeholder="Amount"
-									value="#{MBTransaction.toTransaction.amount}" />
+									value="#{MBInvestment.toTransaction.amount}" />
 							</div>
 							
 							<div>
 								<p:datePicker 
 									placeholder="When"
-									value="#{MBTransaction.toTransaction.date}" />
+									value="#{MBInvestment.toTransaction.date}" />
 								
-								<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTransaction}">							
+								<p:selectOneMenu value="#{MBInvestment.toTransaction.typeTransaction}">							
 									<f:selectItem 
 										itemLabel="Investment"
 										itemValue="Investment" />
@@ -147,7 +146,7 @@
 										itemValue="Expenditure" />
 								</p:selectOneMenu>
 								
-								<p:selectOneMenu value="#{MBTransaction.convertType}">
+								<p:selectOneMenu value="#{MBInvestment.convertType}">
 									<f:selectItems 
 										var="type"
 										value="#{MBType.types}"
@@ -156,11 +155,12 @@
 								</p:selectOneMenu>					
 							</div>
 						</div>
+						
 						<p:commandButton 
 							value="Save"
-							action="#{MBTransaction.save()}"
+							action="#{MBInvestment.save()}"
 							icon="pi pi-check"
-							update="growl, @form, :tableTransactions, dashboard"/>
+							update="growl, :tableInvestments, dashboard"/>
 					</h:form>
 				</p:dialog>				
 			</ui:define>

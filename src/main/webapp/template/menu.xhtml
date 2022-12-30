@@ -134,12 +134,6 @@
 						onclick="PF('dialog-types').show()">
 						Types
 					</p:menuitem>
-
-					<p:menuitem
-						onclick="PF('dialog-transactions').show()"
-						icon="pi pi-plus">
-						New Transaction
-					</p:menuitem>
 				</p:submenu>
 				
 				<p:submenu
@@ -216,61 +210,6 @@
 					</div>
 				</p:column>
 			</p:dataTable>
-		</p:dialog>
-	
-		<!-- DIALOG TRANSACTION -->
-		<p:dialog
-			header="Transactions"
-			widgetVar="dialog-transactions"
-			width="60%"
-			height="60%">
-			
-			<h:form>
-			
-				<div class="panel-inputs">
-					<div>
-						<p:inputText 
-							placeholder="Active"
-							value="#{MBTransaction.toTransaction.active}" />
-						
-						<p:inputNumber 
-							placeholder="Price"
-							value="#{MBTransaction.toTransaction.price}" />
-						
-						<p:inputNumber 
-							placeholder="Amount"
-							value="#{MBTransaction.toTransaction.amount}" />
-					</div>
-					
-					<div>
-						<p:datePicker 
-							placeholder="When"
-							value="#{MBTransaction.toTransaction.date}" />
-						
-						<p:selectOneMenu value="#{MBTransaction.toTransaction.typeTransaction}">							
-							<f:selectItem 
-								itemLabel="Investment"
-								itemValue="Investment" />
-								
-							<f:selectItem 
-								itemLabel="Expenditure"
-								itemValue="Expenditure" />
-						</p:selectOneMenu>
-						
-						<p:selectOneMenu value="#{MBTransaction.convertType}">
-							<f:selectItems 
-								var="type"
-								value="#{MBType.types}"
-								itemLabel="#{type.name}"
-								itemValue="#{type.id}" />
-						</p:selectOneMenu>					
-					</div>
-				</div>
-				<p:commandButton 
-					value="Save"
-					action="#{MBTransaction.save()}"
-					update="growl, @form, tableTransactions, dashboard"/>
-			</h:form>
 		</p:dialog>
 	</h:body>
 </html>

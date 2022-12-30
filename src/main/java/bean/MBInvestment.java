@@ -7,6 +7,8 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.primefaces.PrimeFaces;
+
 import interfaces.Messages;
 import manter.ManterInvestment;
 import manter.ManterTransaction;
@@ -62,9 +64,10 @@ public class MBInvestment implements Serializable, Messages {
 			
 			this.getManterTransaction().save(this.getToTransaction());
 			
-			updateDashboard();
 			listInvestments();
+			updateDashboard();
 			
+			PrimeFaces.current().ajax().update(":tableInvestments");
 			msg.saveSuccessfully();
 		} else {
 			msg.emptyValues();
@@ -85,6 +88,7 @@ public class MBInvestment implements Serializable, Messages {
 			updateDashboard();
 			listInvestments();
 			
+			PrimeFaces.current().ajax().update(":tableInvestments");
 			msg.changedSuccessfully();
 		}
 	}
