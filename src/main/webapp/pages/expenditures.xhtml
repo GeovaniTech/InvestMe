@@ -21,8 +21,25 @@
 					.container-cards {
 						display: flex;
 						flex-direction: row;
+						flex-wrap: wrap;
 						justify-content: space-evenly;
 						align-items: center;
+					}
+	
+					.painel-inputs {
+						display: flex;
+						flex-direction: column;
+						flex-wrap: nowrap;
+						justify-content: center;
+						align-items: center;
+					}
+					
+					.campo {
+						margin-bottom: 5px;
+					}
+					
+					.campo > * {
+						width: 100% !important;
 					}
 				</style>
 				
@@ -113,50 +130,51 @@
 					
 					<h:form>
 						<div class="panel-inputs">
-							<div>
-								<p:inputText 
-									placeholder="Active"
-									value="#{MBExpenditure.toTransaction.active}" />
-								
-								<p:inputNumber 
-									placeholder="Price"
-									value="#{MBExpenditure.toTransaction.price}" />
-								
-								<p:inputNumber 
-									placeholder="Amount"
-									value="#{MBExpenditure.toTransaction.amount}" />
-							</div>
+							<p:inputText 
+								placeholder="Active"
+								value="#{MBExpenditure.toTransaction.active}"
+								styleClass="campo" />
 							
-							<div>
-								<p:datePicker 
-									placeholder="When"
-									value="#{MBExpenditure.toTransaction.date}" />
-								
-								<p:selectOneMenu value="#{MBExpenditure.toTransaction.typeTransaction}">							
-									<f:selectItem 
-										itemLabel="Investment"
-										itemValue="Investment" />
-										
-									<f:selectItem 
-										itemLabel="Expenditure"
-										itemValue="Expenditure" />
-								</p:selectOneMenu>
-								
-								<p:selectOneMenu value="#{MBExpenditure.convertId}">
-									<f:selectItems 
-										var="type"
-										value="#{MBType.types}"
-										itemLabel="#{type.name}"
-										itemValue="#{type.id}" />
-								</p:selectOneMenu>					
-							</div>
+							<p:inputNumber 
+								placeholder="Price"
+								value="#{MBExpenditure.toTransaction.price}" 
+								styleClass="campo"/>
+							
+							<p:inputNumber 
+								placeholder="Amount"
+								value="#{MBExpenditure.toTransaction.amount}"
+								styleClass="campo" />
+							
+							<p:datePicker 
+								placeholder="When"
+								value="#{MBExpenditure.toTransaction.date}"
+								styleClass="campo" />
+							
+							<p:selectOneMenu value="#{MBExpenditure.toTransaction.typeTransaction}" styleClass="campo">							
+								<f:selectItem 
+									itemLabel="Investment"
+									itemValue="Investment" />
+									
+								<f:selectItem 
+									itemLabel="Expenditure"
+									itemValue="Expenditure" />
+							</p:selectOneMenu>
+							
+							<p:selectOneMenu value="#{MBExpenditure.convertId}" styleClass="campo">
+								<f:selectItems 
+									var="type"
+									value="#{MBType.types}"
+									itemLabel="#{type.name}"
+									itemValue="#{type.id}" />
+							</p:selectOneMenu>					
 						</div>
 						
 						<p:commandButton 
 							value="Save"
 							action="#{MBExpenditure.save()}"
 							icon="pi pi-check"
-							update="growl, :tableTransactions, dashboard"/>
+							update="growl, :tableTransactions, dashboard"
+							style="width: 150px;" />
 					</h:form>
 				</p:dialog>		
 			</ui:define>
