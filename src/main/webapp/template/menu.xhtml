@@ -180,9 +180,10 @@
 					style="margin-bottom: 10px;"/>
 				
 				<p:commandButton 
-					value="Register"
+					value="Save"
 					action="#{MBType.save()}"
-					update="tableTypes, growl, @form"/>
+					update="tableTypes, growl, @form"
+					icon="pi pi-check" />
 			</h:form>
 			
 			<p:dataTable
@@ -206,7 +207,8 @@
 						<p:commandButton 
 							value="Deletar"
 							action="#{MBType.remove(type)}"
-							update="tableTypes, growl" />
+							update="tableTypes, growl"
+							icon="pi pi-times" />
 					</div>
 				</p:column>
 			</p:dataTable>
