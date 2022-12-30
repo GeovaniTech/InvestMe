@@ -1,7 +1,6 @@
 package bean;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import manter.ManterClient;

@@ -1,6 +1,5 @@
 package bean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,17 +8,17 @@ import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
 
-import interfaces.Messages;
 import manter.ManterInvestment;
 import manter.ManterTransaction;
 import manter.ManterType;
 import model.Type;
 import to.TOTransaction;
 import to.TOType;
+import utils.AbstractBean;
 
 @Named("MBInvestment")
 @ViewScoped
-public class MBInvestment implements Serializable, Messages {
+public class MBInvestment extends AbstractBean {
 	private static final long serialVersionUID = 4252751160550859892L;
 	
 	private ManterTransaction manterTransaction;

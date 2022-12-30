@@ -1,18 +1,17 @@
 package bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import interfaces.Messages;
 import manter.ManterType;
 import to.TOType;
+import utils.AbstractBean;
 
 @Named("MBType")
 @ViewScoped
-public class MBType implements Serializable, Messages {
+public class MBType extends AbstractBean {
 	private static final long serialVersionUID = 1230226415644681012L;
 	
 	private TOType dtoType = new TOType();
