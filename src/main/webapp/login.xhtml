@@ -63,18 +63,23 @@
 	</h:head>
 	
 	<h:body>
+		<p:growl id="growl" showDetail="true" />
 		<h:form>
 			<div class="name-logo">
 				<h1>Invest<span>Me</span></h1>
 			</div>
 			<p:inputText 
-				placeholder="User" />
+				placeholder="User"
+				value="#{MBclient.client.name}" />
 			
 			<p:password 
-				placeholder="Password" />
+				placeholder="Password"
+				value="#{MBclient.password}" />
 			
 			<p:commandButton 
-				value="Logar" />
+				value="Logar"
+				action="#{MBclient.validateAccess()}"
+				update="growl" />
 		</h:form>
 	</h:body>
 </html>

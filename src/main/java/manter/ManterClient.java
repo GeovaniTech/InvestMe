@@ -15,14 +15,17 @@ import to.TOClient;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ManterClient implements GenericDAO<TOClient>, JPAEntity {
 	
-	public boolean validateAccess(TOClient toUser) {
-		Client user = (Client) em.createQuery(" SELECT U FROM User U WHERE U.name = :pName AND U.password = :pPassword")
-			.setParameter("pName", toUser.getName())
-			.setParameter("pPassword", toUser.getPassword())
-			.getSingleResult();
-		
-		return user != null && !user.getName().equals("");
+	public boolean validateAccess(TOClient toUser, String password) {
+		try {
+			Client user = (Client) em.createQuery(" SELECT C FROM Client C WHERE C.name = :pName AND C.password = :pPassword")
+					.setParameter("pName", toUser.getName())
+					.setParameter("pPassword", password)
+					.getSingleResult();
 			
+			return user != null && !user.getName().equals("");
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override

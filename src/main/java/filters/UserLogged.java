@@ -7,12 +7,10 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import model.Client;
+import to.TOClient;
 
 public class UserLogged implements Filter {
     public UserLogged() {
@@ -29,7 +27,7 @@ public class UserLogged implements Filter {
 		
 		HttpSession session = request.getSession(true);
 	
-		Client client = (Client) session.getAttribute("client");
+		TOClient client = (TOClient) session.getAttribute("client");
 		
 		if(client != null && !client.getName().equals("")) {
 			chain.doFilter(request, response);
