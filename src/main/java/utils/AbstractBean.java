@@ -9,7 +9,7 @@ import interfaces.Messages;
 public class AbstractBean implements Serializable, Messages {
 	private static final long serialVersionUID = -5888518947738583514L;
 
-	public HttpSession getSession() {
+	protected HttpSession getSession() {
 		return(HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 }

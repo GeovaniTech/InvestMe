@@ -41,6 +41,15 @@
 					.campo > * {
 						width: 100% !important;
 					}
+					
+					@media only screen and (max-width: 768px) {
+						.dialog-expenditure {
+							width: 100%;
+							height: 100%;
+						}
+					}
+
+					
 				</style>
 				
 				<h:panelGroup id="dashboard" class="container-cards">
@@ -125,8 +134,7 @@
 				<p:dialog
 					header="Transactions"
 					widgetVar="dialog-new-expenditure"
-					width="60%"
-					height="60%">
+					styleClass="dialog-expenditure">
 					
 					<h:form>
 						<div class="panel-inputs">
