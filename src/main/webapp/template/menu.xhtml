@@ -194,19 +194,16 @@
 				rows="6"
 				paginatorPosition="bottom">
 				
-				<p:column headerText="Id">
+				<p:column headerText="Name">
 					<h:outputText value="#{type.name}" />
 				</p:column>
 				
-				<p:column headerText="Name">
-					<h:outputText varlue="#{type.name}" />
-				</p:column>
-				
-				<p:column headerText="Id">
+				<p:column headerText="Options">
 					<div class="options-menu">
 						<p:commandButton 
 							value="Deletar"
 							action="#{MBType.remove(type)}"
+							rendered="#{type.nameClient != null}"
 							update="tableTypes, growl"
 							icon="pi pi-times" />
 					</div>
