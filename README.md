@@ -1,4 +1,7 @@
 # InvestMe 
+
+> Status: In Tests☢️
+
 ## About the project
 This project is a controller of spends in investments and geral spends
 
