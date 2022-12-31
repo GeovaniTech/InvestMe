@@ -20,6 +20,7 @@ public class Transaction {
 	private String typeTransaction;
 	@ManyToOne
 	private Type typeActive;
+	private String nameClient;
 	
 	public int getId() {
 		return id;
@@ -62,5 +63,11 @@ public class Transaction {
 	}
 	public void setTypeTransaction(String typeTransaction) {
 		this.typeTransaction = typeTransaction;
+	}
+	public String getNameClient() {
+		return nameClient;
+	}
+	public void setNameClient(String nameClient) {
+		this.nameClient = nameClient;
 	}
 }

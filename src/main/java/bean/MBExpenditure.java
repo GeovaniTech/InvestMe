@@ -6,9 +6,9 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import manter.ManterExpenditure;
-import manter.ManterTransaction;
-import manter.ManterType;
+import manter.expenditure.ManterExpenditure;
+import manter.transaction.ManterTransaction;
+import manter.type.ManterType;
 import model.Type;
 import to.TOTransaction;
 import to.TOType;

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import manter.ManterType;
+import manter.type.ManterType;
 import to.TOType;
 import utils.AbstractBean;
 

@@ -1,9 +1,11 @@
 package bean;
 
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import manter.ManterClient;
+
+import manter.client.ManterClient;
 import to.TOClient;
 import utils.AbstractBean;
 import utils.RedirectUrl;
@@ -15,6 +17,8 @@ public class MBClient extends AbstractBean {
 	
 	private TOClient client;
 	private String password;
+	
+	
 	private ManterClient manterClient;
 	
 	public MBClient() {

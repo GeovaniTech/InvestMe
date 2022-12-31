@@ -1,4 +1,4 @@
-package manter;
+package manter.transaction;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,10 +13,11 @@ import interfaces.JPAEntity;
 import model.Transaction;
 import model.Type;
 import to.TOTransaction;
+import utils.InvestmeSession;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
+public class ManterTransaction extends InvestmeSession implements JPAEntity, IManterTransactionSBean, IManterTransactionSBeanRemote  {
 	
 	@Override
 	public void save(TOTransaction to) {
@@ -28,6 +29,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		transaction.setTypeActive(to.getTypeActive());
 		transaction.setTypeTransaction(to.getTypeTransaction());
 		transaction.setDate(to.getDate());
+		transaction.setNameClient(getClient().getName());
 		
 		em.getTransaction().begin();
 		em.persist(transaction);
@@ -45,6 +47,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		transaction.setTypeActive(to.getTypeActive());
 		transaction.setTypeTransaction(to.getTypeTransaction());
 		transaction.setDate(to.getDate());
+		transaction.setNameClient(to.getNameClient());
 		
 		em.getTransaction().begin();
 		em.merge(transaction);
@@ -71,6 +74,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		dtoTransaction.setTypeActive(transaction.getTypeActive());
 		dtoTransaction.setTypeTransaction(transaction.getTypeTransaction());
 		dtoTransaction.setDate(transaction.getDate());
+		dtoTransaction.setNameClient(transaction.getNameClient());
 		
 		return dtoTransaction;
 	}
@@ -90,21 +94,26 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 		sql.append(" T.amount, ");
 		sql.append(" T.date, ");
 		sql.append(" T.typeActive, ");
-		sql.append(" T.typeTransaction ");
+		sql.append(" T.typeTransaction, ");
+		sql.append(" T.nameClient");
 		sql.append(" FROM ").append(Transaction.class.getName()).append(" T ");
+		sql.append(" WHERE T.nameClient = :client");
 		
 		List<Object[]> result = new ArrayList<Object[]>();
 		List<TOTransaction> convertedTransactions = new ArrayList<TOTransaction>();
 		
 		if(!typeTransacion.equals("")) {
 			
-			sql.append(" WHERE T.typeTransaction = :pTypeTransaction ");
+			sql.append(" AND T.typeTransaction = :pTypeTransaction ");
+			
 			
 			result = em.createQuery(sql.toString(), Object[].class)
 					.setParameter("pTypeTransaction", typeTransacion)
+					.setParameter("client", getClient().getName())
 					.getResultList();
-		} else {
+		} else {		
 			result = em.createQuery(sql.toString(), Object[].class)
+					.setParameter("client", getClient().getName())
 					.getResultList();
 		}
 		
@@ -118,6 +127,7 @@ public class ManterTransaction implements JPAEntity, GenericDAO<TOTransaction> {
 			to.setDate((Date) o[4]);
 			to.setTypeActive((Type) o[5]);
 			to.setTypeTransaction((String) o[6]);
+			to.setNameClient((String) o[7]);
 			
 			convertedTransactions.add(to);
 		}

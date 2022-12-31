@@ -11,6 +11,7 @@ public class Type {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	private String nameClient;
 	
 	//Getters and Setters
 	public String getName() {
@@ -24,5 +25,11 @@ public class Type {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getNameClient() {
+		return nameClient;
+	}
+	public void setNameClient(String nameClient) {
+		this.nameClient = nameClient;
 	}
 }

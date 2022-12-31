@@ -3,14 +3,15 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.PrimeFaces;
 
-import manter.ManterInvestment;
-import manter.ManterTransaction;
-import manter.ManterType;
+import manter.investment.ManterInvestment;
+import manter.transaction.ManterTransaction;
+import manter.type.ManterType;
 import model.Type;
 import to.TOTransaction;
 import to.TOType;

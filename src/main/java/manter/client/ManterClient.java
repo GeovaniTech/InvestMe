@@ -1,4 +1,4 @@
-package manter;
+package manter.client;
 
 import java.util.List;
 
@@ -13,8 +13,9 @@ import to.TOClient;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterClient implements GenericDAO<TOClient>, JPAEntity {
+public class ManterClient implements GenericDAO<TOClient>, JPAEntity, IManterClientSBean, IManterClientSbeanRemote {
 	
+	@Override
 	public boolean validateAccess(TOClient toUser, String password) {
 		try {
 			Client user = (Client) em.createQuery(" SELECT C FROM Client C WHERE C.name = :pName AND C.password = :pPassword")

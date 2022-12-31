@@ -3,6 +3,7 @@ package to;
 public class TOType {
 	private int id;
 	private String name;
+	private String nameClient;
 	
 	//Getters and Setters
 	public int getId() {
@@ -16,5 +17,11 @@ public class TOType {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getNameClient() {
+		return nameClient;
+	}
+	public void setNameClient(String nameClient) {
+		this.nameClient = nameClient;
 	}
 }
