@@ -27,4 +27,12 @@ public class Messages {
 	public void errorRemoving() {
 		createMessage(FacesMessage.SEVERITY_ERROR, "Error Removing", "Could not remove record");
 	}
+	
+	public void erroNameUsed() {
+		createMessage(FacesMessage.SEVERITY_ERROR, "Error Register", "The user name is being used!");
+	}
+	
+	public void passwordsDontMatch() {
+		createMessage(FacesMessage.SEVERITY_ERROR, "Error Register", "The passwords do not match");
+	}
 }

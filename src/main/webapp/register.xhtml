@@ -18,7 +18,6 @@
 			* { 
 				font-family: 'Poppins', sans-serif;
 			}
-			
 			body {
 				
 				display: flex;
@@ -77,15 +76,19 @@
 			</div>
 			<p:inputText 
 				placeholder="User"
-				value="#{MBclient.client.name}" />
+				value="#{MBRegister.nameUser}" />
 			
 			<p:password 
 				placeholder="Password"
-				value="#{MBclient.password}" />
+				value="#{MBRegister.password}" />
+
+			<p:password 
+				placeholder="Repeat Password"
+				value="#{MBRegister.repeatPassword}" />
 			
 			<p:commandButton 
-				value="Logar"
-				action="#{MBclient.validateAccess()}"
+				value="Register"
+				action="#{MBRegister.register()}"
 				update="growl" />
 		</h:form>
 	</h:body>
