@@ -65,6 +65,10 @@
 				border: 0px solid #292522 !important;
 				background-color: #292522 !important;
 			}
+			
+			a {
+				color: #292522;
+			}
 		</style>
 	</h:head>
 	
@@ -90,6 +94,8 @@
 				value="Register"
 				action="#{MBRegister.register()}"
 				update="growl" />
+			
+			<a href="/investme/login.xhtml">Sign in</a>
 		</h:form>
 	</h:body>
 </html>
