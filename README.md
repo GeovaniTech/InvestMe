@@ -5,7 +5,7 @@
 ## About the project
 This project is a controller of spends in investments and geral spends
 
-### <a href="http://www.devpree.com.br/investme" target="_blank">devpree.com.br/investme</a>
+### <a href="devpree.com.br/investme" target="_blank">devpree.com.br/investme</a>
 
 ## Technologies
 
