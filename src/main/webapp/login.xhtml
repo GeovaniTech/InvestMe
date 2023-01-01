@@ -66,6 +66,10 @@
 				border: 0px solid #292522 !important;
 				background-color: #292522 !important;
 			}
+			
+			a {
+				color: #292522;
+			}
 		</style>
 	</h:head>
 	
@@ -87,6 +91,8 @@
 				value="Logar"
 				action="#{MBclient.validateAccess()}"
 				update="growl" />
+			
+			<a href="/investme/register.xhtml">Register Here</a>
 		</h:form>
 	</h:body>
 </html>
