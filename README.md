@@ -5,7 +5,7 @@
 ## About the project
 This project is a controller of spends in investments and geral spends
 
-### <a href="http://localhost:8080/investme/login.xhtml" target="_blank">Click Here to Access</a>
+### <a href="http://www.devpree.com.br/investme" target="_blank">devpree.com.br/investme</a>
 
 ## Technologies
 
