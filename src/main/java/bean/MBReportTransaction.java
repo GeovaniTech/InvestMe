@@ -47,7 +47,7 @@ public class MBReportTransaction extends AbstractBean {
 					try (Workbook workbook = new XSSFWorkbook(file)) {
 						Sheet sheet = workbook.getSheetAt(0);
 						
-						int rowNum = 22;
+						int rowNum = 21;
 						
 						for(Transaction t : transactions) {
 							Row row = sheet.getRow(rowNum += 1);
@@ -69,7 +69,7 @@ public class MBReportTransaction extends AbstractBean {
 						
 						TOFile toFile = new TOFile();
 						
-						toFile.setName("report.xlxs");
+						toFile.setName("report.xlsx");
 						toFile.setBytes(baos.toByteArray());
 						
 						FileDownload.download(toFile);
