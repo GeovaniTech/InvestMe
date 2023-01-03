@@ -147,7 +147,8 @@
 					</p:menuitem>	
 					
 					<p:menuitem
-						icon="pi pi-file-excel">
+						icon="pi pi-file-excel"
+						onclick="PF('dialog-excel-report').show()">
 						Excel
 					</p:menuitem>									
 				</p:menuButton>
@@ -210,6 +211,28 @@
 					</div>
 				</p:column>
 			</p:dataTable>
+		</p:dialog>
+		
+		<p:dialog
+			header="Excel Report"
+			widgetVar="dialog-excel-report"
+			modal="true"
+			styleClass="dialog">
+			
+			<h:form>
+				<p style="font-size: 25px; margin-bottom: 10px;">Type of Report</p>
+			
+				<p:selectOneRadio style="margin-bottom: 10px;">
+					<f:selectItem itemLabel="Investments" itemValue="Investment" />
+					<f:selectItem itemLabel="Expenditures" itemValue="Expenditure"/>
+				</p:selectOneRadio>
+				
+				<p:commandButton 
+					value="Generate"
+					icon="pi pi-file-excel"
+					style="width: 150px;"
+				 />
+			</h:form>
 		</p:dialog>
 	</h:body>
 </html>
