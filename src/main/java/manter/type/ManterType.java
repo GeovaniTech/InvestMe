@@ -2,13 +2,9 @@ package manter.type;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringJoiner;
-
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-
-import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Type;
 import to.TOType;

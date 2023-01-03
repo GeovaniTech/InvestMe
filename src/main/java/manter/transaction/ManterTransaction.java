@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import interfaces.GenericDAO;
 import interfaces.JPAEntity;
 import model.Transaction;
 import model.Type;

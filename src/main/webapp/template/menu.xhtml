@@ -222,16 +222,25 @@
 			<h:form>
 				<p style="font-size: 25px; margin-bottom: 10px;">Type of Report</p>
 			
-				<p:selectOneRadio style="margin-bottom: 10px;">
-					<f:selectItem itemLabel="Investments" itemValue="Investment" />
-					<f:selectItem itemLabel="Expenditures" itemValue="Expenditure"/>
+				<p:selectOneRadio 
+					value="#{MBReportTransaction.reportType}"
+					style="margin-bottom: 10px;">
+					
+					<f:selectItem 
+						itemLabel="Investments" 
+						itemValue="Investment" />
+						
+					<f:selectItem 
+						itemLabel="Expenditures" 
+						itemValue="Expenditure" />
 				</p:selectOneRadio>
 				
 				<p:commandButton 
 					value="Generate"
+					action="#{MBReportTransaction.generateReport()}"
+					ajax="false"
 					icon="pi pi-file-excel"
-					style="width: 150px;"
-				 />
+					style="width: 150px;" />
 			</h:form>
 		</p:dialog>
 	</h:body>

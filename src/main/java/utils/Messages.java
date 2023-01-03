@@ -35,4 +35,8 @@ public class Messages {
 	public void passwordsDontMatch() {
 		createMessage(FacesMessage.SEVERITY_ERROR, "Error Register", "The passwords do not match");
 	}
+	
+	public void errorGenerateReport() {
+		createMessage(FacesMessage.SEVERITY_ERROR, "The report was not generated", "We couldn't generate the report, try again later");
+	}
 }
