@@ -7,13 +7,13 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import interfaces.GenericDAO;
-import interfaces.JPAEntity;
 import model.Client;
 import to.TOClient;
+import utils.AbstractManter;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterClient implements GenericDAO<TOClient>, JPAEntity, IManterClientSBean, IManterClientSbeanRemote {
+public class ManterClient extends AbstractManter implements GenericDAO<TOClient>, IManterClientSBean, IManterClientSbeanRemote {
 	
 	@Override
 	public boolean validateAccess(TOClient toUser, String password) {

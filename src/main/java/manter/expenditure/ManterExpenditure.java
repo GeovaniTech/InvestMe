@@ -4,13 +4,12 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import interfaces.JPAEntity;
 import model.Transaction;
-import utils.InvestmeSession;
+import utils.AbstractManter;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterExpenditure extends InvestmeSession implements JPAEntity, IManterExpenditureSBean, IManterExpenditureSBeanRemote {
+public class ManterExpenditure extends AbstractManter implements IManterExpenditureSBean, IManterExpenditureSBeanRemote {
 	private StringBuilder sql;
 	
 	public ManterExpenditure() {

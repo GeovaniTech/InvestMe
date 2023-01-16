@@ -5,14 +5,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-import interfaces.JPAEntity;
 import model.Type;
 import to.TOType;
-import utils.InvestmeSession;
+import utils.AbstractManter;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterType extends InvestmeSession implements JPAEntity, IManterTypeSBean, IManterTypeSBeanRemote  {
+public class ManterType extends AbstractManter implements IManterTypeSBean, IManterTypeSBeanRemote  {
 	@Override
 	public void save(TOType model) {
 		Type type = new Type(); 

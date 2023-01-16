@@ -8,15 +8,14 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import interfaces.JPAEntity;
 import model.Transaction;
 import model.Type;
 import to.TOTransaction;
-import utils.InvestmeSession;
+import utils.AbstractManter;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterTransaction extends InvestmeSession implements JPAEntity, IManterTransactionSBean, IManterTransactionSBeanRemote  {
+public class ManterTransaction extends AbstractManter implements IManterTransactionSBean, IManterTransactionSBeanRemote  {
 	
 	@Override
 	public void save(TOTransaction to) {

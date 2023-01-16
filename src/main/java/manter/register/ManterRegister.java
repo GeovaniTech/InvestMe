@@ -4,20 +4,18 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import interfaces.JPAEntity;
-import interfaces.Messages;
 import model.Client;
+import utils.AbstractManter;
 import utils.RedirectUrl;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class ManterRegister implements JPAEntity, Messages, IManterRegisterSBean, IManterRegisterSBeanRemote {
+public class ManterRegister extends AbstractManter implements IManterRegisterSBean, IManterRegisterSBeanRemote {
 
 	@Override
 	public boolean register(String user, String password, String repeatPassword) {
 		if(!password.equals(repeatPassword)) {
 			msg.passwordsDontMatch();
-			
 			return false;
 		}
 		

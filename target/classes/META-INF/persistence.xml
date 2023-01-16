@@ -5,7 +5,7 @@
     		 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd" 
     		 version="2.1">
 
-	<persistence-unit name="investme" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="investme" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>model.Type</class>
 		<class>model.Investment</class>
