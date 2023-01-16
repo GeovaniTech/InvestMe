@@ -16,20 +16,16 @@
 	<h:body>
 		<ui:composition template="/template/layout.xhtml">
 			<ui:define name="body">
+				
 				<style>
-					h2 {
-						font-family: 'Poppins', sans-serif;
-						font-size: 30px;
-					}
-					
 					.container-cards {
 						display: flex;
 						flex-direction: row;
 						flex-wrap: wrap;
-						justify-content: space-around;
+						justify-content: space-evenly;
 						align-items: center;
 					}
-					
+	
 					.painel-inputs {
 						display: flex;
 						flex-direction: column;
@@ -46,10 +42,18 @@
 						width: 100% !important;
 					}
 					
-					.dialog-investments {
-						width: 100% !important;
-						height: 100% !important;
+					@media only screen and (max-width: 768px) {
+						.dialog-investment {
+							width: 100% !important;
+							height: 100% !important;
+						}
 					}
+
+					@media only screen and (min-width: 600px) {				
+						.dialog-investment {
+							width: 600px !important;
+						}
+					}						
 					
 				</style>
 				
@@ -136,7 +140,7 @@
 				<p:dialog
 					header="Transactions"
 					widgetVar="dialog-new-transaction"
-					styleClass="dialog-investments">
+					styleClass="dialog-investment">
 					
 					<h:form>
 						<div class="panel-inputs">
