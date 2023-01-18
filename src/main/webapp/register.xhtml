@@ -69,7 +69,27 @@
 			a {
 				color: #292522;
 			}
+			
+			.div-by {	
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: fixed;
+				bottom: 0;
+			}
+			
+			.div-by p {
+				font-size: 20px;
+				margin-right: 20px;
+			}
+			
+			.by-logo {
+			    width: 100px;
+			    height: 55px;
+			}
 		</style>
+		<script  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2378328626322553"
+     	crossorigin="anonymous"></script>
 	</h:head>
 	
 	<h:body>
@@ -96,6 +116,13 @@
 				update="growl" />
 			
 			<a href="/investme/login.xhtml">Sign in</a>
+			<div class="div-by" >
+				<p>Developed By</p>
+				<a href="/portfolio/home.html">
+					<h:graphicImage name="logo text.png" library="images" class="by-logo" />
+				</a>
+			</div>
 		</h:form>
+		
 	</h:body>
 </html>

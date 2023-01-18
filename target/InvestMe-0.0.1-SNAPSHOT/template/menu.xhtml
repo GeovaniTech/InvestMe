@@ -4,12 +4,11 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-         xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:f="http://java.sun.com/jsf/core">
 	
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>InvestMe</title>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
 		<style>
 			* {
 				margin: 0px;
@@ -68,9 +67,9 @@
 				flex-direction: row;
 				justify-content: center;
 				align-center: center;
-				margin-bottom: 10px;
 				font-family: 'Poppins', sans-serif;
 				font-size: 20px;
+				color: white;
 			}
 			
 			.name-logo span  {
@@ -80,87 +79,108 @@
 			#form-menu-header {
 				display: flex;
 				flex-direction: row;
-				justify-content: flex-end;
+				justify-content: space-between;
 				align-items: center;
 				width: 100%;
 				height: 60px;
 				background-color: #292522;
+				position: fixed;
+				left: 0;
+				top:0;
+				z-index: 1;
+			}
+			
+			.panel-inputs {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+			}
+			
+			.panel-inputs > * {
+				width: 100% !important;
+			}
+			
+			@media only screen and (max-width: 768px) {
+				#form-menu {
+					display: none;
+					width: 0px;
+					position: fixed;
+				}
+				
+
+				
+				.name-logo {
+					font-size: 16px;
+				}
+				
+				.dialog {
+					width: 100% !importants;
+					height: 100% !important;
+				}
+			}
+			
+			@media only screen and (min-width: 600px) {				
+				.dialog {
+					width: 600px !important;
+				}
 			}
 		</style>
 	</h:head>
 	
 	<h:body>
-		<h:form id="form-menu">
-			<div class="name-logo">
-				<h1>Invest<span>Me</span></h1>
-			</div>
-			<p:menu 
-				toggleable="true">
-				
-				<p:menuitem
-					icon="pi pi-wallet"
-					outcome="/pages/wallet.xhtml">
-					Wallet
-				</p:menuitem>
-				
-				<p:submenu
-					label="Records"
-					styleClass="submenu">
+		<h:form id="form-menu-header">
+			<div>
+				<p:menuButton 
+					icon="pi pi-align-justify"
+					style="margin-left: 10px;">
 					
+					<p:menuitem
+						icon="pi pi-chart-line"
+						outcome="/pages/investments.xhtml">
+						Investments
+					</p:menuitem>
+					
+					<p:menuitem
+						icon="pi pi-euro"
+						outcome="/pages/expenditures.xhtml">
+						Expenditures
+					</p:menuitem>
+							
+				
 					<p:menuitem 
 						icon="pi pi-credit-card"
 						onclick="PF('dialog-types').show()">
 						Types
-					</p:menuitem>
-					
-					<p:menuitem 
-						onclick="PF('dialog-actives').show()"
-						icon="pi pi-bitcoin">
-						Actives
-					</p:menuitem>
+					</p:menuitem>	
 					
 					<p:menuitem
-						icon="pi pi-plus">
-						New Investment
-					</p:menuitem>
-				</p:submenu>
-				
-				<p:submenu
-					label="Reports"
-					styleClass="submenu">
-					
-					<p:menuitem
-						icon="pi pi-file-excel">
+						icon="pi pi-file-excel"
+						onclick="PF('dialog-excel-report').show()">
 						Excel
-					</p:menuitem>
-					
-					<p:menuitem
-						icon="pi pi-file-pdf">
-						PDF
-					</p:menuitem>
-				</p:submenu>
-			</p:menu>
-		</h:form>
-	
-		<h:form id="form-menu-header">
-			<p:commandButton 
-				styleClass="ui-button-raised ui-button-flat"
-				style="color: white; margin-right: 10px;"
-				icon="pi pi-user"/>
+					</p:menuitem>									
+				</p:menuButton>
+			</div>
 			
-			<p:commandButton
-				styleClass="ui-button-raised ui-button-flat" 
-				style="color: white; margin-right: 10px;"
-				icon="pi pi-sign-out"/>
+			<div class="name-logo">
+				<h1>Invest<span>Me</span></h1>
+			</div>
+			
+			<div class="right-options">
+				<p:commandButton
+					action="#{MBclient.logout()}"
+					styleClass="ui-button-raised ui-button-flat" 
+					style="color: white; margin-right: 10px;"
+					icon="pi pi-sign-out"/>
+			</div>
 		</h:form>
 		
 		<!-- DIALOG TYPES -->
 		<p:dialog
 			header="Types"
 			widgetVar="dialog-types"
-			width="60%"
-			height="60%"
-			modal="true">
+			modal="true"
+			styleClass="dialog">
 			
 			<h:form>
 				<p:inputText 
@@ -169,9 +189,11 @@
 					style="margin-bottom: 10px;"/>
 				
 				<p:commandButton 
-					value="Register"
+					value="Save"
 					action="#{MBType.save()}"
-					update="tableTypes, growl, @form"/>
+					update="tableTypes, growl, @form"
+					icon="pi pi-check"
+					style="width: 100%;" />
 			</h:form>
 			
 			<p:dataTable
@@ -182,81 +204,52 @@
 				rows="6"
 				paginatorPosition="bottom">
 				
-				<p:column headerText="Id">
+				<p:column headerText="Name">
 					<h:outputText value="#{type.name}" />
 				</p:column>
 				
-				<p:column headerText="Name">
-					<h:outputText varlue="#{type.name}" />
-				</p:column>
-				
-				<p:column headerText="Id">
+				<p:column headerText="Options">
 					<div class="options-menu">
 						<p:commandButton 
 							value="Deletar"
 							action="#{MBType.remove(type)}"
-							update="tableTypes" />
+							rendered="#{type.nameClient != null}"
+							update="tableTypes, growl"
+							icon="pi pi-times" />
 					</div>
 				</p:column>
 			</p:dataTable>
 		</p:dialog>
 		
-		<!-- DIALOG ACTIVES -->
-		<p:dialog 
-			header="Actives"
-			widgetVar="dialog-actives"
-			width="60%"
-			height="60%"
-			modal="true">
+		<p:dialog
+			header="Excel Report"
+			widgetVar="dialog-excel-report"
+			modal="true"
+			styleClass="dialog">
 			
-			<div class="div-fields" style="margin-bottom: 10px;">
-				<p:inputText 
-					placeholder="Name"
-					value="#{MBActive.dtoActive.name}" />
-				
-				<p:inputNumber 
-					placeholder="Price"
-					value="#{MBActive.dtoActive.price}" />
-				
-				<p:selectOneMenu 
-					value="#{MBActive.dtoActive.type}">
-				
-					<f:selectItems 
-						var="type"
-						value="#{MBType.types}"
-						itemLabel="#{type.name}"
-						itemValue="#{type}" />	
-				</p:selectOneMenu>
+			<h:form>
+				<p style="font-size: 25px; margin-bottom: 10px;">Type of Report</p>
+			
+				<p:selectOneRadio 
+					value="#{MBReportTransaction.reportType}"
+					style="margin-bottom: 10px;">
+					
+					<f:selectItem 
+						itemLabel="Investments" 
+						itemValue="Investment" />
+						
+					<f:selectItem 
+						itemLabel="Expenditures" 
+						itemValue="Expenditure" />
+				</p:selectOneRadio>
 				
 				<p:commandButton 
-					value="Register"
-					action="#{MBActive.save()}"/>			
-			</div>
-				
-			<p:dataTable
-				id="tableActives"
-				value="#{MBActive.actives}"
-				var="active"
-				paginator="true"
-				rows="6"
-				paginatorPosition="bottom">
-				
-				<p:column headerText="Id">
-					<h:outputText value="#{active.id}" />
-				</p:column>
-				
-				<p:column headerText="Name">
-					<h:outputText value="#{active.name}" />
-				</p:column>
-				
-				<p:column headerText="Price">
-					<h:outputText value="#{active.price}" />
-				</p:column>
-				
-				<p:column headerText="Type">
-					<h:outputText value="#{active.type.name}" />
-				</p:column>				
-			</p:dataTable>
+					value="Generate"
+					action="#{MBReportTransaction.generateReport()}"
+					ajax="false"
+					icon="pi pi-file-excel"
+					style="width: 150px;" />
+			</h:form>
 		</p:dialog>
 	</h:body>
 </html>
