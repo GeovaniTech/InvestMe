@@ -6,6 +6,7 @@ import javax.ejb.TransactionManagementType;
 
 import model.Client;
 import utils.AbstractManter;
+import utils.PasswordEncryption;
 import utils.RedirectUrl;
 
 @Stateless
@@ -23,7 +24,7 @@ public class ManterRegister extends AbstractManter implements IManterRegisterSBe
 			Client client = new Client();
 			
 			client.setName(user);
-			client.setPassword(password);
+			client.setPassword(PasswordEncryption.encrypt(password));
 			
 			em.getTransaction().begin();
 			em.persist(client);

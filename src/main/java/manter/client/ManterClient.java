@@ -10,6 +10,7 @@ import interfaces.GenericDAO;
 import model.Client;
 import to.TOClient;
 import utils.AbstractManter;
+import utils.PasswordEncryption;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -20,7 +21,7 @@ public class ManterClient extends AbstractManter implements GenericDAO<TOClient>
 		try {
 			Client user = (Client) em.createQuery(" SELECT C FROM Client C WHERE C.name = :pName AND C.password = :pPassword")
 					.setParameter("pName", toUser.getName())
-					.setParameter("pPassword", password)
+					.setParameter("pPassword", PasswordEncryption.encrypt(password))
 					.getSingleResult();
 			
 			return user != null && !user.getName().equals("");
