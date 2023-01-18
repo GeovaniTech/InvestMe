@@ -56,10 +56,10 @@ public class MBInvestment extends AbstractBean {
 		if(toTransaction.getActive() != null
 			&& toTransaction.getAmount() != null
 			&& toTransaction.getDate() != null
-			&& toTransaction.getPrice() != null
-			&& toTransaction.getTypeTransaction() != null) {
+			&& toTransaction.getPrice() != null) {
 			
 			toTransaction.setTypeActive(convertType());
+			toTransaction.setTypeTransaction("Investment");
 			
 			this.getManterTransaction().save(this.getToTransaction());
 			

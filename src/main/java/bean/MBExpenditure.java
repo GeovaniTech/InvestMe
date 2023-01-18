@@ -52,10 +52,10 @@ public class MBExpenditure extends AbstractBean {
 		if(toTransaction.getActive() != null
 				&& toTransaction.getAmount() != null
 				&& toTransaction.getDate() != null
-				&& toTransaction.getPrice() != null
-				&& toTransaction.getTypeTransaction() != null) {
+				&& toTransaction.getPrice() != null) {
 				
 				toTransaction.setTypeActive(convertType());
+				toTransaction.setTypeTransaction("Expenditure");
 				
 				this.getManterTransaction().save(this.getToTransaction());
 				
