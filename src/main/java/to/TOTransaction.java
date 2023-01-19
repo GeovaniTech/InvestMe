@@ -16,6 +16,7 @@ public class TOTransaction implements Serializable {
 	private String typeTransaction;
 	private Type typeActive;
 	private String nameClient;
+	private String payment;
 	
 	public int getId() {
 		return id;
@@ -64,5 +65,11 @@ public class TOTransaction implements Serializable {
 	}
 	public void setNameClient(String nameClient) {
 		this.nameClient = nameClient;
+	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 }

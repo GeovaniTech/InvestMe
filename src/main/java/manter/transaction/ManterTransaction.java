@@ -28,6 +28,7 @@ public class ManterTransaction extends AbstractManter implements IManterTransact
 		transaction.setTypeTransaction(to.getTypeTransaction());
 		transaction.setDate(to.getDate());
 		transaction.setNameClient(getClient().getName());
+		transaction.setPayment(to.getPayment());
 		
 		em.getTransaction().begin();
 		em.persist(transaction);
@@ -93,7 +94,8 @@ public class ManterTransaction extends AbstractManter implements IManterTransact
 		sql.append(" T.date, ");
 		sql.append(" T.typeActive, ");
 		sql.append(" T.typeTransaction, ");
-		sql.append(" T.nameClient");
+		sql.append(" T.nameClient, ");
+		sql.append(" T.payment ");
 		sql.append(" FROM ").append(Transaction.class.getName()).append(" T ");
 		sql.append(" WHERE T.nameClient = :client");
 		
@@ -126,6 +128,7 @@ public class ManterTransaction extends AbstractManter implements IManterTransact
 			to.setTypeActive((Type) o[5]);
 			to.setTypeTransaction((String) o[6]);
 			to.setNameClient((String) o[7]);
+			to.setPayment((String) o[8]);
 			
 			convertedTransactions.add(to);
 		}

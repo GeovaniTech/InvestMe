@@ -8,7 +8,6 @@
 	<persistence-unit name="investme" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>model.Type</class>
-		<class>model.Investment</class>
 		<class>model.Transaction</class>
 		<class>model.Client</class>
 		<properties>

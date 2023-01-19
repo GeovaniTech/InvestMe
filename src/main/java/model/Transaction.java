@@ -21,6 +21,7 @@ public class Transaction {
 	@ManyToOne
 	private Type typeActive;
 	private String nameClient;
+	private String payment;
 	
 	public int getId() {
 		return id;
@@ -69,5 +70,11 @@ public class Transaction {
 	}
 	public void setNameClient(String nameClient) {
 		this.nameClient = nameClient;
+	}
+	public String getPayment() {
+		return payment;
+	}
+	public void setPayment(String payment) {
+		this.payment = payment;
 	}
 }

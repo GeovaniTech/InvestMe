@@ -111,6 +111,10 @@
 						<p:column headerText="Price">
 							<h:outputText value="#{transaction.price}" />
 						</p:column>
+						
+						<p:column headerText="Payment">
+							<h:outputText value="#{transaction.payment == null ? 'Not informed' : transaction.payment}" />
+						</p:column>
 		
 						<p:column headerText="Amount">
 							<h:outputText value="#{transaction.amount}" />
@@ -163,6 +167,32 @@
 								placeholder="When"
 								value="#{MBExpenditure.toTransaction.date}"
 								styleClass="campo" />
+							
+							<p:selectOneMenu value="#{MBExpenditure.toTransaction.payment}">
+								<f:selectItem 
+									itemLabel="Pix"
+									itemValue="Pix" />
+									
+								<f:selectItem 
+									itemLabel="Money"
+									itemValue="Money" />
+									
+								<f:selectItem 
+									itemLabel="Credit Card"
+									itemValue="Credit Card" />
+								
+								<f:selectItem 
+									itemLabel="Debit Card"
+									itemValue="Debit Card" />
+								
+								<f:selectItem 
+									itemLabel="Ticket"
+									itemValue="Ticket" />								
+								
+								<f:selectItem 
+									itemLabel="Transaction"
+									itemValue="Transaction" />								
+							</p:selectOneMenu>
 							
 							<p:selectOneMenu value="#{MBExpenditure.convertId}" styleClass="campo">
 								<f:selectItems 
