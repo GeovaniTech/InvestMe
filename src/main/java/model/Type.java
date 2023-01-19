@@ -12,6 +12,7 @@ public class Type {
 	private int id;
 	private String name;
 	private String nameClient;
+	private String typeTransction;
 	
 	//Getters and Setters
 	public String getName() {
@@ -31,5 +32,11 @@ public class Type {
 	}
 	public void setNameClient(String nameClient) {
 		this.nameClient = nameClient;
+	}
+	public String getTypeTransction() {
+		return typeTransction;
+	}
+	public void setTypeTransction(String typeTransction) {
+		this.typeTransction = typeTransction;
 	}
 }

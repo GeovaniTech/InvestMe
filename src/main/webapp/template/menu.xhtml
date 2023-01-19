@@ -188,6 +188,16 @@
 					placeholder="Name"
 					style="margin-bottom: 10px;"/>
 				
+				<p:selectOneMenu value="#{MBType.dtoType.typeTransaction}">
+					<f:selectItem 
+						itemLabel="Investment"
+						itemValue="Investment" />
+						
+					<f:selectItem 
+						itemLabel="Expenditure"
+						itemValue="Expenditure" />
+				</p:selectOneMenu>
+				
 				<p:commandButton 
 					value="Save"
 					action="#{MBType.save()}"

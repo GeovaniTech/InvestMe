@@ -4,6 +4,7 @@ public class TOType {
 	private int id;
 	private String name;
 	private String nameClient;
+	private String typeTransaction;
 	
 	//Getters and Setters
 	public int getId() {
@@ -23,5 +24,11 @@ public class TOType {
 	}
 	public void setNameClient(String nameClient) {
 		this.nameClient = nameClient;
+	}
+	public String getTypeTransaction() {
+		return typeTransaction;
+	}
+	public void setTypeTransaction(String typeTransaction) {
+		this.typeTransaction = typeTransaction;
 	}
 }

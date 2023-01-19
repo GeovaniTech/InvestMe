@@ -18,6 +18,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		
 		type.setName(model.getName());
 		type.setNameClient(getClient().getName());
+		type.setTypeTransction(model.getTypeTransaction());
 		
 		em.getTransaction().begin();
 		em.persist(type);
@@ -60,7 +61,8 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		
 		sql.append(" SELECT T.id, ");
 		sql.append(" T.name, ");
-		sql.append(" T.nameClient ");
+		sql.append(" T.nameClient, ");
+		sql.append(" T.typeTransaction ");
 		sql.append(" FROM ").append(Type.class.getName()).append(" T ");
 		sql.append(" WHERE T.nameClient = :client OR T.nameClient IS NULL");
 		
@@ -74,6 +76,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 			to.setId((Integer) o[0]);
 			to.setName((String) o[1]);
 			to.setNameClient((String) o[2]);
+			to.setTypeTransaction((String) o[3]);
 			convertedResults.add(to);
 		}
 		
