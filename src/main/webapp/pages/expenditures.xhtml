@@ -59,7 +59,8 @@
 				<h:panelGroup id="dashboard" class="container-cards">
 					<ui:repeat var="type" value="#{MBType.types}">
 						<components:card 
-							description="#{type.name}"	 />
+							description="#{type.name}"
+							value="#{type.spents}"	 />
 					
 					</ui:repeat>
 				</h:panelGroup>

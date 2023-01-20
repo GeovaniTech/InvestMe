@@ -58,30 +58,12 @@
 				</style>
 				
 				<h:panelGroup class="container-cards" id="dashboard">			
-					<components:card 
-						value="#{MBInvestment.spents}"
-						description="Spents"
-						icon="pi pi-dollar" />
+					<ui:repeat var="type" value="#{MBType.types}">
+						<components:card 
+							description="#{type.name}"
+							value="#{type.spents}"	 />
 					
-					<components:card 
-						value="#{MBInvestment.actions}"
-						description="Actions"
-						icon="pi pi-credit-card" />
-						
-					<components:card 
-						value="#{MBInvestment.fiis}"
-						description="Fiis"
-						icon="pi pi-building" />
-					
-					<components:card 
-						value="#{MBInvestment.fixedIncome}"
-						description="Fixed Income"
-						icon="pi pi-chart-line" />
-						
-					<components:card 
-						value="#{MBInvestment.criptocurrencys}"
-						description="Criptos"
-						icon="pi pi-bitcoin" />
+					</ui:repeat>
 				</h:panelGroup>
 				
 				<p:commandButton 

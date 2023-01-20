@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-import javax.transaction.Transaction;
 
 import model.Type;
 import to.TOType;
@@ -79,6 +78,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 			to.setName((String) o[1]);
 			to.setNameClient((String) o[2]);
 			to.setTypeTransaction((String) o[3]);
+			System.out.print(to.getName());
 			to.setSpents(totalSpents(to.getName()));
 			convertedResults.add(to);
 		}
@@ -97,11 +97,15 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append(" SELECT SUM(T.price * T.amount) ");
-		sql.append(" FROM ").append(Transaction.class.getName()).append(" T ");
-		sql.append(" WHERE T.type.name = :name ");
+		sql.append(" FROM ").append(model.Transaction.class.getName()).append(" T ");
+		sql.append(" WHERE T.typeActive.name = :name ");
 		
-		return em.createQuery(sql.toString(), Double.class)
-				.setParameter("name", type)
-				.getSingleResult();
+		try {
+			return em.createQuery(sql.toString(), Double.class)
+					.setParameter("name", type)
+					.getSingleResult();
+		} catch (Exception e) {
+			return 0.0;
+		}
 	}	
 }
