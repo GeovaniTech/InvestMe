@@ -97,7 +97,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		sql.append(" T.nameClient, ");
 		sql.append(" T.typeTransaction ");
 		sql.append(" FROM ").append(Type.class.getName()).append(" T ");
-		sql.append(" WHERE T.typeTransaction = :typeTransaction AND T.nameClient = :client");
+		sql.append(" WHERE T.typeTransaction = :typeTransaction AND T.nameClient = :client ");
 		
 		List<Object[]> result = em.createQuery(sql.toString(), Object[].class)
 								.setParameter("client", getClient().getName())
