@@ -88,8 +88,34 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 
 	@Override
 	public List<TOType> list(String specificType) {
-		// TODO Auto-generated method stub
-		return null;
+		List<TOType> convertedResults = new ArrayList<TOType>();
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" SELECT T.id, ");
+		sql.append(" T.name, ");
+		sql.append(" T.nameClient, ");
+		sql.append(" T.typeTransaction ");
+		sql.append(" FROM ").append(Type.class.getName()).append(" T ");
+		sql.append(" WHERE T.typeTransaction = :typeTransaction AND T.nameClient = :client");
+		
+		List<Object[]> result = em.createQuery(sql.toString(), Object[].class)
+								.setParameter("client", getClient().getName())
+								.setParameter("typeTransaction", specificType)
+								.getResultList();
+		
+		for(Object[] o : result) {
+			TOType to = new TOType();
+			
+			to.setId((Integer) o[0]);
+			to.setName((String) o[1]);
+			to.setNameClient((String) o[2]);
+			to.setTypeTransaction((String) o[3]);
+			to.setSpents(totalSpents(to.getName()));
+			convertedResults.add(to);
+		}
+		
+		return convertedResults;
 	}
 
 	@Override

@@ -17,6 +17,8 @@ public class MBType extends AbstractBean {
 	private TOType dtoType = new TOType();
 	private ManterType daoType = new ManterType();
 	private List<TOType> types;
+	private List<TOType> typesExpenditure;
+	private List<TOType> typesInvesments;
 	
 	public MBType() {
 		updateTypes();
@@ -49,6 +51,8 @@ public class MBType extends AbstractBean {
 	
 	public void updateTypes() {
 		this.setTypes(this.getDaoType().list());
+		this.setTypesExpenditure(this.getDaoType().list("Expenditure"));
+		this.setTypesInvesments(this.getDaoType().list("Investment"));
 	}
 	
 	//Getters and Setters
@@ -69,5 +73,21 @@ public class MBType extends AbstractBean {
 	}
 	public void setDtoType(TOType dtoType) {
 		this.dtoType = dtoType;
+	}
+
+	public List<TOType> getTypesExpenditure() {
+		return typesExpenditure;
+	}
+
+	public void setTypesExpenditure(List<TOType> typesExpenditure) {
+		this.typesExpenditure = typesExpenditure;
+	}
+
+	public List<TOType> getTypesInvesments() {
+		return typesInvesments;
+	}
+
+	public void setTypesInvesments(List<TOType> typesInvesments) {
+		this.typesInvesments = typesInvesments;
 	}
 }
