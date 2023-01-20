@@ -5,6 +5,7 @@ public class TOType {
 	private String name;
 	private String nameClient;
 	private String typeTransaction;
+	private Double spents;
 	
 	//Getters and Setters
 	public int getId() {
@@ -30,5 +31,11 @@ public class TOType {
 	}
 	public void setTypeTransaction(String typeTransaction) {
 		this.typeTransaction = typeTransaction;
+	}
+	public Double getSpents() {
+		return spents;
+	}
+	public void setSpents(Double spents) {
+		this.spents = spents;
 	}
 }

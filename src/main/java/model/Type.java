@@ -12,7 +12,8 @@ public class Type {
 	private int id;
 	private String name;
 	private String nameClient;
-	private String typeTransction;
+	private String typeTransaction;
+	private Double spents;
 	
 	//Getters and Setters
 	public String getName() {
@@ -33,10 +34,16 @@ public class Type {
 	public void setNameClient(String nameClient) {
 		this.nameClient = nameClient;
 	}
-	public String getTypeTransction() {
-		return typeTransction;
+	public Double getSpents() {
+		return spents;
 	}
-	public void setTypeTransction(String typeTransction) {
-		this.typeTransction = typeTransction;
+	public void setSpents(Double spents) {
+		this.spents = spents;
+	}
+	public String getTypeTransaction() {
+		return typeTransaction;
+	}
+	public void setTypeTransaction(String typeTransaction) {
+		this.typeTransaction = typeTransaction;
 	}
 }

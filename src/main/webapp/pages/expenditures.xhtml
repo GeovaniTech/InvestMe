@@ -15,8 +15,7 @@
 	
 	<h:body>
 		<ui:composition template="/template/layout.xhtml">
-			<ui:define name="body">
-				
+			<ui:define name="body">			
 				<style>
 					.container-cards {
 						display: flex;
@@ -58,30 +57,11 @@
 				</style>
 				
 				<h:panelGroup id="dashboard" class="container-cards">
-					<components:card 
-						value="#{MBExpenditure.spents}"
-						description="Spents"
-						icon="pi pi-dollar" />
+					<ui:repeat var="type" value="#{MBType.types}">
+						<components:card 
+							description="#{type.name}"	 />
 					
-					<components:card 
-						value="#{MBExpenditure.recreation}"
-						description="Recreation"
-						icon="pi pi-home" />
-
-					<components:card 
-						value="#{MBExpenditure.market}"
-						description="Market"
-						icon="pi pi-shopping-cart" />
-
-					<components:card 
-						value="#{MBExpenditure.ifood}"
-						description="Ifood"
-						icon="pi pi-apple" />
-						
-					<components:card 
-						value="#{MBExpenditure.others}"
-						description="Others"
-						icon="pi pi-box" />	
+					</ui:repeat>
 				</h:panelGroup>
 				
 				<p:commandButton 
@@ -185,7 +165,7 @@
 									itemLabel="Debit Card"
 									itemValue="Debit Card" />
 								
-								<f:selectItem 
+								<f:selectItem
 									itemLabel="Ticket"
 									itemValue="Ticket" />								
 								
