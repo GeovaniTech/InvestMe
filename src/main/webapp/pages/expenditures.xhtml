@@ -111,7 +111,14 @@
 							<h:outputText value="#{transaction.amount * transaction.price}" />
 						</p:column>
 						
-						<p:column headerText="Delete">
+						<p:column headerText="Options">
+							<p:commandButton 
+								value="Edit"
+								action="#{MBExpenditure.setToTransaction(transaction)}"
+								oncomplete="PF('dialog-edit-expenditure').show()"
+								update="dialog-edit-expenditure, :tableTransactions, growl, @form, dashboard"
+								icon="pi pi-pencil" />
+						
 							<p:commandButton 
 								value="Delete"
 								action="#{MBExpenditure.remove(transaction)}"
@@ -120,6 +127,78 @@
 						</p:column>				
 					</p:dataTable>
 				</h:form>
+				
+				<p:dialog
+					id="dialog-edit-expenditure"
+					header="Transactions"
+					widgetVar="dialog-edit-expenditure"
+					styleClass="dialog-expenditure">
+					
+					<h:form>
+						<div class="panel-inputs">
+							<p:inputText 
+								placeholder="Active"
+								value="#{MBExpenditure.toTransaction.active}"
+								styleClass="campo" />
+							
+							<p:inputNumber 
+								placeholder="Price"
+								value="#{MBExpenditure.toTransaction.price}" 
+								styleClass="campo"/>
+							
+							<p:inputNumber 
+								placeholder="Amount"
+								value="#{MBExpenditure.toTransaction.amount}"
+								styleClass="campo" />
+							
+							<p:datePicker 
+								placeholder="When"
+								value="#{MBExpenditure.toTransaction.date}"
+								styleClass="campo" />
+							
+							<p:selectOneMenu value="#{MBExpenditure.toTransaction.payment}">
+								<f:selectItem 
+									itemLabel="Pix"
+									itemValue="Pix" />
+									
+								<f:selectItem 
+									itemLabel="Money"
+									itemValue="Money" />
+									
+								<f:selectItem 
+									itemLabel="Credit Card"
+									itemValue="Credit Card" />
+								
+								<f:selectItem 
+									itemLabel="Debit Card"
+									itemValue="Debit Card" />
+								
+								<f:selectItem
+									itemLabel="Ticket"
+									itemValue="Ticket" />								
+								
+								<f:selectItem 
+									itemLabel="Transaction"
+									itemValue="Transaction" />								
+							</p:selectOneMenu>
+							
+							<p:selectOneMenu value="#{MBExpenditure.convertId}" styleClass="campo">
+								<f:selectItems 
+									var="type"
+									value="#{MBType.typesExpenditure}"
+									itemLabel="#{type.name}"
+									itemValue="#{type.id}" />
+							</p:selectOneMenu>					
+						</div>
+						
+						<p:commandButton 
+							value="Save"
+							action="#{MBExpenditure.change()}"
+							icon="pi pi-check"
+							update="growl, :tableTransactions, dashboard"
+							style="width: 100%;" />
+					</h:form>				
+				</p:dialog>
 				
 				<!-- DIALOG TRANSACTION -->
 				<p:dialog
