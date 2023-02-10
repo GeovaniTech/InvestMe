@@ -85,7 +85,6 @@ public class MBExpenditure extends AbstractBean {
 		}
 	}
 	
-
 	public void listExpendiures() {
 		this.setExpenditures(this.getManterTransaction().list("Expenditure"));
 	}

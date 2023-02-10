@@ -15,8 +15,7 @@
 	
 	<h:body>
 		<ui:composition template="/template/layout.xhtml">
-			<ui:define name="body">
-				
+			<ui:define name="body">			
 				<style>
 					.container-cards {
 						display: flex;
@@ -108,7 +107,14 @@
 							<h:outputText value="#{transaction.amount * transaction.price}" />
 						</p:column>
 						
-						<p:column headerText="Delete">
+						<p:column headerText="Options">
+							<p:commandButton 
+								value="Edit"
+								action="#{MBInvestment.setToTransaction(transaction)}"
+								oncomplete="PF('dialog-edit-investment').show()"
+								update="dialog-edit-investment, tableInvestments, growl, @form, dashboard"
+								icon="pi pi-pencil" />
+								 
 							<p:commandButton 
 								value="Delete"
 								action="#{MBInvestment.remove(transaction)}"
@@ -163,7 +169,53 @@
 							style="width: 100%;"
 							 />
 					</h:form>
-				</p:dialog>				
+				</p:dialog>		
+				
+				<p:dialog
+					id="dialog-edit-investment"
+					header="Transactions"
+					widgetVar="dialog-edit-investment"
+					styleClass="dialog-investment">
+					
+					<h:form>
+						<div class="panel-inputs">
+							<p:inputText 
+								placeholder="Active"
+								value="#{MBInvestment.toTransaction.active}"
+								styleClass="campo" />
+							
+							<p:inputNumber 
+								placeholder="Price"
+								value="#{MBInvestment.toTransaction.price}"
+								styleClass="campo" />
+							
+							<p:inputNumber 
+								placeholder="Amount"
+								value="#{MBInvestment.toTransaction.amount}"
+								styleClass="campo" />
+						
+							<p:datePicker 
+								placeholder="When"
+								value="#{MBInvestment.toTransaction.date}"
+								styleClass="campo" />
+							
+							<p:selectOneMenu value="#{MBInvestment.convertType}" styleClass="campo">
+								<f:selectItems 
+									var="type"
+									value="#{MBType.typesInvesments}"
+									itemLabel="#{type.name}"
+									itemValue="#{type.id}" />
+							</p:selectOneMenu>					
+						</div>
+						
+						<p:commandButton 
+							value="Edit"
+							action="#{MBInvestment.change()}"
+							icon="pi pi-pencil"
+							update="growl, :tableInvestments, dashboard"
+							style="width: 100%;" />
+					</h:form>
+				</p:dialog>		
 			</ui:define>
 		</ui:composition>
 	</h:body>
