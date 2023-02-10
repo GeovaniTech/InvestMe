@@ -13,6 +13,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<title>InvestMe</title>
 		<style>
 			* { 
@@ -41,7 +42,7 @@
 
 			.name-logo {
 				display: flex;
-				flex-direction: row;
+				flex-direction: column;
 				justify-content: center;
 				align-items: center;
 				margin-bottom: 5px;
@@ -70,10 +71,29 @@
 			a {
 				color: #292522;
 			}
+			
+			.div-by {	
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				position: fixed;
+				bottom: 0;
+			}
+			
+			.div-by p {
+				font-size: 20px;
+				margin-right: 20px;
+			}
+			
+			.by-logo {
+			    width: 100px;
+			    height: 55px;
+			}
 		</style>
 	</h:head>
 	
 	<h:body>
+
 		<p:growl id="growl" showDetail="true" />
 		<h:form>
 			<div class="name-logo">
@@ -93,6 +113,12 @@
 				update="growl" />
 			
 			<a href="/investme/register.xhtml">Register Here</a>
+				<div class="div-by" >
+					<p>Developed By</p>
+					<a href="/portfolio/home.html">
+						<h:graphicImage name="logo text.png" library="images" class="by-logo" />
+					</a>
+				</div>
 		</h:form>
 	</h:body>
 </html>

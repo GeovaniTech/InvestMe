@@ -8,7 +8,6 @@
 	<persistence-unit name="investme" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>model.Type</class>
-		<class>model.Investment</class>
 		<class>model.Transaction</class>
 		<class>model.Client</class>
 		<properties>
@@ -20,7 +19,7 @@
 			<property name="hibernate.c3p0.idle_test_period" value="3000" />
 			<property name="hibernate.enable_lazy_load_no_trans" value="true" />
 			<property name="dialect" value="org.hibernate.dialect.H2Dialect" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://187.52.148.146:5432/investme" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://189.11.132.38:5432/InvestMe" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="123" />

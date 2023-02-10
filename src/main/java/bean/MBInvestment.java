@@ -27,12 +27,6 @@ public class MBInvestment extends AbstractBean {
 	private List<TOTransaction> investments;
 	private TOTransaction toTransaction;
 	
-	private Double spents;
-	private Double actions;
-	private Double fiis;
-	private Double fixedIncome;
-	private Double criptocurrencys;
-	
 	private int convertType;
 	
 	public MBInvestment() {
@@ -41,15 +35,8 @@ public class MBInvestment extends AbstractBean {
 		this.manterType = new ManterType();
 		this.investments = new ArrayList<TOTransaction>();
 		this.toTransaction = new TOTransaction();
-		this.spents = Double.valueOf(0);
-		this.actions = Double.valueOf(0);
-		this.fiis = Double.valueOf(0);
-		this.fixedIncome = Double.valueOf(0);
-		this.criptocurrencys = Double.valueOf(0);
-		
-		
+
 		listInvestments();
-		updateDashboard();
 	}
 	
 	public void save() {
@@ -64,7 +51,6 @@ public class MBInvestment extends AbstractBean {
 			this.getManterTransaction().save(this.getToTransaction());
 			
 			listInvestments();
-			updateDashboard();
 			
 			PrimeFaces.current().ajax().update(":tableInvestments");
 			msg.saveSuccessfully();
@@ -84,7 +70,6 @@ public class MBInvestment extends AbstractBean {
 			
 			this.getManterTransaction().change(this.getToTransaction());
 			
-			updateDashboard();
 			listInvestments();
 			
 			PrimeFaces.current().ajax().update(":tableInvestments");
@@ -96,7 +81,6 @@ public class MBInvestment extends AbstractBean {
 		try {
 			this.getManterTransaction().remove(toTransaction);
 			
-			updateDashboard();
 			listInvestments();
 			
 			msg.saveSuccessfully();
@@ -108,14 +92,6 @@ public class MBInvestment extends AbstractBean {
 	
 	public void listInvestments() {
 		this.setInvestments(this.getManterTransaction().list("Investment"));
-	}
-
-	public void updateDashboard() {
-		this.setSpents(this.getManterInvetment().spents());
-		this.setActions(this.getManterInvetment().actions());
-		this.setFiis(this.getManterInvetment().fiis());
-		this.setFixedIncome(this.getManterInvetment().fixedIncome());
-		this.setCriptocurrencys(this.getManterInvetment().criptocurrencys());
 	}
 	
 	public Type convertType() {
@@ -142,46 +118,6 @@ public class MBInvestment extends AbstractBean {
 
 	public void setInvestments(List<TOTransaction> investments) {
 		this.investments = investments;
-	}
-
-	public Double getSpents() {
-		return spents;
-	}
-
-	public void setSpents(Double spents) {
-		this.spents = spents;
-	}
-
-	public Double getActions() {
-		return actions;
-	}
-
-	public void setActions(Double actions) {
-		this.actions = actions;
-	}
-
-	public Double getFiis() {
-		return fiis;
-	}
-
-	public void setFiis(Double fiis) {
-		this.fiis = fiis;
-	}
-
-	public Double getFixedIncome() {
-		return fixedIncome;
-	}
-
-	public void setFixedIncome(Double fixedIncome) {
-		this.fixedIncome = fixedIncome;
-	}
-
-	public Double getCriptocurrencys() {
-		return criptocurrencys;
-	}
-
-	public void setCriptocurrencys(Double criptocurrencys) {
-		this.criptocurrencys = criptocurrencys;
 	}
 
 	public ManterInvestment getManterInvetment() {
