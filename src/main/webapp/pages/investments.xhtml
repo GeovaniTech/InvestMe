@@ -16,6 +16,7 @@
 	<h:body>
 		<ui:composition template="/template/layout.xhtml">
 			<ui:define name="body">			
+				<h:outputStylesheet library="css" name="card.css"/>
 				<style>
 					.container-cards {
 						display: flex;
@@ -60,7 +61,7 @@
 					<ui:repeat var="type" value="#{MBType.typesInvesments}">
 						<components:card 
 							description="#{type.name}"
-							value="#{type.spents}"	 />
+							value="#{MBAppConfigs.getBrazilianCurrency(type.spents)}"	 />
 					
 					</ui:repeat>
 				</h:panelGroup>
@@ -90,7 +91,7 @@
 						</p:column>
 						
 						<p:column headerText="Price">
-							<h:outputText value="#{transaction.price}" />
+							<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(transaction.price)}" />
 						</p:column>
 		
 						<p:column headerText="Amount">
@@ -104,7 +105,7 @@
 						</p:column>
 						
 						<p:column headerText="Total">
-							<h:outputText value="#{transaction.amount * transaction.price}" />
+							<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(transaction.amount * transaction.price)}" />
 						</p:column>
 						
 						<p:column headerText="Options">

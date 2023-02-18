@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.container-cards {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.painel-inputs {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.campo {
+	margin-bottom: 5px;
+}
+
+.campo > * {
+	width: 100% !important;
+}
+
+@media only screen and (max-width: 768px) {
+	.dialog-expenditure {
+		width: 100% !important;
+		height: 100% !important;
+	}
+}
+
+@media only screen and (min-width: 600px) {				
+	.dialog-expenditure {
+		width: 600px !important;
+	}
+}	

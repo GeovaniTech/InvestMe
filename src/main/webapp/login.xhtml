@@ -92,33 +92,34 @@
 		</style>
 	</h:head>
 	
-	<h:body>
-
-		<p:growl id="growl" showDetail="true" />
-		<h:form>
-			<div class="name-logo">
-				<h1>Invest<span>Me</span></h1>
-			</div>
-			<p:inputText 
-				placeholder="User"
-				value="#{MBclient.client.name}" />
-			
-			<p:password 
-				placeholder="Password"
-				value="#{MBclient.password}" />
-			
-			<p:commandButton 
-				value="Logar"
-				action="#{MBclient.validateAccess()}"
-				update="growl" />
-			
-			<a href="/investme/register.xhtml">Register Here</a>
-				<div class="div-by" >
-					<p>Developed By</p>
-					<a href="/portfolio/home.html">
-						<h:graphicImage name="logo text.png" library="images" class="by-logo" />
-					</a>
+	<f:view locale="#{MBAppConfigs.language}" id="view-locale">
+		<h:body>
+			<p:growl id="growl" showDetail="true" />
+			<h:form>
+				<div class="name-logo">
+					<h1>Invest<span>Me</span></h1>
 				</div>
-		</h:form>
-	</h:body>
+				<p:inputText 
+					placeholder="User"
+					value="#{MBclient.client.name}" />
+				
+				<p:password 
+					placeholder="Password"
+					value="#{MBclient.password}" />
+				
+				<p:commandButton 
+					value="Logar"
+					action="#{MBclient.validateAccess()}"
+					update="growl" />
+				
+				<a href="/investme/register.xhtml">Register Here</a>
+					<div class="div-by" >
+						<p>Developed By</p>
+						<a href="/portfolio/home.html">
+							<h:graphicImage name="logo text.png" library="images" class="by-logo" />
+						</a>
+					</div>
+			</h:form>
+		</h:body>
+	</f:view>
 </html>

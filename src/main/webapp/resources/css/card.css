@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.card-wallet {
+	background-color: var(--primary);
+	color: white;
+	font-size: 20px;
+	padding: 10px;
+	padding-left: 20px;
+	width: 200px;
+	height: 100px;
+	border-radius: 5px;
+	margin: 10px;
+	
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.values {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+}
+
+@media only screen and (max-width: 768px) {
+	.card-wallet {
+		width: 100%;
+	}
+}

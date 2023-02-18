@@ -16,52 +16,14 @@
 	<h:body>
 		<ui:composition template="/template/layout.xhtml">
 			<ui:define name="body">			
-				<style>
-					.container-cards {
-						display: flex;
-						flex-direction: row;
-						flex-wrap: wrap;
-						justify-content: space-evenly;
-						align-items: center;
-					}
-	
-					.painel-inputs {
-						display: flex;
-						flex-direction: column;
-						flex-wrap: nowrap;
-						justify-content: center;
-						align-items: center;
-					}
-					
-					.campo {
-						margin-bottom: 5px;
-					}
-					
-					.campo > * {
-						width: 100% !important;
-					}
-					
-					@media only screen and (max-width: 768px) {
-						.dialog-expenditure {
-							width: 100% !important;
-							height: 100% !important;
-						}
-					}
-			
-					@media only screen and (min-width: 600px) {				
-						.dialog-expenditure {
-							width: 600px !important;
-						}
-					}	
-					
-				</style>
-				
+				<h:outputStylesheet library="css" name="card.css"/>
+				<h:outputStylesheet library="css" name="expenditures.css"/>
+								
 				<h:panelGroup id="dashboard" class="container-cards">
 					<ui:repeat var="type" value="#{MBType.typesExpenditure}">
 						<components:card 
 							description="#{type.name}"
-							value="#{type.spents}" />
-					
+							value="#{MBAppConfigs.getBrazilianCurrency(type.spents)}" />
 					</ui:repeat>
 				</h:panelGroup>
 				
@@ -90,7 +52,7 @@
 						</p:column>
 						
 						<p:column headerText="Price">
-							<h:outputText value="#{transaction.price}" />
+							<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(transaction.price)}" />
 						</p:column>
 						
 						<p:column headerText="Payment">
@@ -108,7 +70,7 @@
 						</p:column>
 						
 						<p:column headerText="Total">
-							<h:outputText value="#{transaction.amount * transaction.price}" />
+							<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(transaction.amount * transaction.price)}" />
 						</p:column>
 						
 						<p:column headerText="Options">

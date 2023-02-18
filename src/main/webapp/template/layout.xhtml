@@ -4,7 +4,8 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 	
 	<h:head>
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -50,20 +51,21 @@
 			}
 		</style>
 	</h:head>
-	
-	<h:body>
-		<p:growl id="growl" showDetail="true" />
-	
-		<div id="menu">
-			<ui:insert name="menu">
-				<ui:include src="/template/menu.xhtml" />
-			</ui:insert>
-		</div>
+	<f:view locale="#{MBAppConfigs.language}" id="view-locale">
+		<h:body>
+			<p:growl id="growl" showDetail="true" />
 		
-		<div id="body">
-			<ui:insert name="body">
+			<div id="menu">
+				<ui:insert name="menu">
+					<ui:include src="/template/menu.xhtml" />
+				</ui:insert>
+			</div>
 			
-			</ui:insert>
-		</div>
-	</h:body>
+			<div id="body">
+				<ui:insert name="body">
+				
+				</ui:insert>
+			</div>
+		</h:body>
+	</f:view>
 </html>
