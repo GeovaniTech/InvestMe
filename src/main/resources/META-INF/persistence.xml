@@ -18,11 +18,11 @@
 			<property name="hibernate.c3p0.max_statements" value="50" />
 			<property name="hibernate.c3p0.idle_test_period" value="3000" />
 			<property name="hibernate.enable_lazy_load_no_trans" value="true" />
-			<property name="dialect" value="org.hibernate.dialect.H2Dialect" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://189.11.132.38:5432/InvestMe" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://191.96.251.235:5432/investme" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="123" />
+			<property name="javax.persistence.jdbc.password" value="#Geovani5280" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
