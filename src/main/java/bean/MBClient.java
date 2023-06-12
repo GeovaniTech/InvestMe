@@ -29,7 +29,7 @@ public class MBClient extends AbstractBean {
 		if(this.getManterClient().validateAccess(client, password)) {
 			getSession().setAttribute("client", client);
 			
-			RedirectUrl.redirecionarPara("/investme/pages/investments.xhtml");
+			RedirectUrl.redirecionarPara("/investme/home/investments");
 		} else {
 			msg.createMessage(FacesMessage.SEVERITY_ERROR, "User not found", "User not found, try again.");
 		}
@@ -38,7 +38,7 @@ public class MBClient extends AbstractBean {
 	public void logout() {
 		getSession().setAttribute("client", null);
 		
-		RedirectUrl.redirecionarPara("/investme/pages/investments.xhtml");
+		RedirectUrl.redirecionarPara("/investme/home/investments");
 	}
 	
 	public TOClient getClient() {

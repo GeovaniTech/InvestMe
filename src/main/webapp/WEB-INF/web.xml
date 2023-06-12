@@ -24,6 +24,6 @@
   </filter>
   <filter-mapping>
     <filter-name>UserLogged</filter-name>
-    <url-pattern>/pages/*</url-pattern>
+    <url-pattern>/home/*</url-pattern>
   </filter-mapping>
 </web-app>

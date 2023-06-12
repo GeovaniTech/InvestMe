@@ -1,5 +1,6 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -21,6 +22,12 @@ public class MBType extends AbstractBean {
 	private List<TOType> typesInvesments;
 	
 	public MBType() {
+		this.setDaoType(new ManterType());
+		this.setDtoType(new TOType());
+		this.setTypes(new ArrayList<>());
+		this.setTypesExpenditure(new ArrayList<>());
+		this.setTypesInvesments(new ArrayList<>());
+		
 		updateTypes();
 	}
 	

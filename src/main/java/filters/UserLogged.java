@@ -29,11 +29,11 @@ public class UserLogged implements Filter {
 	
 		TOClient client = (TOClient) session.getAttribute("client");
 		
-		if(client != null && !client.getName().equals("")) {
-			chain.doFilter(request, response);
-		} else {
+		if(client == null || client.getName().equals("")) {
         	response.setStatus(401);
-        	response.sendRedirect("/investme/login.xhtml");
+        	response.sendRedirect("/investme/login");
+		} else {
+			chain.doFilter(request, response);
 		}
 	}
 
