@@ -19,3 +19,4 @@ targe-eclipse
 bin
 .tern-project
 /target/
+persistence.xml
