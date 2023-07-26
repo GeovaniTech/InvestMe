@@ -20,3 +20,4 @@ bin
 .tern-project
 /target/
 persistence.xml
+src/main/resources/META-INF/persistence.xml
