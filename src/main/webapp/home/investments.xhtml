@@ -23,7 +23,7 @@
 					<ui:repeat var="type" value="#{MBType.typesInvesments}">
 						<components:card 
 							description="#{type.name}"
-							value="#{MBAppConfigs.getBrazilianCurrency(type.spents)}"	 />
+							value="#{type.spents == null ? MBAppConfigs.getBrazilianCurrency(0.0) : MBAppConfigs.getBrazilianCurrency(type.spents)}" />
 					
 					</ui:repeat>
 				</h:panelGroup>
