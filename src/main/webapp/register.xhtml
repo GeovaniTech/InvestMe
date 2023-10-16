@@ -12,18 +12,103 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<title>InvestMe</title>
+		<link rel="shortcut icon" href="ico.ico" type="image/x-icon" />
+		<title>InvestMe - #{label.register}</title>
 	</h:head>
 	
-	<h:body>
-		<div class="infos-left-side">
-		
-		</div>
-		
-		<div class="login-right-side">
-		
-		</div>
-	</h:body>
+	<f:view locale="#{MBAppConfigs.language}" id="view-locale">
+		<h:body>
+			<h:outputStylesheet library="css" name="access.css" />
+			<h:outputStylesheet library="css" name="/colors/light/colors.css" />
+			<h:outputStylesheet library="css" name="/colors/light/theme-light.css" />
+			<h:outputStylesheet library="css" name="/alignments/alignments.css" />
+			
+			<div class="infos-left-side" />
+			
+			<div class="form-right-side">
+				<div class="logo">
+					<img src="/investme/resources/images/logo.png" />
+				</div>
+				
+				<h:form>
+					<p:messages 
+						id="messages"
+						showDetail="false"
+						showIcon="false"
+						autoUpdate="true"
+						style="width: 100%;"/>
+				
+					<h1>#{label.register}</h1>
+					
+					<div class="search-group">
+						<p:outputLabel value="#{label.email}" for="email" />
+					    
+					    <span class="ui-input-icon-left">
+					        <i class="pi pi-envelope" />
+					        
+					        <p:inputText 
+					        	id="email" 
+					        	value="#{MBRegister.email}"
+					        	placeholder="#{label.enter_email}"
+					        	styleClass="field-login"
+					        	required="true"
+					        	requiredMessage="#{label.email_required}" />
+					    </span>
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel 
+							value="#{label.password}" 
+							for="password" />
+					   
+					    <span class="ui-input-icon-left">
+					        <i class="pi pi-lock" />
+					        
+					        <p:password 
+					        	id="password" 
+					        	value="#{MBRegister.password}"
+					        	placeholder="#{label.enter_password}"
+					        	toggleMask="true"
+					        	styleClass="field-login"
+					        	required="true"
+					        	requiredMessage="#{label.password_required}" />
+					    </span>
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel 
+							value="#{label.repeat_password}" 
+							for="repeatPassword" />
+					   
+					    <span class="ui-input-icon-left">
+					        <i class="pi pi-lock" />
+					        
+					        <p:password 
+					        	id="repeatPassword" 
+					        	value="#{MBRegister.repeatPassword}"
+					        	placeholder="#{label.enter_password}"
+					        	toggleMask="true"
+					        	styleClass="field-login"
+					        	required="true"
+					        	requiredMessage="#{label.repeat_password_required}" />
+					    </span>
+					</div>
+
+					<div class="search-group">
+						<p:commandButton 
+							value="#{label.finish}" 
+							action="#{MBRegister.register()}"
+							update="messages"
+							style="width: 100%" />
+					</div>
+				</h:form>
+				
+				<p:divider layout="horizontal" align="center" style="width: 200px;"/>
+				
+				<p:commandLink 
+					value="#{label.already_have_account}"
+					action="#{MBAppConfigs.redirectTo('/investme/login')}" />
+			</div>
+		</h:body>
+	</f:view>
 </html>

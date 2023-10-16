@@ -3,7 +3,7 @@ package bean;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import manter.register.ManterRegister;
+import manter.client.ManterClient;
 import utils.AbstractBean;
 
 @Named("MBRegister")
@@ -11,33 +11,20 @@ import utils.AbstractBean;
 public class MBRegister extends AbstractBean {
 	private static final long serialVersionUID = -6921252465658970503L;
 	
-	private String nameUser;
+	private String email;
 	private String password;
 	private String repeatPassword;
-	private ManterRegister manterRegister;
+	private ManterClient manterClientSBean;
 	
 	public MBRegister() {
-		this.manterRegister = new ManterRegister();
+		this.setManterClientSBean(new ManterClient());
 	}
 	
 	public void register() {
-		if(nameUser != null
-			&& !nameUser.equals("")
-			&& password != null
-			&& !password.equals("")
-			&& repeatPassword != null
-			&& !repeatPassword.equals("")) {
-			
-			this.getManterRegister().register(nameUser, password, repeatPassword);
-		}
+
 	}
 	
-	public String getNameUser() {
-		return nameUser;
-	}
-	public void setNameUser(String nameUser) {
-		this.nameUser = nameUser;
-	}
+	// Getters and Setters
 	public String getPassword() {
 		return password;
 	}
@@ -50,10 +37,17 @@ public class MBRegister extends AbstractBean {
 	public void setRepeatPassword(String repeatPassword) {
 		this.repeatPassword = repeatPassword;
 	}
-	public ManterRegister getManterRegister() {
-		return manterRegister;
+	public String getEmail() {
+		return email;
 	}
-	public void setManterRegister(ManterRegister manterRegister) {
-		this.manterRegister = manterRegister;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	public ManterClient getManterClientSBean() {
+		return manterClientSBean;
+	}
+	public void setManterClientSBean(ManterClient manterClientSBean) {
+		this.manterClientSBean = manterClientSBean;
+	}
+	
 }
