@@ -1,6 +1,6 @@
 package manter.type;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 import interfaces.GenericDAO;
 import to.TOType;

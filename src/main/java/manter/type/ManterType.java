@@ -2,9 +2,9 @@ package manter.type;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
 
 import model.Type;
 import to.TOType;

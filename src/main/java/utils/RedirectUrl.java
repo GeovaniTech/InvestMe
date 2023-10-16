@@ -2,8 +2,8 @@ package utils;
 
 import java.io.IOException;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 
 public class RedirectUrl {
 	public static void redirectTo(String url) {

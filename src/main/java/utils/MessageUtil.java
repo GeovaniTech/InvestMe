@@ -3,8 +3,8 @@ package utils;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 
 public class MessageUtil {
 	public static String getMessageFromProperties(String label) {

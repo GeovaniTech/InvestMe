@@ -1,10 +1,13 @@
 package bean;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import jakarta.inject.Named;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.view.ViewScoped;
 import manter.client.ManterClient;
 import utils.AbstractBean;
+import utils.EmailUtil;
+import utils.MessageUtil;
 
 @Named("MBRegister")
 @ViewScoped
@@ -21,7 +24,23 @@ public class MBRegister extends AbstractBean {
 	}
 	
 	public void register() {
-
+		if(!EmailUtil.validateEmail(this.getEmail())) {
+			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("invalid_email"), FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		
+		if(!this.getPassword().equals(this.getRepeatPassword())) {
+			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("password_are_not_the_same"), FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		
+		if(this.getManterClientSBean().verifyIfExistsUserByEmail(this.getEmail())) {
+			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("existing_email"), FacesMessage.SEVERITY_ERROR);
+			return;
+		}
+		
+		this.getManterClientSBean().register(this.getEmail(), this.getPassword());
+		
 	}
 	
 	// Getters and Setters

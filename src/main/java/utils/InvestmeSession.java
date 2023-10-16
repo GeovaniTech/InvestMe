@@ -1,8 +1,7 @@
 package utils;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
+import jakarta.faces.context.FacesContext;
+import jakarta.servlet.http.HttpSession;
 import to.TOClient;
 
 public class InvestmeSession {

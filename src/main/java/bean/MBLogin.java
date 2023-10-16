@@ -1,10 +1,10 @@
 package bean;
 
 
-import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+import jakarta.inject.Named;
 
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.view.ViewScoped;
 import manter.client.ManterClient;
 import utils.AbstractBean;
 import utils.EmailUtil;

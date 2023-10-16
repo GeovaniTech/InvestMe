@@ -3,11 +3,12 @@ package bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
+
+import jakarta.inject.Named;
 
 import org.primefaces.PrimeFaces;
 
+import jakarta.faces.view.ViewScoped;
 import manter.investment.ManterInvestment;
 import manter.transaction.ManterTransaction;
 import manter.type.ManterType;

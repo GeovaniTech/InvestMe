@@ -1,17 +1,17 @@
 package errors;
 
-import javax.faces.application.NavigationHandler;
-import javax.faces.application.ViewExpiredException;
-import javax.faces.context.ExceptionHandler;
-import javax.faces.context.ExceptionHandlerWrapper;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ExceptionQueuedEvent;
-import javax.faces.event.ExceptionQueuedEventContext;
+import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.application.ViewExpiredException;
+import jakarta.faces.context.ExceptionHandler;
+import jakarta.faces.context.ExceptionHandlerWrapper;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ExceptionQueuedEvent;
+import jakarta.faces.event.ExceptionQueuedEventContext;
 
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.faces.FacesException;
+import jakarta.faces.FacesException;
  
 public class ViewExpiredExceptionHandler extends ExceptionHandlerWrapper {
 
@@ -34,8 +34,8 @@ public class ViewExpiredExceptionHandler extends ExceptionHandlerWrapper {
                 Map<String, Object> requestMap = fc.getExternalContext().getRequestMap();
                 NavigationHandler nav = fc.getApplication().getNavigationHandler();
                 try {
-                    requestMap.put("javax.servlet.error.exception_name", vee.getClass().getName());
-                    requestMap.put("javax.servlet.error.message", vee.getMessage());
+                    requestMap.put("jakarta.servlet.error.exception_name", vee.getClass().getName());
+                    requestMap.put("jakarta.servlet.error.message", vee.getMessage());
 
                     nav.handleNavigation(fc, null, "/login.xhtml?faces-redirect=true");
                     fc.renderResponse(); 

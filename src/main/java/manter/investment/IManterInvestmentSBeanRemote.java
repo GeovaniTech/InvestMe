@@ -1,6 +1,6 @@
 package manter.investment;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface IManterInvestmentSBeanRemote extends IManterInvestmentSBean {

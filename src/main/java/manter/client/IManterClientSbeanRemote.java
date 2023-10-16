@@ -1,6 +1,6 @@
 package manter.client;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface IManterClientSbeanRemote extends IManterClientSBean {

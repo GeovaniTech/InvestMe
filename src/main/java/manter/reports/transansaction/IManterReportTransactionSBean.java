@@ -2,7 +2,7 @@ package manter.reports.transansaction;
 
 import java.util.List;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 import model.Transaction;
 

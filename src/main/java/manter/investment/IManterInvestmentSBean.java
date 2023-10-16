@@ -1,6 +1,6 @@
 package manter.investment;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface IManterInvestmentSBean {

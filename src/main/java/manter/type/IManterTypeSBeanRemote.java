@@ -1,6 +1,6 @@
 package manter.type;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface IManterTypeSBeanRemote extends IManterTypeSBean {

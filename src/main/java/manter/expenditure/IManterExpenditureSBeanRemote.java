@@ -1,6 +1,6 @@
 package manter.expenditure;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface IManterExpenditureSBeanRemote extends IManterExpenditureSBean {

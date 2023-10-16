@@ -1,6 +1,6 @@
 package manter.expenditure;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface IManterExpenditureSBean {

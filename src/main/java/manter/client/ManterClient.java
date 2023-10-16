@@ -2,12 +2,13 @@ package manter.client;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.persistence.Query;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
+import jakarta.faces.application.FacesMessage;
 
 import interfaces.GenericDAO;
+import jakarta.persistence.Query;
 import model.Client;
 import to.TOClient;
 import utils.AbstractManter;
@@ -48,14 +49,39 @@ public class ManterClient extends AbstractManter implements GenericDAO<TOClient>
 			e.printStackTrace();
 		}
 		
-		MessageUtil.sendMessage("", null);
+		MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("user_or_password_incorrect"), FacesMessage.SEVERITY_ERROR);
 		
 		return false;
+	}
+	
+	@Override
+	public void register(String email, String password) {
+		Client client = new Client();
+		
+		client.setEmail(email);
+		client.setPassword(Encryption.encryptTextSHA(password));
+		
+	    em.getTransaction().begin();
+	    em.persist(client);
+	    em.getTransaction().commit();
+	}
+
+	public boolean verifyIfExistsUserByEmail(String email) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" SELECT C FROM ")
+			.append(Client.class.getName()).append(" C ")
+			.append(" WHERE C.email = :email ");
+		
+		Query query = this.em.createQuery(sql.toString(), Client.class);
+		query.setParameter("email", email);
+		
+		return query.getResultList().size() > 0;
 	}
 
 	@Override
 	public void save(TOClient to) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
