@@ -10,7 +10,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import to.TOClient;
+import utils.StringUtil;
 
 public class UserLogged implements Filter {
     public UserLogged() {
@@ -29,7 +31,7 @@ public class UserLogged implements Filter {
 	
 		TOClient client = (TOClient) session.getAttribute("client");
 		
-		if(client == null || client.getName().equals("")) {
+		if(client == null || StringUtil.isNull(client.getEmail())) {
         	response.setStatus(401);
         	response.sendRedirect("/investme/login");
 		} else {

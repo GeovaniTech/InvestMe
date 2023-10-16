@@ -16,24 +16,23 @@ public class ManterRegister extends AbstractManter implements IManterRegisterSBe
 	@Override
 	public boolean register(String user, String password, String repeatPassword) {
 		if(!password.equals(repeatPassword)) {
-			msg.passwordsDontMatch();
 			return false;
 		}
 		
 		if(validateUserName(user)) {
 			Client client = new Client();
 			
-			client.setName(user);
+			//client.setName(user);
 			client.setPassword(PasswordEncryption.encrypt(password));
 			
 			em.getTransaction().begin();
 			em.persist(client);
 			em.getTransaction().commit();	
 			
-			RedirectUrl.redirecionarPara("/investme/login.xhtml");
+			RedirectUrl.redirectTo("/investme/login.xhtml");
 			return true;
 		} else {
-			msg.erroNameUsed();
+			
 		}
 		
 		return false;

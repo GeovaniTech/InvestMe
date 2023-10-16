@@ -44,9 +44,9 @@ public class MBTransaction extends AbstractBean {
 			
 			this.getManterTransaction().save(this.getToTransaction());
 			listTransactions();
-			msg.saveSuccessfully();
+		
 		} else {
-			msg.emptyValues();
+		
 		}
 	}
 	

@@ -6,7 +6,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 public class RedirectUrl {
-	public static void redirecionarPara(String url) {
+	public static void redirectTo(String url) {
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 
 		try {

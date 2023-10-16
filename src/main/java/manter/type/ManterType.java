@@ -18,7 +18,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		Type type = new Type(); 
 		
 		type.setName(model.getName());
-		type.setNameClient(getClient().getName());
+		type.setNameClient(getClient().getEmail());
 		type.setTypeTransaction(model.getTypeTransaction());
 		
 		em.getTransaction().begin();
@@ -68,7 +68,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		sql.append(" WHERE T.nameClient = :client OR T.nameClient IS NULL");
 		
 		List<Object[]> result = em.createQuery(sql.toString(), Object[].class)
-								.setParameter("client", getClient().getName())
+								.setParameter("client", getClient().getEmail())
 								.getResultList();
 		
 		for(Object[] o : result) {
@@ -100,7 +100,7 @@ public class ManterType extends AbstractManter implements IManterTypeSBean, IMan
 		sql.append(" WHERE T.typeTransaction = :typeTransaction AND T.nameClient = :client ");
 		
 		List<Object[]> result = em.createQuery(sql.toString(), Object[].class)
-								.setParameter("client", getClient().getName())
+								.setParameter("client", getClient().getEmail())
 								.setParameter("typeTransaction", specificType)
 								.getResultList();
 		

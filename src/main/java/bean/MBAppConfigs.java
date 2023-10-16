@@ -1,14 +1,18 @@
 package bean;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import utils.AbstractBean;
+import utils.RedirectUrl;
 
 @Named("MBAppConfigs")
 @SessionScoped
@@ -24,7 +28,7 @@ public class MBAppConfigs extends AbstractBean {
 		localeList.add(new Locale("pt"));
 		localeList.add(new Locale("en"));
 		
-		language = Locale.getDefault().getLanguage();
+		language = "pt";
 	}
 	
 	public String getBrazilianCurrency(Double value) {
@@ -32,6 +36,16 @@ public class MBAppConfigs extends AbstractBean {
 		NumberFormat brazilianFormat = NumberFormat.getCurrencyInstance(localeBR);
 		
 		return brazilianFormat.format(value);
+	}
+	
+	public void redirectTo(String url) {
+		RedirectUrl.redirectTo(url);
+	}
+	
+	public void logout() {
+		this.getSession().invalidate();
+		
+		this.redirectTo("/investme");
 	}
 
 	public boolean isDarkMode() {

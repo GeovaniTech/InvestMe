@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+body {
+	background-color: var(--body-login);
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+}
+
+/* LEFT SIDE */
+
+.infos-left-side {
+	height: 100vh;
+	width: 50vw;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+
+	align-items: center;
+	flex-direction: column;
+	background-image: url('/investme/resources/images/investing.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.your_investments {
+	font-size: 70px;
+	font-weight: bold;
+	opacity: 1 !important;
+}
+
+.our_services {
+	color: gray;
+	opacity: 1;
+}
+
+.infos-left-side p {
+	color: white;
+	
+}
+/* RIGHT SIDE */
+
+.form-right-side {
+	height: 100vh;
+	width: 50vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	align-content: center;
+}
+
+h1 {
+	margin: 25px 0px;
+	font-size: 25px;
+}
+
+.field-login {
+	width: 350px !important;
+}
+

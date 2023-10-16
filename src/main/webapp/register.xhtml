@@ -13,114 +13,17 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<title>InvestMe</title>
-		<style>
-			* { 
-				font-family: 'Poppins', sans-serif;
-			}
-			body {
-				
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 98vh;
-			}
-			
-			form {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-			}
-			
-			form > * {
-				width: 300px !important;
-				margin-bottom: 5px !important;
-			}
-
-			.name-logo {
-				display: flex;
-				flex-direction: row;
-				justify-content: center;
-				align-items: center;
-				margin-bottom: 5px;
-				font-family: 'Poppins', sans-serif;
-				
-			}
-			
-			.name-logo h1 {
-				font-size: 60px;
-			}
-			
-			.name-logo span  {
-				color: #11766d;
-			}
-			
-			.ui-button {
-				border: 0px solid #292522 !important;
-				background-color: #292522 !important;
-			}
-			
-			.ui-button:hover {
-				border: 0px solid #292522 !important;
-				background-color: #292522 !important;
-			}
-			
-			a {
-				color: #292522;
-			}
-			
-			.div-by {	
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				position: fixed;
-				bottom: 0;
-			}
-			
-			.div-by p {
-				font-size: 20px;
-				margin-right: 20px;
-			}
-			
-			.by-logo {
-			    width: 100px;
-			    height: 55px;
-			}
-		</style>
 	</h:head>
 	
 	<h:body>
-		<p:growl id="growl" showDetail="true" />
-		<h:form>
-			<div class="name-logo">
-				<h1>Invest<span>Me</span></h1>
-			</div>
-			<p:inputText 
-				placeholder="User"
-				value="#{MBRegister.nameUser}" />
-			
-			<p:password 
-				placeholder="Password"
-				value="#{MBRegister.password}" />
-
-			<p:password 
-				placeholder="Repeat Password"
-				value="#{MBRegister.repeatPassword}" />
-			
-			<p:commandButton 
-				value="Register"
-				action="#{MBRegister.register()}"
-				update="growl" />
-			
-			<a href="/investme/login">Sign in</a>
-			<div class="div-by" >
-				<p>Developed By</p>
-				<a href="/portfolio/">
-					<h:graphicImage name="logo text.png" library="images" class="by-logo" />
-				</a>
-			</div>
-		</h:form>
+		<div class="infos-left-side">
 		
+		</div>
+		
+		<div class="login-right-side">
+		
+		</div>
 	</h:body>
 </html>

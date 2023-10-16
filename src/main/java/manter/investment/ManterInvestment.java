@@ -24,7 +24,7 @@ public class ManterInvestment extends AbstractManter implements IManterInvestmen
 	@Override
 	public Double spents() {		
 		return em.createQuery(sql.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -34,7 +34,7 @@ public class ManterInvestment extends AbstractManter implements IManterInvestmen
 		filters.append(" AND T.typeActive.name = 'Action' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -44,7 +44,7 @@ public class ManterInvestment extends AbstractManter implements IManterInvestmen
 		filters.append(" AND T.typeActive.name = 'Fii' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -54,7 +54,7 @@ public class ManterInvestment extends AbstractManter implements IManterInvestmen
 		filters.append(" AND T.typeActive.name = 'Fixed Income' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -64,7 +64,7 @@ public class ManterInvestment extends AbstractManter implements IManterInvestmen
 		filters.append(" AND T.typeActive.name = 'Criptocurrency' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	

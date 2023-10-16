@@ -77,11 +77,11 @@ public class MBReportTransaction extends AbstractBean {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				msg.errorGenerateReport();
+		
 			}
 			
 		} else {
-			msg.emptyValues();
+	
 		}
 	}
 	

@@ -5,29 +5,52 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.persistence.Query;
 
 import interfaces.GenericDAO;
 import model.Client;
 import to.TOClient;
 import utils.AbstractManter;
-import utils.PasswordEncryption;
+import utils.Encryption;
+import utils.MessageUtil;
+import utils.RedirectUrl;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class ManterClient extends AbstractManter implements GenericDAO<TOClient>, IManterClientSBean, IManterClientSbeanRemote {
 	
 	@Override
-	public boolean validateAccess(TOClient toUser, String password) {
+	public boolean logar(String email, String password) {
 		try {
-			Client user = (Client) em.createQuery(" SELECT C FROM Client C WHERE C.name = :pName AND C.password = :pPassword")
-					.setParameter("pName", toUser.getName())
-					.setParameter("pPassword", PasswordEncryption.encrypt(password))
-					.getSingleResult();
+			StringBuilder sql = new StringBuilder();
 			
-			return user != null && !user.getName().equals("");
+			sql.append(" SELECT C FROM ")
+			   .append(Client.class.getName()).append(" C ")
+			   .append(" WHERE C.email = :email AND C.password = :password ");
+			
+			Query query = em.createQuery(sql.toString(), Client.class);
+			query.setParameter("email", email);
+			query.setParameter("password", Encryption.encryptTextSHA(password));
+			
+			Client client = (Client) query.getSingleResult();
+			
+			TOClient to = new TOClient();
+			
+			to.setEmail(client.getEmail());
+			
+			this.getSession().setAttribute("client", to);
+			
+			RedirectUrl.redirectTo("/investme/home/investments");
+			
+			return true;
+			
 		} catch (Exception e) {
-			return false;
+			e.printStackTrace();
 		}
+		
+		MessageUtil.sendMessage("", null);
+		
+		return false;
 	}
 
 	@Override
@@ -65,4 +88,5 @@ public class ManterClient extends AbstractManter implements GenericDAO<TOClient>
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

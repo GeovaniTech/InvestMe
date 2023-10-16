@@ -48,10 +48,8 @@ public class MBExpenditure extends AbstractBean {
 				this.getManterTransaction().save(this.getToTransaction());
 			
 				listExpendiures();
-				
-				msg.saveSuccessfully();
 			} else {
-				msg.emptyValues();
+
 			}
 	}
 	
@@ -67,8 +65,6 @@ public class MBExpenditure extends AbstractBean {
 			this.getManterTransaction().change(this.getToTransaction());
 		
 			listExpendiures();
-			
-			msg.changedSuccessfully();
 		}
 	}
 	
@@ -77,10 +73,7 @@ public class MBExpenditure extends AbstractBean {
 			this.getManterTransaction().remove(toTransaction);
 			
 			listExpendiures();
-			
-			msg.saveSuccessfully();
 		} catch (Exception e) {
-			msg.errorRemoving();
 			e.printStackTrace();
 		}
 	}

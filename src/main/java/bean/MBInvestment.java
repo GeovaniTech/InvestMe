@@ -53,9 +53,9 @@ public class MBInvestment extends AbstractBean {
 			listInvestments();
 			
 			PrimeFaces.current().ajax().update(":tableInvestments");
-			msg.saveSuccessfully();
+			
 		} else {
-			msg.emptyValues();
+			
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class MBInvestment extends AbstractBean {
 			listInvestments();
 			
 			PrimeFaces.current().ajax().update(":tableInvestments");
-			msg.changedSuccessfully();
+	
 		}
 	}
 	
@@ -82,10 +82,8 @@ public class MBInvestment extends AbstractBean {
 			this.getManterTransaction().remove(toTransaction);
 			
 			listInvestments();
-			
-			msg.saveSuccessfully();
+
 		} catch (Exception e) {
-			msg.errorRemoving();
 			e.printStackTrace();
 		}
 	}

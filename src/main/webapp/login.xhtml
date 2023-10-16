@@ -12,114 +12,103 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
     	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-		<title>InvestMe</title>
-		<style>
-			* { 
-				font-family: 'Poppins', sans-serif;
-			}
-			
-			body {
-				
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 98vh;
-			}
-			
-			form {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-			}
-			
-			form > * {
-				width: 300px !important;
-				margin-bottom: 5px !important;
-			}
-
-			.name-logo {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				margin-bottom: 5px;
-				font-family: 'Poppins', sans-serif;
-				
-			}
-			
-			.name-logo h1 {
-				font-size: 60px;
-			}
-			
-			.name-logo span  {
-				color: #11766d;
-			}
-			
-			.ui-button {
-				border: 0px solid #292522 !important;
-				background-color: #292522 !important;
-			}
-			
-			.ui-button:hover {
-				border: 0px solid #292522 !important;
-				background-color: #292522 !important;
-			}
-			
-			a {
-				color: #292522;
-			}
-			
-			.div-by {	
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				position: fixed;
-				bottom: 0;
-			}
-			
-			.div-by p {
-				font-size: 20px;
-				margin-right: 20px;
-			}
-			
-			.by-logo {
-			    width: 100px;
-			    height: 55px;
-			}
-		</style>
+		<link rel="shortcut icon" href="ico.ico" type="image/x-icon" />
+		<title>InvestMe - Login</title>
 	</h:head>
 	
 	<f:view locale="#{MBAppConfigs.language}" id="view-locale">
 		<h:body>
-			<p:growl id="growl" showDetail="true" />
-			<h:form>
-				<div class="name-logo">
-					<h1>Invest<span>Me</span></h1>
+			<h:outputStylesheet library="css" name="access.css" />
+			<h:outputStylesheet library="css" name="/colors/light/colors.css" />
+			<h:outputStylesheet library="css" name="/colors/light/theme-light.css" />
+			<h:outputStylesheet library="css" name="/alignments/alignments.css" />
+			
+			<div class="infos-left-side" />
+			
+			<div class="form-right-side">
+				<div class="logo">
+					<img src="/investme/resources/images/logo.png" />
 				</div>
-				<p:inputText 
-					placeholder="User"
-					value="#{MBclient.client.name}" />
 				
-				<p:password 
-					placeholder="Password"
-					value="#{MBclient.password}" />
+				<h:form>
+					<p:messages 
+						id="messages"
+						showDetail="false"
+						showIcon="false"
+						autoUpdate="true"
+						style="width: 100%;"/>
 				
-				<p:commandButton 
-					value="Logar"
-					action="#{MBclient.validateAccess()}"
-					update="growl" />
-				
-				<a href="/investme/register">Register Here</a>
-					<div class="div-by" >
-						<p>Developed By</p>
-						<a href="/portfolio/">
-							<h:graphicImage name="logo text.png" library="images" class="by-logo" />
-						</a>
+					<h1>#{label.login}</h1>
+					
+					<div class="search-group">
+						<p:outputLabel value="#{label.email}" for="email" />
+					    
+					    <span class="ui-input-icon-left">
+					        <i class="pi pi-envelope" />
+					        
+					        <p:inputText 
+					        	id="email" 
+					        	value="#{MBLogin.email}"
+					        	placeholder="#{label.enter_email}"
+					        	styleClass="field-login"
+					        	required="true"
+					        	requiredMessage="#{label.email_required}" />
+					    </span>
 					</div>
-			</h:form>
+					
+					<div class="search-group">
+						<p:outputLabel 
+							value="#{label.password}" 
+							for="password" />
+					   
+					    <span class="ui-input-icon-left">
+					        <i class="pi pi-lock" />
+					        
+					        <p:password 
+					        	id="password" 
+					        	value="#{MBLogin.password}"
+					        	placeholder="#{label.enter_password}"
+					        	toggleMask="true"
+					        	styleClass="field-login"
+					        	required="true"
+					        	requiredMessage="#{label.password_required}" />
+					    </span>
+					</div>
+					
+					<div class="horizontal-between">
+						<div class="search-group">
+							<div class="horizontal-left-center">
+								<p:selectBooleanCheckbox 
+									id="rememberMe"
+									value="#{MBLogin.rememberMe}"
+									styleClass="mg-r-5" />
+									
+								<p:outputLabel for="rememberMe" value="#{label.remember_me}"/>
+							</div>
+						</div>
+						
+						<div class="search-group">
+							<p:commandLink 
+								value="#{label.reset_password}" 
+								action="#{MBAppConfigs.redirectTo('/investme/register')}"/>
+						</div>
+					</div>
+					
+					<div class="search-group">
+						<p:commandButton 
+							value="#{label.login}" 
+							action="#{MBLogin.logar()}"
+							update="messages"
+							style="width: 100%" />
+					</div>
+				</h:form>
+				
+				<p:divider layout="horizontal" align="center" style="width: 200px;"/>
+				
+				<p:commandLink action="#{MBAppConfigs.redirectTo('/investme/register')}">
+					#{label.dont_have_account} <span>#{label.create_here}</span>
+				</p:commandLink>
+			</div>
 		</h:body>
 	</f:view>
 </html>

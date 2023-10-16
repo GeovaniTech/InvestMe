@@ -22,7 +22,7 @@ public class ManterReportTransaction extends AbstractManter implements IManterRe
 		sql.append(" AND T.typeTransaction = :typeTransaction ");
 		
 		List<Transaction> transactions = em.createQuery(sql.toString(), Transaction.class)
-										 .setParameter("client", getClient().getName())
+										 .setParameter("client", getClient().getEmail())
 										 .setParameter("typeTransaction", reportType)
 										 .getResultList();
 		

@@ -38,9 +38,9 @@ public class MBType extends AbstractBean {
 			this.setDtoType(new TOType());
 			
 			updateTypes();
-			msg.saveSuccessfully();
+
 		} else {
-			msg.emptyValues();
+			
 		}
 	}
 	
@@ -49,9 +49,9 @@ public class MBType extends AbstractBean {
 			this.getDaoType().remove(to);
 			
 			updateTypes();
-			msg.removeSuccessfully();
+
 		} catch (Exception e) {
-			msg.emptyValues();
+
 		}
 		
 	}

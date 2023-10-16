@@ -24,7 +24,7 @@ public class ManterExpenditure extends AbstractManter implements IManterExpendit
 	@Override
 	public Double spents() {
 		return em.createQuery(sql.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -34,7 +34,7 @@ public class ManterExpenditure extends AbstractManter implements IManterExpendit
 		filters.append(" AND T.typeActive.name = 'Recreation' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -44,7 +44,7 @@ public class ManterExpenditure extends AbstractManter implements IManterExpendit
 		filters.append(" AND T.typeActive.name = 'Market' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -54,7 +54,7 @@ public class ManterExpenditure extends AbstractManter implements IManterExpendit
 		filters.append(" AND T.typeActive.name = 'Ifood' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 	
@@ -64,7 +64,7 @@ public class ManterExpenditure extends AbstractManter implements IManterExpendit
 		filters.append(" AND T.typeActive.name = 'Others' ");
 		
 		return em.createQuery(sql.toString() + filters.toString(), Double.class)
-				.setParameter("client", getClient().getName())
+				.setParameter("client", getClient().getEmail())
 				.getSingleResult();
 	}
 
