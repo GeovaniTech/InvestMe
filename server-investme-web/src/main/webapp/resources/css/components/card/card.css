@@ -1,0 +1,18 @@
+.card-insights-orders {
+	padding: 10px 15px;
+	border-radius: 10px;
+	background-color: var(--background-general);
+	min-width: 200px;
+	margin: 10px 10px; 
+	margin-bottom: 20px;
+}
+
+.card-insights-orders p {
+	font-size: 23px;
+}
+
+.icon-insights {
+	color: var(--text-mouse);
+	font-size: 25px !important;
+	margin-top: 8px;
+}

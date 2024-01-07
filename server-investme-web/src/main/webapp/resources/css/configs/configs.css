@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#menu-configs {
+	background-color: var(--background-general-mouse);
+	color: var(--text-mouse);
+}
+
+#menu-configs > span {
+	color: var(--text-mouse);
+}
+
+.align-options {
+	margin-right: 30px;
+}
+
+.horizontal-left {
+	align-items: flex-start;
+}

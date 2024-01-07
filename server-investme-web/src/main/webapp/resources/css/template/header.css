@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+/* ############## TOP HEADER ############## */
+
+h1, h1 a, h1 span {
+	font-size: 50px !important; 
+}
+
+.top-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--background-general);
+	width: 100%;
+	height: 65px;
+	position: fixed;
+	top: 0px;
+	padding-left: 250px;
+	transition: 0.4s;
+	overflow: hide;
+	z-index: 1;
+}
+
+.top-header span {
+	transition: 0.4s;
+	cursor: pointer;
+}
+
+.btn-menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.btn-menu span {
+	font-size: 40px !important;
+	margin: 10px;
+	color: var(--text);
+	transition: 0.4s;
+}
+
+.btn-menu span:hover {
+	color: var(--text-mouse);
+}
+
+.name-page {
+	font-size: 20px;
+	color: var(--text);
+}
+
+/* ############## LEFT HEADER ############## */
+
+.header {
+	width: 250px;
+	left:0;
+	transition: 0.4s;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	background-color: var(--background-general);
+	text-align: center;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	font-family: 'Poppins', sans-serif;
+	z-index: 2;
+	overflow: hidden;
+}
+
+.logo {
+	height: 65px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 1px solid var(--bottom-row-table);
+	color: var(--text) !important;
+}
+
+.logo a {
+	color: var(--text) !important;
+}
+
+.menu {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+	margin-top: 5px;
+}
+
+.menu a {
+	width: 90%;
+	padding: 10px;
+	padding-left: 12px;
+	color: var(--text);
+	transition: 0.4s;
+	font-size: 18px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-radius: 10px;
+	margin: 5px;
+	text-decoration: none !important;
+	font-family: 'Poppins', sans-serif !important;
+}
+
+.menu a span {
+	transition: 0.4s;
+}
+
+.menu a:hover {
+	color: var(--text-mouse);
+	background-color: var(--background-general-mouse);
+}
+
+.menu a:hover span {
+	color: var(--text-mouse);
+}
+
+.google-icons {
+	font-size: 30px !important;
+	margin-right: 10px;
+	color: var(--text);
+}
+
+.google-icons:hover {
+	color: var(--text-mouse);
+}
+
+@media (max-width: 600px) {
+	.body {
+		margin-left: 10px !important;
+	}
+}

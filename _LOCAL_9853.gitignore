@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # BUILD
-=======
-tar# BUILD
->>>>>>> main
 target
 targe-eclipse
 
@@ -22,10 +18,6 @@ targe-eclipse
 .metadata
 bin
 .tern-project
-<<<<<<< HEAD
 /target/
 persistence.xml
 src/main/resources/META-INF/persistence.xml
-=======
-/target/
->>>>>>> main

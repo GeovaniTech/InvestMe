@@ -1,0 +1,21 @@
+tar# BUILD
+target
+targe-eclipse
+
+# IDEA
+.iml
+.ipr
+.iws
+.idea
+
+# ECLIPSE
+
+.classpath
+.project
+.settings
+.checkstyle
+.fbprefs
+.metadata
+bin
+.tern-project
+/target/

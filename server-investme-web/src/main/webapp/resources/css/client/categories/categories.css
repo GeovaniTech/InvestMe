@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#menu-categories {
+	background-color: var(--background-general-mouse);
+	color: var(--text-mouse);
+}
+
+#menu-categories > * {
+	color: var(--text-mouse);
+}

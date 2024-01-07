@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+
+	<composite:interface>
+		<composite:attribute name="id" />
+		<composite:attribute name="widgetVar" />
+		<composite:attribute name="header" />
+		<composite:attribute name="dynamic" />
+		<composite:attribute name="resizable" />
+		<composite:attribute name="draggable" />
+		<composite:attribute name="position" />
+		<composite:attribute name="modal" />
+		<composite:attribute name="width" />
+		<composite:attribute name="onHide" />
+		<composite:attribute name="onShow" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<p:dialog 
+			id="#{cc.attrs.id}" 
+			widgetVar="#{cc.attrs.widgetVar}"
+			header="#{cc.attrs.header}" 
+			dynamic="#{cc.attrs.dynamic}"
+			resizable="#{cc.attrs.resizable}" 
+			draggable="#{cc.attrs.draggable}"
+			position="#{cc.attrs.position}" 
+			modal="#{cc.attrs.modal}"
+			width="#{cc.attrs.width}"
+			onHide="#{cc.attrs.onHide}"
+			onShow="#{cc.attrs.onShow}">
+	
+			<p:scrollPanel 
+				mode="native" 
+				style="max-height: 80vh; width: 100%;">
+	
+				<h:form id="formMessages">
+		        	<p:messages 
+		        		id="messages" 
+		        		autoUpdate="true" 
+		        		style="width: 100%;"
+		        		showIcon="false"
+		        		showDetail="false" />
+				</h:form>
+				
+				<composite:insertChildren />
+			</p:scrollPanel>
+		</p:dialog>
+	</composite:implementation>
+</html>

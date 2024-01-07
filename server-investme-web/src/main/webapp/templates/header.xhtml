@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<h:body>
+		<h:outputStylesheet library="css" name="/template/header.css" />
+		<h:outputStylesheet library="css" name="/configs/configs.css" />
+		
+		<div class="top-header" id="top-header">
+			<div class="left-items horizontal-center">
+				<div class="btn-menu" onclick="openMenu();">
+					<span class="material-symbols-outlined">
+						menu
+					</span>
+				</div>
+				
+				<div class="name-page">
+					<ui:insert name="name_page" />
+				</div>
+			</div>
+			
+			<div class="right-items horizontal-center">
+				<p:commandLink id="my_account" style="text-decoration: none;">
+					<div class="horizontal-center">
+						<span class="material-symbols-outlined google-icons">
+							account_circle
+						</span>
+					</div>			
+				</p:commandLink>
+			
+				<div class="horizontal-center">
+					<span class="material-symbols-outlined google-icons">
+						notifications
+					</span>
+				</div>
+				
+				<div class="horizontal-center">
+					<p:commandLink
+						id="options"
+						style="text-decoration: none;"
+						styleClass="horizontal-center">
+						
+						<span class="material-symbols-outlined google-icons">
+							settings
+						</span>
+					</p:commandLink>
+				</div>
+			</div>
+		</div>
+		
+		<div class="header" id="header">
+			<h:form id="formLogo">
+				<div class="logo" jsf:id="logo">
+					<a href="/investme/client/home" style="display: flex;"><img src="#{MBAppConfigs.appConfigs.darkMode ? '/investme/resources/images/logo-dark.png' : '/investme/resources/images/logo-investme.png'}" style="width: 210px;" /></a>
+				</div>
+			</h:form>
+			
+			<p:scrollPanel
+				mode="native" 
+				style="max-height: calc(100vh - 60px); width: 100%;">
+				
+				<div class="menu" id="menu">
+					<p:commandLink
+						id="menu-home"
+						action="#{MBAppConfigs.redirectTo('/investme/client/home')}">
+						
+						<span class="material-symbols-outlined google-icons">
+							home
+						</span>
+						
+						#{label.home}					
+					</p:commandLink>					
+					
+					<p:commandLink
+						id="menu-investments"
+						action="#{MBAppConfigs.redirectTo('/investme/client/investments')}">
+						
+						<span class="material-symbols-outlined google-icons">
+							trending_up
+						</span>
+						
+						#{label.investments}					
+					</p:commandLink>
+					
+					<p:commandLink 
+						id="menu-expenditures"
+						action="#{MBAppConfigs.redirectTo('/investme/client/expenditures')}">
+						
+						<span class="material-symbols-outlined google-icons">
+							trending_down
+						</span>
+						
+						#{label.expenditures}
+					</p:commandLink>
+					
+					<p:commandLink 
+						id="menu-categories"
+						action="#{MBAppConfigs.redirectTo('/investme/client/categories')}">
+						
+						<span class="material-symbols-outlined google-icons">
+							category
+						</span>
+						
+						#{label.categories}
+					</p:commandLink>
+					
+					<p:commandLink 
+						id="menu-payments"
+						action="#{MBAppConfigs.redirectTo('/investme/client/payments')}">
+						
+						<span class="material-symbols-outlined google-icons">
+							money
+						</span>
+						
+						#{label.payments}
+					</p:commandLink>
+				</div>
+			</p:scrollPanel>
+		</div>
+		
+		<ui:include src="overlayOptions.xhtml" />
+		<ui:include src="overlayMyAccount.xhtml" />
+		<script src="/investme/resources/js/menu.js"/>	
+	</h:body>
+</html>

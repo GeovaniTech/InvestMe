@@ -1,0 +1,340 @@
+@charset "UTF-8";
+
+/* #################### SELECTONEMENU #################### */
+
+.ui-selectonemenu > * {
+	color: var(--text-mouse) !important;
+}	
+
+.ui-selectonemenu {
+	border-color: var(--background-general) !important;
+	background-color: var(--background-general) !important;	
+}
+
+.ui-selectonemenu-items {
+	background-color: var(--background-general) !important;
+}
+
+.ui-selectonemenu-item {
+	color: var(--text) !important;
+	background-color: var(--background-general) !important;	
+}
+
+.ui-selectonemenu-item:hover {
+	color: var(--text-mouse) !important;
+	background-color: var(--background-general-mouse) !important;	
+}
+
+.ui-selectonemenu .ui-inputfield {
+	height: 39px !important;
+}
+
+.ui-selectonemenu-trigger {
+	background-color: var(--background-general-mouse) !important;	
+}
+
+/* #################### BUTTON #################### */
+
+.ui-button {
+	color: white !important;
+	background-color: var(--blue) !important;
+	border-color: var(--blue) !important;
+}
+
+.ui-button:hover {
+ 	border-color: var(--blue-mouse) !important;
+	background-color: var(--blue-mouse) !important;
+}
+
+.optionsButtonStyle {
+	background-color: var(--background-general) !important;
+	border-color: transparent !important;
+	border-radius: 20px !important;
+	transition: 0.4s !important;
+	color: var(--text-mouse) !important;	
+	padding: 5px !important;
+}
+
+ .ui-button.ui-button-icon-only .ui-button-text {
+	padding: 0px !important;	
+}
+
+.optionsButtonStyle:hover {
+	border-color: transparent !important;
+	background-color: var(--background-general-mouse) !important;
+}
+
+.deleteStyle {
+	background-color: red !important;
+	border-color: red !important;
+	transition: 0.4s !important;
+}
+
+.deleteStyle:hover {
+	background-color: rgb(217, 115, 115) !important;
+	border-color: rgb(217, 115, 115) !important;
+}
+
+.secondary-bt {
+	background-color: var(--background-general) !important;
+	border-color: transparent !important;
+	transition: 0.4s !important;
+	color: var(--text-mouse) !important;	
+}
+
+.secondary-bt:hover {
+	border-color: transparent !important;
+	background-color: var(--background-general-mouse) !important;
+}
+
+.disableStyle {
+    background-color: #fbc02d !important;
+    color: #212529 !important;
+    border: 1px solid #fbc02d !important;
+}
+
+.disableStyle:hover {
+    background-color: #fab710 !important;
+    color: #212529 !important;
+    border-color: #fab710 !important;
+}
+/* #################### DIALOG #################### */
+
+.ui-dialog {
+  	position: absolute;
+ 	top: 50%;
+  	left: 50%;
+ 	transform: translate(-50%, -50%); 
+ 	min-width: 520px !important;
+ 	max-width: 100vw !important;
+}
+
+.ui-dialog-titlebar {
+	padding: 5px !important;
+	color: var(--text) !important;
+	background-color: var(--background-body) !important;
+}
+
+.ui-dialog-content {
+	padding: 5px !important;
+	background-color: var(--background-general) !important;
+}
+
+@media (max-width: 600px) {
+	.ui-dialog {
+	  	position: absolute;
+	 	top: 50%;
+	  	left: 50%;
+	 	transform: translate(-50%, -50%); 
+	 	min-width: 0px !important;
+	}
+}
+
+/* #################### INPUTEXT/INPUTFIELD #################### */
+
+.ui-inputtext, .ui-inputfield {
+    font-size: 16px !important;
+    padding: 8px !important;
+    background-color: var(--background-general-mouse) !important;
+    border: 1px solid var(--border-radius) !important;
+    border-radius: 5px !important;
+    outline: none !important;
+    color: var(--text-mouse) !important;
+}
+
+@media (max-width: 600px) {
+	.ui-inputtext, .ui-inputfield {
+		width: 150px !important;
+	}
+}
+
+/* #################### DATAPICKER #################### */
+
+.ui-datepicker-header, .ui-datepicker {
+	background-color: var(--background-general-mouse) !important;
+	color: var(--text-mouse) !important;
+}
+
+body .ui-datepicker .ui-datepicker-calendar td>a, body .ui-datepicker .ui-datepicker-calendar td>span {
+	color: var(--text);
+}
+
+.ui-datepicker-today > a {
+	color: var(--text) !important;
+}
+
+/* #################### INPUTTEXTAREA #################### */
+
+.ui-inputtextarea {
+	color: var(--text-mouse) !important;
+	border-color: var(--background-general-mouse) !important;
+	background-color: var(--background-general-mouse) !important;
+}
+
+/* #################### FILEUPLOAD #################### */
+
+.ui-fileupload-buttonbar {
+	border-color: var(--background-general-mouse) !important;
+	background-color: var(--background-general-mouse) !important;	
+}
+
+ .ui-scrollpanel {
+	border-color: var(--background-general) !important;
+	background-color: var(--background-general) !important;	
+  	padding: 5px !important;
+ 	margin: 0px !important;
+}
+
+.ui-fileupload-content {
+	border-color: var(--second-color-widget) !important;
+	background-color: var(--second-color-widget) !important;
+	
+}
+.ui-fileupload-content div {
+	color: var(--text-mouse) !important;
+}
+
+/* #################### DATATABLE #################### */
+
+.ui-datatable {
+	overflow-x: auto !important;
+}
+
+.ui-datatable thead th {
+	background-color: var(--background-general) !important;
+	color: var(--text) !important;	
+	border: 0px !important;
+	width: 275px;
+}
+
+.ui-datatable tbody td {
+	width: 275px;
+}
+
+.ui-datatable .ui-datatable-data > tr.ui-state-highlight, .ui-datatable .ui-datatable-data tr.ui-state-highlight:hover {
+	background-color: var(--blue-mouse) !important;
+	color: white !important;
+}
+
+.ui-datatable .ui-datatable-data > tr {
+	background-color: var(--second-color-widget) !important;
+	color: var(--text) !important;	
+	border-color: var(--bottom-row-table) !important;
+}
+
+.ui-datatable .ui-datatable-data .ui-state-hover {
+	background-color: var(--background-general-mouse) !important;
+	color: var(--text-mouse) !important;	
+	border-color: var(--bottom-row-table) !important;
+}
+
+.ui-datatable .ui-paginator-page.ui-state-active	 {
+	background-color: var(--blue) !important;
+	color: #FFFFFF !important;
+}
+
+.ui-datatable .ui-paginator-top {
+	padding: 10px 0px !important;
+	background-color: var(--background-general) !important;
+	border-bottom: 1px solid var(--bottom-row-table) !important;
+	display: flex;
+	align-items: flex-start;
+}
+
+/* #################### TABVIEW/TABS #################### */
+
+.ui-tabs {
+	background-color: var(--background-general) !important;
+	color: var(--blue) !important;
+}
+
+.ui-tabs-nav:before {
+	border-color: gray !important;
+}
+
+.ui-tabs-header {
+	border-color: gray !important;
+	background-color: var(--background-general) !important;
+}
+
+.ui-tabs-header:hover {
+	border-color: var(--text-mouse) !important;
+}
+
+.ui-tabs-nav {
+	background-color: var(--background-general) !important;
+	border-color: var(--blue) !important;
+}
+
+.ui-tabs-panel {
+	border-color: var(--second-color-widget) !important;
+	background-color: var(--second-color-widget) !important;	
+}
+
+.ui-tabs-selected a {
+	color: var(--text-mouse) !important;	
+}
+
+.ui-tabs-selected {
+	border-color: var(--text-mouse) !important;
+}
+
+.ui-state-hover a {
+	color: var(--text-mouse) !important;
+}
+
+/* #################### MESSAGES #################### */
+
+.ui-messages > div  {
+	padding: 10px !important;
+}
+
+/* #################### RATING #################### */
+
+.ui-rating > input {
+	color: var(--blue) !important;
+}
+
+/* #################### OVERLAYPANEl #################### */
+.ui-overlaypanel {
+	background-color: var(--background-general) !important;
+}
+
+/* #################### TOOLBAR #################### */
+.ui-toolbar {
+	margin-top: 15px !important; 
+	padding: 5px !important;
+	background-color: var(--background-general-mouse) !important;
+	border-color: var(--background-general-mouse) !important;
+}
+
+/* #################### ORDERLIST #################### */
+.ui-orderlist, .ui-orderlist-caption {
+	color: var(--text-mouse) !important;
+	background-color: var(--background-general) !important;
+	border-color: var(--background-general) !important;
+}
+
+.ui-orderlist-list {
+	background-color: var(--second-color-widget) !important;
+	border-color: var(--second-color-widget) !important;
+	color: var(--text-mouse) !important;
+}
+
+.ui-orderlist-item:hover, .ui-state-highlight {
+	background-color: var(--blue) !important;
+	color: var(--white) !important;
+}
+
+/* #################### AccordionPanel #################### */
+.ui-accordion-header {
+	background-color: var(--background-general-mouse) !important;
+	border-color: var(--background-general-mouse) !important;
+	color: var(--text) !important;
+}
+
+.ui-accordion-content {
+	background-color: var( --second-color-widget) !important;
+	border-color: var(--second-color-widget) !important;
+	color: var(--text) !important;
+}

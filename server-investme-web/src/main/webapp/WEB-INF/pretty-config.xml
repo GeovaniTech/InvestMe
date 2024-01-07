@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config
+	xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<!-- INIT LOGIN -->
+
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/htdocs/home/login.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="loginMessage">
+		<pattern value="/login/#{messageParam}" />
+		<view-id value="/htdocs/home/login.xhtml?messageParam=#{messageParam}" />
+	</url-mapping>
+	
+	<url-mapping id="register">
+		<pattern value="/register" />
+		<view-id value="/htdocs/home/register.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="registerToken">
+		<pattern value="/register/#{finished}" />
+		<view-id value="/htdocs/home/register.xhtml?finished=#{finished}" />
+	</url-mapping>
+	
+	<url-mapping id="newPassword">
+		<pattern value="/newpassword/#{token}" />
+		<view-id value="/htdocs/home/new_password.xhtml?token=#{token}" />
+	</url-mapping>
+	
+	<url-mapping id="home">
+		<pattern value="/client/home" />
+		<view-id value="/htdocs/client/home/home.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="investments">
+		<pattern value="/client/investments" />
+		<view-id value="/htdocs/client/investments/investments.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="expenditures">
+		<pattern value="/client/expenditures" />
+		<view-id value="/htdocs/client/expenditures/expenditures.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="categories">
+		<pattern value="/client/categories" />
+		<view-id value="/htdocs/client/categories/categories.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="payments">
+		<pattern value="/client/payments" />
+		<view-id value="/htdocs/client/payments/payments.xhtml" />
+	</url-mapping>
+</pretty-config>

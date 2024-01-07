@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<h:body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="name_page">
+			<h:outputText value="#{label.expenditures}" />
+		</ui:define>
+
+		<ui:define name="body">
+			<h:outputStylesheet library="css" name="/client/expenditures/expenditures.css" />
+			
+			<h:form id="formExpenditures">
+				<p:remoteCommand 
+					name="updateTableAndCards"
+					update="formExpenditures:cards, formExpenditures:tableExpenditures"/>
+									
+				<div jsf:id="cards" class="horizontal-left-center wrap">
+					<ui:repeat var="category" value="#{MBExpense.categories}">
+						<components:card 
+							title="#{category.name}"
+							value="#{MBAppConfigs.getBrazilianCurrency(MBExpense.getTotalSpentByCategory(category))}"
+							primefacesIcon="#{category.icon}"/>
+					</ui:repeat>
+				</div>
+				
+				<div class="top-buttons mg-b-10">
+					<p:commandButton 
+						id="btnInitNewExpenditure"
+						action="#{MBExpense.initExpense()}"
+						oncomplete="PF('dialogTransactionInfoVW').show();"
+						icon="pi pi-plus" 
+						styleClass="optionsButtonStyle mg-r-5" />
+
+					<p:commandButton 
+						id="btnFiltersTransactions"
+						icon="pi pi-filter" 
+						styleClass="optionsButtonStyle mg-r-10" />
+				</div>
+				
+				<p:overlayPanel id="overlayFilters" for="btnFiltersTransactions">
+					<div class="horizontal-left-center">
+						<div class="search-group">
+							<components:inputFilter 
+								label="#{label.active}"
+								toInputFilter="#{MBExpense.filter.active}" />
+						</div>
+						
+						<div class="search-group">
+							<components:dateRange 
+								label="#{label.purchase_date}"
+								toInputDateFilter="#{MBExpense.filter.datePurchase}" />
+						</div>
+					</div>
+					
+					<div class="horizontal-left-center">
+						<div class="search-group">
+							<components:numberRange 
+								label="#{label.price}"
+								toInputNumberFilter="#{MBExpense.filter.price}" />
+						</div>
+						
+						<div class="search-group">
+							<p:outputLabel for="category" value="#{label.category}" />
+							<p:selectOneMenu 
+								id="category"
+								value="#{MBExpense.filter.idCategory}"
+								style="width: 200px;">
+							
+								<f:selectItem 
+									itemLabel="#{label.all}" 
+									itemValue="#{null}"/>							
+								
+								<f:selectItems 
+									var="category"
+									value="#{MBExpense.categories}"
+									itemLabel="#{category.name}"
+									itemValue="#{category.id}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="search-group">
+							<p:outputLabel for="payment" value="#{label.payment}" />
+							<p:selectOneMenu 
+								id="payment"
+								value="#{MBExpense.filter.idPayment}"
+								style="width: 200px;">
+								
+								<f:selectItem 
+									itemLabel="#{label.all}" 
+									itemValue="#{null}"/>
+								
+								<f:selectItems 
+									var="payment"
+									value="#{MBExpense.payments}"
+									itemLabel="#{payment.name}"
+									itemValue="#{payment.id}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton 
+								id="btnSearchResults" 
+								icon="pi pi-search"
+								value="#{label.search}"
+								update="@form"
+								onclick="PF('tableExpendituresVW').filter();" 
+								styleClass="mg-r-5" />
+
+							<p:commandButton 
+								icon="pi pi-filter-slash"
+								value="#{label.clear_filters}" 
+								action="#{MBExpense.clearFilters}"
+								update="@form" />
+						</f:facet>
+					</p:toolbar>
+				</p:overlayPanel>
+				
+				<p:dataTable
+					id="tableExpenditures"
+					var="to" 
+					widgetVar="tableExpendituresVW"
+					value="#{MBExpense.results}"
+					rowKey="#{to.id}"
+					rows="20"
+					paginator="true" 
+	               	paginatorPosition="top"
+	                lazy="true"
+	                selection="#{MBExpense.expense}"
+	                selectionMode="single">
+	                
+	                <p:ajax 
+	                	event="rowSelect" 
+	                	listener="#{MBExpense.onRowSelect}"
+	                	oncomplete="PF('dialogTransactionInfoVW').show();" />
+					
+					<p:column headerText="#{label.active}">
+						<h:outputText value="#{to.active}"/>
+					</p:column>
+					
+					<p:column headerText="#{label.purchase_date}">
+						<h:outputText value="#{to.datePurchase}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{label.total}">
+						<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(to.price * to.amount)}" />
+					</p:column>
+					
+					<p:column headerText="#{label.price}">
+						<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(to.price)}" />
+					</p:column>
+					
+					<p:column headerText="#{label.amount}">
+						<h:outputText value="#{to.amount}" />
+					</p:column>
+					
+					<p:column headerText="#{label.category}">
+						<h:outputText value="#{to.category.name}" />
+					</p:column>
+					
+					<p:column headerText="#{label.payment}">
+						<h:outputText value="#{to.payment.name}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			
+			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

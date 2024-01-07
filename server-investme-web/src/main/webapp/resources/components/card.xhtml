@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+	<composite:interface>
+		<composite:attribute name="title" />
+		<composite:attribute name="value" />
+		<composite:attribute name="primefacesIcon" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<h:outputStylesheet library="css" name="/components/card/card.css" />
+	
+		<div class="card-insights-orders horizontal-between">
+			<div class="vertical-left">
+				<h3>#{cc.attrs.title}</h3>
+				
+				<span class="material-symbols-outlined google-icons icon-insights">
+					#{cc.attrs.primefacesIcon}
+				</span>
+			</div>
+			
+			<p:divider layout="vertical" />
+			
+			<div class="vertical-right">
+				<p>#{cc.attrs.value}</p>
+			</div>
+		</div>
+	</composite:implementation>
+</html>

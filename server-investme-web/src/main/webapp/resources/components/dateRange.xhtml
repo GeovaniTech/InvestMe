@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+	<composite:interface>
+		<composite:attribute name="toInputDateFilter" />
+		<composite:attribute name="label" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<style>
+			.input-width > * {
+				width: 200px;
+				height: 39px !important;
+			}
+		</style>
+		<p>#{cc.attrs.label}</p>
+		<div class="horizontal-center-left">
+			<p:calendar
+				value="#{cc.attrs.toInputDateFilter.from}"
+				pattern="dd/MM/yyyy HH:mm"
+				styleClass="input-width" />
+			
+			<div class="p-to-from">
+				<p>#{label.to}</p>
+			</div>
+			
+			<p:calendar
+				value="#{cc.attrs.toInputDateFilter.to}"
+				styleClass="input-width"
+				pattern="dd/MM/yyyy HH:mm"
+				defaultHour="23"
+				defaultMinute="59" />
+		</div>
+	</composite:implementation>	
+</html>
