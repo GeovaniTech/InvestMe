@@ -55,9 +55,9 @@ public class MBAppConfigs extends AbstractMBean {
 	
  	public boolean getConfigsFromCookies() {
  		this.getAppConfigs().setDarkMode(CookieUtil.getDarkModeCookie());
- 		boolean showValuesStartUp = CookieUtil.getShowCardValuesOnStartUp();
+ 		this.getAppConfigs().setShowCardValuesStartUp(CookieUtil.getShowCardValuesOnStartUp());
  		
- 		if(showValuesStartUp) {
+ 		if(this.getAppConfigs().isShowCardValuesStartUp()) {
  	 		this.getAppConfigs().setShowCardValues(true);
  		}
  		
