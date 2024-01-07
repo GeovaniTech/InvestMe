@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+:root {
+    --brown: #2F1F10;
+    --brown-mouse: #352415;
+    --green: #5e8c6a;
+    --green-mouse: #70997b;
+	--blue: #027DFC;
+    --blue-mouse: #429af4;
+    --border-radius: #272A30; 
+    --second-color-widget: rgb(30, 32, 36);
+    --bottom-row-table: #383b3e;
+	
+	--text: rgb(232, 232, 232);
+	--text-mouse: #ffffff;
+	--background-general: #1A1C1E;
+	--background-general-mouse: #272A30;
+	--background-body: #111315;
+	--landing-page: #1A1C1E;
+}	

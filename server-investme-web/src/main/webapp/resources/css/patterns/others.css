@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Poppins&display=swap');
+
+* {
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--background-body);
+	overflow-x: hidden;
+}
+
+.ui-toggleswitch .ui-toggleswitch-checked>* {
+	color: black !important;
+}
+
+.body {
+	margin: 10px;
+	margin-top: 75px;
+	margin-left: 260px;
+	transition: 0.4s;
+}
+
+h2 {
+	color: var(--text-mouse);
+}
+
+.general-dialog-forms>* {
+	margin-bottom: 5px !important;
+	width: 100% !important;
+}
+
+.form-top-buttons>* {
+	margin-right: 5px !important;
+}
+
+.hide-filters .ui-column-customfilter {
+	display: none;
+	overflow-x: auto !important;
+}
+
+.toggleFilter {
+	width: 20px !important;
+}
+
+.toggleFilter button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.toggleFilter a {
+	margin: 0px;
+	padding: 0px;
+}
+
+.toggleFilter i {
+	font-size: 25px;
+	margin-top: 5px;
+	margin-left: 4px;
+
+	color: var(--text-mouse);
+}
+
+.ajax-loading,
+.ajax-loading:before {
+	height: 4px;
+	width: 100%;
+	margin: 0;
+}
+
+.ajax-loading {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 9999;
+	background-color: transparent;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.ajax-loading:before {
+	background-color: var(--blue-mouse);
+	content: '';
+	-webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+	animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@-webkit-keyframes running-progress {
+	0% {
+		margin-left: 0px;
+		margin-right: 100%;
+	}
+
+	50% {
+		margin-left: 25%;
+		margin-right: 0%;
+	}
+
+	100% {
+		margin-left: 100%;
+		margin-right: 0;
+	}
+}
+
+@keyframes running-progress {
+	0% {
+		margin-left: 0px;
+		margin-right: 100%;
+	}
+
+	50% {
+		margin-left: 25%;
+		margin-right: 0%;
+	}
+
+	100% {
+		margin-left: 100%;
+		margin-right: 0;
+	}
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	width: 12px;
+	box-shadow: inset 0 0 .3rem #00000050;
+	background-color: #fff;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: var(--blue);
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 719px) {
+	.ui-dialog {
+		width: 100% !important;
+	}
+}

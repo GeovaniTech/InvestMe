@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+
+<h:body>
+	<ui:composition>
+		<components:dialog
+			id="dialogTransactionInfo" 
+			widgetVar="dialogTransactionInfoVW"
+			header="#{label.transaction}"
+			onHide="updateTableAndCards();">
+			
+			<h:form id="formTransactionInfo">
+				<p:messages 
+	       			id="transactionInfoMessages" 
+	        		autoUpdate="true"
+	        		showIcon="false"
+	        		showDetail="false"
+	        		escape="false" />
+			
+				<div class="horizontal-left-center">
+					<div class="search-group">
+						<p:outputLabel for="name" value="#{label.active}" />
+						<p:inputText 	
+							id="name"
+							value="#{MBTransactionInfo.transaction.active}"
+							required="true"
+							requiredMessage="#{label.active_required}" />
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel for="price" value="#{label.price}" />
+						<p:inputNumber	
+							id="price"
+							value="#{MBTransactionInfo.transaction.price}"
+							required="true"
+							requiredMessage="#{label.price_required}"
+							decimalSeparator="," 
+							thousandSeparator="." 
+							pattern="#.##0,00"/>
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel for="amount" value="#{label.amount}" />
+						<p:inputNumber	
+							id="amount"
+							value="#{MBTransactionInfo.transaction.amount}"
+							required="true"
+							requiredMessage="#{label.amount_required}" />
+					</div>
+				</div>
+				
+				<div class="horizontal-left-center">
+					<div class="search-group">
+						<p:outputLabel for="purchaseDate" value="#{label.purchase_date}" />
+						<p:calendar 
+							id="purchaseDate"
+							value="#{MBTransactionInfo.transaction.datePurchase}"
+							maxlength="10"
+							mask="99/99/9999"
+							required="true"
+							requiredMessage="#{label.purchase_date_required}"
+							pattern="dd/MM/yyyy" />
+					</div>
+
+					<div class="search-group">
+						<p:outputLabel for="category" value="#{label.category}" />
+						<p:selectOneMenu
+							id="category"
+							value="#{MBTransactionInfo.idCategorySelected}"
+							style="width: 225px;"
+							required="true"
+							requiredMessage="#{labe.required_category}"
+							disabled="#{MBTransactionInfo.categories == null or MBTransactionInfo.categories.size() == 0}">
+							
+							<f:selectItems 
+								var="category"
+								value="#{MBTransactionInfo.categories}"
+								itemLabel="#{category.name}"
+								itemValue="#{category.id}" />
+						</p:selectOneMenu>
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel for="payment" value="#{label.payment}" />
+						<p:selectOneMenu
+							id="payment"
+							value="#{MBTransactionInfo.idPaymentSelected}"
+							style="width: 225px;"
+							required="true"
+							requiredMessage="#{labe.required_payment}"
+							disabled="#{MBTransactionInfo.payments == null or MBTransactionInfo.payments.size() == 0}">
+							
+							<f:selectItems 
+								var="payment"
+								value="#{MBTransactionInfo.payments}"
+								itemLabel="#{payment.name}"
+								itemValue="#{payment.id}" />
+						</p:selectOneMenu>
+					</div>
+				</div>
+				
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton
+							icon="pi pi-save" 
+							value="#{label.save}"
+							action="#{MBTransactionInfo.save}"
+							rendered="#{!MBTransactionInfo.editing}"
+							disabled="#{MBTransactionInfo.transaction == null}"
+							styleClass="mg-r-5"
+							update="@form" />
+							
+						<p:commandButton
+							icon="pi pi-save" 
+							value="#{label.save}"
+							action="#{MBTransactionInfo.change}"
+							rendered="#{MBTransactionInfo.editing}"
+							disabled="#{MBTransactionInfo.transaction == null}"
+							styleClass="mg-r-5"
+							update="@form" />
+							
+						<p:commandButton
+							icon="pi pi-trash" 
+							value="#{label.remove}"
+							action="#{MBTransactionInfo.remove}"
+							disabled="#{MBTransactionInfo.transaction == null or !MBTransactionInfo.editing}"
+							styleClass="deleteStyle"
+							oncomplete="PF('dialogTransactionInfoVW').hide();"
+							update="@form" />
+					</f:facet>
+				</p:toolbar>
+			</h:form>
+		</components:dialog>
+	</ui:composition>
+</h:body>
+</html>

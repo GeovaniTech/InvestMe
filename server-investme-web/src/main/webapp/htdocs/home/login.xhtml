@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+	
+	<h:head>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Login - InvestMe</title>
+		
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-brands/css/uicons-brands.css' />
+		<link href="https://fonts.googleapis.com/css2?family=Poppins&#38;display=swap" rel="stylesheet"></link>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+		<link rel="shortcut icon" href="/investme/resources/images/ico-investme.ico" type="image/x-icon" />
+		
+		<h:outputStylesheet library="css" name="/patterns/others.css" />
+		<h:outputStylesheet library="css" name="/patterns/texts.css" />
+		<h:outputStylesheet library="css" name="/patterns/alignments.css" />
+		<h:outputStylesheet library="css" name="/patterns/components-primefaces.css" />
+		<h:outputStylesheet library="css" name="/login/login.css" />
+		<h:outputStylesheet library="css" name="/colors/light-mode/colors.css" />
+		<h:outputStylesheet library="css" name="#{MBAppConfigs.appConfigs.darkMode ? '/colors/dark-mode/colors.css' : '/colors/light-mode/colors.css'}" />
+	</h:head>
+	
+	<h:body>	
+		<f:view locale="#{MBAppConfigs.appConfigs.language}" id="view-locale">	
+			<p:ajaxStatus>
+				<f:facet name="start">
+					<div class="ajax-loading" />
+				</f:facet>
+				
+				<f:facet name="complete" />
+			</p:ajaxStatus>
+			
+			<f:metadata>
+				<f:viewParam name="messageParam" value="#{MBLogin.messageParam}"></f:viewParam>
+			</f:metadata>
+
+			<h:form>
+				<p:remoteCommand 
+					autoRun="true"
+					action="#{MBLogin.showFinishedRegisterMessage()}"
+					update="formLogin:messages" />
+			</h:form>
+		
+			<div class="container">
+				<div class="logo horizontal-center">
+					<img src="#{MBAppConfigs.appConfigs.darkMode ? '/investme/resources/images/logo-dark.png' : '/investme/resources/images/logo-investme.png'}" style="width: 330px;" />
+				</div>
+				
+				<div class="center">
+					<h2>#{label.welcome}</h2>
+					
+					<h:form id="formLogin" class="form">
+			        	<p:messages 
+			        		id="messages" 
+			        		autoUpdate="true" 
+			        		style="width: 100%;"
+			        		showIcon="false"
+			        		showDetail="false" />
+			
+						<div>
+							<p:outputLabel for="email" value="#{label.email}"/>
+							<p:inputText 
+								id="email"
+								value="#{MBLogin.email}"
+								placeholder="#{label.email}"
+								required="true"
+								requiredMessage="#{label.email_required}"
+								styleClass="field mg-b-10" />
+						</div>
+						
+						<div>
+							<p:outputLabel for="password" value="#{label.password}"/>
+				            <p:password 
+	    						id="password"
+					           	value="#{MBLogin.password}"
+					           	required="true" 
+					           	requiredMessage="#{label.password_required}"
+					           	placeholder="#{label.password}"
+					           	toggleMask="true"
+					           	styleClass="field" />
+						</div>
+			
+			            <p:commandButton
+				           	id="btnRegister"
+				           	value="#{label.access}"
+				           	widgetVar="btnRegister"
+				           	action="#{MBLogin.logar()}"
+				           	update="messages"
+				           	styleClass="buttonClass mg-t-15 mg-b-10"
+				            style="width: 100%; margin-top: 15px !important; margin-bottom: 10px !important;" />
+				           	
+						<p:defaultCommand target="btnRegister" />
+					</h:form>						
+					
+					<div class="horizontal-between">
+						<p:commandLink 
+							value="#{label.register}"
+							action="#{MBAppConfigs.redirectTo('/investme/register')}" />
+					
+						<p:commandLink 
+							value="#{label.forgot_password}"
+							onclick="PF('dialog-forgot-password').show();" />
+					</div>
+				</div>
+							
+		        <div class="atendimento">
+		            <a href="https://bit.ly/preetechcontato" target="_blank"><i class="fi fi-brands-whatsapp"></i></a>
+		            <a href="https://www.instagram.com/_geovanitech" target="_blank"><i class="fi fi-brands-instagram"></i></a>
+		            <a href="https://github.com/GeovaniTech" target="_blank"><i class="fi fi-brands-github"></i></a>
+		        </div>
+		        
+     			<div class="horizontal-center version">
+					#{label.version}: #{MBAppConfigs.getSystemVersion()}
+				</div>
+			</div>   
+		
+	        <p:dialog
+	        	header="#{label.password}"
+	        	widgetVar="dialog-forgot-password"
+     			dynamic="true"
+				resizable="false"
+				draggable="false"
+				position="center"
+				modal="true"
+				width="300px">
+	        	
+	        	<h:form class="general-dialog-forms">
+			        <p:messages 
+		        		id="messagesForgotPassword" 
+		        		autoUpdate="true" 
+		        		style="width: 100%;"
+		        		showIcon="false"
+		        		showDetail="false" />
+	        		
+	        		<p class="mg-b-10">#{label.message_send_email_to_set_new_password}</p>
+	        		
+					<p:inputText 
+						value="#{MBLogin.email}" 
+						placeholder="#{label.email}"
+						required="true" 
+						requiredMessage="#{label.email_required}"
+						styleClass="mg-b-10"
+						style="width: 100% !important;" />
+
+					<p:commandButton 
+						value="#{label.send_email}"
+						action="#{MBLogin.validateSendNewPassword}" 
+						update="@form"
+						icon="pi pi-send" />
+	        	</h:form>
+	        </p:dialog>
+		</f:view>	
+	</h:body>
+</html>

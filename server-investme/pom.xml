@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.devpree</groupId>
+		<artifactId>investme</artifactId>
+		<version>1.0.X-SNAPSHOT</version>
+	</parent>
+	<artifactId>server-investme</artifactId>
+	<packaging>ear</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-web</artifactId>
+			<version>1.0.X-SNAPSHOT</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-business</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-utils</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<outputFileNameMapping>
+						@{artifactId}@@{dashClassifier?}@~@{version}@.@{extension}@</outputFileNameMapping>
+					<filtering>true</filtering>
+					<modules>
+						<webModule>
+							<groupId>br.com.devpree</groupId>
+							<artifactId>server-investme-web</artifactId>
+							<context-root>/investme</context-root>
+						</webModule>
+
+						<jarModule>
+							<groupId>br.com.devpree</groupId>
+							<artifactId>server-investme-business</artifactId>
+							<bundleDir>/</bundleDir>
+						</jarModule>
+
+						<jarModule>
+							<groupId>br.com.devpree</groupId>
+							<artifactId>server-investme-model</artifactId>
+							<bundleDir>/</bundleDir>
+						</jarModule>
+
+						<jarModule>
+							<groupId>br.com.devpree</groupId>
+							<artifactId>server-investme-utils</artifactId>
+							<bundleDir>/</bundleDir>
+						</jarModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

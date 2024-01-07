@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+	<h:body>
+		<p:overlayPanel for="options">
+			<p:remoteCommand 
+				autoRun="false" 
+				name="updateConfigs"
+				update="formLogo:logo"
+				action="#{MBAppConfigs.createCookiePreferences()}" />
+	
+			<div class="horizontal-left">
+				<div class="select-language align-options">
+					<h:form>
+						<h5>#{label.language}</h5>
+						<p:selectOneMenu 
+							value="#{MBAppConfigs.appConfigs.language}"
+							style="width: 200px;">
+	
+							<f:selectItems 
+								var="language" 
+								value="#{MBAppConfigs.localeList}"
+								itemLabel="#{language.language eq 'pt_br' ? label.portuguese : label.english}"
+								itemValue="#{language.language}" />
+							
+								<p:ajax 
+									render="all" 
+									listener="#{MBAppConfigs.refreshPage()}"
+									oncomplete="updateConfigs()" />
+						</p:selectOneMenu>
+					</h:form>
+				</div>
+	
+				<div class="select-theme align-options">
+					<h:form>
+						<h5>#{label.dark_mode}</h5>
+						<p:toggleSwitch 
+							value="#{MBAppConfigs.appConfigs.darkMode}"
+							onIcon="pi pi-sun" 
+							offIcon="pi pi-moon" 
+							styleClass="dark-mode">
+	
+							<p:ajax 
+								event="change" 
+								process="@form"
+								oncomplete="updateConfigs()" />
+						</p:toggleSwitch>
+					</h:form>
+				</div>
+			</div>
+		</p:overlayPanel>	
+	</h:body>
+</html>

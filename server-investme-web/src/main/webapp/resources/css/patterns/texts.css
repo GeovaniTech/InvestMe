@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+h1, h1 a, h1 span {
+    font-family: 'Grape Nuts', cursive;
+    font-size: 65px;
+    color: var(--text);
+    text-decoration: none;
+}
+
+h1 a span {
+    color: var(--green);
+    font-family: 'Grape Nuts', cursive;
+}
+
+h2, h3, h4, h5, p, h2, .label, label, a, #text {
+	color: var(--text);
+}
+
+h5 {
+	margin-bottom: 5px;
+}
+
+.label {
+	margin-top: 5px;
+}
+
+
+.p-to-from {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 5px;
+	margin-right: 5px;
+}

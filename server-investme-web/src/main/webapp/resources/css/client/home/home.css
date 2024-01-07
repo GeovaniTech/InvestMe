@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#menu-home {
+	background-color: var(--background-general-mouse);
+	color: var(--text-mouse);
+}
+
+#menu-home > * {
+	color: var(--text-mouse);
+}
+
+
+h2 {
+	margin: 10px 0px;
+}
+
+.row-expense > * {
+	color: red !important;	
+}
+
+.row-investment > * {
+	color: green !important;	
+}

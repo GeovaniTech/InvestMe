@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+
+<h:body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="name_page">
+			<h:outputText value="#{label.categories}" />
+		</ui:define>
+
+		<ui:define name="body">
+			<h:outputStylesheet library="css" name="/client/categories/categories.css" />
+			
+			<h:form id="formCategories">
+				<p:remoteCommand 
+					name="updateTableCategories"
+					update="formCategories:tableCategories"/>
+			
+				<div class="top-buttons mg-b-10">
+					<p:commandButton 
+						id="btnInitNewCategory"
+						action="#{MBCategory.initCategory}"
+						oncomplete="PF('dialogCategoryInfoVW').show();"
+						icon="pi pi-plus" 
+						styleClass="optionsButtonStyle mg-r-5" />
+						
+					<p:commandButton 
+						id="btnFiltersCategory"
+						icon="pi pi-filter" 
+						styleClass="optionsButtonStyle mg-r-10" />
+				</div>
+				
+				<p:overlayPanel id="overlayFilters" for="btnFiltersCategory">
+					<div class="horizontal-left-center">
+						<div class="search-group">
+							<components:inputFilter 
+								label="#{label.name}"
+								toInputFilter="#{MBCategory.filter.name}" />
+						</div>
+					</div>
+					
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton 
+								id="btnSearchResults" 
+								icon="pi pi-search"
+								value="#{label.search}"
+								update="@form"
+								onclick="PF('tableCategoriesVW').filter();" 
+								styleClass="mg-r-5" />
+
+							<p:commandButton 
+								icon="pi pi-filter-slash"
+								value="#{label.clear_filters}" 
+								action="#{MBCategory.clearFilters}"
+								update="@form" />
+							
+							<p:defaultCommand target="btnSearchResults" />
+						</f:facet>
+					</p:toolbar>
+				</p:overlayPanel>
+				
+				<p:dataTable
+					id="tableCategories"
+					var="toCategory" 
+					widgetVar="tableCategoriesVW"
+					value="#{MBCategory.results}"
+					rowKey="#{toCategory.id}"
+					rows="20"
+					paginator="true" 
+	               	paginatorPosition="top"
+	                lazy="true"
+	                selection="#{MBCategory.category}"
+	                selectionMode="single">
+	                
+	                <p:ajax 
+	                	event="rowSelect" 
+	                	listener="#{MBCategory.onRowSelect}"
+	                	oncomplete="PF('dialogCategoryInfoVW').show();" />
+					
+					<p:column headerText="#{label.name}">
+						<h:outputText value="#{toCategory.name}"/>
+					</p:column>
+					
+					<p:column headerText="#{label.icon}">
+						<h:panelGroup>
+							<span class="material-symbols-outlined google-icons">
+								#{toCategory.icon}
+							</span>
+						</h:panelGroup>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			
+			<ui:include src="/htdocs/client/categories/category_info.xhtml" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

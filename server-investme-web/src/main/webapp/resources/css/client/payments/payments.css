@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#menu-payments {
+	background-color: var(--background-general-mouse);
+	color: var(--text-mouse);
+}
+
+#menu-payments > * {
+	color: var(--text-mouse);
+}

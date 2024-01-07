@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+	<composite:interface>
+		<composite:attribute name="toInputFilter" type="to.TOInputFilter" />
+		<composite:attribute name="label" />
+		<composite:attribute name="mask" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<div class="vertical-left">
+			<p>#{cc.attrs.label}</p>
+			<div class="horizontal-top-left">
+				<p:selectOneMenu 
+					value="#{cc.attrs.toInputFilter.type}"
+					style="margin-right: 5px; width: 185px;">
+					
+					<f:selectItem 
+						itemLabel="#{label.contains}"
+						itemValue="contains" />
+						
+					<f:selectItem 
+						itemLabel="#{label.does_not_contain}"
+						itemValue="does not contain" />
+				</p:selectOneMenu>
+				
+				<p:inputMask
+					value="#{cc.attrs.toInputFilter.value}"
+					style="width: 222px; height: 39px !important;"
+					mask="#{cc.attrs.mask}" />
+			</div>
+		</div>
+	</composite:implementation>	
+</html>

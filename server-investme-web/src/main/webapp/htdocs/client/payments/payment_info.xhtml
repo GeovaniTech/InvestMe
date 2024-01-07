@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+
+<h:body>
+	<ui:composition>
+		<components:dialog
+			id="dialogPaymentInfo" 
+			widgetVar="dialogPaymentInfoVW"
+			header="#{label.payment}"
+			onHide="updateTablePayments();">
+			
+			<h:form id="formPaymentInfo">
+				<p:messages 
+	       			id="paymentInfoMessages" 
+	        		autoUpdate="true"
+	        		showIcon="false"
+	        		showDetail="false" />
+			
+				<div class="horizontal-left-center">
+					<div class="search-group">
+						<p:outputLabel for="name" value="#{label.name}" />
+						<p:inputText 	
+							id="name"
+							value="#{MBPaymentInfo.payment.name}"
+							required="true"
+							requiredMessage="#{label.name_required}" />
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel for="name" value="#{label.icon}" />
+						<p:inputText 	
+							id="icon"
+							value="#{MBPaymentInfo.payment.icon}"
+							required="true"
+							requiredMessage="#{label.icon_required}" />
+					</div>
+				</div>
+				
+				<a href="https://fonts.google.com/icons" target="_blank">#{label.see_icons}</a>
+				
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton
+							icon="pi pi-save" 
+							value="#{label.save}"
+							action="#{MBPaymentInfo.save}"
+							rendered="#{!MBPaymentInfo.editing}"
+							disabled="#{MBPaymentInfo.payment == null}"
+							styleClass="mg-r-5"
+							update="@form" />
+							
+						<p:commandButton
+							icon="pi pi-save" 
+							value="#{label.save}"
+							action="#{MBPaymentInfo.change}"
+							rendered="#{MBPaymentInfo.editing}"
+							disabled="#{MBPaymentInfo.payment == null}"
+							styleClass="mg-r-5"
+							update="@form" />
+							
+						<p:commandButton
+							icon="pi pi-trash" 
+							value="#{label.remove}"
+							action="#{MBPaymentInfo.remove}"
+							disabled="#{MBPaymentInfo.payment == null or !MBPaymentInfo.editing}"
+							styleClass="deleteStyle"
+							update="@form" />
+					</f:facet>
+				</p:toolbar>
+			</h:form>
+		</components:dialog>
+	</ui:composition>
+</h:body>
+</html>

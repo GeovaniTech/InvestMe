@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.devpree</groupId>
+		<artifactId>investme</artifactId>
+		<version>1.0.X-SNAPSHOT</version>
+	</parent>
+	<artifactId>server-investme-business</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.ejb</groupId>
+			<artifactId>jakarta.ejb-api</artifactId>
+			<version>4.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.3.1.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
+
+		<!-- INIT DEVPREE DEPENDENCIES -->
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-utils</artifactId>
+		</dependency>
+
+		<!-- END DEVPREE DEPENDENCIES -->
+	</dependencies>
+</project>

@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.devpree</groupId>
+		<artifactId>investme</artifactId>
+		<version>1.0.X-SNAPSHOT</version>
+	</parent>
+	<artifactId>server-investme-web</artifactId>
+	<packaging>war</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>13.0.0</version>
+			<classifier>jakarta</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>10.0.0.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>10.0.0.Final</version>
+		</dependency>
+
+		<!-- INIT DEVPREE DEPENDENCIES -->
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-business</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-utils</artifactId>
+		</dependency>
+
+		<!-- END DEVPREE DEPENDENCIES -->
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources/config</directory>
+				<filtering>true</filtering>
+				
+				<includes>
+					<include>app-config.properties</include>
+				</includes>
+			</resource>
+			
+		    <resource>
+		       <directory>src/main/resources</directory>
+		    </resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

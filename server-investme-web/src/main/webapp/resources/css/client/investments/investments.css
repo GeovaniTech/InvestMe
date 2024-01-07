@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#menu-investments {
+	background-color: var(--background-general-mouse);
+	color: var(--text-mouse);
+}
+
+#menu-investments > * {
+	color: var(--text-mouse);
+}
