@@ -1,39 +1,66 @@
-# InvestMe 
+# InvestMe
+A web system to centralize all your investments and expenses in one place
 
-> Status: In Tests☢️
 
-## About the project
-This project is a controller of spends in investments and geral spends
+## Access to the plataform
+<a href="https://www.devpree.com.br/investme/login">InvestMe System</a>
 
-### <a href="https://www.devpree.com.br/investme" target="_blank">devpree.com.br/investme</a>
+## Features
 
-## Technologies
+### Business Features
++ Registration/Change/Removal of transactions (Investments/Expeditures)
++ Cards -Total investment/Expenditures on Home
++ Cards - Total by categories
++ Filters in every page
++ Categories
++ Payment methods
 
+### System Features
++ Login, Register and Forgot Password
++ Register and New Password by email validation
++ Languages(PT_BR/EN)
++ Dark and Light Mode
++ Option to show values (Cards/Tables)
++ Show values on start up
+  
+## Tecnologies
 + Java
-+ JSF
++ Jsf
 + Primefaces
-+ EJB
++ Ejb's
++ Postgresql
++ Jpa
++ Wildfly Server
 
 ## Screens
 
 ### Login
-![image](https://user-images.githubusercontent.com/84943777/210155482-8c224ae1-7d3e-4b6c-89bb-c1f7f015ac27.png)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/46d82e11-bb4e-4201-bb4d-872ebb82a6e6)
 
-### Investments Dashboard
-![image](https://user-images.githubusercontent.com/84943777/210155513-1bf8256e-f25a-4055-9045-aa54c4cfb62e.png)
+### Home
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/8bed0504-4ea7-421c-b3d0-cf7177c3fa08)
 
-### New Investment
-![image](https://user-images.githubusercontent.com/84943777/210155526-ef0b31ef-f2ad-4076-88f8-9bbc04197373.png)
+#### Main filters
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/fd288b86-f6e6-4a8c-a630-f0286710cd87)
 
-### Table Investments
-![image](https://user-images.githubusercontent.com/84943777/210155540-366dfb39-8528-408e-9678-b5fed1ef3008.png)
+#### New Transaction
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/89109fda-7398-46cb-be9b-209759d9c8a8)
 
-### Expenditures Dashboard
-![image](https://user-images.githubusercontent.com/84943777/210155564-d596f1c5-6388-42fc-ad32-ed8fc833d505.png)
+#### Edit Transaction
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/e3ea1c8c-f088-4415-a4c9-e917895a531a)
 
-### New Expenditure
-![image](https://user-images.githubusercontent.com/84943777/210155574-f32d3c28-0594-47e1-b8b7-490d90019fe6.png)
+### Investments
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/ed5a362e-1c54-4888-8140-189a772f9205)
 
-### Table Expenditures
-![image](https://user-images.githubusercontent.com/84943777/210155587-d8895cab-b5ff-4d4b-8996-1522eab12131.png)
+### Expenditures
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/ea4853e4-c0dc-4a6a-9b21-6769c31f1598)
+
+### Categories
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/eae6d1b4-434d-4de6-bacd-915c1a95111b)
+
+### Payments
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/8b188069-90b4-4d74-8c32-12188382a77f)
+
+### Configurations
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/f5b3c25d-3710-42ea-bc12-3d9bc7733a6a)
 
