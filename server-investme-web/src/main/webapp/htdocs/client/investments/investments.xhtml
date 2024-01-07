@@ -19,7 +19,11 @@
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/investments/investments.css" />
 			
-			<h:form id="formCards">
+			<h:form id="formInvestments">
+				<p:remoteCommand 
+					name="updateTableAndCards"
+					update="formInvestments:cards, formInvestments:tableInvestments"/>
+			
 				<div jsf:id="cards" class="horizontal-left-center wrap">
 					<ui:repeat var="category" value="#{MBInvestment.categories}">
 						<components:card 
@@ -28,12 +32,6 @@
 							primefacesIcon="#{category.icon}"/>
 					</ui:repeat>
 				</div>
-			</h:form>
-			
-			<h:form id="formInvestments">
-				<p:remoteCommand 
-					name="updateTableAndCards"
-					update="formCards:cards, formInvestments:tableInvestments"/>
 									
 				<div class="top-buttons mg-b-10">
 					<p:commandButton 
@@ -160,11 +158,11 @@
 					</p:column>
 					
 					<p:column headerText="#{label.total}">
-						<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(to.price * to.amount)}" />
+						<h:outputText value="#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(to.price * to.amount) : '******'}" />
 					</p:column>
 					
 					<p:column headerText="#{label.price}">
-						<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(to.price)}" />
+						<h:outputText value="#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(to.price) : '******'}" />
 					</p:column>
 					
 					<p:column headerText="#{label.amount}">

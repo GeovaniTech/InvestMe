@@ -19,7 +19,11 @@
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/home/home.css" />
 			
-			<h:form id="formCards">
+			<h:form id="formTransactions">
+				<p:remoteCommand 
+					name="updateTableAndCards"
+					update="formTransactions:cards, formTransactions:tableTransactions" />
+		
 				<div jsf:id="cards" class="horizontal-left-center wrap">
 					<components:card 
 						title="#{label.investments}"
@@ -31,12 +35,6 @@
 						value="#{MBAppConfigs.getBrazilianCurrency(MBHome.getTotalExpense())}"
 						primefacesIcon="trending_down"/>
 				</div>
-			</h:form>
-			
-			<h:form id="formTransactions">
-				<p:remoteCommand 
-					name="updateTableAndCards"
-					update="formCards:cards, formTransactions:tableTransactions" />
 				
 				<h2>#{label.last_transactions}</h2>
 		
@@ -104,7 +102,7 @@
 								
 								<f:selectItem 
 									itemLabel="#{label.all}" 
-									itemValue="#{null}"/>
+									itemValue="#{null}"/>getSystemVersion()
 								
 								<f:selectItems 
 									var="payment"
@@ -168,11 +166,11 @@
 					</p:column>
 					
 					<p:column headerText="#{label.price}">
-						<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(to.price)}" />
+						<h:outputText value="#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(to.price) :  '******'}" />
 					</p:column>
 					
 					<p:column headerText="#{label.total}">
-						<h:outputText value="#{MBAppConfigs.getBrazilianCurrency(to.price * to.amount)}" />
+						<h:outputText value="#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(to.price * to.amount) :  '******'}" />
 					</p:column>
 					
 					<p:column headerText="#{label.amount}">

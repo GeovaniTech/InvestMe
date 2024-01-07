@@ -47,7 +47,7 @@ public class MBAppConfigs extends AbstractMBean {
 		//Initial Configurations
 		this.getAppConfigs().setLanguage(Locale.getDefault().getLanguage());
 		this.getAppConfigs().setDarkMode(false);
-		this.getAppConfigs().setShowCardValues(false);
+		this.getAppConfigs().setShowValues(false);
 		
 		//Getting User preferences
 		this.getConfigsFromCookies();	
@@ -55,10 +55,10 @@ public class MBAppConfigs extends AbstractMBean {
 	
  	public boolean getConfigsFromCookies() {
  		this.getAppConfigs().setDarkMode(CookieUtil.getDarkModeCookie());
- 		this.getAppConfigs().setShowCardValuesStartUp(CookieUtil.getShowCardValuesOnStartUp());
+ 		this.getAppConfigs().setShowValuesStartUp(CookieUtil.getShowCardValuesOnStartUp());
  		
- 		if(this.getAppConfigs().isShowCardValuesStartUp()) {
- 	 		this.getAppConfigs().setShowCardValues(true);
+ 		if(this.getAppConfigs().isShowValuesStartUp()) {
+ 	 		this.getAppConfigs().setShowValues(true);
  		}
  		
  		if(CookieUtil.getLanguageCookie() != null) {
@@ -80,13 +80,13 @@ public class MBAppConfigs extends AbstractMBean {
 		language.setMaxAge(60*60*24*30);
 		language.setPath("/investme");
 		
-		Cookie showCardValuesOnStartUp = new Cookie("showCardValuesOnStartUp", "" + this.getAppConfigs().isShowCardValuesStartUp());
-		showCardValuesOnStartUp.setMaxAge(60*60*24*30);
-		showCardValuesOnStartUp.setPath("/investme");
+		Cookie showValuesOnStartUp = new Cookie("showValuesOnStartUp", "" + this.getAppConfigs().isShowValuesStartUp());
+		showValuesOnStartUp.setMaxAge(60*60*24*30);
+		showValuesOnStartUp.setPath("/investme");
 		
 		response.addCookie(darkMode);
 		response.addCookie(language);
-		response.addCookie(showCardValuesOnStartUp);
+		response.addCookie(showValuesOnStartUp);
 	}
 	
 	public void removeUserFromCookie() {
@@ -101,7 +101,7 @@ public class MBAppConfigs extends AbstractMBean {
 	
 	
 	public void updateCards() {
-		PrimeFaces.current().ajax().update("formCards:cards");
+		PrimeFaces.current().executeScript("updateTableAndCards();");
 	}
 	
 	public void logout() {

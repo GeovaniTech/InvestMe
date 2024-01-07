@@ -4,8 +4,8 @@ public class AppConfigs {
 	
 	private String language;
 	private boolean darkMode;
-	private boolean showCardValues;
-	private boolean showCardValuesStartUp;
+	private boolean showValues;
+	private boolean showValuesStartUp;
 	
 	// Getters and Setters
 	public String getLanguage() {
@@ -20,17 +20,17 @@ public class AppConfigs {
 	public void setDarkMode(boolean darkMode) {
 		this.darkMode = darkMode;
 	}
-	public boolean isShowCardValues() {
-		return showCardValues;
+	public boolean isShowValuesStartUp() {
+		return showValuesStartUp;
 	}
-	public void setShowCardValues(boolean showCardValues) {
-		this.showCardValues = showCardValues;
+	public void setShowValuesStartUp(boolean showValuesStartUp) {
+		this.showValuesStartUp = showValuesStartUp;
 	}
-	public boolean isShowCardValuesStartUp() {
-		return showCardValuesStartUp;
+	public boolean isShowValues() {
+		return showValues;
 	}
-	public void setShowCardValuesStartUp(boolean showCardValuesStartUp) {
-		this.showCardValuesStartUp = showCardValuesStartUp;
+	public void setShowValues(boolean showValues) {
+		this.showValues = showValues;
 	}
 	
 }
