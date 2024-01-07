@@ -18,7 +18,7 @@ A web system to centralize all your investments and expenses in one place
 ### System Features
 + Login, Register and Forgot Password
 + Register and New Password by email validation
-+ Languages(PT_BR/EN)
++ Languages (PT_BR/EN)
 + Dark and Light Mode
 + Option to show values (Cards/Tables)
 + Show values on start up
