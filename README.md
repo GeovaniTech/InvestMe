@@ -40,20 +40,23 @@ A web system to centralize all your investments and expenses in one place
 ### Home
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/8bed0504-4ea7-421c-b3d0-cf7177c3fa08)
 
+### Home Light Mode
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/2d32bbb6-6d01-4dc7-a55e-d92384bf6d31)
+
 #### Main filters
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/fd288b86-f6e6-4a8c-a630-f0286710cd87)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/1423db75-0666-4d0a-a17b-fddf0185c386)
 
 #### New Transaction
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/89109fda-7398-46cb-be9b-209759d9c8a8)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/5f73dad2-e0f4-4e46-a292-f06c54d848e6)
 
 #### Edit Transaction
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/e3ea1c8c-f088-4415-a4c9-e917895a531a)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/d33ce345-6f67-48ee-93d3-2160bccb2c2f)
 
 ### Investments
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/ed5a362e-1c54-4888-8140-189a772f9205)
 
 ### Expenditures
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/ea4853e4-c0dc-4a6a-9b21-6769c31f1598)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/2f59a012-dd96-47c6-aecf-c8700f911277)
 
 ### Categories
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/eae6d1b4-434d-4de6-bacd-915c1a95111b)
@@ -63,4 +66,5 @@ A web system to centralize all your investments and expenses in one place
 
 ### Configurations
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/f5b3c25d-3710-42ea-bc12-3d9bc7733a6a)
+
 
