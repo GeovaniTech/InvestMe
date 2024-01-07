@@ -8,7 +8,7 @@ A web system to centralize all your investments and expenses in one place
 ## Features
 
 ### Business Features
-+ Registration/Change/Removal of transactions (Investments/Expeditures)
++ Registration/Change/Removal of transactions (Investments/Expenditures)
 + Cards -Total investment/Expenditures on Home
 + Cards - Total by categories
 + Filters in every page
