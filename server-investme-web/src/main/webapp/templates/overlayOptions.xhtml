@@ -10,17 +10,18 @@
 	
 	<h:body>
 		<p:overlayPanel for="options">
-			<p:remoteCommand 
-				autoRun="false" 
-				name="updateConfigs"
-				update="formLogo:logo"
-				action="#{MBAppConfigs.createCookiePreferences()}" />
-	
-			<div class="horizontal-left">
-				<div class="select-language align-options">
-					<h:form>
-						<h5>#{label.language}</h5>
-						<p:selectOneMenu 
+			<h:form id="preferences">
+				<p:remoteCommand 
+					autoRun="false" 
+					name="updateConfigs"
+					update="formLogo:logo"
+					action="#{MBAppConfigs.createCookiePreferences()}" />
+			
+				 <div class="horizontal-left-center">
+					<div class="search-group">
+						<p:outputLabel for="language" value="#{label.language}"/>
+						<p:selectOneMenu
+							id="language" 
 							value="#{MBAppConfigs.appConfigs.language}"
 							style="width: 200px;">
 	
@@ -33,15 +34,14 @@
 								<p:ajax 
 									render="all" 
 									listener="#{MBAppConfigs.refreshPage()}"
-									oncomplete="updateConfigs()" />
+									oncomplete="updateConfigs();" />
 						</p:selectOneMenu>
-					</h:form>
-				</div>
-	
-				<div class="select-theme align-options">
-					<h:form>
-						<h5>#{label.dark_mode}</h5>
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel for="darkMode" value="#{label.dark_mode}"/>
 						<p:toggleSwitch 
+							id="darkMode"
 							value="#{MBAppConfigs.appConfigs.darkMode}"
 							onIcon="pi pi-sun" 
 							offIcon="pi pi-moon" 
@@ -50,11 +50,42 @@
 							<p:ajax 
 								event="change" 
 								process="@form"
-								oncomplete="updateConfigs()" />
+								oncomplete="updateConfigs();" />
 						</p:toggleSwitch>
-					</h:form>
+					</div>
+					
+					<div class="search-group">
+						<p:outputLabel for="showValues" value="#{label.show_values}"/>
+						<p:toggleSwitch 
+							id="showValues"
+							value="#{MBAppConfigs.appConfigs.showCardValues}"
+							onIcon="pi pi-eye" 
+							offIcon="pi pi-eye-slash" 
+							styleClass="dark-mode">
+	
+							<p:ajax 
+								event="change" 
+								process="@form"
+								listener="#{MBAppConfigs.updateCards()}" />
+						</p:toggleSwitch>
+					</div>
 				</div>
-			</div>
+				
+				<div class="horizontal-left-center">
+					<p:selectBooleanCheckbox 
+						value="#{MBAppConfigs.appConfigs.showCardValuesStartUp}"
+						styleClass="mg-r-5">
+						
+						<p:ajax 
+							event="change" 
+							process="@form"
+							oncomplete="updateConfigs();" />
+					</p:selectBooleanCheckbox>
+					
+					<p:outputLabel 
+						value="#{label.show_card_values_startup}"/>
+				</div>			
+			</h:form>
 		</p:overlayPanel>	
 	</h:body>
 </html>

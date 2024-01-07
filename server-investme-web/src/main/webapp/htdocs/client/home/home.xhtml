@@ -19,13 +19,7 @@
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/home/home.css" />
 			
-			<h:form id="formTransactions">
-				<p:remoteCommand 
-					name="updateTableAndCards"
-					update="formTransactions:tableTransactions" />
-				
-				<h2>#{label.last_transactions}</h2>
-		
+			<h:form id="formCards">
 				<div jsf:id="cards" class="horizontal-left-center wrap">
 					<components:card 
 						title="#{label.investments}"
@@ -37,6 +31,14 @@
 						value="#{MBAppConfigs.getBrazilianCurrency(MBHome.getTotalExpense())}"
 						primefacesIcon="trending_down"/>
 				</div>
+			</h:form>
+			
+			<h:form id="formTransactions">
+				<p:remoteCommand 
+					name="updateTableAndCards"
+					update="formCards:cards, formTransactions:tableTransactions" />
+				
+				<h2>#{label.last_transactions}</h2>
 		
 				<div class="top-buttons mg-b-10">
 					<p:commandButton 

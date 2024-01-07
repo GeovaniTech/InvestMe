@@ -19,11 +19,7 @@
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/investments/investments.css" />
 			
-			<h:form id="formInvestments">
-				<p:remoteCommand 
-					name="updateTableAndCards"
-					update="formInvestments:cards, formInvestments:tableInvestments"/>
-									
+			<h:form id="formCards">
 				<div jsf:id="cards" class="horizontal-left-center wrap">
 					<ui:repeat var="category" value="#{MBInvestment.categories}">
 						<components:card 
@@ -32,7 +28,13 @@
 							primefacesIcon="#{category.icon}"/>
 					</ui:repeat>
 				</div>
-				
+			</h:form>
+			
+			<h:form id="formInvestments">
+				<p:remoteCommand 
+					name="updateTableAndCards"
+					update="formCards:cards, formInvestments:tableInvestments"/>
+									
 				<div class="top-buttons mg-b-10">
 					<p:commandButton 
 						id="btnInitNewExpenditure"

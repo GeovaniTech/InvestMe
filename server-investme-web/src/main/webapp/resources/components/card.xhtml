@@ -29,7 +29,7 @@
 			<p:divider layout="vertical" />
 			
 			<div class="vertical-right">
-				<p>#{cc.attrs.value}</p>
+				<p>#{MBAppConfigs.appConfigs.showCardValues ? cc.attrs.value : '******'}</p>
 			</div>
 		</div>
 	</composite:implementation>

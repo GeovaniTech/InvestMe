@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.primefaces.PrimeFaces;
+
 import abstracts.AbstractMBean;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
@@ -45,6 +47,7 @@ public class MBAppConfigs extends AbstractMBean {
 		//Initial Configurations
 		this.getAppConfigs().setLanguage(Locale.getDefault().getLanguage());
 		this.getAppConfigs().setDarkMode(false);
+		this.getAppConfigs().setShowCardValues(false);
 		
 		//Getting User preferences
 		this.getConfigsFromCookies();	
@@ -52,6 +55,11 @@ public class MBAppConfigs extends AbstractMBean {
 	
  	public boolean getConfigsFromCookies() {
  		this.getAppConfigs().setDarkMode(CookieUtil.getDarkModeCookie());
+ 		boolean showValuesStartUp = CookieUtil.getShowCardValuesOnStartUp();
+ 		
+ 		if(showValuesStartUp) {
+ 	 		this.getAppConfigs().setShowCardValues(true);
+ 		}
  		
  		if(CookieUtil.getLanguageCookie() != null) {
  			this.getAppConfigs().setLanguage(CookieUtil.getLanguageCookie());
@@ -72,8 +80,13 @@ public class MBAppConfigs extends AbstractMBean {
 		language.setMaxAge(60*60*24*30);
 		language.setPath("/investme");
 		
+		Cookie showCardValuesOnStartUp = new Cookie("showCardValuesOnStartUp", "" + this.getAppConfigs().isShowCardValuesStartUp());
+		showCardValuesOnStartUp.setMaxAge(60*60*24*30);
+		showCardValuesOnStartUp.setPath("/investme");
+		
 		response.addCookie(darkMode);
 		response.addCookie(language);
+		response.addCookie(showCardValuesOnStartUp);
 	}
 	
 	public void removeUserFromCookie() {
@@ -84,6 +97,11 @@ public class MBAppConfigs extends AbstractMBean {
 		userSession.setPath("/investme");
 		
 		response.addCookie(userSession);
+	}
+	
+	
+	public void updateCards() {
+		PrimeFaces.current().ajax().update("formCards:cards");
 	}
 	
 	public void logout() {

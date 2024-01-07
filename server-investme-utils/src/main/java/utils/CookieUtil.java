@@ -5,21 +5,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class CookieUtil {
-	public static String getUserCookie() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-		Cookie[] cookies = request.getCookies();
-
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("userSession")) {
-					return cookie.getValue();
-				}
-			}
-		}
-		return null;
-	}
-
 	public static String getLanguageCookie() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
@@ -51,18 +36,19 @@ public class CookieUtil {
 		return false;
 	}
 	
-	public static Integer getCartIdFromCookie() {
+	public static boolean getShowCardValuesOnStartUp() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
+		
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("cart")) {
-					return Integer.parseInt(cookie.getValue());
+				if (cookie.getName().equals("showCardValuesOnStartUp")) {
+					return Boolean.parseBoolean(cookie.getValue());
 				}
 			}
 		}
-		
-		return null;
+
+		return false;
 	}
 }

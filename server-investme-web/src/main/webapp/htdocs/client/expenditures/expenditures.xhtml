@@ -18,12 +18,8 @@
 
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/expenditures/expenditures.css" />
-			
-			<h:form id="formExpenditures">
-				<p:remoteCommand 
-					name="updateTableAndCards"
-					update="formExpenditures:cards, formExpenditures:tableExpenditures"/>
-									
+
+			<h:form id="formCards">
 				<div jsf:id="cards" class="horizontal-left-center wrap">
 					<ui:repeat var="category" value="#{MBExpense.categories}">
 						<components:card 
@@ -32,7 +28,13 @@
 							primefacesIcon="#{category.icon}"/>
 					</ui:repeat>
 				</div>
-				
+			</h:form>
+			
+			<h:form id="formExpenditures">
+				<p:remoteCommand 
+					name="updateTableAndCards"
+					update="formCards:cards, formExpenditures:tableExpenditures"/>
+									
 				<div class="top-buttons mg-b-10">
 					<p:commandButton 
 						id="btnInitNewExpenditure"
