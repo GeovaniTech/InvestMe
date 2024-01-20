@@ -50,6 +50,12 @@
 						id="btnFiltersTransactions"
 						icon="pi pi-filter" 
 						styleClass="optionsButtonStyle mg-r-10" />
+						
+					<p:commandButton 
+						id="btnOpenChart"
+						icon="pi pi-chart-line" 
+						styleClass="optionsButtonStyle mg-r-10"
+						oncomplete="PF('chartSpentsVW').show();" />
 				</div>
 				
 				<p:overlayPanel id="overlayFilters" for="btnFiltersTransactions">
@@ -184,6 +190,7 @@
 			</h:form>
 			
 			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />
+			<ui:include src="/htdocs/client/home/chart_spents.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

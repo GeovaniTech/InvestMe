@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:composition>
+	<components:dialog 
+		header="#{label.expenses_by_type_of_transaction}"
+		widgetVar="chartSpentsVW"
+		width="50vw"
+		height="50vh"
+		modal="true">
+		
+		<h:form>
+			<p:remoteCommand 
+				name="reloadChart"
+				action="#{MBChartSpents.createChartSpents}"
+				update="@form" />
+				
+			<div class="horizontal-left-center">
+				<div class="search-group">
+					<p:outputLabel for="year" value="#{label.year}" />
+					<p:selectOneMenu
+						id="year"
+						value="#{MBChartSpents.yearSelected}"
+						style="width: 200px;"
+						onchange="reloadChart();">
+						
+						<f:selectItems 
+							value="#{MBChartSpents.years}"/>
+					</p:selectOneMenu>
+				</div>
+			</div>
+			
+			<p:lineChart model="#{MBChartSpents.lineModel}" />
+		</h:form>
+	</components:dialog>
+</ui:composition>
+</html>
