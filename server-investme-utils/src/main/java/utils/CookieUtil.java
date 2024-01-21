@@ -35,20 +35,4 @@ public class CookieUtil {
 
 		return false;
 	}
-	
-	public static boolean getShowCardValuesOnStartUp() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-		
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("showValuesOnStartUp")) {
-					return Boolean.parseBoolean(cookie.getValue());
-				}
-			}
-		}
-
-		return false;
-	}
 }

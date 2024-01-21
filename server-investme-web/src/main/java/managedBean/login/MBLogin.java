@@ -6,10 +6,12 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import keep.client.IKeepClientSBean;
+import managedBean.appconfigs.MBAppConfigs;
 import utils.EmailUtil;
 import utils.EncryptionUtil;
 import utils.JWTUtil;
 import utils.MessageUtil;
+import utils.RedirectURL;
 import utils.StringUtil;
 
 @Named("MBLogin")
@@ -27,7 +29,11 @@ public class MBLogin extends AbstractMBean {
 
 	public void logar() {
 		if(EmailUtil.isValidEmailPattern(this.getEmail())) {
-			this.getClientSBean().logar(this.getEmail(), this.getPassword());
+			if(this.getClientSBean().logar(this.getEmail(), this.getPassword())) {
+				this.getMBAppConfigs().configAppByUserPreferences();
+				
+				RedirectURL.redirectTo("/investme/client/home");
+			}
 			
 			return;
 		}
@@ -77,6 +83,10 @@ public class MBLogin extends AbstractMBean {
 		}
 		
 		this.sendEmailForgotPassoword();
+	}
+	
+	private MBAppConfigs getMBAppConfigs() {
+		return this.getMBean(MBAppConfigs.MANAGED_BEAN_NAME);
 	}
 	
 	// Getters and Setters

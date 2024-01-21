@@ -3,10 +3,12 @@ package model;
 import java.util.Date;
 
 import abstracts.AbstractObject;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Client extends AbstractObject {
@@ -20,6 +22,9 @@ public class Client extends AbstractObject {
 	private boolean blocked;
 	private String phoneNumber;
 	private boolean changePassword;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private AppConfig appConfig;
 	
 	public Client() {
 		this.setBlocked(false);
@@ -88,6 +93,14 @@ public class Client extends AbstractObject {
 
 	public void setChangePassword(boolean changePassword) {
 		this.changePassword = changePassword;
+	}
+
+	public AppConfig getAppConfig() {
+		return appConfig;
+	}
+
+	public void setAppConfig(AppConfig appConfig) {
+		this.appConfig = appConfig;
 	}
 	
 }

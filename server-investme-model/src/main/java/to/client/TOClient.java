@@ -3,6 +3,7 @@ package to.client;
 import java.util.Date;
 
 import abstracts.AbstractTOObject;
+import to.appconfigs.TOAppConfig;
 
 public class TOClient extends AbstractTOObject {
 
@@ -15,6 +16,7 @@ public class TOClient extends AbstractTOObject {
 	private Date lastLogin;
 	private boolean blocked;
 	private boolean changePassword;
+	private TOAppConfig appConfig;
 	
 	public TOClient() {
 		this.setSecurityLevel("client");
@@ -62,6 +64,12 @@ public class TOClient extends AbstractTOObject {
 	}
 	public void setChangePassword(boolean changePassword) {
 		this.changePassword = changePassword;
+	}
+	public TOAppConfig getAppConfig() {
+		return appConfig;
+	}
+	public void setAppConfig(TOAppConfig appConfig) {
+		this.appConfig = appConfig;
 	}
 	
 }

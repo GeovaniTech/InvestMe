@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import abstracts.AbstractKeep;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionManagement;
 import jakarta.ejb.TransactionManagementType;
@@ -14,6 +15,7 @@ import jakarta.persistence.Query;
 import jakarta.persistence.TemporalType;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import keep.appConfig.IKeepAppConfigSBean;
 import model.Client;
 import query.SimpleWhere;
 import to.TOParameter;
@@ -30,6 +32,9 @@ import utils.StringUtil;
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements IKeepClientSBean, IKeepClientRemoteSBean {
 
+	@EJB
+	private IKeepAppConfigSBean appConfigsSBean;
+	
 	public KeepClientSBean() {
 		super(Client.class, TOClient.class);
 	}
@@ -56,9 +61,18 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 
 	@Override
 	public void change(TOClient client) {
-		Client model = this.convertToModel(client);
-		Client pattern = this.getEntityManager().find(Client.class, model.getId());
+		Client pattern = this.getEntityManager().find(Client.class, client.getId());
 		
+		if(pattern.getAppConfig() == null && client.getAppConfig() != null) {
+			this.getAppConfigsSBean().save(client.getAppConfig());
+			this.getEntityManager().flush();
+		} else if(client.getAppConfig() != null) {
+			this.getAppConfigsSBean().change(client.getAppConfig());
+			this.getEntityManager().flush();
+		}
+		
+		Client model = this.convertToModel(client);
+	
 		if(StringUtil.isNull(model.getEmail())) {
 			model.setEmail(pattern.getEmail());
 		}
@@ -140,8 +154,6 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 			userCookie.setPath("/investme");
 			
 			response.addCookie(userCookie);
-			
-			RedirectURL.redirectTo("/investme/client/home");
 
 			return true;
 		}
@@ -336,6 +348,15 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		TOClient to = this.convertToDTO(client);
 		
 		return to;
+	}
+
+	// Getters and Setters
+	public IKeepAppConfigSBean getAppConfigsSBean() {
+		return appConfigsSBean;
+	}
+
+	public void setAppConfigsSBean(IKeepAppConfigSBean appConfigsSBean) {
+		this.appConfigsSBean = appConfigsSBean;
 	}
 
 }

@@ -19,19 +19,21 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import keep.client.IKeepClientSBean;
-import model.AppConfigs;
+import to.appconfigs.TOAppConfig;
 import to.client.TOClient;
 import utils.CookieUtil;
 import utils.ImageUtil;
 import utils.RedirectURL;
+import utils.StringUtil;
 
 @Named("MBAppConfigs")
 @SessionScoped
 public class MBAppConfigs extends AbstractMBean {
 
 	private static final long serialVersionUID = 8432905268667991640L;
+	public static final String MANAGED_BEAN_NAME = "MBAppConfigs";
 	
-	private AppConfigs appConfigs;
+	private TOAppConfig appConfigs;
 	private List<Locale> localeList;
 	
 	@EJB
@@ -39,7 +41,7 @@ public class MBAppConfigs extends AbstractMBean {
 
 	public MBAppConfigs() {
 		//Attributes
-		this.setAppConfigs(new AppConfigs());
+		this.setAppConfigs(new TOAppConfig());
 		this.setLocaleList(new ArrayList<Locale>());
 		this.getLocaleList().add(new Locale("pt_BR"));
 		this.getLocaleList().add(new Locale("en_US"));
@@ -55,11 +57,6 @@ public class MBAppConfigs extends AbstractMBean {
 	
  	public boolean getConfigsFromCookies() {
  		this.getAppConfigs().setDarkMode(CookieUtil.getDarkModeCookie());
- 		this.getAppConfigs().setShowValuesStartUp(CookieUtil.getShowCardValuesOnStartUp());
- 		
- 		if(this.getAppConfigs().isShowValuesStartUp()) {
- 	 		this.getAppConfigs().setShowValues(true);
- 		}
  		
  		if(CookieUtil.getLanguageCookie() != null) {
  			this.getAppConfigs().setLanguage(CookieUtil.getLanguageCookie());
@@ -67,6 +64,29 @@ public class MBAppConfigs extends AbstractMBean {
  			return true;
  		}
  		return false;
+ 	}
+ 	
+ 	public void configAppByUserPreferences() {
+ 		if(this.getClientLogged() != null && this.getClientLogged().getAppConfig() != null) {
+ 			this.setAppConfigs(this.getClientLogged().getAppConfig());
+ 			
+ 			if(!this.getAppConfigs().isShowValuesStartUp()) {
+ 				this.getAppConfigs().setShowValues(false);
+ 			} else {
+ 				this.getAppConfigs().setShowValues(true);
+ 			} 
+ 			
+ 			this.createCookiePreferences();
+ 		} else {
+ 			updateUserConfigs();
+ 		}
+ 	}
+ 	
+ 	public void updateUserConfigs() {
+ 		this.getClientLogged().setAppConfig(this.getAppConfigs());
+ 		this.getClientSBean().change(this.getClientLogged());
+ 		
+ 		this.createCookiePreferences();
  	}
 	
 	public void createCookiePreferences() {	
@@ -154,14 +174,13 @@ public class MBAppConfigs extends AbstractMBean {
 		 ResourceBundle bundle = ResourceBundle.getBundle("app-config", locale);
 
 		 return bundle.getString("system_version");
-
 	}
 	
 	// Getters and Setters
-	public AppConfigs getAppConfigs() {
+	public TOAppConfig getAppConfigs() {
 		return appConfigs;
 	}
-	public void setAppConfigs(AppConfigs appConfigs) {
+	public void setAppConfigs(TOAppConfig appConfigs) {
 		this.appConfigs = appConfigs;
 	}
 	public List<Locale> getLocaleList() {
