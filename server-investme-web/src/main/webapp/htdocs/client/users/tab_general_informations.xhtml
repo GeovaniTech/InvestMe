@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:composition>
+	<h:form id="infosClient">
+     	<p:messages 
+       		id="messages" 
+       		autoUpdate="true" 
+       		style="width: 100%;"
+       		showIcon="false"
+       		showDetail="false" />
+		
+		<div jsf:id="generalInformation">
+			<h3>#{label.general_information}</h3>
+			<div class="horizontal-left-center">
+				<div class="search-group">
+					<p:outputLabel value="#{label.email}" for="email" />
+					<p:inputText 
+						id="email"
+						placeholder="#{label.email}"
+						value="#{MBClientInfo.client.email}"
+						required="true"
+						requiredMessage="#{label.email_required}" />
+				</div>
+			</div>	
+		</div>
+		
+		<div jsf:id="security">
+			<h3>#{label.security}</h3>
+			
+			<div class="horizontal-left-bottom">
+				<div class="search-group">
+					<p:outputLabel value="#{label.level}" for="level" />
+					
+					<p:selectOneRadio id="level" value="#{MBClientInfo.client.securityLevel}">					
+						<f:selectItem 
+							itemLabel="#{label.client}"
+							itemValue="client" />
+						
+						<f:selectItem 
+							itemLabel="#{label.admin}"
+							itemValue="admin" />
+					</p:selectOneRadio>
+				</div>
+				
+				<div class="search-group">
+					<div class="horizontal-left">
+						<p:selectBooleanCheckbox 
+							id="blocked"
+							value="#{MBClientInfo.client.blocked}"
+							styleClass="mg-r-5" />
+							
+						<p:outputLabel value="#{label.blocked}" for="blocked"/>	
+					</div>
+				</div>
+				
+				<div class="search-group">
+					<div class="horizontal-left">
+						<p:selectBooleanCheckbox 
+							id="change_password"
+							value="#{MBClientInfo.client.changePassword}"
+							styleClass="mg-r-5" />
+						
+						<p:outputLabel value="#{label.change_password_next_login}" for="change_password"/>		
+					</div>			
+				</div>
+			</div>
+		</div>
+		
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton 
+					value="#{label.save}" 
+					action="#{MBClientInfo.save}"
+					icon="pi pi-save" 
+					update="@form, dialogClientInfo:tabview_client"
+					rendered="#{!MBClientInfo.editing}"
+					styleClass="mg-r-5" />
+				
+				<p:commandButton 
+					value="#{label.save}" 
+					action="#{MBClientInfo.change}"
+					icon="pi pi-save" 
+					update="@form"
+					rendered="#{MBClientInfo.editing}"
+					styleClass="mg-r-5" />
+					
+				<p:commandButton
+					value="#{label.send_welcome_email}"
+					action="#{MBClientInfo.sendWelcomeEmailWithPassword}"
+					icon="pi pi-send" 
+					update="@form"
+					disabled="#{!MBClientInfo.editing}"
+					styleClass="secondary-bt mg-r-5" />
+					
+				<p:commandButton
+					value="#{label.access_account}"
+					action="#{MBClientInfo.accessUserAccount}"
+					icon="pi pi-user" 
+					update="@form"
+					disabled="#{!MBClientInfo.editing}"
+					styleClass="secondary-bt" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+</ui:composition>
+</html>

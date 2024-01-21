@@ -120,6 +120,18 @@
 						
 						#{label.payments}
 					</p:commandLink>
+					
+					<p:commandLink 
+						id="menu-users"
+						action="#{MBAppConfigs.redirectTo('/investme/client/users')}"
+						rendered="#{MBAppConfigs.isUserAdminLogged()}">
+						
+						<span class="material-symbols-outlined google-icons">
+							group
+						</span>
+						
+						#{label.users}
+					</p:commandLink>
 				</div>
 			</p:scrollPanel>
 		</div>

@@ -141,12 +141,8 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 			
 			response.addCookie(userCookie);
 			
-			if(client.getSecurityLevel().equals("client")) {
-				RedirectURL.redirectTo("/investme/client/home");
-			} else {
-				RedirectURL.redirectTo("/investme/admin/dashboard");
-			}	
-			
+			RedirectURL.redirectTo("/investme/client/home");
+
 			return true;
 		}
 		

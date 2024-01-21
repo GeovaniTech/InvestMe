@@ -11,6 +11,7 @@ import keep.client.IKeepClientSBean;
 import to.client.TOClient;
 import utils.EmailUtil;
 import utils.MessageUtil;
+import utils.RedirectURL;
 
 @Named("MBClientInfo")
 @ViewScoped
@@ -77,19 +78,25 @@ public class MBClientInfo extends AbstractMBean {
 	public void sendWelcomeEmailWithPassword() {
 		StringBuilder description = new StringBuilder();
 		
-		description.append("<h2>Bem-vindo(a) LeCoffee!</h2>");
+		description.append("<h2>Bem-vindo(a) ao InvestMe!</h2>");
 		description.append("<p>Olá,	</p>");
-		description.append("<p>Agradecemos por se cadastrar na LeCoffee! ");
+		description.append("<p>Agradecemos por se cadastrar no InvestMe! ");
 		description.append("Estamos felizes em tê-lo(a) como nosso(a) cliente.</p>");
 		description.append("<p>Seu cadastro foi realizado manualmente. Para o seu primeiro acesso à plataforma, utilize o seu e-mail e a senha temporária 123. Após o primeiro login, recomendamos que escolha uma nova senha para garantir a segurança da sua conta.</p>");
-		description.append("<p><a href=http://localhost:8080/lecoffee/login>");
+		description.append("<p><a href=https://www.devpree.com.br/investme/login>");
 		description.append("Acessar a LeCoffee</a></p>");
-		description.append("<p>Caso você não tenha solicitado uma conta na LeCoffee ");
+		description.append("<p>Caso você não tenha solicitado uma conta no InvestMe ");
 		description.append("ou acredite que este email tenha sido enviado por engano, por favor, desconsidere esta mensagem.</p>");
 		description.append("Atenciosamente, <br>");
-		description.append("A equipe LeCoffee <br>");
+		description.append("A equipe InvestMe <br>");
 		
-		EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) à LeCoffee!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"));
+		EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) ao InvestMe!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"));
+	}
+	
+	public void accessUserAccount() {
+		this.getSession().setAttribute("client", this.getClient());
+		
+		RedirectURL.redirectTo("/investme/client/home");
 	}
 	
 	// Getters and Settersclient

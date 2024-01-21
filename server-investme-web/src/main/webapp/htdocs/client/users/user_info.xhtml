@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<ui:composition>
+	<components:dialog 
+		id="dialogClientInfo" 
+		widgetVar="dialogClientModelInfoVW"
+		header="#{label.client}">
+		
+		<p:tabView
+			id="tabview_client"
+			dynamic="true">
+			
+			<p:tab id="tab_general" title="#{label.general_information}">
+				<ui:include src="/htdocs/client/users/tab_general_informations.xhtml" />
+			</p:tab>
+		</p:tabView>
+	</components:dialog>
+</ui:composition>
+</html>

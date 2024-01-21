@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#menu-users {
+	background-color: var(--background-general-mouse);
+	color: var(--text-mouse);
+}
+
+#menu-users > * {
+	color: var(--text-mouse);
+}

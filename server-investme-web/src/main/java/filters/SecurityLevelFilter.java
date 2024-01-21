@@ -38,7 +38,7 @@ public class SecurityLevelFilter extends HttpFilter implements Filter {
 		
 		TOClient client = (TOClient) session.getAttribute("client");
 		
-		if(client != null && client.getSecurityLevel().equals("client")) {
+		if(client != null) {
 			chain.doFilter(request, response);
 		} else {
 			response.setStatus(401);

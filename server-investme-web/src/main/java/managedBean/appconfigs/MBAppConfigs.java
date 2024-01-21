@@ -119,6 +119,14 @@ public class MBAppConfigs extends AbstractMBean {
 		return false;
 	}
 	
+	public boolean isUserAdminLogged() {
+		if(this.getClientSession() != null && this.getClientLogged().getSecurityLevel().equals("admin")) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void redirectTo(String url) {
 		RedirectURL.redirectTo(url);
 	}

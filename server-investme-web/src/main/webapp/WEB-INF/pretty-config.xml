@@ -54,4 +54,9 @@
 		<pattern value="/client/payments" />
 		<view-id value="/htdocs/client/payments/payments.xhtml" />
 	</url-mapping>
+	
+	<url-mapping id="users">
+		<pattern value="/client/users" />
+		<view-id value="/htdocs/client/users/users.xhtml" />
+	</url-mapping>
 </pretty-config>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+
+<h:body>
+	<ui:composition template="/templates/layout.xhtml">
+		<ui:define name="name_page">
+			<h:outputText value="#{label.customers}" />
+		</ui:define>
+
+		<ui:define name="body">
+			<h:outputStylesheet library="css" name="/client/users/users.css" />
+
+			<h:form id="formClients">
+				<p:remoteCommand
+					name="openEditClient"
+					update="dialogClientInfo:tabview_client"
+					oncomplete="PF('dialogClientModelInfoVW').show();" />
+				
+				<div class="top-buttons mg-b-10">						
+					<p:commandButton 
+						action="#{MBClient.initNewClient}"
+						update="dialogClientInfo:tabview_client"
+						oncomplete="PF('dialogClientModelInfoVW').show();"
+						icon="pi pi-plus" 
+						styleClass="optionsButtonStyle mg-r-5" />
+						
+					<p:commandButton 
+						id="btnFiltersClient"
+						icon="pi pi-filter" 
+						styleClass="optionsButtonStyle mg-r-10" />
+				</div>
+				
+				<p:overlayPanel id="overlayFilters" for="btnFiltersClient">
+					<div class="horizontal-left-center">
+						<div class="search-group">
+							<components:inputFilter 
+								label="#{label.email}"
+								toInputFilter="#{MBClient.filter.email}" />
+						</div>
+						
+						<div class="search-group">
+							<components:dateRange 
+								label="#{label.last_login}"
+								toInputDateFilter="#{MBClient.filter.lastLogin}" />
+						</div>
+					</div>
+					
+					<div class="horizontal-left-center">						
+						<div class="search-group">
+							<p:outputLabel 
+								for="securityLevel" 
+								value="#{label.security_level}" />
+								
+							<p:selectOneMenu 
+								id="securityLevel"
+								value="#{MBClient.filter.securityLevel}"
+								style="width: 200px;">
+								
+								<f:selectItem 
+									itemLabel="#{label.all}"
+									itemValue="#{null}" />
+								
+								<f:selectItem 
+									itemLabel="#{label.client}"
+									itemValue="client" />
+								
+								<f:selectItem 
+									itemLabel="#{label.admin}"
+									itemValue="admin" />
+							</p:selectOneMenu>
+						</div>
+						
+						<div class="search-group">
+							<p:outputLabel 
+								for="blocked" 
+								value="#{label.blocked}" />
+								
+							<p:selectOneMenu
+								id="blocked" 
+								value="#{MBClient.filter.blocked}"
+								style="width: 200px;">
+								<f:selectItem 
+									itemLabel="#{label.all}"
+									itemValue="#{null}" />
+								
+								<f:selectItem 
+									itemLabel="#{label.yes}"
+									itemValue="#{true}" />
+								
+								<f:selectItem 
+									itemLabel="#{label.no}"
+									itemValue="#{false}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton 
+								id="btnSearchResults"
+								icon="pi pi-search"
+								value="#{label.search}"
+								update="formClients:tableClients, formClients:overlayFilters"
+								onclick="PF('tableClientsVW').filter();"
+								styleClass="mg-r-5" />
+		
+							<p:commandButton 
+								icon="pi pi-filter-slash"
+								value="#{label.clear_filters}"
+								action="#{MBClient.clearFilters}"
+								update="@form" />
+						</f:facet>
+					</p:toolbar>
+					
+					<p:defaultCommand target="btnSearchResults" />
+				</p:overlayPanel>
+			
+				<p:dataTable 
+					id="tableClients"
+					var="toClient" 
+					widgetVar="tableClientsVW"
+					value="#{MBClient.results}"
+					rowKey="#{toClient.id}"
+					rows="20"
+                    paginator="true" 
+                    paginatorPosition="top"
+                    lazy="true"
+                    selection="#{MBClient.client}"
+                    selectionMode="single">
+                    
+                    <p:ajax 
+                    	event="rowSelect" 
+                    	listener="#{MBClient.onRowSelect}"
+                    	oncomplete="openEditClient();" />
+
+					<p:column headerText="#{label.email}">					
+						<h:outputText value="#{toClient.email}" />
+					</p:column>
+					
+					<p:column headerText="#{label.security_level}">
+						<h:outputText value="#{toClient.securityLevel}"/>
+					</p:column>
+					
+					<p:column headerText="#{label.blocked}">
+						<h:outputText value="#{toClient.blocked ? label.yes : label.no}" />
+					</p:column>
+					
+					<p:column headerText="#{label.last_login}">						
+						<h:outputText value="#{toClient.lastLogin}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{label.creation_user}">					
+						<h:outputText value="#{toClient.creationUser}" />
+					</p:column>
+					
+					<p:column headerText="#{label.creation_date}">
+						<h:outputText value="#{toClient.creationDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{label.change_user}">
+						<h:outputText value="#{toClient.changeUser}" />
+					</p:column>
+					
+					<p:column headerText="#{label.change_date}">
+						<h:outputText value="#{toClient.changeDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			
+			<ui:include src="/htdocs/client/users/user_info.xhtml" />
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
