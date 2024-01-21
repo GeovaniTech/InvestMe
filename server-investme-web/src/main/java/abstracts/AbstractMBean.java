@@ -2,8 +2,11 @@ package abstracts;
 
 import java.io.Serializable;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.application.FacesMessage.Severity;
+import jakarta.transaction.RollbackException;
 import utils.MessageUtil;
 
 public abstract class AbstractMBean extends AbstractSession implements Serializable {
@@ -23,6 +26,18 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 	
 	public void showMessageError(Exception e) {
 		e.printStackTrace();
+
+		if (e.getCause() instanceof RollbackException) {
+			RollbackException rollbackException = (RollbackException) e.getCause();
+			
+			if (rollbackException.getCause() instanceof ConstraintViolationException) {
+				MessageUtil.sendMessage(
+						MessageUtil.getMessageFromProperties("msg_error_removing_entity_used_other_tables"),
+						FacesMessage.SEVERITY_ERROR);
+				return;
+			}
+		}
+
 		MessageUtil.sendMessage(e.getMessage(), FacesMessage.SEVERITY_ERROR);
 	}
 	
