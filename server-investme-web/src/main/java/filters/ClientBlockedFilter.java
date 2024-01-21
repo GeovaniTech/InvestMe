@@ -43,7 +43,7 @@ public class ClientBlockedFilter extends HttpFilter implements Filter {
 		if(client != null && this.getSecuritySBean().isClientBlocked(client.getEmail())) {
 			session.invalidate();
 			response.setStatus(401);
-			response.sendRedirect("/lecoffee/login/userblocked");
+			response.sendRedirect("/investme/login/userblocked");
 		} else {
 			chain.doFilter(request, response);
 		}

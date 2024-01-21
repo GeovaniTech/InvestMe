@@ -23,6 +23,10 @@
 					name="openEditClient"
 					update="dialogClientInfo:tabview_client"
 					oncomplete="PF('dialogClientModelInfoVW').show();" />
+					
+				<p:remoteCommand 
+					name="updateTableClients"
+					update="tableClients" />
 				
 				<div class="top-buttons mg-b-10">						
 					<p:commandButton 

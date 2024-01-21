@@ -14,7 +14,8 @@
 	<components:dialog 
 		id="dialogClientInfo" 
 		widgetVar="dialogClientModelInfoVW"
-		header="#{label.client}">
+		header="#{label.client}"
+		onHide="updateTableClients();">
 		
 		<p:tabView
 			id="tabview_client"
