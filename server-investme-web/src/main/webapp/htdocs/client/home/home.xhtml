@@ -53,9 +53,11 @@
 						
 					<p:commandButton 
 						id="btnOpenChart"
+						action="#{MBChartSpents.createChartSpents}"
+						update="dialogChartSpents:formChartSpents"
+						oncomplete="PF('chartSpentsVW').show();"
 						icon="pi pi-chart-line" 
-						styleClass="optionsButtonStyle mg-r-10"
-						oncomplete="PF('chartSpentsVW').show();" />
+						styleClass="optionsButtonStyle mg-r-10" />
 				</div>
 				
 				<p:overlayPanel id="overlayFilters" for="btnFiltersTransactions">

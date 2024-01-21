@@ -11,16 +11,16 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <ui:composition>
-	<components:dialog 
+	<components:dialog
+		id="dialogChartSpents" 
 		header="#{label.expenses_by_type_of_transaction}"
 		widgetVar="chartSpentsVW"
 		width="50vw"
 		height="50vh"
 		dynamic="true"
-		modal="true"
-		onShow="reloadChart();">
+		modal="true">
 		
-		<h:form>
+		<h:form id="formChartSpents">
 			<p:remoteCommand 
 				name="reloadChart"
 				action="#{MBChartSpents.createChartSpents}"
