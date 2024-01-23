@@ -17,11 +17,11 @@ import to.client.TOClient;
 /**
  * Servlet Filter implementation class SecurityLevelFilter
  */
-public class SecurityLevelFilter extends HttpFilter implements Filter {
+public class ClientSecurityLevelFilter extends HttpFilter implements Filter {
     
 	private static final long serialVersionUID = -1230273312344471544L;
 	
-    public SecurityLevelFilter() {
+    public ClientSecurityLevelFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +38,12 @@ public class SecurityLevelFilter extends HttpFilter implements Filter {
 		
 		TOClient client = (TOClient) session.getAttribute("client");
 		
-		if(client != null) {
-			chain.doFilter(request, response);
-		} else {
+		if(client == null) {
 			response.setStatus(401);
 			response.sendRedirect("/investme/login");
+
+		} else {
+			chain.doFilter(request, response);
 		}
 	}
 

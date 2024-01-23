@@ -123,7 +123,7 @@
 					
 					<p:commandLink 
 						id="menu-users"
-						action="#{MBAppConfigs.redirectTo('/investme/client/users')}"
+						action="#{MBAppConfigs.redirectTo('/investme/admin/users')}"
 						rendered="#{MBAppConfigs.isUserAdminLogged()}">
 						
 						<span class="material-symbols-outlined google-icons">
@@ -131,6 +131,18 @@
 						</span>
 						
 						#{label.users}
+					</p:commandLink>
+					
+					<p:commandLink 
+						id="menu-logs"
+						action="#{MBAppConfigs.redirectTo('/investme/admin/logs')}"
+						rendered="#{MBAppConfigs.isUserAdminLogged()}">
+						
+						<span class="material-symbols-outlined google-icons">
+							bug_report
+						</span>
+						
+						#{label.logs}
 					</p:commandLink>
 				</div>
 			</p:scrollPanel>

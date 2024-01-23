@@ -56,7 +56,12 @@
 	</url-mapping>
 	
 	<url-mapping id="users">
-		<pattern value="/client/users" />
-		<view-id value="/htdocs/client/users/users.xhtml" />
+		<pattern value="/admin/users" />
+		<view-id value="/htdocs/admin/users/users.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="logs">
+		<pattern value="/admin/logs" />
+		<view-id value="/htdocs/admin/logs/logs.xhtml" />
 	</url-mapping>
 </pretty-config>

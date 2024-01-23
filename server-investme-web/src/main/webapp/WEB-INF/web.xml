@@ -33,14 +33,24 @@
 		<param-value>true</param-value>
 	</context-param>
 	<filter>
-		<display-name>SecurityLevelFilter</display-name>
-		<filter-name>SecurityLevelFilter</filter-name>
-		<filter-class>filters.SecurityLevelFilter</filter-class>
+		<display-name>ClientSecurityLevelFilter</display-name>
+		<filter-name>ClientSecurityLevelFilter</filter-name>
+		<filter-class>filters.ClientSecurityLevelFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>SecurityLevelFilter</filter-name>
+		<filter-name>ClientSecurityLevelFilter</filter-name>
 		<url-pattern>/client/*</url-pattern>
 		<url-pattern>/htdocs/client/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<display-name>AdminSecurityLevelFilter</display-name>
+		<filter-name>AdminSecurityLevelFilter</filter-name>
+		<filter-class>filters.AdminSecurityLevelFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AdminSecurityLevelFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/htdocs/admin/*</url-pattern>
 	</filter-mapping>
 	<filter>
 		<display-name>ClientBlockedFilter</display-name>
