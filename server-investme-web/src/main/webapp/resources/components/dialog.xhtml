@@ -19,6 +19,7 @@
 		<composite:attribute name="width" />
 		<composite:attribute name="onHide" />
 		<composite:attribute name="onShow" />
+		<composite:attribute name="closable" default="true" />
 	</composite:interface>
 	
 	<composite:implementation>
@@ -34,7 +35,8 @@
 			width="#{cc.attrs.width}"
 			onHide="#{cc.attrs.onHide}"
 			onShow="#{cc.attrs.onShow}"
-			blockScroll="true">
+			blockScroll="true"
+			closable="#{cc.attrs.closable}">
 	
 			<p:scrollPanel 
 				mode="native" 

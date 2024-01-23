@@ -12,6 +12,7 @@ import org.primefaces.PrimeFaces;
 import abstracts.AbstractMBean;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -23,6 +24,7 @@ import to.appconfigs.TOAppConfig;
 import to.client.TOClient;
 import utils.CookieUtil;
 import utils.ImageUtil;
+import utils.MessageUtil;
 import utils.RedirectURL;
 import utils.StringUtil;
 
@@ -35,6 +37,9 @@ public class MBAppConfigs extends AbstractMBean {
 	
 	private TOAppConfig appConfigs;
 	private List<Locale> localeList;
+	
+	// For actions that require password
+	private String password;
 	
 	@EJB
 	private IKeepClientSBean clientSBean;
@@ -53,6 +58,70 @@ public class MBAppConfigs extends AbstractMBean {
 		
 		//Getting User preferences
 		this.getConfigsFromCookies();	
+	}
+	
+	public void askShowValues() {
+		if(!this.getAppConfigs().isShowValues() && !this.isValidPasswordForAction()) {
+			PrimeFaces.current().executeScript("PF('dialogShowValuesVW').show();");
+			this.getAppConfigs().setShowValues(false);
+			return;
+		} else if(!this.getAppConfigs().isShowValues()) {
+			this.confirmShowValues();
+			return;
+		} else {
+			this.getAppConfigs().setShowValues(false);;
+		}
+		
+		this.updateCards();
+		this.updateUserConfigs();
+	}
+	
+	public void askShowValuesOnStartUp() {
+		if(!this.getAppConfigs().isShowValuesStartUp() && !this.isValidPasswordForAction()) {
+			PrimeFaces.current().executeScript("PF('dialogShowValuesOnStartUpVW').show();");
+			this.getAppConfigs().setShowValuesStartUp(false);
+			return;
+		} else if(!this.getAppConfigs().isShowValuesStartUp()) {
+			this.confirmShowValuesOnStartUp();
+			return;
+		} else {
+			this.getAppConfigs().setShowValuesStartUp(false);
+		}
+		
+		this.updateUserConfigs();
+	}
+	
+	public void confirmShowValues() {
+		if(this.isValidPasswordForAction()) {
+			this.getAppConfigs().setShowValues(true);
+			PrimeFaces.current().executeScript("PF('dialogShowValuesVW').hide();");
+		} else {
+			this.getAppConfigs().setShowValues(false);
+		}
+		
+		this.updateCards();
+		this.updateUserConfigs();
+	}
+	
+	public void confirmShowValuesOnStartUp() {
+		if(this.isValidPasswordForAction()) {
+			this.getAppConfigs().setShowValuesStartUp(true);
+			PrimeFaces.current().executeScript("PF('dialogShowValuesOnStartUpVW').hide();");
+		} else {
+			this.getAppConfigs().setShowValuesStartUp(false);
+		}
+
+		this.updateUserConfigs();
+	}
+
+	public boolean isValidPasswordForAction() {
+		if(this.getPassword() != null && this.getClientSBean().isPasswordValidForAction(this.getClientLogged().getId(), this.getPassword())) {
+			return true;
+		} else if(StringUtil.isNotNull(this.getPassword())){
+			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("password_invalid"), FacesMessage.SEVERITY_ERROR);
+		}
+		
+		return false;
 	}
 	
  	public boolean getConfigsFromCookies() {
@@ -100,13 +169,8 @@ public class MBAppConfigs extends AbstractMBean {
 		language.setMaxAge(60*60*24*30);
 		language.setPath("/investme");
 		
-		Cookie showValuesOnStartUp = new Cookie("showValuesOnStartUp", "" + this.getAppConfigs().isShowValuesStartUp());
-		showValuesOnStartUp.setMaxAge(60*60*24*30);
-		showValuesOnStartUp.setPath("/investme");
-		
 		response.addCookie(darkMode);
 		response.addCookie(language);
-		response.addCookie(showValuesOnStartUp);
 	}
 	
 	public void removeUserFromCookie() {
@@ -118,7 +182,6 @@ public class MBAppConfigs extends AbstractMBean {
 		
 		response.addCookie(userSession);
 	}
-	
 	
 	public void updateCards() {
 		PrimeFaces.current().executeScript("updateTableAndCards();");
@@ -197,6 +260,12 @@ public class MBAppConfigs extends AbstractMBean {
 	}
 	public void setClientSBean(IKeepClientSBean clientSBean) {
 		this.clientSBean = clientSBean;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

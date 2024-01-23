@@ -16,6 +16,16 @@
 					name="updateConfigs"
 					update="formLogo:logo"
 					action="#{MBAppConfigs.updateUserConfigs()}" />
+					
+				<p:remoteCommand
+					name="askShowValues"
+					action="#{MBAppConfigs.askShowValues}"
+					process="@this" />
+					
+				<p:remoteCommand 
+					name="askShowValuesOnStartUp"
+					action="#{MBAppConfigs.askShowValuesOnStartUp}"
+					process="@this" />
 			
 				 <div class="horizontal-left-center">
 					<div class="search-group">
@@ -58,34 +68,36 @@
 						<p:outputLabel for="showValues" value="#{label.show_values}"/>
 						<p:toggleSwitch 
 							id="showValues"
-							value="#{MBAppConfigs.appConfigs.showValues}"
 							onIcon="pi pi-eye" 
 							offIcon="pi pi-eye-slash" 
-							styleClass="dark-mode">
-	
-							<p:ajax 
-								event="change" 
-								process="@form"
-								listener="#{MBAppConfigs.updateCards()}" />
-						</p:toggleSwitch>
+							styleClass="dark-mode"
+							value="#{MBAppConfigs.appConfigs.showValues}"
+							onchange="askShowValues();" />
 					</div>
 				</div>
 				
 				<div class="horizontal-left-center">
 					<p:selectBooleanCheckbox 
+						styleClass="mg-r-5"
 						value="#{MBAppConfigs.appConfigs.showValuesStartUp}"
-						styleClass="mg-r-5">
-						
-						<p:ajax 
-							event="change" 
-							process="@form"
-							oncomplete="updateConfigs();" />
-					</p:selectBooleanCheckbox>
+						onchange="askShowValuesOnStartUp();" />
 					
 					<p:outputLabel 
-						value="#{label.show_card_values_startup}"/>
+						value="#{label.show_card_values_startup}" />
 				</div>			
 			</h:form>
-		</p:overlayPanel>	
+		</p:overlayPanel>
+		
+		<components:requirePassword 
+			widgetVar="dialogShowValuesVW"
+			text="#{label.enter_your_password_to_do_action}"
+			action="#{MBAppConfigs.confirmShowValues}"
+			update="preferences" />
+		
+		<components:requirePassword 
+			widgetVar="dialogShowValuesOnStartUpVW"
+			text="#{label.enter_your_password_to_do_action}"
+			action="#{MBAppConfigs.confirmShowValuesOnStartUp}"
+			update="preferences" />
 	</h:body>
 </html>
