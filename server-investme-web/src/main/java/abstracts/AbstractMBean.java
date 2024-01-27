@@ -51,6 +51,7 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 		log.setStack(ExceptionUtils.getStackTrace(e));
 		log.setType(EnumLogType.EXCEPTION);
 		log.setCategory(EnumLogCategory.OTHER);
+		log.setIp(this.getUserIpAddress());
 		
 		this.saveLog(log);
 		

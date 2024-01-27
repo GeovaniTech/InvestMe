@@ -97,6 +97,7 @@ public class MBClientInfo extends AbstractMBean {
 		
 		TOLog log = new TOLog();
 		log.setCategory(EnumLogCategory.WELCOME_EMAIL);
+		log.setIp(this.getUserIpAddress());
 		
 		try {
 			EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) ao InvestMe!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"));

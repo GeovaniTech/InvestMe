@@ -41,6 +41,10 @@ public abstract class AbstractSession {
 		return bean;		
 	}
 	
+	protected String getUserIpAddress() {
+		return this.getRequest().getHeader("x-forwarded-for") == null ? this.getRequest().getRemoteAddr() : this.getRequest().getHeader("x-forwarded-for");
+	}
+	
 	//Setters and Getters
 	public HttpServletRequest getRequest() {
 		return request;

@@ -60,6 +60,8 @@ public class KeepLogSbean extends AbstractKeep<Log, TOLog> implements IKeepLogSb
 			.append(" ORDER BY L.creationDate DESC ");		
 		
 		Query query = this.getEntityManager().createQuery(sql.toString());
+		query.setFirstResult(filter.getFirstResult());
+		query.setMaxResults(filter.getMaxResults());
 		setParameters(query, params);
 		
 		return this.convertModelResults(query.getResultList());

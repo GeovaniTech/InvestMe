@@ -76,6 +76,7 @@ public class MBLogin extends AbstractMBean {
 		TOLog log = new TOLog();
 		log.setCategory(EnumLogCategory.RECOVERY_EMAIL);
 		log.setCreationUser(this.getEmail());
+		log.setIp(this.getUserIpAddress());
 		
 		try {
 			EmailUtil.sendMail(this.getEmail(), title, description.toString(), MessageUtil.getMessageFromProperties("email_new_password"));
@@ -104,6 +105,7 @@ public class MBLogin extends AbstractMBean {
 			log.setCategory(EnumLogCategory.INVALID_EMAIL_RECOVERY);
 			log.setType(EnumLogType.WARN);
 			log.setStack("Invalid email to send recovery password.");
+			log.setIp(this.getRequest().getRemoteAddr());
 			
 			saveLog(log);
 			return;

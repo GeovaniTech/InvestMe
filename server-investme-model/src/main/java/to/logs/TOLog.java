@@ -20,20 +20,10 @@ public class TOLog extends AbstractTOObject {
 	
 	public TOLog() {
 		this.setCreationDate(new Date());
-		this.setIp(this.getUserPublicIpAddress());
 		this.setCreationUser("None");
 	}
 	
-	private String getUserPublicIpAddress() {
-		try {
-			URL whatismyip = new URL("http://checkip.amazonaws.com");
-			BufferedReader in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
 
-			return in.readLine();
-		} catch (Exception e) {
-			return "Error trying to find IP";	
-		}
-	}
 
 	public String getStack() {
 		return stack;

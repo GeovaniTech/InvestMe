@@ -50,12 +50,7 @@ public class EmailUtil {
         	
         	Transport.send(message);
         	
-        	MessageUtil.sendMessage(success_message, FacesMessage.SEVERITY_INFO);
-        	
-        	if(1 == 1) {
-        		throw new Exception();
-        	}
-        	
+        	MessageUtil.sendMessage(success_message, FacesMessage.SEVERITY_INFO);        	
 		} catch (Exception e) {
 			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("mail_server_error"), FacesMessage.SEVERITY_ERROR);
 			throw new Exception(e);
