@@ -3,12 +3,17 @@ package managedBean.login;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import abstracts.AbstractMBean;
+import enums.EnumLogCategory;
+import enums.EnumLogType;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Named;
 import keep.client.IKeepClientSBean;
+import to.logs.TOLog;
 import utils.EmailUtil;
 import utils.EncryptionUtil;
 import utils.JWTUtil;
@@ -75,7 +80,20 @@ public class MBRegister extends AbstractMBean {
 		description.append("Atenciosamente, <br>");
 		description.append("A equipe InvestMe <br>");
 		
-		EmailUtil.sendMail(email, title, description.toString(), MessageUtil.getMessageFromProperties("confirmation_email_sent"));	
+		TOLog log = new TOLog();
+		log.setCategory(EnumLogCategory.REGISTER_EMAIL);
+		log.setCreationUser(email);
+		
+		try {
+			EmailUtil.sendMail(email, title, description.toString(), MessageUtil.getMessageFromProperties("confirmation_email_sent"));	
+			log.setStack("Email sent successfully. Credentials: " + email);
+			log.setType(EnumLogType.INFO);
+		} catch (Exception e) {
+			log.setStack(ExceptionUtils.getStackTrace(e));
+			log.setType(EnumLogType.EXCEPTION);
+		}
+		
+		saveLog(log);
 	}
 	
 	public boolean verifyFields() {

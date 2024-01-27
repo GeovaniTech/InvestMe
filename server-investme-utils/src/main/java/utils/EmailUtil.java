@@ -23,7 +23,7 @@ public class EmailUtil {
         return matcher.matches();
     }
     
-    public static void sendMail(String to, String title, String description, String success_message) {
+    public static void sendMail(String to, String title, String description, String success_message) throws Exception {
     	try {
         	Properties properties = new Properties();
         	
@@ -52,10 +52,14 @@ public class EmailUtil {
         	
         	MessageUtil.sendMessage(success_message, FacesMessage.SEVERITY_INFO);
         	
+        	if(1 == 1) {
+        		throw new Exception();
+        	}
+        	
 		} catch (Exception e) {
-			e.printStackTrace();
 			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("mail_server_error"), FacesMessage.SEVERITY_ERROR);
-			System.out.println(" ################# ERROR SENDING EMAIL #################");
+			throw new Exception(e);
+
 		}
     }
 }

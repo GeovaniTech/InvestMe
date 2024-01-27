@@ -20,23 +20,25 @@
 				height: 39px !important;
 			}
 		</style>
-		<p>#{cc.attrs.label}</p>
-		<div class="horizontal-center-left">
-			<p:calendar
-				value="#{cc.attrs.toInputDateFilter.from}"
-				pattern="dd/MM/yyyy HH:mm"
-				styleClass="input-width" />
-			
-			<div class="p-to-from">
-				<p>#{label.to}</p>
+		<div class="search-group">
+			<p>#{cc.attrs.label}</p>
+			<div class="horizontal-center-left">
+				<p:calendar
+					value="#{cc.attrs.toInputDateFilter.from}"
+					pattern="dd/MM/yyyy HH:mm"
+					styleClass="input-width" />
+				
+				<div class="p-to-from">
+					<p>#{label.to}</p>
+				</div>
+				
+				<p:calendar
+					value="#{cc.attrs.toInputDateFilter.to}"
+					styleClass="input-width"
+					pattern="dd/MM/yyyy HH:mm"
+					defaultHour="23"
+					defaultMinute="59" />
 			</div>
-			
-			<p:calendar
-				value="#{cc.attrs.toInputDateFilter.to}"
-				styleClass="input-width"
-				pattern="dd/MM/yyyy HH:mm"
-				defaultHour="23"
-				defaultMinute="59" />
 		</div>
 	</composite:implementation>	
 </html>

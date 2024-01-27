@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import abstracts.AbstractKeep;
+import enums.EnumLogCategory;
+import enums.EnumLogType;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionManagement;
@@ -16,12 +18,14 @@ import jakarta.persistence.TemporalType;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import keep.appConfig.IKeepAppConfigSBean;
+import keep.logs.IKeepLogSbean;
 import model.Client;
 import query.SimpleWhere;
 import to.TOParameter;
 import to.client.TOClient;
 import to.client.TOFilterClient;
 import to.client.TOFilterLovClient;
+import to.logs.TOLog;
 import utils.EncryptionUtil;
 import utils.JWTUtil;
 import utils.MessageUtil;
@@ -34,6 +38,9 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 
 	@EJB
 	private IKeepAppConfigSBean appConfigsSBean;
+	
+	@EJB
+	private IKeepLogSbean logSbean;
 	
 	public KeepClientSBean() {
 		super(Client.class, TOClient.class);
@@ -127,6 +134,13 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 			if(client.isBlocked()) {
 				MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("user_blocked"), FacesMessage.SEVERITY_ERROR);
 				
+				TOLog log = new TOLog();
+				log.setCreationUser(email);
+				log.setStack("User is blocked. Credentials: \n Email: " + email);
+				log.setCategory(EnumLogCategory.USER_BLOCKED_LOGIN);
+				log.setType(EnumLogType.WARN);
+				
+				this.getLogSbean().save(log);
 				return false;
 			}
 			
@@ -157,6 +171,16 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 
 			return true;
 		}
+		
+		TOLog log = new TOLog();
+		log.setCreationUser(email);
+		
+		String message = "Invalid Credentials. Credentials: Email:" + email + " Password: " + EncryptionUtil.encryptTextSHA(password);
+		log.setStack(message);
+		log.setCategory(EnumLogCategory.INVALID_LOGIN);
+		log.setType(EnumLogType.WARN);
+		
+		this.getLogSbean().save(log);
 		
 		MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("user_or_password_incorrect"), FacesMessage.SEVERITY_ERROR);
 		
@@ -370,4 +394,13 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		return false;
 	}
 
+	public IKeepLogSbean getLogSbean() {
+		return logSbean;
+	}
+
+	public void setLogSbean(IKeepLogSbean logSbean) {
+		this.logSbean = logSbean;
+	}
+
+	
 }

@@ -1,12 +1,17 @@
 package managedBean.login;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import abstracts.AbstractMBean;
+import enums.EnumLogCategory;
+import enums.EnumLogType;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import keep.client.IKeepClientSBean;
 import managedBean.appconfigs.MBAppConfigs;
+import to.logs.TOLog;
 import utils.EmailUtil;
 import utils.EncryptionUtil;
 import utils.JWTUtil;
@@ -68,7 +73,20 @@ public class MBLogin extends AbstractMBean {
 		description.append("Atenciosamente, <br>");
 		description.append("A equipe InvestMe <br>");
 		
-		EmailUtil.sendMail(this.getEmail(), title, description.toString(), MessageUtil.getMessageFromProperties("email_new_password"));
+		TOLog log = new TOLog();
+		log.setCategory(EnumLogCategory.RECOVERY_EMAIL);
+		log.setCreationUser(this.getEmail());
+		
+		try {
+			EmailUtil.sendMail(this.getEmail(), title, description.toString(), MessageUtil.getMessageFromProperties("email_new_password"));
+			log.setType(EnumLogType.INFO);
+			log.setStack("Email sent successfully. Credentials: " + this.getEmail());
+		} catch (Exception e) {
+			log.setStack(ExceptionUtils.getStackTrace(e));
+			log.setType(EnumLogType.EXCEPTION);
+		}
+		
+		saveLog(log);
 	}
 	
 	public void validateSendNewPassword() {
@@ -79,6 +97,15 @@ public class MBLogin extends AbstractMBean {
 		
 		if(!this.getClientSBean().verifyClient(this.getEmail())) {
 			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("user_not_found"), FacesMessage.SEVERITY_ERROR);
+			
+			TOLog log = new TOLog();
+			
+			log.setCreationUser(this.getEmail());
+			log.setCategory(EnumLogCategory.INVALID_EMAIL_RECOVERY);
+			log.setType(EnumLogType.WARN);
+			log.setStack("Invalid email to send recovery password.");
+			
+			saveLog(log);
 			return;
 		}
 		

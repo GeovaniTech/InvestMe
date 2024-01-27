@@ -2,8 +2,6 @@ package query;
 
 import java.util.List;
 
-import javax.sound.midi.Sequence;
-
 import jakarta.persistence.TemporalType;
 import to.TODateRangeFilter;
 import to.TOInputFilter;

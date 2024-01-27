@@ -80,6 +80,13 @@
 	align-items: center;
 }
 
+.line {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
 .horizontal-left-bottom {
 	display: flex;
 	flex-direction: row;

@@ -13,6 +13,7 @@
 		<class>model.Payment</class>
 		<class>model.Category</class>
 		<class>model.AppConfig</class>
+		<class>model.Log</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

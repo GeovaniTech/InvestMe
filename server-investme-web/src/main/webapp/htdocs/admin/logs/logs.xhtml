@@ -12,15 +12,130 @@
 <h:body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="name_page">
-			<h:outputText value="#{label.categories}" />
+			<h:outputText value="#{label.logs}" />
 		</ui:define>
 
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/admin/logs/logs.css" />
 			
 			<h:form id="formLogs">
+				<div class="top-buttons mg-b-10">		
+					<p:commandButton 
+						id="btnFiltersLogs"
+						icon="pi pi-filter" 
+						styleClass="optionsButtonStyle mg-r-10" />
+				</div>
+				
+				<p:overlayPanel id="overlayFilters" for="btnFiltersLogs">
+					<div class="line">
+						<components:inputFilter 
+							toInputFilter="#{MBLog.filter.email}"
+							label="#{label.email}" />
+							
+						<div class="search-group">
+							<p:outputLabel for="category" value="#{label.category}" />
+							<p:selectOneMenu
+								id="category" 
+								value="#{MBLog.filter.category}"
+								style="width: 200px;">
+								
+								<f:selectItem 
+									itemLabel="#{label.all}"
+									itemValue="#{null}" />
+								
+								<f:selectItems
+									value="#{MBLog.categories}" />
+							</p:selectOneMenu>
+						</div>
+						
+						
+						<div class="search-group">
+							<p:outputLabel for="type" value="#{label.type}" />
+							<p:selectOneMenu 
+								id="type" 
+								value="#{MBLog.filter.type}"
+								style="width: 200px;">
+								
+								<f:selectItem 
+									itemLabel="#{label.all}"
+									itemValue="#{null}" />
+								
+								<f:selectItems
+									value="#{MBLog.types}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					
+					<div class="line">						
+						<components:dateRange
+							toInputDateFilter="#{MBLog.filter.date}"
+							label="#{label.date}" />
+					</div>
 
+					<p:toolbar>
+						<f:facet name="left">
+							<p:commandButton 
+								id="btnSearchResults" 
+								icon="pi pi-search"
+								value="#{label.search}"
+								update="@form"
+								onclick="PF('tableLogsVW').filter();" 
+								styleClass="mg-r-5" />
+
+							<p:commandButton 
+								icon="pi pi-filter-slash"
+								value="#{label.clear_filters}" 
+								action="#{MBLog.clearFilters}"
+								update="@form" />
+						</f:facet>
+					</p:toolbar>
+					
+					<p:defaultCommand target="btnSearchResults" />
+				</p:overlayPanel>
+				
+				<p:dataTable
+					id="tableLogs"
+					var="to" 
+					widgetVar="tableLogsVW"
+					value="#{MBLog.results}"
+					rowKey="#{to.id}"
+					rows="20"
+					paginator="true" 
+	               	paginatorPosition="top"
+	                lazy="true"
+	                selection="none"
+	                selectionMode="single">
+	                
+	                <p:ajax 
+	                	event="rowSelect" 
+	                	listener="#{MBLog.onRowSelect}"
+	                	oncomplete="PF('dialogStackDetailsWV').show();" />
+					
+					<p:column headerText="#{label.email}">
+						<h:outputText value="#{to.creationUser}" />
+					</p:column>
+					
+					<p:column headerText="#{label.ip_address}">
+						<h:outputText value="#{to.ip}" />
+					</p:column>
+					
+					<p:column headerText="#{label.date}">
+						<h:outputText value="#{to.creationDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="#{label.category}">
+						<h:outputText value="#{to.category}" />
+					</p:column>
+					
+					<p:column headerText="#{label.type}">
+						<h:outputText value="#{to.type}" />
+					</p:column>
+				</p:dataTable>				
 			</h:form>
+			
+			<ui:include src="/htdocs/admin/logs/stack_details.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

@@ -2,13 +2,18 @@ package managedBean.client;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import abstracts.AbstractMBean;
+import enums.EnumLogCategory;
+import enums.EnumLogType;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import keep.client.IKeepClientSBean;
 import to.client.TOClient;
+import to.logs.TOLog;
 import utils.EmailUtil;
 import utils.MessageUtil;
 import utils.RedirectURL;
@@ -90,7 +95,19 @@ public class MBClientInfo extends AbstractMBean {
 		description.append("Atenciosamente, <br>");
 		description.append("A equipe InvestMe <br>");
 		
-		EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) ao InvestMe!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"));
+		TOLog log = new TOLog();
+		log.setCategory(EnumLogCategory.WELCOME_EMAIL);
+		
+		try {
+			EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) ao InvestMe!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"));
+			log.setStack("Email sent successfully. Credentials: " + this.getClient().getEmail());
+			log.setType(EnumLogType.INFO);
+		} catch (Exception e) {
+			log.setStack("Credentials: " + this.getClient().getEmail() + ExceptionUtils.getStackTrace(e));
+			log.setType(EnumLogType.EXCEPTION);
+		}
+		
+		saveLog(log);
 	}
 	
 	public void accessUserAccount() {

@@ -1,12 +1,18 @@
 package abstracts;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.hibernate.exception.ConstraintViolationException;
 
+import enums.EnumLogCategory;
+import enums.EnumLogType;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.application.FacesMessage.Severity;
 import jakarta.transaction.RollbackException;
+import managedBean.logs.MBLog;
+import to.logs.TOLog;
 import utils.MessageUtil;
 
 public abstract class AbstractMBean extends AbstractSession implements Serializable {
@@ -26,7 +32,7 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 	
 	public void showMessageError(Exception e) {
 		e.printStackTrace();
-
+		
 		if (e.getCause() instanceof RollbackException) {
 			RollbackException rollbackException = (RollbackException) e.getCause();
 			
@@ -37,8 +43,23 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 				return;
 			}
 		}
-
+		
+		TOLog log = new TOLog();
+		
+		log.setCreationUser(this.getClientSession().getEmail());
+		log.setCreationDate(new Date());
+		log.setStack(ExceptionUtils.getStackTrace(e));
+		log.setType(EnumLogType.EXCEPTION);
+		log.setCategory(EnumLogCategory.OTHER);
+		
+		this.saveLog(log);
+		
 		MessageUtil.sendMessage(e.getMessage(), FacesMessage.SEVERITY_ERROR);
+	}
+	
+	public void saveLog(TOLog log) {
+		MBLog mblog = this.getMBean(MBLog.MANAGED_BEAN_NAME);
+		mblog.save(log);
 	}
 	
 	public void addMessage(String message, Severity severity) {
