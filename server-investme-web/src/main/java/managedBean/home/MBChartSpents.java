@@ -74,9 +74,6 @@ public class MBChartSpents extends AbstractMBean {
 		
 		for(Integer value : this.getMonths()) {
 			valuesInvestments.add(this.getTransactionSBean().getTotalInvestmentsChartByYear(this.getYearSelected(), value));
-		}
-
-		for(Integer value : this.getMonths()) {
 			valuesExpenditures.add(this.getTransactionSBean().getTotalExpensesChartByYear(this.getYearSelected(), value));
 		}
 		
