@@ -9,7 +9,8 @@ A web system to centralize all your investments and expenses in one place
 
 ### Business Features
 + Registration/Change/Removal of transactions (Investments/Expenditures)
-+ Chart - Spents by type of transaction
++ Chart - Spents by type of transaction (Filtered by Year)
++ Chart (Investments/Expenditures) - Spents by category (All screen filters)
 + Cards - Total investment/Expenditures on Home
 + Cards - Total by categories
 + Filters in every page
@@ -39,10 +40,10 @@ A web system to centralize all your investments and expenses in one place
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/46d82e11-bb4e-4201-bb4d-872ebb82a6e6)
 
 ### Home
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/8bed0504-4ea7-421c-b3d0-cf7177c3fa08)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/a0375142-75db-4490-a1e8-377c13c4edb8)
 
 ### Home Light Mode
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/2d32bbb6-6d01-4dc7-a55e-d92384bf6d31)
+![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/b793387a-9af4-4892-a110-619c5f24dfcd)
 
 ## Chart - Spents by type of transaction (Investment/Expenditure)
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/7adad0c8-ebb9-4e80-8c94-32503e4a90c3)
