@@ -385,17 +385,6 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		this.appConfigsSBean = appConfigsSBean;
 	}
 
-	@Override
-	public boolean isPasswordValidForAction(int clientId, String password) {
-		Client client = this.getEntityManager().find(Client.class, clientId);
-		
-		if(client.getPassword().equals(EncryptionUtil.encryptTextSHA(password))) {
-			return true;
-		}
-		
-		return false;
-	}
-
 	public IKeepLogSbean getLogSbean() {
 		return logSbean;
 	}

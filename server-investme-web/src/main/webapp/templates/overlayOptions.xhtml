@@ -12,20 +12,10 @@
 		<p:overlayPanel for="options">
 			<h:form id="preferences">
 				<p:remoteCommand 
-					autoRun="false" 
+					autoRun="false"
 					name="updateConfigs"
 					update="formLogo:logo"
 					action="#{MBAppConfigs.updateUserConfigs()}" />
-					
-				<p:remoteCommand
-					name="askShowValues"
-					action="#{MBAppConfigs.askShowValues}"
-					process="@this" />
-					
-				<p:remoteCommand 
-					name="askShowValuesOnStartUp"
-					action="#{MBAppConfigs.askShowValuesOnStartUp}"
-					process="@this" />
 			
 				 <div class="horizontal-left-center">
 					<div class="search-group">
@@ -71,33 +61,31 @@
 							onIcon="pi pi-eye" 
 							offIcon="pi pi-eye-slash" 
 							styleClass="dark-mode"
-							value="#{MBAppConfigs.appConfigs.showValues}"
-							onchange="askShowValues();" />
+							value="#{MBAppConfigs.appConfigs.showValues}">
+							
+							<p:ajax 
+								event="change" 
+								process="@form"
+								oncomplete="updateConfigs();" />
+						</p:toggleSwitch>
 					</div>
 				</div>
 				
 				<div class="horizontal-left-center">
 					<p:selectBooleanCheckbox 
 						styleClass="mg-r-5"
-						value="#{MBAppConfigs.appConfigs.showValuesStartUp}"
-						onchange="askShowValuesOnStartUp();" />
+						value="#{MBAppConfigs.appConfigs.showValuesStartUp}">
+						
+						<p:ajax 
+							event="change" 
+							process="@form"
+							oncomplete="updateConfigs();" />	
+					</p:selectBooleanCheckbox>
 					
 					<p:outputLabel 
 						value="#{label.show_card_values_startup}" />
 				</div>			
 			</h:form>
 		</p:overlayPanel>
-		
-		<components:requirePassword 
-			widgetVar="dialogShowValuesVW"
-			text="#{label.enter_your_password_to_do_action}"
-			action="#{MBAppConfigs.confirmShowValues}"
-			update="preferences" />
-		
-		<components:requirePassword 
-			widgetVar="dialogShowValuesOnStartUpVW"
-			text="#{label.enter_your_password_to_do_action}"
-			action="#{MBAppConfigs.confirmShowValuesOnStartUp}"
-			update="preferences" />
 	</h:body>
 </html>

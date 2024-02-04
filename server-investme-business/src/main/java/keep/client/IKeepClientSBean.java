@@ -24,5 +24,4 @@ public interface IKeepClientSBean {
 	public List<TOClient> listClientsLov(TOFilterLovClient filter);
 	public void setNewPassword(String email, String password);
 	public void finishRegister(String email);
-	public boolean isPasswordValidForAction(int clientId, String password);
 }
