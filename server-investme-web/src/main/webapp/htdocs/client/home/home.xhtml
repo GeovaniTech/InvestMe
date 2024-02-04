@@ -19,23 +19,23 @@
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/home/home.css" />
 			
+			<div jsf:id="charts" class="horizontal-evenly">
+				<div class="vertical-center" style="display: #{MBChartInvestments.hasData ? 'flex' : 'none'}">
+					<ui:include src="/htdocs/client/investments/chart_investments_by_category.xhtml" />
+					<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalInvestment()) : '******'}</p>
+				</div>
+				
+				<div class="vertical-center" style="display: #{MBChartExpenditures.hasData ? 'flex' : 'none'}">
+					<ui:include src="/htdocs/client/expenditures/chart_expenditures_by_category.xhtml" />
+					<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalExpense()) : '******'}</p>
+				</div>
+			</div>
+			
 			<h:form id="formTransactions">
 				<p:remoteCommand 
 					name="updateTableAndCards"
-					update="formTransactions:cards, formTransactions:tableTransactions" />
+					update="formTransactions:tableTransactions, :charts" />
 		
-				<div jsf:id="cards" class="horizontal-left-center wrap">
-					<components:card 
-						title="#{label.investments}"
-						value="#{MBAppConfigs.getBrazilianCurrency(MBHome.getTotalInvestment())}"
-						primefacesIcon="trending_up"/>
-						
-					<components:card 
-						title="#{label.expenditures}"
-						value="#{MBAppConfigs.getBrazilianCurrency(MBHome.getTotalExpense())}"
-						primefacesIcon="trending_down"/>
-				</div>
-				
 				<h2>#{label.last_transactions}</h2>
 		
 				<div class="top-buttons mg-b-10">
@@ -128,16 +128,20 @@
 								icon="pi pi-search"
 								value="#{label.search}"
 								update="@form"
-								onclick="PF('tableTransactionsVW').filter();" 
+								onclick="PF('tableTransactionsVW').filter();"
+								oncomplete="reloadChartInvestments(); reloadChartExpenditures();" 
 								styleClass="mg-r-5" />
 
 							<p:commandButton 
 								icon="pi pi-filter-slash"
 								value="#{label.clear_filters}" 
+								oncomplete="reloadChartInvestments(); reloadChartExpenditures();" 
 								action="#{MBHome.clearFilters}"
 								update="@form" />
 						</f:facet>
 					</p:toolbar>
+					
+					<p:defaultCommand target="btnSearchResults" />
 				</p:overlayPanel>
 				
 				<p:dataTable

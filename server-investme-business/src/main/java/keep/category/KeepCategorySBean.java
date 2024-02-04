@@ -122,5 +122,4 @@ public class KeepCategorySBean extends AbstractKeep<Category, TOCategory> implem
 		return sql.toString();
 	}
 	
-	
 }

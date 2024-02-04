@@ -1,4 +1,4 @@
-package managedBean.invetment;
+package managedBean.investment;
 
 import java.util.List;
 

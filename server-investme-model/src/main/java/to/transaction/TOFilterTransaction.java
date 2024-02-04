@@ -5,7 +5,7 @@ import to.TODateRangeFilter;
 import to.TOInputFilter;
 import to.TOInputNumberFilter;
 
-public class TOFilterTransaction extends AbstractTOFilter {
+public class TOFilterTransaction extends AbstractTOFilter implements Cloneable {
 
 	private static final long serialVersionUID = 1199959907542665089L;
 
@@ -59,5 +59,10 @@ public class TOFilterTransaction extends AbstractTOFilter {
 	public void setIdPayment(Integer idPayment) {
 		this.idPayment = idPayment;
 	}
-	
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
 }

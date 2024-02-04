@@ -8,3 +8,7 @@
 #menu-investments > * {
 	color: var(--text-mouse);
 }
+
+.container-chart-investments > * {
+	height: 300px;
+}

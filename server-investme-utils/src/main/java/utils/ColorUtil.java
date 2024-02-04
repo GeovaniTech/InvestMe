@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ColorUtil {
-    private static List<String> generateRandomColors(int numColors) {
+    public static List<String> generateRandomColors(int numColors) {
         List<String> colors = new ArrayList<>();
         Random rand = new Random();
         for (int i = 0; i < numColors; i++) {

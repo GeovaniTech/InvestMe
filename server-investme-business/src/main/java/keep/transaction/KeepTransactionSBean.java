@@ -245,4 +245,43 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		return 0.0;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Number> getTotalByCategoryChartInvestment(TOFilterTransaction filter) {		
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT SUM(T.price * T.amount) ")
+			.append(this.getFromTransactions())
+			.append(" RIGHT JOIN T.category category ")
+			.append(this.getWhereTransactions(filter, params))
+			.append(" GROUP BY category.name ")
+			.append(" ORDER BY category.name ");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString(), Number.class);
+		setParameters(query, params);
+		
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getCategoriesNameWithTransactions(TOFilterTransaction filter) {
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT T.category.name FROM ");
+		sql.append(Transaction.class.getSimpleName()).append(" T ");
+		sql.append(this.getWhereTransactions(filter, params));
+		sql.append(" GROUP BY T.category.name ");
+		sql.append(" ORDER BY T.category.name");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString(), String.class);
+		setParameters(query, params);
+		
+		return query.getResultList();
+	}
+
 }
