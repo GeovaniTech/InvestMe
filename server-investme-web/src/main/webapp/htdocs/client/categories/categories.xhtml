@@ -21,7 +21,7 @@
 			<h:form id="formCategories">
 				<p:remoteCommand 
 					name="updateTableCategories"
-					update="formCategories:tableCategories"/>
+					update="formCategories:tableCategories:tableCategories"/>
 			
 				<div class="top-buttons mg-b-10">
 					<p:commandButton 
@@ -67,36 +67,25 @@
 					</p:toolbar>
 				</p:overlayPanel>
 				
-				<p:dataTable
+				<components:datatableSingleSelection
 					id="tableCategories"
-					var="toCategory" 
 					widgetVar="tableCategoriesVW"
-					value="#{MBCategory.results}"
-					rowKey="#{toCategory.id}"
-					rows="20"
-					paginator="true" 
-	               	paginatorPosition="top"
-	                lazy="true"
 	                selection="#{MBCategory.category}"
-	                selectionMode="single">
-	                
-	                <p:ajax 
-	                	event="rowSelect" 
-	                	listener="#{MBCategory.onRowSelect}"
-	                	oncomplete="PF('dialogCategoryInfoVW').show();" />
+	                mBean="#{MBCategory}"
+	                oncomplete="PF('dialogCategoryInfoVW').show();">
 					
 					<p:column headerText="#{label.name}">
-						<h:outputText value="#{toCategory.name}"/>
+						<h:outputText value="#{to.name}"/>
 					</p:column>
 					
 					<p:column headerText="#{label.icon}">
 						<h:panelGroup>
 							<span class="material-symbols-outlined google-icons">
-								#{toCategory.icon}
+								#{to.icon}
 							</span>
 						</h:panelGroup>
 					</p:column>
-				</p:dataTable>
+				</components:datatableSingleSelection>
 			</h:form>
 			
 			<ui:include src="/htdocs/client/categories/category_info.xhtml" />

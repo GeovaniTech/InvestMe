@@ -22,7 +22,7 @@
 			<h:form id="formInvestments">
 				<p:remoteCommand 
 					name="updateTableAndCards"
-					update="formInvestments:cards, formInvestments:tableInvestments"/>
+					update="formInvestments:cards, formInvestments:tableInvestments:tableInvestments"/>
 			
 				<div jsf:id="cards" class="horizontal-left-center wrap">
 					<ui:repeat var="category" value="#{MBInvestment.categories}">
@@ -129,24 +129,13 @@
 					</p:toolbar>
 				</p:overlayPanel>
 				
-				<p:dataTable
+				<components:datatableSingleSelection
 					id="tableInvestments"
-					var="to" 
 					widgetVar="tableInvestmentsVW"
-					value="#{MBInvestment.results}"
-					rowKey="#{to.id}"
-					rows="20"
-					paginator="true" 
-	               	paginatorPosition="top"
-	                lazy="true"
+					mBean="#{MBInvestment}"
 	                selection="#{MBInvestment.investment}"
-	                selectionMode="single">
+	                oncomplete="PF('dialogTransactionInfoVW').show();">
 	                
-	                <p:ajax 
-	                	event="rowSelect" 
-	                	listener="#{MBInvestment.onRowSelect}"
-	                	oncomplete="PF('dialogTransactionInfoVW').show();" />
-					
 					<p:column headerText="#{label.active}">
 						<h:outputText value="#{to.active}"/>
 					</p:column>
@@ -176,7 +165,7 @@
 					<p:column headerText="#{label.payment}">
 						<h:outputText value="#{to.payment.name}" />
 					</p:column>
-				</p:dataTable>
+				</components:datatableSingleSelection>
 			</h:form>
 			
 			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />

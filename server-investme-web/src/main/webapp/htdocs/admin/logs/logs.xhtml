@@ -93,23 +93,11 @@
 					<p:defaultCommand target="btnSearchResults" />
 				</p:overlayPanel>
 				
-				<p:dataTable
+				<components:datatableSingleSelection
 					id="tableLogs"
-					var="to" 
 					widgetVar="tableLogsVW"
-					value="#{MBLog.results}"
-					rowKey="#{to.id}"
-					rows="20"
-					paginator="true" 
-	               	paginatorPosition="top"
-	                lazy="true"
-	                selection="none"
-	                selectionMode="single">
-	                
-	                <p:ajax 
-	                	event="rowSelect" 
-	                	listener="#{MBLog.onRowSelect}"
-	                	oncomplete="PF('dialogStackDetailsWV').show();" />
+					mBean="#{MBLog}"
+					oncomplete="PF('dialogStackDetailsWV').show();">
 					
 					<p:column headerText="#{label.email}">
 						<h:outputText value="#{to.creationUser}" />
@@ -132,7 +120,7 @@
 					<p:column headerText="#{label.type}">
 						<h:outputText value="#{to.type}" />
 					</p:column>
-				</p:dataTable>				
+				</components:datatableSingleSelection>				
 			</h:form>
 			
 			<ui:include src="/htdocs/admin/logs/stack_details.xhtml" />

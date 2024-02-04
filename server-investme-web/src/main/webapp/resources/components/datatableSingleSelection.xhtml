@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+	<composite:interface>
+		<composite:attribute name="id" />
+		<composite:attribute name="widgetVar" />
+		<composite:attribute name="mBean" />
+		<composite:attribute name="oncomplete" />
+		<composite:attribute name="rowStyleClass" />
+		<composite:attribute name="reflow" default="true" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<p:dataTable
+			id="#{cc.attrs.id}"
+			var="to" 
+			widgetVar="#{cc.attrs.widgetVar}"
+			value="#{cc.attrs.mBean.results}"
+			rowKey="#{to.id}"
+			rows="20"
+			paginator="true" 
+           	paginatorPosition="top"
+            lazy="true"
+            selection="#{cc.attrs.selection}"
+            selectionMode="single"
+            rowStyleClass="#{cc.attrs.rowStyleClass}"
+            reflow="#{cc.attrs.reflow}">
+               
+            <p:ajax 
+             	event="rowSelect" 
+             	listener="#{cc.attrs.mBean.onRowSelect}"
+             	oncomplete="#{cc.attrs.oncomplete}" />
+			
+			<composite:insertChildren />
+		</p:dataTable>		
+	</composite:implementation>
+</html>

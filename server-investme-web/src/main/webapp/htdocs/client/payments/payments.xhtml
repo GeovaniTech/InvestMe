@@ -21,7 +21,7 @@
 			<h:form id="formPayments">
 				<p:remoteCommand 
 					name="updateTablePayments"
-					update="formPayments:tablePayments"/>
+					update="formPayments:tablePayments:tablePayments"/>
 			
 				<div class="top-buttons mg-b-10">
 					<p:commandButton 
@@ -40,7 +40,7 @@
 				<p:overlayPanel id="overlayFilters" for="btnFiltersPayment">
 					<div class="horizontal-left-center">
 						<div class="search-group">
-							<components:inputFilter 
+							<components:inputFilter
 								label="#{label.name}"
 								toInputFilter="#{MBPayment.filter.name}" />
 						</div>
@@ -67,36 +67,25 @@
 					</p:toolbar>
 				</p:overlayPanel>
 				
-				<p:dataTable
-					id="tablePayments"
-					var="toPayment" 
+				<components:datatableSingleSelection
+					id="tablePayments" 
 					widgetVar="tablePaymentsVW"
-					value="#{MBPayment.results}"
-					rowKey="#{toPayment.id}"
-					rows="20"
-					paginator="true" 
-	               	paginatorPosition="top"
-	                lazy="true"
+					mBean="#{MBPayment}"
 	                selection="#{MBPayment.payment}"
-	                selectionMode="single">
-	                
-	                <p:ajax 
-	                	event="rowSelect" 
-	                	listener="#{MBPayment.onRowSelect}"
-	                	oncomplete="PF('dialogPaymentInfoVW').show();" />
+	                oncomplete="PF('dialogPaymentInfoVW').show();">
 					
 					<p:column headerText="#{label.name}">
-						<h:outputText value="#{toPayment.name}"/>
+						<h:outputText value="#{to.name}"/>
 					</p:column>
 					
 					<p:column headerText="#{label.icon}">
 						<h:panelGroup>
 							<span class="material-symbols-outlined google-icons">
-								#{toPayment.icon}
+								#{to.icon}
 							</span>
 						</h:panelGroup>
 					</p:column>
-				</p:dataTable>
+				</components:datatableSingleSelection>
 			</h:form>
 			
 			<ui:include src="/htdocs/client/payments/payment_info.xhtml" />

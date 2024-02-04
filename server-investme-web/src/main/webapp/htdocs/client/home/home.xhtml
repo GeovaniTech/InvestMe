@@ -34,7 +34,7 @@
 			<h:form id="formTransactions">
 				<p:remoteCommand 
 					name="updateTableAndCards"
-					update="formTransactions:tableTransactions, :charts" />
+					update="formTransactions:tableTransactions:tableTransactions, :charts" />
 		
 				<h2>#{label.last_transactions}</h2>
 		
@@ -144,24 +144,13 @@
 					<p:defaultCommand target="btnSearchResults" />
 				</p:overlayPanel>
 				
-				<p:dataTable
+				<components:datatableSingleSelection
 					id="tableTransactions"
-					var="to" 
 					widgetVar="tableTransactionsVW"
-					value="#{MBHome.results}"
-					rowKey="#{to.id}"
-					rows="20"
-					paginator="true" 
-	               	paginatorPosition="top"
-	                lazy="true"
-	                selection="#{MBHome.transaction}"
-	                selectionMode="single"
-	                rowStyleClass="#{to.category.type eq 'investment' ? 'row-investment' : 'row-expense'}">
-	                
-	                <p:ajax 
-	                	event="rowSelect" 
-	                	listener="#{MBHome.onRowSelect}"
-	                	oncomplete="PF('dialogTransactionInfoVW').show();" />
+					mBean="#{MBHome}"
+					selection="#{MBHome.transaction}"
+					oncomplete="PF('dialogTransactionInfoVW').show();"  
+					rowStyleClass="#{to.category.type eq 'investment' ? 'row-investment' : 'row-expense'}">
 					
 					<p:column headerText="#{label.active}">
 						<h:outputText value="#{to.active}"/>
@@ -192,7 +181,7 @@
 					<p:column headerText="#{label.payment}">
 						<h:outputText value="#{to.payment.name}" />
 					</p:column>
-				</p:dataTable>
+				</components:datatableSingleSelection>
 			</h:form>
 			
 			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />

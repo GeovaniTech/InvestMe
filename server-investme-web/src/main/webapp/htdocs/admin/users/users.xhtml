@@ -26,7 +26,7 @@
 					
 				<p:remoteCommand 
 					name="updateTableClients"
-					update="tableClients" />
+					update="tableClients:tableClients" />
 				
 				<div class="top-buttons mg-b-10">						
 					<p:commandButton 
@@ -127,62 +127,51 @@
 					<p:defaultCommand target="btnSearchResults" />
 				</p:overlayPanel>
 			
-				<p:dataTable 
+				<components:datatableSingleSelection 
 					id="tableClients"
-					var="toClient" 
 					widgetVar="tableClientsVW"
-					value="#{MBClient.results}"
-					rowKey="#{toClient.id}"
-					rows="20"
-                    paginator="true" 
-                    paginatorPosition="top"
-                    lazy="true"
+					mBean="#{MBClient}"
                     selection="#{MBClient.client}"
-                    selectionMode="single">
-                    
-                    <p:ajax 
-                    	event="rowSelect" 
-                    	listener="#{MBClient.onRowSelect}"
-                    	oncomplete="openEditClient();" />
+                    oncomplete="openEditClient();">
 
 					<p:column headerText="#{label.email}">					
-						<h:outputText value="#{toClient.email}" />
+						<h:outputText value="#{to.email}" />
 					</p:column>
 					
 					<p:column headerText="#{label.security_level}">
-						<h:outputText value="#{toClient.securityLevel}"/>
+						<h:outputText value="#{to.securityLevel}"/>
 					</p:column>
 					
 					<p:column headerText="#{label.blocked}">
-						<h:outputText value="#{toClient.blocked ? label.yes : label.no}" />
+						<h:outputText value="#{to.blocked ? label.yes : label.no}" />
 					</p:column>
 					
 					<p:column headerText="#{label.last_login}">						
-						<h:outputText value="#{toClient.lastLogin}">
+						<h:outputText value="#{to.lastLogin}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 						</h:outputText>
 					</p:column>
 					
 					<p:column headerText="#{label.creation_user}">					
-						<h:outputText value="#{toClient.creationUser}" />
+						<h:outputText value="#{to.creationUser}" />
 					</p:column>
 					
 					<p:column headerText="#{label.creation_date}">
-						<h:outputText value="#{toClient.creationDate}">
+						<h:outputText value="#{to.creationDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 						</h:outputText>
 					</p:column>
 					
 					<p:column headerText="#{label.change_user}">
-						<h:outputText value="#{toClient.changeUser}" />
+						<h:outputText value="#{to.changeUser}" />
 					</p:column>
 					
 					<p:column headerText="#{label.change_date}">
-						<h:outputText value="#{toClient.changeDate}">
+						<h:outputText value="#{to.changeDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 						</h:outputText>
 					</p:column>
-				</p:dataTable>
+				</components:datatableSingleSelection>
 			</h:form>
 			
 			<ui:include src="/htdocs/admin/users/user_info.xhtml" />
