@@ -17,11 +17,12 @@
 		<p:remoteCommand 
 			name="reloadChartInvestments"
 			action="#{MBChartInvestments.createChartInvestments}"
-			update="@form, :charts" />
+			update="@form" />
 
-		<div class="container-chart-investments horizontal-left">
-			<p:pieChart model="#{MBChartInvestments.pieModel}" rendered="#{MBChartInvestments.hasData}" />	
-		</div>
+		<div class="container-chart-investments vertical-center" style="display: #{MBChartInvestments.hasData ? 'flex' : 'none'}">
+			<p:pieChart model="#{MBChartInvestments.pieModel}" rendered="#{MBChartInvestments.hasData}" />
+			<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalInvestment()) : '******'}</p>
+		</div>	
 	</h:form>
 </ui:composition>
 </html>

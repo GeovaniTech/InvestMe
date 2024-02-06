@@ -20,22 +20,15 @@
 			<h:outputStylesheet library="css" name="/client/home/home.css" />
 			
 			<div jsf:id="charts" class="horizontal-evenly">
-				<div class="vertical-center" style="display: #{MBChartInvestments.hasData ? 'flex' : 'none'}">
-					<ui:include src="/htdocs/client/investments/chart_investments_by_category.xhtml" />
-					<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalInvestment()) : '******'}</p>
-				</div>
-				
-				<div class="vertical-center" style="display: #{MBChartExpenditures.hasData ? 'flex' : 'none'}">
-					<ui:include src="/htdocs/client/expenditures/chart_expenditures_by_category.xhtml" />
-					<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalExpense()) : '******'}</p>
-				</div>
+				<ui:include src="/htdocs/client/investments/chart_investments_by_category.xhtml" />
+				<ui:include src="/htdocs/client/expenditures/chart_expenditures_by_category.xhtml" />
 			</div>
 			
 			<h:form id="formTransactions">
 				<p:remoteCommand 
 					name="updateTableAndCards"
 					onstart="reloadChartInvestments(); reloadChartExpenditures();"
-					update="formTransactions:tableTransactions:tableTransactions, :charts" />
+					update="formTransactions:tableTransactions:tableTransactions" />
 		
 				<h2>#{label.last_transactions}</h2>
 		
