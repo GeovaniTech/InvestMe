@@ -34,6 +34,7 @@
 			<h:form id="formTransactions">
 				<p:remoteCommand 
 					name="updateTableAndCards"
+					onstart="reloadChartInvestments(); reloadChartExpenditures();"
 					update="formTransactions:tableTransactions:tableTransactions, :charts" />
 		
 				<h2>#{label.last_transactions}</h2>
