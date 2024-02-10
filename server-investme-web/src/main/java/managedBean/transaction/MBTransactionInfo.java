@@ -106,6 +106,7 @@ public class MBTransactionInfo extends AbstractMBean {
 			showMessageItemRemoved(this.getTransaction().getActive());
 			
 			this.setEditing(false);
+			this.initTransaction();
 		} catch (Exception e) {
 			showMessageError(e);
 		}
@@ -127,12 +128,8 @@ public class MBTransactionInfo extends AbstractMBean {
 
 	public void initTransactionFromHome() {
 		this.initTransaction();
-		
 		this.setEditing(false);
-
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("expense"));
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("investment"));
-		
+		this.listAllCategories();
 		this.updateForm();
 	}
 	
@@ -146,6 +143,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void initInvestment() {
 		this.initTransaction();
 		this.listCategoriesInvestment();
+		this.setEditing(false);
 		this.updateForm();
 	}
 	
@@ -169,15 +167,12 @@ public class MBTransactionInfo extends AbstractMBean {
 
 	public void editTransaction(TOTransaction transaction) {
 		this.setTransaction(transaction);
-		
 		this.setEditing(true);
 		
 		this.setIdCategorySelected(transaction.getCategory().getId());
 		this.setIdPaymentSelected(transaction.getPayment().getId());
 		
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("expense"));
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("investment"));
-		
+		this.listAllCategories();
 		this.updateForm();
 	}
 	
@@ -187,6 +182,11 @@ public class MBTransactionInfo extends AbstractMBean {
 	
 	public void listCategoriesExpense() {
 		this.setCategories(this.getCategorySBean().searchCategoriesByType("expense"));
+	}
+	
+	public void listAllCategories() {
+		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("expense"));
+		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("investment"));
 	}
 	
 	public void updateForm() {
