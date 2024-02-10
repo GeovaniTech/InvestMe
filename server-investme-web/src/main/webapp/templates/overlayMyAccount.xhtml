@@ -22,44 +22,12 @@
 				color: var(--text-mouse) !important;
 			}
 		</style>	
-			
+	
 		<p:overlayPanel 
 			id="overlayMyAccount"
 			for="my_account">
 			
-			<div class="horizontal-left mg-b-10">
-				<div class="vertical-left mg-r-10">
-					<p:avatar label="#{MBAppConfigs.userLogged ? MBAppConfigs.clientLogged.email.toUpperCase().substring(0, 1) : 'U'}" size="large" style="background-color:#9c27b0; color:#fff" />
-				</div>
-				
-				<div class="vertical-left">
-					<strong style="color: var(--text-mouse);"><h:outputLabel value="#{label.user}" for="email" /></strong>
-					<p id="email" style="display: #{MBAppConfigs.userLogged ? 'flex' : 'none'}">#{MBAppConfigs.clientLogged.email}</p>
-					<p:commandLink
-						value="#{label.do_login}"
-						action="#{MBAppConfigs.redirectTo('/investme/login')}"
-						rendered="#{MBAppConfigs.userLogged ? false : true}" />
-				</div>
-			</div>
-			
-			<div class="vertical-center" style="width: 100%;">
-				<h:panelGroup rendered="#{MBAppConfigs.userLogged ? true : false}">					
-					<p:commandLink 
-						action="#{MBAppConfigs.logout()}"
-						styleClass="buttonMyAccount">
-						
-						#{label.logout}
-					</p:commandLink>
-				</h:panelGroup>
-				
-			</div>
-		</p:overlayPanel>
-	
-		<p:overlayPanel 
-			id="overlayMyAccountDesktop"
-			for="my_account">
-			
-			<div class="horizontal-left mg-b-10">
+			<div class="horizontal-left mg-b-10" style="flex-wrap: nowrap;">
 				<div class="vertical-left mg-r-10">
 					<p:avatar label="#{MBAppConfigs.userLogged ? MBAppConfigs.clientLogged.email.toUpperCase().substring(0, 1) : 'U'}" size="large" style="background-color: var(--blue); color:#fff" />
 				</div>
