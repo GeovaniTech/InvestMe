@@ -65,7 +65,7 @@
 			        		showIcon="false"
 			        		showDetail="false" />
 			
-						<div>
+						<div class="vertical-left" style="width: 100%;">
 							<p:outputLabel for="email" value="#{label.email}"/>
 							<p:inputText 
 								id="email"
@@ -76,7 +76,7 @@
 								styleClass="field mg-b-10" />
 						</div>
 						
-						<div>
+						<div class="vertical-left mg-b-10" style="width: 100%;">
 							<p:outputLabel for="password" value="#{label.password}"/>
 				            <p:password 
 	    						id="password"
@@ -85,10 +85,10 @@
 					           	requiredMessage="#{label.password_required}"
 					           	placeholder="#{label.password}"
 					           	toggleMask="true"
-					           	styleClass="field mg-b-10" />
+					           	styleClass="field" />
 						</div>
 						
-						<div>
+						<div class="vertical-left" style="width: 100%;">
 							<p:outputLabel for="repeatPassword" value="#{label.repeat_password}"/>
 				            <p:password 
 	    						id="repeatPassword"

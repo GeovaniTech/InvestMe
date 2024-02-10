@@ -90,10 +90,14 @@ form {
 	justify-content: center;
 }
 
-.field {
-    width: 330px !important;
+.ui-inputfield {
+    width: 100% !important;
 	background-color: var(--background-general-mouse) !important;
 	font-size: 18px !important;
+}
+
+.ui-password {
+	width: 100%;
 }
 
 .container a {
@@ -189,12 +193,13 @@ form {
 
 @media (max-width: 400px) {
 	.container {
-		width: 95vw;
-		height: 80vh;
-		padding: 30px;
+		width: 100vw;
+		height: 100vh;
+		border-radius: 0px;
 	}
 	
 	body {
 		background-color: var(--background-body) !important;
+		background-image: none;
 	}
 }
