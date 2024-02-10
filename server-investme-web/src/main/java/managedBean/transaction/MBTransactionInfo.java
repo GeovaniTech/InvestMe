@@ -185,6 +185,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	}
 	
 	public void listAllCategories() {
+		this.setCategories(new ArrayList<TOCategory>());
 		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("expense"));
 		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("investment"));
 	}
