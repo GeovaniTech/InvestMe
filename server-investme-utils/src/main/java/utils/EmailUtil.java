@@ -1,6 +1,7 @@
 package utils;
 
 
+import java.io.FileInputStream;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +14,7 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import security.wildfly.WildflyConfigs;
 
 public class EmailUtil {
     private static final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
@@ -32,8 +34,14 @@ public class EmailUtil {
         	properties.put("mail.smtp.host", "smtp.gmail.com");
         	properties.put("mail.smtp.port", "587");
         	
-        	String myAccountEmail = "devpreetestes@gmail.com";
-        	String password = "dirjdcospowfrcfa";
+        	Properties appConfigs = new Properties();
+        	
+        	try (FileInputStream fis = new FileInputStream(WildflyConfigs.appConfigsPath)) {
+        		appConfigs.load(fis);
+        	}
+        	
+        	String myAccountEmail = appConfigs.getProperty("email_server");
+        	String password = appConfigs.getProperty("email_password");
         	
         	Session session = Session.getInstance(properties, new Authenticator() {
         		@Override
