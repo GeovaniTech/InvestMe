@@ -185,7 +185,8 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		
 		sql.append(" SELECT DISTINCT YEAR(T.datePurchase) ")
 			.append(this.getFromTransactions())
-			.append(" WHERE T.client.id = :clientId ");
+			.append(" WHERE T.client.id = :clientId ")
+			.append(" ORDER BY YEAR(T.datePurchase) DESC ");
 		
 		Query query = this.getEntityManager().createQuery(sql.toString());
 		query.setParameter("clientId", this.getClientSession().getId());
