@@ -6,7 +6,7 @@
 	<groupId>br.com.devpree</groupId>
 	<artifactId>
 		investme</artifactId>
-	<version>1.0.X-SNAPSHOT</version>
+	<version>1.0.X-Api-AlphaVantage-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -43,31 +43,31 @@
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme-web</artifactId>
-				<version>1.0.X-SNAPSHOT</version>
+				<version>1.0.X-Api-AlphaVantage-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme-model</artifactId>
-				<version>1.0.X-SNAPSHOT</version>
+				<version>1.0.X-Api-AlphaVantage-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme-business</artifactId>
-				<version>1.0.X-SNAPSHOT</version>
+				<version>1.0.X-Api-AlphaVantage-SNAPSHOT</version>
 			</dependency>
 
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme-utils</artifactId>
-				<version>1.0.X-SNAPSHOT</version>
+				<version>1.0.X-Api-AlphaVantage-SNAPSHOT</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme</artifactId>
-				<version>1.0.X-SNAPSHOT</version>
+				<version>1.0.X-Api-AlphaVantage-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
