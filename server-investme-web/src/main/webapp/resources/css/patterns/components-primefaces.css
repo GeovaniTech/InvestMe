@@ -33,6 +33,10 @@
 	background-color: var(--background-general-mouse) !important;	
 }
 
+.ui-selectonemenu-filter-container {
+	background-color: var(--background-general) !important;
+}
+
 /* #################### BUTTON #################### */
 
 .ui-button {
@@ -133,19 +137,11 @@
 /* #################### INPUTEXT/INPUTFIELD #################### */
 
 .ui-inputtext, .ui-inputfield {
-    font-size: 16px !important;
-    padding: 8px !important;
     background-color: var(--background-general-mouse) !important;
     border: 1px solid var(--border-radius) !important;
     border-radius: 5px !important;
     outline: none !important;
     color: var(--text-mouse) !important;
-}
-
-@media (max-width: 600px) {
-	.ui-inputtext, .ui-inputfield {
-		width: 150px !important;
-	}
 }
 
 /* #################### DATAPICKER #################### */
