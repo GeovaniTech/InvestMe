@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Investme Build
+name: maven_build
 
 
 # Quando executar um push ou for feito um pull_request vai executar as tarefas
