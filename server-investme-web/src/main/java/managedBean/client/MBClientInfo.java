@@ -89,7 +89,7 @@ public class MBClientInfo extends AbstractMBean {
 		description.append("Estamos felizes em tê-lo(a) como nosso(a) cliente.</p>");
 		description.append("<p>Seu cadastro foi realizado manualmente. Para o seu primeiro acesso à plataforma, utilize o seu e-mail e a senha temporária 123. Após o primeiro login, recomendamos que escolha uma nova senha para garantir a segurança da sua conta.</p>");
 		description.append("<p><a href=https://www.devpree.com.br/investme/login>");
-		description.append("Acessar a LeCoffee</a></p>");
+		description.append("Acessar o InvestMe</a></p>");
 		description.append("<p>Caso você não tenha solicitado uma conta no InvestMe ");
 		description.append("ou acredite que este email tenha sido enviado por engano, por favor, desconsidere esta mensagem.</p>");
 		description.append("Atenciosamente, <br>");
