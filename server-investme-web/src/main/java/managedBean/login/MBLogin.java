@@ -37,7 +37,7 @@ public class MBLogin extends AbstractMBean {
 			if(this.getClientSBean().logar(this.getEmail(), this.getPassword())) {
 				this.getMBAppConfigs().configAppByUserPreferences();
 				
-				RedirectURL.redirectTo("/investme/client/home");
+				RedirectURL.redirectTo("/investme/client/wallet");
 			}
 			
 			return;

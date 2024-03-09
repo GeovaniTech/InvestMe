@@ -13,11 +13,11 @@
 <h:body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="name_page">
-			<h:outputText value="#{label.home}" />
+			<h:outputText value="#{label.wallet}" />
 		</ui:define>
 
 		<ui:define name="body">
-			<h:outputStylesheet library="css" name="/client/home/home.css" />
+			<h:outputStylesheet library="css" name="/client/wallet/wallet.css" />
 			
 			<div jsf:id="charts" class="horizontal-evenly">
 				<ui:include src="/htdocs/client/investments/chart_investments_by_category.xhtml" />
@@ -181,7 +181,7 @@
 			</h:form>
 			
 			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />
-			<ui:include src="/htdocs/client/home/chart_spents.xhtml" />
+			<ui:include src="/htdocs/client/wallet/chart_spents.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

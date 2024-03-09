@@ -30,9 +30,9 @@
 		<view-id value="/htdocs/home/new_password.xhtml?token=#{token}" />
 	</url-mapping>
 	
-	<url-mapping id="home">
-		<pattern value="/client/home" />
-		<view-id value="/htdocs/client/home/home.xhtml" />
+	<url-mapping id="wallet">
+		<pattern value="/client/wallet" />
+		<view-id value="/htdocs/client/wallet/wallet.xhtml" />
 	</url-mapping>
 	
 	<url-mapping id="investments">

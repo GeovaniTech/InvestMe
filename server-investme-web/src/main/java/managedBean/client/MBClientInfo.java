@@ -114,7 +114,7 @@ public class MBClientInfo extends AbstractMBean {
 	public void accessUserAccount() {
 		this.getSession().setAttribute("client", this.getClient());
 		
-		RedirectURL.redirectTo("/investme/client/home");
+		RedirectURL.redirectTo("/investme/client/wallet");
 	}
 	
 	// Getters and Settersclient
