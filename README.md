@@ -1,6 +1,7 @@
 # InvestMe
-A web system to centralize all your investments and expenses in one place
-
+A web system to centralize all your investments and expenses in one place </br></br>
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/GeovaniTech/InvestMe/maven.yml)
+![GitHub Release](https://img.shields.io/github/v/release/geovaniTech/InvestMe)
 
 ## Access to the plataform
 <a href="https://www.devpree.com.br/investme/login">InvestMe System</a>

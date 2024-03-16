@@ -281,7 +281,9 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		
 		query.executeUpdate();
 		
-		RedirectURL.redirectTo("/investme/login/newpassword");
+		if(this.logar(email, password)) {
+			RedirectURL.redirectTo("/investme/client/wallet");
+		}
 	}
 
 	@Override
