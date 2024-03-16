@@ -13,8 +13,6 @@ import jakarta.inject.Named;
 import keep.category.IKeepCategorySBean;
 import keep.payment.IKeepPaymentSBean;
 import keep.transaction.IKeepTransactionSBean;
-import managedBean.expense.MBChartExpenditures;
-import managedBean.investment.MBChartInvestments;
 import managedBean.transaction.MBTransactionInfo;
 import to.category.TOCategory;
 import to.payment.TOPayment;
@@ -89,14 +87,6 @@ public class MBHome extends AbstractFilterMBean<TOTransaction, TOFilterTransacti
 	
 	public MBTransactionInfo getMBTransactionInfo() {
 		return this.getMBean(MBTransactionInfo.MANAGED_BEAN_NAME);
-	}
-	
-	public MBChartInvestments getMBChartInvestments() {
-		return this.getMBean(MBChartInvestments.MANAGED_BEAN_NAME);
-	}
-	
-	public MBChartExpenditures getMBChartExpenditures() {
-		return this.getMBean(MBChartExpenditures.MANAGED_BEAN_NAME);
 	}
 
 	public IKeepTransactionSBean getTransactionSBean() {

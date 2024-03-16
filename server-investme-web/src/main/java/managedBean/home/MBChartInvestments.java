@@ -1,4 +1,4 @@
-package managedBean.expense;
+package managedBean.home;
 
 import java.util.List;
 
@@ -13,32 +13,32 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import keep.category.IKeepCategorySBean;
 import keep.transaction.IKeepTransactionSBean;
-import managedBean.home.MBHome;
 import to.transaction.TOFilterTransaction;
 import utils.ColorUtil;
 
-@Named(MBChartExpenditures.MANAGED_BEAN_NAME)
+@Named(MBChartInvestments.MANAGED_BEAN_NAME)
 @ViewScoped
-public class MBChartExpenditures extends AbstractMBean {
+public class MBChartInvestments extends AbstractMBean {
 
 	private static final long serialVersionUID = 7671190281894410973L;
-	public static final String MANAGED_BEAN_NAME = "MBChartExpenditures";
+	public static final String MANAGED_BEAN_NAME = "MBChartInvestments";
 	
 	private PieChartModel pieModel;
-	private boolean hasData;
 	
 	@EJB
 	private IKeepTransactionSBean transactionSBean;
 	
 	@EJB
 	private IKeepCategorySBean categorySBean;
+
+	private boolean hasData = false;
 	
 	@PostConstruct
 	public void init() {
-		this.createChartExpenditures();
+		this.createChartInvestments();
 	}
 	
-	public void createChartExpenditures() {
+	public void createChartInvestments() {
         this.setPieModel(new PieChartModel());
         
         ChartData data = new ChartData();
@@ -52,7 +52,7 @@ public class MBChartExpenditures extends AbstractMBean {
 			showMessageError(e);
 		}
         
-        filter.setType("expense");
+        filter.setType("investment");
         
         List<String> labels = this.getTransactionSBean().getCategoriesNameWithTransactions(filter);
         data.setLabels(labels);
@@ -65,14 +65,13 @@ public class MBChartExpenditures extends AbstractMBean {
         	this.setHasData(false);
         }
         
-        
         dataSet.setData(values);
         dataSet.setBackgroundColor(ColorUtil.generateRandomColors(values.size()));
         
         data.addChartDataSet(dataSet);
         
         this.getPieModel().setData(data);
-	}
+	}	
 	
 	public MBHome getMBHome() {
 		return this.getMBean(MBHome.MANAGED_BEAN_NAME);

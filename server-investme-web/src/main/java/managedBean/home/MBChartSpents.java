@@ -15,7 +15,6 @@ import jakarta.ejb.EJB;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import keep.transaction.IKeepTransactionSBean;
-import managedBean.investment.MBInvestment;
 import utils.MessageUtil;
 
 @Named(MBChartSpents.MANAGED_BEAN_NAME)

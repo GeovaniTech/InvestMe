@@ -35,16 +35,6 @@
 		<view-id value="/htdocs/client/wallet/wallet.xhtml" />
 	</url-mapping>
 	
-	<url-mapping id="investments">
-		<pattern value="/client/investments" />
-		<view-id value="/htdocs/client/investments/investments.xhtml" />
-	</url-mapping>
-	
-	<url-mapping id="expenditures">
-		<pattern value="/client/expenditures" />
-		<view-id value="/htdocs/client/expenditures/expenditures.xhtml" />
-	</url-mapping>
-	
 	<url-mapping id="categories">
 		<pattern value="/client/categories" />
 		<view-id value="/htdocs/client/categories/categories.xhtml" />
