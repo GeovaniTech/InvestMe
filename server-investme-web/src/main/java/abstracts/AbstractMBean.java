@@ -27,7 +27,7 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 	}
 	
 	public void showMessageItemRemoved(String itemName) {
-		MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("msg_item_removed", itemName), FacesMessage.SEVERITY_ERROR);
+		MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("msg_item_removed", itemName), FacesMessage.SEVERITY_INFO);
 	}
 	
 	public void showMessageError(Exception e) {

@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import to.TOParameter;
+import utils.MessageUtil;
 
 public abstract class AbstractKeep<model, to> extends AbstractSession {	
 	@PersistenceContext(unitName = "investme_datasource")
@@ -55,6 +56,10 @@ public abstract class AbstractKeep<model, to> extends AbstractSession {
 		}
 	}
 
+	public String getLabel(String key) {
+		return MessageUtil.getMessageFromProperties(key);
+	}
+	
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}

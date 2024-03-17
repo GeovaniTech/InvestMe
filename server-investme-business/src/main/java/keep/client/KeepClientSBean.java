@@ -18,14 +18,20 @@ import jakarta.persistence.TemporalType;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import keep.appConfig.IKeepAppConfigSBean;
+import keep.category.IKeepCategorySBean;
 import keep.logs.IKeepLogSbean;
+import keep.payment.IKeepPaymentSBean;
+import keep.transaction.IKeepTransactionSBean;
 import model.Client;
 import query.SimpleWhere;
 import to.TOParameter;
+import to.category.TOCategory;
 import to.client.TOClient;
 import to.client.TOFilterClient;
 import to.client.TOFilterLovClient;
 import to.logs.TOLog;
+import to.payment.TOPayment;
+import to.transaction.TOTransaction;
 import utils.EncryptionUtil;
 import utils.JWTUtil;
 import utils.MessageUtil;
@@ -41,6 +47,15 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 	
 	@EJB
 	private IKeepLogSbean logSbean;
+	
+	@EJB
+	private IKeepCategorySBean categorySBean;
+	
+	@EJB
+	private IKeepPaymentSBean paymentSBean;
+	
+	@EJB
+	private IKeepTransactionSBean transactionSBean;
 	
 	public KeepClientSBean() {
 		super(Client.class, TOClient.class);
@@ -156,6 +171,11 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 			}
 			
 			TOClient to = this.getTOClient(client);
+			
+			if(to.getLastLogin() == null) {
+				this.createDefaultEntitys(to);
+			}
+			
 			to.setLastLogin(new Date());
 			
 			this.change(to);
@@ -372,6 +392,183 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		return query.getResultList().size() == 1;
 	}
 	
+	private void createDefaultEntitys(TOClient client) {
+		String user = client.getEmail();
+		
+		TOPayment money = new TOPayment();
+		money.setName(this.getLabel("money"));
+		money.setCreationDate(new Date());
+		money.setCreationUser(user);
+		
+		TOPayment debitCard = new TOPayment();
+		debitCard.setName(this.getLabel("debit_card"));
+		debitCard.setCreationDate(new Date());
+		debitCard.setCreationUser(user);
+		
+		TOPayment creditCard = new TOPayment();
+		creditCard.setName(this.getLabel("credit_card"));
+		creditCard.setCreationDate(new Date());
+		creditCard.setCreationUser(user);
+		
+		TOPayment pix = new TOPayment();
+		pix.setName(this.getLabel("pix"));
+		pix.setCreationDate(new Date());
+		pix.setCreationUser(user);
+		
+		TOPayment ticket = new TOPayment();
+		ticket.setName(this.getLabel("ticket"));
+		ticket.setCreationDate(new Date());
+		ticket.setCreationUser(user);
+		
+		this.getPaymentSBean().save(money);
+		this.getPaymentSBean().save(debitCard);
+		this.getPaymentSBean().save(creditCard);
+		this.getPaymentSBean().save(pix);
+		this.getPaymentSBean().save(ticket);
+		
+		TOCategory food = new TOCategory();
+		food.setName(this.getLabel("food"));
+		food.setType("expense");
+		food.setCreationDate(new Date());
+		food.setCreationUser(user);
+		
+		TOCategory transport = new TOCategory();
+		transport.setName(this.getLabel("transport"));
+		transport.setType("expense");
+		transport.setCreationDate(new Date());
+		transport.setCreationUser(user);
+		
+		TOCategory health = new TOCategory();
+		health.setName(this.getLabel("health"));
+		health.setType("expense");
+		health.setCreationDate(new Date());
+		health.setCreationUser(user);
+		
+		TOCategory education = new TOCategory();
+		education.setName(this.getLabel("education"));
+		education.setType("expense");
+		education.setCreationDate(new Date());
+		education.setCreationUser(user);
+		
+		TOCategory others = new TOCategory();
+		others.setName(this.getLabel("others"));
+		others.setType("expense");
+		others.setCreationDate(new Date());
+		others.setCreationUser(user);
+		
+		TOCategory emergencyMoney = new TOCategory();
+		emergencyMoney.setName(this.getLabel("emergency_money"));
+		emergencyMoney.setType("investment");
+		emergencyMoney.setCreationDate(new Date());
+		emergencyMoney.setCreationUser(user);
+		
+		TOCategory actions = new TOCategory();
+		actions.setName(this.getLabel("actions"));
+		actions.setType("investment");
+		actions.setCreationDate(new Date());
+		actions.setCreationUser(user);
+		
+		TOCategory cdi = new TOCategory();
+		cdi.setName(this.getLabel("cdi"));
+		cdi.setType("investment");
+		cdi.setCreationDate(new Date());
+		cdi.setCreationUser(user);
+		
+		TOCategory fiis = new TOCategory();
+		fiis.setName(this.getLabel("fiis"));
+		fiis.setType("investment");
+		fiis.setCreationDate(new Date());
+		fiis.setCreationUser(user);
+		
+		TOCategory bdrs = new TOCategory();
+		bdrs.setName(this.getLabel("bdrs"));
+		bdrs.setType("investment");
+		bdrs.setCreationDate(new Date());
+		bdrs.setCreationUser(user);
+		
+		TOCategory criptocurrencys = new TOCategory();
+		criptocurrencys.setName(this.getLabel("criptocurrencys"));
+		criptocurrencys.setType("investment");
+		criptocurrencys.setCreationDate(new Date());
+		criptocurrencys.setCreationUser(user);
+		
+		// Expenses
+		this.getCategorySBean().save(food);
+		this.getCategorySBean().save(transport);
+		this.getCategorySBean().save(health);
+		this.getCategorySBean().save(education);
+		this.getCategorySBean().save(others);
+		
+		// Investments
+		this.getCategorySBean().save(emergencyMoney);
+		this.getCategorySBean().save(actions);
+		this.getCategorySBean().save(fiis);
+		this.getCategorySBean().save(cdi);
+		this.getCategorySBean().save(bdrs);
+		this.getCategorySBean().save(criptocurrencys);
+		
+		TOTransaction nvdc34 = new TOTransaction();
+		nvdc34.setActive("NVDC34 " + this.getLabel("example_you_can_delete"));
+		nvdc34.setPrice(90.51);
+		nvdc34.setAmount(3);
+		nvdc34.setCategory(actions);
+		nvdc34.setPayment(pix);
+		nvdc34.setDatePurchase(new Date());
+		nvdc34.setCreationDate(new Date());
+		nvdc34.setCreationUser(user);
+		nvdc34.setClient(client);
+		
+		TOTransaction tsla32 = new TOTransaction();
+		tsla32.setActive("TSLA32 " + this.getLabel("example_you_can_delete"));
+		tsla32.setPrice(25.43);
+		tsla32.setAmount(7);
+		tsla32.setCategory(actions);
+		tsla32.setPayment(creditCard);
+		tsla32.setDatePurchase(new Date());
+		tsla32.setCreationDate(new Date());
+		tsla32.setCreationUser(user);
+		tsla32.setClient(client);
+		
+		TOTransaction em = new TOTransaction();
+		em.setActive(this.getLabel("emergency_money") + " " + this.getLabel("example_you_can_delete"));
+		em.setPrice(698.0);
+		em.setAmount(1);
+		em.setCategory(emergencyMoney);
+		em.setPayment(pix);
+		em.setDatePurchase(new Date());
+		em.setCreationDate(new Date());
+		em.setCreationUser(user);
+		em.setClient(client);
+		
+		TOTransaction pizza = new TOTransaction();
+		pizza.setActive("Pizza " + this.getLabel("example_you_can_delete"));
+		pizza.setPrice(85.0);
+		pizza.setAmount(1);
+		pizza.setCategory(food);
+		pizza.setPayment(ticket);
+		pizza.setDatePurchase(new Date());
+		pizza.setCreationDate(new Date());
+		pizza.setCreationUser(user);
+		pizza.setClient(client);
+		
+		TOTransaction uber = new TOTransaction();
+		uber.setActive(this.getLabel("uber_to_work") + " " + this.getLabel("example_you_can_delete"));
+		uber.setPrice(21.0);
+		uber.setAmount(1);
+		uber.setCategory(transport);
+		uber.setPayment(money);
+		uber.setDatePurchase(new Date());
+		uber.setCreationDate(new Date());
+		uber.setCreationUser(user);
+		uber.setClient(client);
+		
+		this.getTransactionSBean().save(nvdc34);
+		this.getTransactionSBean().save(tsla32);
+		this.getTransactionSBean().save(em);
+		this.getTransactionSBean().save(pizza);
+		this.getTransactionSBean().save(uber);
+	}
+	
 	private TOClient getTOClient(Client client) {
 		TOClient to = this.convertToDTO(client);
 		
@@ -393,6 +590,30 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 
 	public void setLogSbean(IKeepLogSbean logSbean) {
 		this.logSbean = logSbean;
+	}
+
+	public IKeepCategorySBean getCategorySBean() {
+		return categorySBean;
+	}
+
+	public void setCategorySBean(IKeepCategorySBean categorySBean) {
+		this.categorySBean = categorySBean;
+	}
+
+	public IKeepPaymentSBean getPaymentSBean() {
+		return paymentSBean;
+	}
+
+	public void setPaymentSBean(IKeepPaymentSBean paymentSBean) {
+		this.paymentSBean = paymentSBean;
+	}
+
+	public IKeepTransactionSBean getTransactionSBean() {
+		return transactionSBean;
+	}
+
+	public void setTransactionSBean(IKeepTransactionSBean transactionSBean) {
+		this.transactionSBean = transactionSBean;
 	}
 
 	
