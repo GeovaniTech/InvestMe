@@ -78,12 +78,8 @@
 						<h:outputText value="#{to.name}"/>
 					</p:column>
 					
-					<p:column headerText="#{label.icon}">
-						<h:panelGroup>
-							<span class="material-symbols-outlined google-icons">
-								#{to.icon}
-							</span>
-						</h:panelGroup>
+					<p:column headerText="#{label.type}">
+						<h:outputText value="#{to.type eq 'investment' ? label.investment : label.expense}"/>
 					</p:column>
 				</components:datatableSingleSelection>
 			</h:form>

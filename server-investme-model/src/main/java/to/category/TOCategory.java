@@ -8,8 +8,6 @@ public class TOCategory extends AbstractTOObject {
 	
 	private int id;
 	private String name;
-	private String description;
-	private String icon;
 	private String type;
 	
 	public int getId() {
@@ -23,18 +21,6 @@ public class TOCategory extends AbstractTOObject {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getIcon() {
-		return icon;
-	}
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 	public String getType() {
 		return type;
