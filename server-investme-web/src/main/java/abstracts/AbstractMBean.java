@@ -66,4 +66,8 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 	public void addMessage(String message, Severity severity) {
 		MessageUtil.sendMessage(MessageUtil.getMessageFromProperties(message), severity);
 	}
+	
+	public String getLabel(String key) {
+		return MessageUtil.getMessageFromProperties(key);
+	}
 }

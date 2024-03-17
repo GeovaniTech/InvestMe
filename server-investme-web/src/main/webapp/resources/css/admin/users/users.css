@@ -1,10 +1,17 @@
 @charset "UTF-8";
 
-#menu-users {
-	background-color: var(--background-general-mouse);
-	color: var(--text-mouse);
+.menu-users {
+	background-color: var(--blue) !important;
 }
 
-#menu-users > * {
-	color: var(--text-mouse);
+.menu-users:hover {
+	background-color: var(--blue-mouse) !important;
+}
+
+.menu-users .ui-menuitem-text {
+	color: var(--white) !important;
+}
+
+.menu-users .ui-menuitem-icon {
+	color: var(--white) !important;
 }

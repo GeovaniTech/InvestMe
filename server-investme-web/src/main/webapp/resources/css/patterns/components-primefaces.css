@@ -335,3 +335,28 @@ body .ui-datepicker .ui-datepicker-calendar td>a, body .ui-datepicker .ui-datepi
 	border-color: var(--second-color-widget) !important;
 	color: var(--text) !important;
 }
+
+/* #################### MENU #################### */
+.ui-menu-list li {
+	background-color: var(--submenu) !important;
+}
+
+.ui-menu {
+	width: 100% !important;
+	border: 0px !important;
+	background-color: var(--background-geneneral) !important;
+	padding: 0px !important;
+}
+
+.ui-menuitem-link  {
+	background-color: var(--background-general) !important;
+}
+
+.ui-menuitem-link:hover {
+	background-color: var(--background-general-mouse) !important;
+}
+
+.ui-menuitem-text, .ui-menu-list h3, .ui-menuitem-icon, .submenu:hover .ui-icon {
+	color: var(--text) !important;
+}
+

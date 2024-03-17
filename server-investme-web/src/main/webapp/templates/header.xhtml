@@ -54,76 +54,16 @@
 			</div>
 		</div>
 		
-		<div class="header" id="header">
+		<div id="header" class="header">
 			<h:form id="formLogo">
 				<div class="logo" jsf:id="logo">
 					<a href="/investme/client/wallet" style="display: flex;"><img src="#{MBAppConfigs.appConfigs.darkMode ? '/investme/resources/images/logo-dark.png' : '/investme/resources/images/logo-investme.png'}" style="width: 210px;" /></a>
 				</div>
 			</h:form>
 			
-			<p:scrollPanel
-				mode="native" 
-				style="max-height: calc(100vh - 60px); width: 100%;">
-				
-				<div class="menu" id="menu">
-					<p:commandLink
-						id="menu-home"
-						action="#{MBAppConfigs.redirectTo('/investme/client/wallet')}">
-						
-						<span class="material-symbols-outlined google-icons">
-							wallet
-						</span>
-						
-						#{label.wallet}					
-					</p:commandLink>					
-					
-					<p:commandLink 
-						id="menu-categories"
-						action="#{MBAppConfigs.redirectTo('/investme/client/categories')}">
-						
-						<span class="material-symbols-outlined google-icons">
-							category
-						</span>
-						
-						#{label.categories}
-					</p:commandLink>
-					
-					<p:commandLink 
-						id="menu-payments"
-						action="#{MBAppConfigs.redirectTo('/investme/client/payments')}">
-						
-						<span class="material-symbols-outlined google-icons">
-							money
-						</span>
-						
-						#{label.payments}
-					</p:commandLink>
-					
-					<p:commandLink 
-						id="menu-users"
-						action="#{MBAppConfigs.redirectTo('/investme/admin/users')}"
-						rendered="#{MBAppConfigs.isUserAdminLogged()}">
-						
-						<span class="material-symbols-outlined google-icons">
-							group
-						</span>
-						
-						#{label.users}
-					</p:commandLink>
-					
-					<p:commandLink 
-						id="menu-logs"
-						action="#{MBAppConfigs.redirectTo('/investme/admin/logs')}"
-						rendered="#{MBAppConfigs.isUserAdminLogged()}">
-						
-						<span class="material-symbols-outlined google-icons">
-							bug_report
-						</span>
-						
-						#{label.logs}
-					</p:commandLink>
-				</div>
-			</p:scrollPanel>
+			<h:form id="investme-menu">
+				<p:menu model="#{MBMenuInvestme.menu}" toggleable="true" />
+			</h:form>
 		</div>
 		
 		<ui:include src="overlayOptions.xhtml" />

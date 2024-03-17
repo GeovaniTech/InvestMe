@@ -1,10 +1,17 @@
 @charset "UTF-8";
 
-#menu-logs {
-	background-color: var(--background-general-mouse);
-	color: var(--text-mouse);
+.menu-logs {
+	background-color: var(--blue) !important;
 }
 
-#menu-logs > * {
-	color: var(--text-mouse);
+.menu-logs:hover {
+	background-color: var(--blue-mouse) !important;
+}
+
+.menu-logs .ui-menuitem-text {
+	color: var(--white) !important;
+}
+
+.menu-logs .ui-menuitem-icon {
+	color: var(--white) !important;
 }

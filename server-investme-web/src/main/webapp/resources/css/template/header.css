@@ -61,7 +61,6 @@ h1, h1 a, h1 span {
 	position: fixed;
 	top: 0px;
 	background-color: var(--background-general);
-	text-align: center;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 	font-family: 'Poppins', sans-serif;
 	z-index: 2;
@@ -81,7 +80,7 @@ h1, h1 a, h1 span {
 	color: var(--text) !important;
 }
 
-.menu {
+/* .menu {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -113,7 +112,7 @@ h1, h1 a, h1 span {
 .menu a:hover {
 	color: var(--text-mouse);
 	background-color: var(--background-general-mouse);
-}
+} */
 
 .menu a:hover span {
 	color: var(--text-mouse);
