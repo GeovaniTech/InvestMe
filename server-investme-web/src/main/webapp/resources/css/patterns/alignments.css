@@ -110,6 +110,14 @@
 	margin: 10px 5px; 
 }
 
+.search-group-horizontal {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	margin: 10px 5px; 
+}
+
 .wrap {
 	flex-wrap: wrap;
 }

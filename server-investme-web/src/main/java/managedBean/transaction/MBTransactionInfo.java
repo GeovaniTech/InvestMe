@@ -30,6 +30,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	private boolean editing;
 	private Integer idCategorySelected;
 	private Integer idPaymentSelected;
+	private boolean continueEntering;
 	
 	private List<TOCategory> categories;
 	private List<TOPayment> payments;
@@ -47,10 +48,13 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void init() {
 		this.setPayments(this.getPaymentSBean().listAll());
 		this.setCategories(new ArrayList<TOCategory>());
+		this.setContinueEntering(true);
 	}
 	
 	public void initTransaction() {
 		this.setTransaction(new TOTransaction());
+		this.setContinueEntering(true);
+		this.setEditing(false);
 	}
 	
 	public void save() {
@@ -67,7 +71,12 @@ public class MBTransactionInfo extends AbstractMBean {
 				
 				this.getTransactionSBean().save(this.getTransaction());
 				this.showMessageItemSaved(this.getTransaction().getActive());
-				this.setEditing(true);
+
+				if(this.isContinueEntering()) {
+					this.initTransactionFromHome();
+				} else {
+					this.setEditing(true);
+				}
 			} catch (Exception e) {
 				showMessageError(e);
 			}
@@ -128,46 +137,14 @@ public class MBTransactionInfo extends AbstractMBean {
 
 	public void initTransactionFromHome() {
 		this.initTransaction();
-		this.setEditing(false);
 		this.listAllCategories();
 		this.updateForm();
 	}
 	
-	public void initExpense() {
-		this.initTransaction();
-		this.listCategoriesExpense();
-		this.setEditing(false);
-		this.updateForm();
-	}
-	
-	public void initInvestment() {
-		this.initTransaction();
-		this.listCategoriesInvestment();
-		this.setEditing(false);
-		this.updateForm();
-	}
-	
-	public void editInvestment(TOTransaction transaction) {
-		this.setTransaction(transaction);
-		this.setEditing(true);
-		this.setIdCategorySelected(transaction.getCategory().getId());
-		this.setIdPaymentSelected(transaction.getPayment().getId());
-		this.listCategoriesInvestment();
-		this.updateForm();
-	}
-	
-	public void editExpense(TOTransaction transaction) {
-		this.setTransaction(transaction);
-		this.setEditing(true);
-		this.setIdCategorySelected(transaction.getCategory().getId());
-		this.setIdPaymentSelected(transaction.getPayment().getId());
-		this.listCategoriesExpense();
-		this.updateForm();
-	}
-
 	public void editTransaction(TOTransaction transaction) {
 		this.setTransaction(transaction);
 		this.setEditing(true);
+		this.setContinueEntering(false);
 		
 		this.setIdCategorySelected(transaction.getCategory().getId());
 		this.setIdPaymentSelected(transaction.getPayment().getId());
@@ -264,6 +241,14 @@ public class MBTransactionInfo extends AbstractMBean {
 
 	public void setPaymentSBean(IKeepPaymentSBean paymentSBean) {
 		this.paymentSBean = paymentSBean;
+	}
+
+	public boolean isContinueEntering() {
+		return continueEntering;
+	}
+
+	public void setContinueEntering(boolean continueEntering) {
+		this.continueEntering = continueEntering;
 	}
 	
 }

@@ -7,7 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	xmlns:components="http://java.sun.com/jsf/composite/components">
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <h:body>
 	<ui:composition>
@@ -106,6 +107,17 @@
 								itemLabel="#{payment.name}"
 								itemValue="#{payment.id}" />
 						</p:selectOneMenu>
+					</div>
+				</div>
+				
+				<div class="line" jsf:rendered="#{!MBTransactionInfo.editing}">
+					<div class="search-group-horizontal">
+						<p:selectBooleanCheckbox
+							id="continueEntering" 
+							value="#{MBTransactionInfo.continueEntering}"
+							styleClass="mg-r-5" />
+						
+						<p:outputLabel for="continueEntering" value="#{label.continue_entering}" />
 					</div>
 				</div>
 				
