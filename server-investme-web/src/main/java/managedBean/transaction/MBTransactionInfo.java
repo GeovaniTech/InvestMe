@@ -16,6 +16,7 @@ import keep.category.IKeepCategorySBean;
 import keep.payment.IKeepPaymentSBean;
 import keep.transaction.IKeepTransactionSBean;
 import to.category.TOCategory;
+import to.category.TOFilterCategory;
 import to.payment.TOPayment;
 import to.transaction.TOTransaction;
 
@@ -55,6 +56,8 @@ public class MBTransactionInfo extends AbstractMBean {
 		this.setTransaction(new TOTransaction());
 		this.setContinueEntering(true);
 		this.setEditing(false);
+		this.listAllCategories();
+		this.updateForm();
 	}
 	
 	public void save() {
@@ -73,7 +76,7 @@ public class MBTransactionInfo extends AbstractMBean {
 				this.showMessageItemSaved(this.getTransaction().getActive());
 
 				if(this.isContinueEntering()) {
-					this.initTransactionFromHome();
+					this.initTransaction();
 				} else {
 					this.setEditing(true);
 				}
@@ -134,12 +137,6 @@ public class MBTransactionInfo extends AbstractMBean {
 
 		return true;
 	}
-
-	public void initTransactionFromHome() {
-		this.initTransaction();
-		this.listAllCategories();
-		this.updateForm();
-	}
 	
 	public void editTransaction(TOTransaction transaction) {
 		this.setTransaction(transaction);
@@ -153,18 +150,9 @@ public class MBTransactionInfo extends AbstractMBean {
 		this.updateForm();
 	}
 	
-	public void listCategoriesInvestment() {
-		this.setCategories(this.getCategorySBean().searchCategoriesByType("investment"));
-	}
-	
-	public void listCategoriesExpense() {
-		this.setCategories(this.getCategorySBean().searchCategoriesByType("expense"));
-	}
-	
 	public void listAllCategories() {
 		this.setCategories(new ArrayList<TOCategory>());
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("expense"));
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("investment"));
+		this.getCategories().addAll(this.getCategorySBean().searchAllCategories());
 	}
 	
 	public void updateForm() {

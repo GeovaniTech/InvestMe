@@ -86,16 +86,15 @@ public class KeepCategorySBean extends AbstractKeep<Category, TOCategory> implem
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TOCategory> searchCategoriesByType(String type) {
+	public List<TOCategory> searchAllCategories() {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append("SELECT C FROM ")
 			.append(getFromCategories())
-			.append(" WHERE C.type = :type")
-			.append(" AND C.creationUser = :email ");
+			.append(" WHERE C.creationUser = :email ")
+			.append(" ORDER BY C.name ASC ");
 		
 		Query query = this.getEntityManager().createQuery(sql.toString());
-		query.setParameter("type", type);
 		query.setParameter("email", this.getClientSession().getEmail());
 		
 		return this.convertModelResults(query.getResultList());

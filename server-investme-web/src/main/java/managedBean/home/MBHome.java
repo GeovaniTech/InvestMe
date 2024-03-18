@@ -44,8 +44,7 @@ public class MBHome extends AbstractFilterMBean<TOTransaction, TOFilterTransacti
 	@Override
 	public void init() {
 		this.setCategories(new ArrayList<TOCategory>());
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("investment"));
-		this.getCategories().addAll(this.getCategorySBean().searchCategoriesByType("expense"));
+		this.getCategories().addAll(this.getCategorySBean().searchAllCategories());
 		
 		this.setPayments(this.getPaymentsBean().listAll());
 		
@@ -74,7 +73,7 @@ public class MBHome extends AbstractFilterMBean<TOTransaction, TOFilterTransacti
 	}
 	
 	public void initTransaction() {
-		this.getMBTransactionInfo().initTransactionFromHome();
+		this.getMBTransactionInfo().initTransaction();
 	}
 	
 	public Double getTotalExpense() {

@@ -14,5 +14,5 @@ public interface IKeepCategorySBean {
 	public TOCategory findById(int id);
 	public Integer getCount(TOFilterCategory filter);
 	public List<TOCategory> searchCategories(TOFilterCategory filter);
-	public List<TOCategory> searchCategoriesByType(String type);
+	public List<TOCategory> searchAllCategories();
 }

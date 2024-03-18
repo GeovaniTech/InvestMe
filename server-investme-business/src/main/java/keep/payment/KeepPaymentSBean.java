@@ -114,6 +114,7 @@ public class KeepPaymentSBean extends AbstractKeep<Payment, TOPayment> implement
 		sql.append(" SELECT P ");
 		sql.append(this.getFromPayments());
 		sql.append(" WHERE P.creationUser = :email");
+		sql.append(" ORDER BY P.name ASC ");
 		
 		Query query = this.getEntityManager().createQuery(sql.toString());
 		query.setParameter("email", this.getClientSession().getEmail());
