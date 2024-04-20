@@ -133,3 +133,14 @@ h1, h1 a, h1 span {
 		margin-left: 10px !important;
 	}
 }
+
+
+.HW_badge_cont {
+	position: fixed !important;
+	top: 4px !important;
+	right: 39px !important; 
+}
+
+.HW_frame_cont {
+	top: 50px !important;
+}

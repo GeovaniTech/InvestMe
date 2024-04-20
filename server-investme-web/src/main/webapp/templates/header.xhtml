@@ -12,6 +12,16 @@
 		<h:outputStylesheet library="css" name="/template/header.css" />
 		<h:outputStylesheet library="css" name="/configs/configs.css" />
 		
+		<script>
+		  // @see https://docs.headwayapp.co/widget for more configuration options.
+		  var HW_config = {
+		    selector: ".notifications", // CSS selector where to inject the badge
+		    account:  "72bQq7"
+		  }
+		</script>
+		
+		<script src="https://cdn.headwayapp.co/widget.js"></script>
+		
 		<div class="top-header" id="top-header">
 			<div class="left-items horizontal-center">
 				<div class="btn-menu" onclick="openMenu();">
@@ -34,8 +44,8 @@
 					</div>			
 				</p:commandLink>
 			
-				<div class="horizontal-center">
-					<span class="material-symbols-outlined google-icons">
+				<div class="horizontal-center ">
+					<span class="material-symbols-outlined google-icons notifications">
 						notifications
 					</span>
 				</div>
