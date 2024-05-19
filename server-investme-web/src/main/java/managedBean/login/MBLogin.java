@@ -54,6 +54,8 @@ public class MBLogin extends AbstractMBean {
 				MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("password_change_successfully"), FacesMessage.SEVERITY_INFO);
 			} else if(this.getMessageParam().equals("userblocked")) {
 				MessageUtil.sendMessage( MessageUtil.getMessageFromProperties("user_blocked"), FacesMessage.SEVERITY_ERROR);
+			} else if(this.getMessageParam().equals("accountdeleted")) {
+				MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("msg_account_deleted_successfully"), FacesMessage.SEVERITY_INFO);
 			}
 		}
 	}

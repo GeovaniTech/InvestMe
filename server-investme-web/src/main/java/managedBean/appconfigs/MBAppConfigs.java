@@ -3,13 +3,17 @@ package managedBean.appconfigs;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.primefaces.PrimeFaces;
 
 import abstracts.AbstractMBean;
+import enums.EnumLogCategory;
+import enums.EnumLogType;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
@@ -22,6 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import keep.client.IKeepClientSBean;
 import to.appconfigs.TOAppConfig;
 import to.client.TOClient;
+import to.logs.TOLog;
 import utils.CookieUtil;
 import utils.ImageUtil;
 import utils.MessageUtil;
@@ -129,6 +134,38 @@ public class MBAppConfigs extends AbstractMBean {
 		finishSession();
 		
 		RedirectURL.redirectTo("/investme/login");
+	}
+	
+	public void deleteAccount() { 		
+		try {
+			this.getClientSBean().deleteAccount();
+			
+			TOLog log = new TOLog();
+			log.setCategory(EnumLogCategory.DELETE_ACCOUNT);
+			log.setType(EnumLogType.INFO);
+			log.setStack("USER ACCOUNT DELETED SUCCESSFULLY. USER DELETE: " +  this.getClientSession().getEmail());
+			log.setCreationUser(this.getClientSession().getEmail());
+			log.setCreationDate(new Date());
+			log.setIp(this.getUserIpAddress());
+			
+			saveLog(log);
+			
+			finishSession();
+
+			RedirectURL.redirectTo("/investme/login/accountdeleted");
+		} catch (Exception e) {
+			TOLog log = new TOLog();
+			log.setCategory(EnumLogCategory.DELETE_ACCOUNT);
+			log.setType(EnumLogType.EXCEPTION);
+			log.setStack(ExceptionUtils.getStackTrace(e));
+			log.setCreationUser(this.getClientSession().getEmail());
+			log.setCreationDate(new Date());
+			log.setIp(this.getUserIpAddress());
+			
+			saveLog(log);
+			
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean isUserLogged() {

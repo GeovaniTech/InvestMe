@@ -15,4 +15,5 @@ public interface IKeepPaymentSBean {
 	public Integer getCount(TOFilterPayment filter);
 	public List<TOPayment> search(TOFilterPayment filter);
 	public List<TOPayment> listAll();
+	public void deletePaymentsFromUser() throws Exception;
 }

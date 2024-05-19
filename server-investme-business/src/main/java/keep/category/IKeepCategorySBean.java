@@ -15,4 +15,5 @@ public interface IKeepCategorySBean {
 	public Integer getCount(TOFilterCategory filter);
 	public List<TOCategory> searchCategories(TOFilterCategory filter);
 	public List<TOCategory> searchAllCategories();
+	public void deleteCategoriesFromUser() throws Exception;
 }

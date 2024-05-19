@@ -9,5 +9,6 @@ public enum EnumLogCategory {
 	USER_BLOCKED_LOGIN,
 	TOKEN_INVALID,
 	IP_NOT_FOUND,
-	OTHER;
+	OTHER,
+	DELETE_ACCOUNT;
 }

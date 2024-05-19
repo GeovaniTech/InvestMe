@@ -121,5 +121,17 @@ public class KeepPaymentSBean extends AbstractKeep<Payment, TOPayment> implement
 		
 		return this.convertModelResults(query.getResultList());
 	}
+
+	@Override
+	public void deletePaymentsFromUser() throws Exception {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" DELETE ").append(this.getFromPayments());
+		sql.append(" WHERE P.creationUser = :email");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString());
+		query.setParameter("email", this.getClientSession().getEmail());
+		
+		query.executeUpdate();
+	}
 	
 }

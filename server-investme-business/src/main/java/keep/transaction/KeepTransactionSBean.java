@@ -285,4 +285,16 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		return query.getResultList();
 	}
 
+	@Override
+	public void deleteTransactionsFromUser() throws Exception {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" DELETE ").append(this.getFromTransactions());
+		sql.append(" WHERE T.client.email = :email");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString());
+		query.setParameter("email", this.getClientSession().getEmail());
+		
+		query.executeUpdate();
+	}
+
 }

@@ -22,4 +22,5 @@ public interface IKeepTransactionSBean {
 	public Double getTotalInvestmentsChartByYear(Integer year, Integer month);
 	public List<Number> getTotalByCategoryChartInvestment(TOFilterTransaction filter);
 	public List<String> getCategoriesNameWithTransactions(TOFilterTransaction filter);
+	public void deleteTransactionsFromUser() throws Exception;
 }

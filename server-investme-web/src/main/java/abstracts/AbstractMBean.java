@@ -63,6 +63,14 @@ public abstract class AbstractMBean extends AbstractSession implements Serializa
 		mblog.save(log);
 	}
 	
+	public boolean isUserAdmin() {
+		if(this.getClientSession().getSecurityLevel().equals("admin")) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public void addMessage(String message, Severity severity) {
 		MessageUtil.sendMessage(MessageUtil.getMessageFromProperties(message), severity);
 	}

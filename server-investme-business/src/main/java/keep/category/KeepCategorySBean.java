@@ -120,5 +120,17 @@ public class KeepCategorySBean extends AbstractKeep<Category, TOCategory> implem
 		
 		return sql.toString();
 	}
+
+	@Override
+	public void deleteCategoriesFromUser() throws Exception {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" DELETE ").append(this.getFromCategories());
+		sql.append(" WHERE C.creationUser = :email ");
+	
+		Query query = this.getEntityManager().createQuery(sql.toString());
+		query.setParameter("email", this.getClientSession().getEmail());
+		
+		query.executeUpdate();
+	}
 	
 }

@@ -569,6 +569,26 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		this.getTransactionSBean().save(uber);
 	}
 	
+	@Override
+	public void deleteAccount() throws Exception {
+		try {			
+			this.getTransactionSBean().deleteTransactionsFromUser();
+			this.getPaymentSBean().deletePaymentsFromUser();
+			this.getCategorySBean().deleteCategoriesFromUser();
+			
+			StringBuilder sql = new StringBuilder();
+			sql.append(" DELETE FROM ").append(Client.class.getSimpleName()).append(" C ");
+			sql.append(" WHERE C.email = :email ");
+			
+			Query query = this.getEntityManager().createQuery(sql.toString());
+			query.setParameter("email", this.getClientSession().getEmail());
+			
+			query.executeUpdate();
+		} catch (Exception e) {
+			throw new Exception(e);
+		}		
+	}
+	
 	private TOClient getTOClient(Client client) {
 		TOClient to = this.convertToDTO(client);
 		
@@ -615,6 +635,5 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 	public void setTransactionSBean(IKeepTransactionSBean transactionSBean) {
 		this.transactionSBean = transactionSBean;
 	}
-
 	
 }
