@@ -22,6 +22,11 @@
 			<groupId>br.com.devpree</groupId>
 			<artifactId>server-investme-utils</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-business</artifactId>
+		</dependency>
 
 		<!-- END DEVPREE DEPENDENCIES -->
 	</dependencies>

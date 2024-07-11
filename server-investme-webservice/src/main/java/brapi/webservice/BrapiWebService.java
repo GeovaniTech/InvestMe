@@ -11,12 +11,18 @@ import brapi.transferobject.TOStockBrapiAPI;
 import brapi.transferobject.TOTickerBrapiAPI;
 import brapi.webservice.response.QuoteListResponse;
 import brapi.webservice.response.QuoteResponse;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
 import security.wildfly.WildflyConfigs;
 
-public class BrapiWebService extends AbstractWebService {
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+public class BrapiWebService extends AbstractWebService implements IBrapiWebServiceSBean, IBrapiWebServiceRemoteSBean {
 	private final String BASE_URL = "https://brapi.dev/api/";
 	private final String AUTH_TOKEN = WildflyConfigs.getConfig("brapi_token");
 	
+	@Override
 	public TOTickerBrapiAPI getTicker(String symbol) {
 		String url = BASE_URL + "quote/" + symbol + "?token=" + AUTH_TOKEN;
 		
@@ -39,6 +45,7 @@ public class BrapiWebService extends AbstractWebService {
         return ticker;
 	}
 	
+	@Override
 	public List<TOStockBrapiAPI> getAllStocks() {
 		String url = BASE_URL + "quote/list" + "?token=" + AUTH_TOKEN;
 		
