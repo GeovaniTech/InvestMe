@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.primefaces.PrimeFaces;
@@ -40,11 +41,11 @@ public class MBAppConfigs extends AbstractMBean {
 	private TOAppConfig appConfigs;
 	private List<Locale> localeList;
 	
-	// For actions that require password
-	private String password;
-	
 	@EJB
 	private IKeepClientSBean clientSBean;
+	
+	private String systemVersion;
+	private String cacheVersion;
 
 	public MBAppConfigs() {
 		//Attributes
@@ -59,7 +60,10 @@ public class MBAppConfigs extends AbstractMBean {
 		this.getAppConfigs().setShowValues(false);
 		
 		//Getting User preferences
-		this.getConfigsFromCookies();	
+		this.getConfigsFromCookies();
+		
+		// Setting cache management
+		this.setCacheVersion(UUID.randomUUID().toString());
 	}
 	
  	public boolean getConfigsFromCookies() {
@@ -203,11 +207,15 @@ public class MBAppConfigs extends AbstractMBean {
 	}
 	
 	public String getSystemVersion() {
-		 FacesContext facesContext = FacesContext.getCurrentInstance(); 
-		 Locale locale = facesContext.getViewRoot().getLocale();
-		 ResourceBundle bundle = ResourceBundle.getBundle("app-config", locale);
+		if (systemVersion == null) {
+			 FacesContext facesContext = FacesContext.getCurrentInstance(); 
+			 Locale locale = facesContext.getViewRoot().getLocale();
+			 ResourceBundle bundle = ResourceBundle.getBundle("app-config", locale);
 
-		 return bundle.getString("system_version");
+			 this.setSystemVersion(bundle.getString("system_version"));
+		}
+		
+		return systemVersion;
 	}
 	
 	// Getters and Setters
@@ -232,12 +240,14 @@ public class MBAppConfigs extends AbstractMBean {
 	public void setClientSBean(IKeepClientSBean clientSBean) {
 		this.clientSBean = clientSBean;
 	}
-	public String getPassword() {
-		return password;
+	public void setSystemVersion(String systemVersion) {
+		this.systemVersion = systemVersion;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public String getCacheVersion() {
+		return cacheVersion;
 	}
-	
+	public void setCacheVersion(String cacheVersion) {
+		this.cacheVersion = cacheVersion;
+	}
 }
 
