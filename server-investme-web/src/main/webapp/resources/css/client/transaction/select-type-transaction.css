@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.text-select-type {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.text-select-type p {
+	color: var(--text-mouse);
+	font-size: 18px;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+}
+
+.card {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 10px;
+	color: var(--text-mouse);
+	background-color: var(--background-general-mouse);
+	width: 150px;
+	height: 125px;
+	transition: 0.4s;
+	cursor: pointer;
+}
+
+.card:hover {
+	background-color: var(--blue);
+}
+
+.card i {
+	font-size: 45px;
+}
+
+.card p {
+	margin-top: 5px;
+}

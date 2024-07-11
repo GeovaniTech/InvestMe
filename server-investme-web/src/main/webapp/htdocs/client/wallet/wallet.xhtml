@@ -36,7 +36,7 @@
 					<p:commandButton 
 						id="btnInitNewTransaction"
 						action="#{MBHome.initTransaction()}"
-						oncomplete="PF('dialogTransactionInfoVW').show();"
+						oncomplete="PF('dialogTransactionSelectTypeVW').show();"
 						icon="pi pi-plus" 
 						styleClass="optionsButtonStyle mg-r-5" />
 					
@@ -192,6 +192,7 @@
 			</h:form>
 			
 			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />
+			<ui:include src="/htdocs/client/transaction/select_transaction_type.xhtml" />
 			<ui:include src="/htdocs/client/wallet/chart_spents.xhtml" />
 		</ui:define>
 	</ui:composition>

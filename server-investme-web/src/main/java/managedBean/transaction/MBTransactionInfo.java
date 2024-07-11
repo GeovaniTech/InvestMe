@@ -16,7 +16,6 @@ import keep.category.IKeepCategorySBean;
 import keep.payment.IKeepPaymentSBean;
 import keep.transaction.IKeepTransactionSBean;
 import to.category.TOCategory;
-import to.category.TOFilterCategory;
 import to.payment.TOPayment;
 import to.transaction.TOTransaction;
 
@@ -56,8 +55,16 @@ public class MBTransactionInfo extends AbstractMBean {
 		this.setTransaction(new TOTransaction());
 		this.setContinueEntering(true);
 		this.setEditing(false);
-		this.listAllCategories();
-		this.updateForm();
+	}
+	
+	public void initInvestment() {
+		this.setCategories(this.getCategorySBean().searchAllCategories("investment"));
+		updateForm();
+	}
+	
+	public void initExpense() {
+		this.setCategories(this.getCategorySBean().searchAllCategories("expense"));
+		updateForm();
 	}
 	
 	public void save() {
@@ -152,7 +159,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	
 	public void listAllCategories() {
 		this.setCategories(new ArrayList<TOCategory>());
-		this.getCategories().addAll(this.getCategorySBean().searchAllCategories());
+		this.getCategories().addAll(this.getCategorySBean().searchAllCategories(null));
 	}
 	
 	public void updateForm() {

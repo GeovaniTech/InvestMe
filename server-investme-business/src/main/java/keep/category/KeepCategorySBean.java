@@ -13,6 +13,7 @@ import query.SimpleWhere;
 import to.TOParameter;
 import to.category.TOCategory;
 import to.category.TOFilterCategory;
+import utils.StringUtil;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -86,16 +87,25 @@ public class KeepCategorySBean extends AbstractKeep<Category, TOCategory> implem
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TOCategory> searchAllCategories() {
+	public List<TOCategory> searchAllCategories(String type) {
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		params.add(new TOParameter("email", this.getClientSession().getEmail()));
+		
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append("SELECT C FROM ")
 			.append(getFromCategories())
-			.append(" WHERE C.creationUser = :email ")
-			.append(" ORDER BY C.name ASC ");
+			.append(" WHERE C.creationUser = :email ");
+		
+		if (StringUtil.isNotNull(type)) {
+			sql.append(" AND C.type = :type");
+			params.add(new TOParameter("type", type));
+		}
+		
+		sql.append(" ORDER BY C.name ASC ");
 		
 		Query query = this.getEntityManager().createQuery(sql.toString());
-		query.setParameter("email", this.getClientSession().getEmail());
+		setParameters(query, params);
 		
 		return this.convertModelResults(query.getResultList());
 	}
@@ -132,5 +142,4 @@ public class KeepCategorySBean extends AbstractKeep<Category, TOCategory> implem
 		
 		query.executeUpdate();
 	}
-	
 }
