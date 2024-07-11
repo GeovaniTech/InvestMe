@@ -34,14 +34,8 @@ public class EmailUtil {
         	properties.put("mail.smtp.host", "smtp.gmail.com");
         	properties.put("mail.smtp.port", "587");
         	
-        	Properties appConfigs = new Properties();
-        	
-        	try (FileInputStream fis = new FileInputStream(WildflyConfigs.appConfigsPath)) {
-        		appConfigs.load(fis);
-        	}
-        	
-        	String myAccountEmail = appConfigs.getProperty("email_server");
-        	String password = appConfigs.getProperty("email_password");
+        	String myAccountEmail = WildflyConfigs.getConfig("email_server");
+        	String password = WildflyConfigs.getConfig("email_password");
         	
         	Session session = Session.getInstance(properties, new Authenticator() {
         		@Override

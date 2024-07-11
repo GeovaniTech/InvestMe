@@ -16,7 +16,6 @@ import enums.EnumLogCategory;
 import enums.EnumLogType;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
@@ -29,9 +28,7 @@ import to.client.TOClient;
 import to.logs.TOLog;
 import utils.CookieUtil;
 import utils.ImageUtil;
-import utils.MessageUtil;
 import utils.RedirectURL;
-import utils.StringUtil;
 
 @Named("MBAppConfigs")
 @SessionScoped
