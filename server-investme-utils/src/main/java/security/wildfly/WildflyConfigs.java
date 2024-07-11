@@ -17,13 +17,15 @@ public class WildflyConfigs {
 		return base.substring(0, base.length() -3);
 	}
 	
-	public static String getConfig(String key) throws Exception {
+	public static String getConfig(String key) {
 		if (appConfigs == null) {
 			appConfigs = new Properties();
 			
 	    	try (FileInputStream fis = new FileInputStream(WildflyConfigs.appConfigsPath)) {
 	    		appConfigs.load(fis);
-	    	}
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+			} 
 		}
 		
     	return appConfigs.getProperty(key);

@@ -21,6 +21,7 @@
 		<module>server-investme-business</module>
 		<module>server-investme-utils</module>
 		<module>server-investme</module>
+		<module>server-investme-webservice</module>
 	</modules>
 
 	<distributionManagement>
@@ -61,6 +62,12 @@
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme-utils</artifactId>
+				<version>1.0.X-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.com.devpree</groupId>
+				<artifactId>server-investme-webservice</artifactId>
 				<version>1.0.X-SNAPSHOT</version>
 			</dependency>
 			

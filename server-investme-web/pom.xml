@@ -58,6 +58,11 @@
 			<groupId>br.com.devpree</groupId>
 			<artifactId>server-investme-utils</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-webservice</artifactId>
+		</dependency>
 
 		<!-- END DEVPREE DEPENDENCIES -->
 	</dependencies>

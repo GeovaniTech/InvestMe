@@ -32,6 +32,11 @@
 			<groupId>br.com.devpree</groupId>
 			<artifactId>server-investme-utils</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-webservice</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -67,6 +72,12 @@
 						<jarModule>
 							<groupId>br.com.devpree</groupId>
 							<artifactId>server-investme-utils</artifactId>
+							<bundleDir>/</bundleDir>
+						</jarModule>
+						
+						<jarModule>
+							<groupId>br.com.devpree</groupId>
+							<artifactId>server-investme-webservice</artifactId>
 							<bundleDir>/</bundleDir>
 						</jarModule>
 					</modules>

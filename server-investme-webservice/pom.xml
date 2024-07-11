@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.devpree</groupId>
+		<artifactId>investme</artifactId>
+		<version>1.0.X-SNAPSHOT</version>
+	</parent>
+	<artifactId>server-investme-webservice</artifactId>
+
+	<dependencies>
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+
+		<!-- INIT DEVPREE DEPENDENCIES -->
+
+		<dependency>
+			<groupId>br.com.devpree</groupId>
+			<artifactId>server-investme-utils</artifactId>
+		</dependency>
+
+		<!-- END DEVPREE DEPENDENCIES -->
+	</dependencies>
+</project>
