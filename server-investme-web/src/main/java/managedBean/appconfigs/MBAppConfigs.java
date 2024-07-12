@@ -1,7 +1,6 @@
 package managedBean.appconfigs;
 
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +28,7 @@ import to.client.TOClient;
 import to.logs.TOLog;
 import utils.CookieUtil;
 import utils.ImageUtil;
+import utils.MoneyUtil;
 import utils.RedirectURL;
 
 @Named("MBAppConfigs")
@@ -190,11 +190,7 @@ public class MBAppConfigs extends AbstractMBean {
 	}
 	
 	public String getBrazilianCurrency(Double value) {
-		Locale localeBR = new Locale("pt", "BR");
-		NumberFormat brazilianFormat = NumberFormat.getCurrencyInstance(localeBR);
-		String formattedValue = brazilianFormat.format(value);
-
-		return formattedValue;
+		return MoneyUtil.getBrazilianCurrency(value);
 	}
 
 	public String getRenderedImage(byte[] imageBytes) {

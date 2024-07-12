@@ -26,7 +26,7 @@
 	        		showDetail="false"
 	        		escape="false" />
 			
-				<div class="horizontal-left-center">
+				<div class="line">
 					<div class="search-group">
 						<p:outputLabel for="name" value="#{label.active}" />
 						<p:inputText 	
@@ -34,7 +34,7 @@
 							value="#{MBTransactionInfo.transaction.active}"
 							required="true"
 							requiredMessage="#{label.active_required}" />
-					</div>
+					</div>				
 					
 					<div class="search-group">
 						<p:outputLabel for="price" value="#{label.price}" />
@@ -58,7 +58,15 @@
 					</div>
 				</div>
 				
-				<div class="horizontal-left-center">
+				<div class="line">
+					<p:commandLink 
+						value="#{label.open_investment_dashboard}"
+						onclick="PF('dialogInvestmentsDashboardWV').show();"
+						rendered="#{MBTransactionInfo.investment}"
+						style="margin-left: 5px;" />
+				</div>
+				
+				<div class="line">
 					<div class="search-group">
 						<p:outputLabel for="purchaseDate" value="#{label.purchase_date}" />
 						<p:calendar 
@@ -151,6 +159,8 @@
 					</f:facet>
 				</p:toolbar>
 			</h:form>
+			
+			<ui:include src="/htdocs/client/investment/dashboard/investments_dashboard.xhtml" />
 		</components:dialog>
 	</ui:composition>
 </h:body>

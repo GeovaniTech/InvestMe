@@ -31,6 +31,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	private Integer idCategorySelected;
 	private Integer idPaymentSelected;
 	private boolean continueEntering;
+	private boolean investment;
 	
 	private List<TOCategory> categories;
 	private List<TOPayment> payments;
@@ -59,11 +60,13 @@ public class MBTransactionInfo extends AbstractMBean {
 	
 	public void initInvestment() {
 		this.setCategories(this.getCategorySBean().searchAllCategories("investment"));
+		this.setInvestment(true);
 		updateForm();
 	}
 	
 	public void initExpense() {
 		this.setCategories(this.getCategorySBean().searchAllCategories("expense"));
+		this.setInvestment(false);
 		updateForm();
 	}
 	
@@ -245,5 +248,12 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void setContinueEntering(boolean continueEntering) {
 		this.continueEntering = continueEntering;
 	}
-	
+
+	public boolean isInvestment() {
+		return investment;
+	}
+
+	public void setInvestment(boolean investment) {
+		this.investment = investment;
+	}
 }

@@ -11,3 +11,11 @@ if (PrimeFaces.widget.Dialog) {
         }
     }
 };
+
+function hideBodyScroll() {
+    document.body.style.overflow = 'hidden';
+}
+
+function showBodyScroll() {
+    document.body.style.overflow = 'auto';
+}
