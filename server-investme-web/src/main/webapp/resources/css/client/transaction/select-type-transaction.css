@@ -8,8 +8,9 @@
 }
 
 .text-select-type p {
-	color: var(--text-mouse);
+	color: var(--);
 	font-size: 18px;
+
 }
 
 .container {
@@ -31,16 +32,26 @@
 	background-color: var(--background-general-mouse);
 	width: 150px;
 	height: 125px;
-	transition: 0.4s;
 	cursor: pointer;
+	transition: 0.4s;
+}
+
+.card > * {
+	transition: 0.4s;
 }
 
 .card:hover {
 	background-color: var(--blue);
+	color: white;
+}
+
+.card:hover > p {
+	color: white;
 }
 
 .card i {
 	font-size: 45px;
+	transition: 0.0s;
 }
 
 .card p {

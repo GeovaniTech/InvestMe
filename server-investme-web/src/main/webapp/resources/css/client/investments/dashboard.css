@@ -28,9 +28,16 @@
 	box-sizing: border-box;
 }
 
+.stock p {
+	transition: 0.4s;
+}
+
 .stock:hover {
 	background-color: var(--blue);
-	color: var(--text-mouse);
+}
+
+.stock:hover p {
+	color: white;
 }
 
 .stock .infos {
@@ -63,11 +70,13 @@
 	background-color: var(--background-general) !important;
 	border-color: var(--background-general) !important;
 	transition: 0.4s !important;
+	color: var(--text) !important;
 }
 
 .button-buy:hover {
 	background-color: var(--background-general-mouse) !important;
 	border-color: var(--background-general-mouse) !important;
+	color: var(--text-mouse) !important;
 }
 
 .stock img {
