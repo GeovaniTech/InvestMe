@@ -17,7 +17,7 @@
 		</ui:define>
 
 		<ui:define name="body">
-			<h:outputStylesheet library="css" name="/client/wallet/wallet.css" />
+			<h:outputStylesheet library="css" name="/client/wallet/wallet.css?v=#{MBAppConfigs.cacheVersion}" />
 			
 			<div jsf:id="charts" class="horizontal-evenly">
 				<ui:include src="/htdocs/client/wallet/chart_investments_by_category.xhtml" />

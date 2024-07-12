@@ -9,8 +9,8 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf">
 	
 	<h:body>
-		<h:outputStylesheet library="css" name="/template/header.css" />
-		<h:outputStylesheet library="css" name="/configs/configs.css" />
+		<h:outputStylesheet library="css" name="/template/header.css?v=#{MBAppConfigs.cacheVersion}" />
+		<h:outputStylesheet library="css" name="/configs/configs.css?v=#{MBAppConfigs.cacheVersion}" />
 		
 		<script>
 		  // @see https://docs.headwayapp.co/widget for more configuration options.

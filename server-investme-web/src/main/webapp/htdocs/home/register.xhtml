@@ -19,12 +19,11 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 		<link rel="shortcut icon" href="/investme/resources/images/ico-investme.ico" type="image/x-icon" />
 		
-		<h:outputStylesheet library="css" name="/patterns/others.css" />
-		<h:outputStylesheet library="css" name="/patterns/texts.css" />
-		<h:outputStylesheet library="css" name="/patterns/alignments.css" />
-		<h:outputStylesheet library="css" name="/patterns/components-primefaces.css" />
-		<h:outputStylesheet library="css" name="/login/login.css" />
-		<h:outputStylesheet library="css" name="/colors/light-mode/colors.css" />
+		<h:outputStylesheet library="css" name="/patterns/others.css?v=#{MBAppConfigs.cacheVersion}" />
+		<h:outputStylesheet library="css" name="/patterns/texts.css?v=#{MBAppConfigs.cacheVersion}" />
+		<h:outputStylesheet library="css" name="/patterns/alignments.css?v=#{MBAppConfigs.cacheVersion}" />
+		<h:outputStylesheet library="css" name="/patterns/components-primefaces.css?v=#{MBAppConfigs.cacheVersion}" />
+		<h:outputStylesheet library="css" name="/login/login.css?v=#{MBAppConfigs.cacheVersion}" />
 		<h:outputStylesheet library="css" name="#{MBAppConfigs.appConfigs.darkMode ? '/colors/dark-mode/colors.css' : '/colors/light-mode/colors.css'}" />
 	</h:head>
 	

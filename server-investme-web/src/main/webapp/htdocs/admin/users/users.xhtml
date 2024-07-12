@@ -16,7 +16,7 @@
 		</ui:define>
 
 		<ui:define name="body">
-			<h:outputStylesheet library="css" name="/admin/users/users.css" />
+			<h:outputStylesheet library="css" name="/admin/users/users.css?v=#{MBAppConfigs.cacheVersion}" />
 
 			<h:form id="formClients">
 				<p:remoteCommand
