@@ -24,107 +24,118 @@
 		<h:outputStylesheet library="css" name="/patterns/alignments.css?v=#{MBAppConfigs.cacheVersion}" />
 		<h:outputStylesheet library="css" name="/patterns/components-primefaces.css?v=#{MBAppConfigs.cacheVersion}" />
 		<h:outputStylesheet library="css" name="/login/login.css?v=#{MBAppConfigs.cacheVersion}" />
-		<h:outputStylesheet library="css" name="#{MBAppConfigs.appConfigs.darkMode ? '/colors/dark-mode/colors.css' : '/colors/light-mode/colors.css'}" />
+		<h:outputStylesheet library="css" name="/colors/light-mode/colors.css" />
 	</h:head>
 	
 	<h:body>	
 		<f:view locale="#{MBAppConfigs.appConfigs.language}" id="view-locale">	
-			<p:ajaxStatus>
-				<f:facet name="start">
-					<div class="ajax-loading" />
-				</f:facet>
-				
-				<f:facet name="complete" />
-			</p:ajaxStatus>
-			
-			<f:metadata>
-				<f:viewParam name="finished" value="#{MBRegister.token}"></f:viewParam>
-			</f:metadata>
-
-			<h:form>
-				<p:remoteCommand 
-					autoRun="true"
-					action="#{MBRegister.finishRegister}"
-					update="formRegister:messages" />
-			</h:form>
-		
 			<div class="container">
-				<div class="logo horizontal-center">
-					<img src="#{MBAppConfigs.appConfigs.darkMode ? '/investme/resources/images/logo-dark.png' : '/investme/resources/images/logo-investme.png'}" style="width: 330px;" />
-				</div>
-				
-				<div class="center">
-					<h2>#{label.welcome}</h2>
+				<div class="left">
+					<div class="logo">
+						<img src="/investme/resources/images/logo-investme.png" style="width: 350px;" />
+					</div>
 					
-					<h:form id="formRegister" class="form">
-			        	<p:messages 
-			        		id="messages" 
-			        		autoUpdate="true" 
-			        		style="width: 100%;"
-			        		showIcon="false"
-			        		showDetail="false" />
-			
-						<div class="vertical-left" style="width: 100%;">
-							<p:outputLabel for="email" value="#{label.email}"/>
-							<p:inputText 
-								id="email"
-								value="#{MBRegister.email}"
-								placeholder="#{label.email}"
-								required="true"
-								requiredMessage="#{label.email_required}"
-								styleClass="field mg-b-10" />
-						</div>
+					<p class="credentials">#{label.please_enter_your_crendentials}</p>
+					
+					<h:form id="formLogin">
+						<p:remoteCommand 
+							autoRun="true"
+							action="#{MBLogin.showFinishedRegisterMessage()}"
+							update="formLogin:messages"
+							process="@this" />
+	
+						<div class="container-login">
+				        	<p:messages 
+				        		id="messages" 
+				        		autoUpdate="true" 
+				     			styleClass="messages"
+				        		showIcon="false"
+				        		showDetail="false" />
 						
-						<div class="vertical-left mg-b-10" style="width: 100%;">
-							<p:outputLabel for="password" value="#{label.password}"/>
-				            <p:password 
-	    						id="password"
-					           	value="#{MBRegister.password}"
-					           	required="true" 
-					           	requiredMessage="#{label.password_required}"
-					           	placeholder="#{label.password}"
-					           	toggleMask="true"
-					           	styleClass="field" />
+							<div class="vertical-left">
+								<p:outputLabel 
+									for="email" 
+									value="#{label.email}" />
+									
+								<p:inputText 
+									id="email"
+									value="#{MBRegister.email}"
+									placeholder="#{label.email}"
+									required="true"
+									requiredMessage="#{label.email_required}"
+									styleClass="field" />
+							</div>
+		
+							<div class="vertical-left">
+								<p:outputLabel
+									for="password" 
+									value="#{label.password}" />
+									
+					            <p:password 
+		    						id="password"
+						           	value="#{MBRegister.password}"
+						           	required="true" 
+						           	requiredMessage="#{label.password_required}"
+						           	placeholder="#{label.password}"
+						           	toggleMask="true"
+						           	styleClass="field" />
+							</div>
+							
+							<div class="vertical-left">
+								<p:outputLabel 
+									for="repeatPassword" 
+									value="#{label.repeat_password}" />
+									
+					            <p:password 
+		    						id="repeatPassword"
+						           	value="#{MBRegister.repeatedPassword}"
+						           	required="true" 
+						           	requiredMessage="#{label.repeat_password_required}"
+						           	placeholder="#{label.repeat_password}"
+						           	toggleMask="true"
+						           	styleClass="field" />
+							</div>
+		
+							<div class="horizontal-between links">
+								<p:commandLink 
+									value="#{label.login}"
+									action="#{MBAppConfigs.redirectTo('/investme/login')}"
+									process="@this" />
+							</div>
+		
+				            <p:commandButton
+					           	id="btnRegister"
+					           	value="#{label.register}"
+					           	widgetVar="btnRegister"
+					           	action="#{MBRegister.register}"
+					           	update="messages"
+					           	styleClass="button-login mg-t-15 mg-b-10"
+					            style="width: 100%; margin-top: 15px !important; margin-bottom: 10px !important;" />
 						</div>
-						
-						<div class="vertical-left" style="width: 100%;">
-							<p:outputLabel for="repeatPassword" value="#{label.repeat_password}"/>
-				            <p:password 
-	    						id="repeatPassword"
-					           	value="#{MBRegister.repeatedPassword}"
-					           	required="true" 
-					           	requiredMessage="#{label.repeat_password_required}"
-					           	placeholder="#{label.repeat_password}"
-					           	toggleMask="true"
-					           	styleClass="field" />
-						</div>
-			
-			            <p:commandButton
-				           	id="btnRegister"
-				           	value="#{label.register}"
-				           	widgetVar="btnRegister"
-				           	action="#{MBRegister.register}"
-				           	update="messages"
-				           	styleClass="buttonClass mg-t-15 mg-b-10"
-				            style="width: 100%; margin-top: 15px !important; margin-bottom: 10px !important;" />
-				           	
+							
 						<p:defaultCommand target="btnRegister" />
-					</h:form>						
+					</h:form>
 					
-					<div class="horizontal-between">
-						<p:commandLink 
-							value="#{label.login}"
-							action="#{MBAppConfigs.redirectTo('/investme/login')}" />
+					<div class="container-divisor">
+						<div class="divisor"></div>
+						<p class="follow-me">#{label.follow_me}</p>
+						<div class="divisor"></div>
+					</div>
+					
+			        <div class="atendimento">
+			            <a href="https://bit.ly/preetechcontato" target="_blank"><i class="fi fi-brands-whatsapp"></i></a>
+			            <a href="https://www.instagram.com/_geovanitech" target="_blank"><i class="fi fi-brands-instagram"></i></a>
+			            <a href="https://github.com/GeovaniTech" target="_blank"><i class="fi fi-brands-github"></i></a>
+			            <a href="https://www.linkedin.com/in/geovani-debastiani" target="_blank" style="margin-right: 0px;"><i class="fi fi-brands-linkedin"></i></a>
+			        </div>
+			        
+           			<div class="horizontal-center version">
+						#{label.version}: #{MBAppConfigs.getSystemVersion()}
 					</div>
 				</div>
-							
-		        <div class="atendimento">
-		            <a href="https://bit.ly/preetechcontato" target="_blank"><i class="fi fi-brands-whatsapp"></i></a>
-		            <a href="https://www.instagram.com/_geovanitech" target="_blank"><i class="fi fi-brands-instagram"></i></a>
-		            <a href="https://github.com/GeovaniTech" target="_blank"><i class="fi fi-brands-github"></i></a>
-		        	<a href="https://www.linkedin.com/in/geovani-debastiani" target="_blank" style="margin-right: 0px;"><i class="fi fi-brands-linkedin"></i></a>
-		        </div>
-			</div>   
+				
+				<div class="right"></div>
+			</div>
 		</f:view>	
 	</h:body>
 </html>

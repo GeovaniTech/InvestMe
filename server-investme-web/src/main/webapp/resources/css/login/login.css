@@ -7,107 +7,108 @@
 	font-family: 'Poppins', sans-serif;
 }
 
-.version {
-	font-size: 13px;
-	color: gray;
-}
-
-.logo {
-	text-align: center;
-	font-size: 25px;
-	color: var(--text-mouse);
-}
-
-.logo span {
-	color: var(--blue);
-}
-
-.logo h1 {
-	font-size: 65px;
-}
-
-h2, h5 {
-	color: var(--text);
-}
-
-h5 {
-	margin-bottom: 5px;
-	text-align: left !important;
-}
-
 body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	background-image: url('/investme/resources/images/background.jpg');
-	background-position: center;
+	background-color: var(--white);
 }
 
 .container {
-   	display: flex;
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
+	width: 100vw;
+}
+
+/* ------------------ INIT LEFT ------------------ */
+
+.left {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	flex-direction: column;
+	max-width: 550px;
+}
+
+.container-login, .field, .container-divisor {
+	min-width: 450px !important;
+}
+
+.messages {
+	max-width: 450px !important;
+}
+
+.vertical-left {
+	margin-bottom: 15px;
+}
+
+.links { 
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.welcome-back {
+	font-size: 40px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+.credentials {
+	color: #888888;
+	font-size: 18px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.button-login {
+    background-color: var(--blue) !important;
+    border: none !important;
+    color: white !important;
+    padding: 5px 52px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    font-size: 16px !important;
+    border-radius: 35px !important;
+    font-family: 'Poppins', sans-serif !important;
+    transition: 0.4s !important;
+    cursor: pointer !important;
+    margin: 0px !important; 
+}
+
+.button-login:hover {
+	background-color: var(--blue-mouse) !important;	
+}
+
+.container-divisor {
+	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	
-	height: 70vh;
-	width: 390px;
-	
-	padding: 30px;
-	border-radius: 15px;
-	background-color: var(--background-general);
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 4px 16px 0 rgba(0,0,0,0.15);
+	margin-top: 20px;
 }
 
-.center {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
-	margin: 0px;
-}
-
-.center > * {
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-.container > * {
+.divisor {
+	background-color: #E0E0E0;
+	height: 1px;
 	width: 100%;
 }
 
-.form-darkmode {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-start;
+.follow-me {
+	width: 220px;
+	text-align: center;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
-form {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
-}
-
-.ui-inputfield {
-    width: 100% !important;
-	background-color: var(--background-general-mouse) !important;
-	font-size: 18px !important;
-}
-
-.ui-password {
-	width: 100%;
-}
-
-.container a {
-	color: var(--text);
-	transition: 0.4s;
-	font-size: 18px;
+.version {
+	font-size: 13px;
+	color: gray;
+	margin-top: 20px;
 }
 
 .atendimento {
 	text-align: center;
+	margin-top: 20px;
 }
 
 .atendimento a {
@@ -134,72 +135,27 @@ form {
 	color: var(--blue) !important;
 }
 
-.buttonClass {
-    background-color: var(--blue) !important;
-    border: none !important;
-    color: white !important;
-    padding: 5px 52px !important;
-    text-align: center !important;
-    text-decoration: none !important;
-    display: inline-block !important;
-    font-size: 16px !important;
-    border-radius: 35px !important;
-    font-family: 'Poppins', sans-serif !important;
-    transition: 0.4s !important;
-    cursor: pointer !important;
-    margin: 0px !important; 
-}
-
-.buttonClass:hover {
-	background-color: var(--blue-mouse) !important;	
-}
-
-.options {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: flex-start;
-	text-align: left;
-}
-
-.google-icons {
-	color: var(--text-mouse);
-	font-size: 30px !important;
-}
-
-.ui-messages > div  {
-	padding: 10px !important;
-}
-
-*::-webkit-scrollbar {
-    width: 10px;
-}
-
-*::-webkit-scrollbar-track {
-    width: 12px;
-    box-shadow: inset 0 0 .3rem #00000050;
-    background-color: #fff ;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: var(--blue);
-}
-
-@media (max-height: 850px) {
-	.container {
-		height: 90vh;
-	}
-}
-
-@media (max-width: 400px) {
-	.container {
-		width: 100vw;
-		height: 100vh;
-		border-radius: 0px;
+@media (max-width: 600px) {
+	.right {
+		display: none;
 	}
 	
-	body {
-		background-color: var(--background-body) !important;
-		background-image: none;
+	.container-login, .field, .container-divisor {
+		min-width: 350px !important;
 	}
+	
+	.messages {
+		max-width: 350px !important;
+	}
+	
+}
+
+/* ------------------ INIT RIGHT ------------------ */
+
+.right {
+	width: 100%;
+	height: 100%;
+	background-image:url('https://images.pexels.com/photos/6771740/pexels-photo-6771740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+	background-size: cover;
+	background-position: center
 }
