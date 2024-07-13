@@ -11,10 +11,10 @@ A web system to centralize all your investments and expenses in one place </br><
 
 ### Business Features
 + Registration/Change/Removal of transactions (Investments/Expenditures)
++ Dashboard with all stocks/FIIs/BDRs (Used BRAPI to get informations)
 + Chart - Spents by type of transaction (Filtered by Year)
 + Chart (Investments/Expenditures) - Spents by category (All screen filters)
-+ Cards - Total investment/Expenditures on Home
-+ Cards - Total by categories
++ Chart (Investments/Expenditures) - Spents by payment (All screen filters)
 + Filters in every page
 + Categories
 + Payment methods
@@ -35,17 +35,21 @@ A web system to centralize all your investments and expenses in one place </br><
 + Postgresql
 + Jpa
 + Wildfly Server
++ Api (BRAPI)
 
 ## Screens
 
 ### Login
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/46d82e11-bb4e-4201-bb4d-872ebb82a6e6)
+![image](https://github.com/user-attachments/assets/5eee566a-389d-41d2-b282-35dff68d171a)
 
-### Home
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/a0375142-75db-4490-a1e8-377c13c4edb8)
+### Wallet
+![image](https://github.com/user-attachments/assets/6f55a44e-d1cc-4181-aa70-076d1abac7c0)
 
-### Home Light Mode
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/b793387a-9af4-4892-a110-619c5f24dfcd)
+### Wallet Light Mode
+![image](https://github.com/user-attachments/assets/1676dec0-faa3-435c-aa56-8c61b5e3dac2)
+
+### Dashboard
+![image](https://github.com/user-attachments/assets/13d134b3-975f-4e2b-ad24-b9f164394015)
 
 ## Chart - Spents by type of transaction (Investment/Expenditure)
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/7adad0c8-ebb9-4e80-8c94-32503e4a90c3)
@@ -58,12 +62,6 @@ A web system to centralize all your investments and expenses in one place </br><
 
 #### Edit Transaction
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/d33ce345-6f67-48ee-93d3-2160bccb2c2f)
-
-### Investments
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/ed5a362e-1c54-4888-8140-189a772f9205)
-
-### Expenditures
-![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/2f59a012-dd96-47c6-aecf-c8700f911277)
 
 ### Categories
 ![image](https://github.com/GeovaniTech/InvestMe/assets/84943777/eae6d1b4-434d-4de6-bacd-915c1a95111b)
