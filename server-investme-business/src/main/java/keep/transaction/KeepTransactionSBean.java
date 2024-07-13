@@ -297,4 +297,61 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		query.executeUpdate();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> getPaymentsNameWithTransactions(TOFilterTransaction filter) {
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT T.payment.name FROM ");
+		sql.append(Transaction.class.getSimpleName()).append(" T ");
+		sql.append(this.getWhereTransactions(filter, params));
+		sql.append(" GROUP BY T.payment.name ");
+		sql.append(" ORDER BY T.payment.name");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString(), String.class);
+		setParameters(query, params);
+		
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Number> getTotalByPayment(TOFilterTransaction filter) {
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT SUM(T.price * T.amount) ")
+			.append(this.getFromTransactions())
+			.append(" RIGHT JOIN T.payment payment ")
+			.append(this.getWhereTransactions(filter, params))
+			.append(" GROUP BY payment.name ")
+			.append(" ORDER BY payment.name ");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString(), Number.class);
+		setParameters(query, params);
+		
+		return query.getResultList();
+	}
+
+	@Override
+	public Double getTotalValueByPayment(TOFilterTransaction filter) {
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT SUM(T.price * T.amount) ")
+			.append(this.getFromTransactions())
+			.append(this.getWhereTransactions(filter, params));
+		
+		Query query = this.getEntityManager().createQuery(sql.toString());
+		setParameters(query, params);
+		
+		Number value = (Number) query.getSingleResult();
+		
+		return value != null ? value.doubleValue() : 0.0;
+	}
+
 }

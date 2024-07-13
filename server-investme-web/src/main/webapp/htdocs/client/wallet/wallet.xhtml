@@ -22,12 +22,13 @@
 			<div jsf:id="charts" class="horizontal-evenly">
 				<ui:include src="/htdocs/client/wallet/chart_investments_by_category.xhtml" />
 				<ui:include src="/htdocs/client/wallet/chart_expenditures_by_category.xhtml" />
+				<ui:include src="/htdocs/client/wallet/chart_expenditures_by_payment.xhtml" />
 			</div>
 			
 			<h:form id="formTransactions">
 				<p:remoteCommand 
 					name="updateTableAndCards"
-					onstart="reloadChartInvestments(); reloadChartExpenditures();"
+					onstart="reloadChartInvestments(); reloadChartExpenditures(); reloadChartExpendituresByPayment();"
 					update="formTransactions:tableTransactions:tableTransactions" />
 		
 				<h2>#{label.last_transactions}</h2>
@@ -136,7 +137,7 @@
 								value="#{label.search}"
 								update="@form"
 								onclick="PF('tableTransactionsVW').filter();"
-								oncomplete="reloadChartInvestments(); reloadChartExpenditures();" 
+								oncomplete="reloadChartInvestments(); reloadChartExpenditures(); reloadChartExpendituresByPayment();" 
 								styleClass="mg-r-5" />
 
 							<p:commandButton 

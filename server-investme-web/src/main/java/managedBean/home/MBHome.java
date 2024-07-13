@@ -83,6 +83,10 @@ public class MBHome extends AbstractFilterMBean<TOTransaction, TOFilterTransacti
 		return this.getTransactionSBean().getTotalByType(this.getFilter(), "investment");
 	}
 	
+	public Double getTotalByPayment() {
+		return this.getTransactionSBean().getTotalValueByPayment(this.getFilter());
+	}
+	
 	public MBTransactionInfo getMBTransactionInfo() {
 		return this.getMBean(MBTransactionInfo.MANAGED_BEAN_NAME);
 	}
