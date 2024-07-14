@@ -1,4 +1,4 @@
-package brapi.webservice.response;
+package brapi.response;
 
 import java.util.List;
 

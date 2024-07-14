@@ -7,10 +7,10 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 import abstracts.AbstractWebService;
+import brapi.response.QuoteListResponse;
+import brapi.response.QuoteResponse;
 import brapi.transferobject.TOStockBrapiAPI;
 import brapi.transferobject.TOTickerBrapiAPI;
-import brapi.webservice.response.QuoteListResponse;
-import brapi.webservice.response.QuoteResponse;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionManagement;
 import jakarta.ejb.TransactionManagementType;
