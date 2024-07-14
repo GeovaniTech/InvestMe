@@ -87,12 +87,12 @@
 }
 
 .ui-dataview-row {
-	height: calc(100vh - 156px);
+	height: calc(100vh - 165px);
 	overflow-y: auto;
 }
 
 .ui-dataview-column {
-	width: 19.9% !important;
+	width: 24.9% !important;
 	padding: 10px !important;
 	float: left;
 	box-sizing: border-box;
