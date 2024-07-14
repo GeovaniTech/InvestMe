@@ -143,7 +143,7 @@
 							<p:commandButton 
 								icon="pi pi-filter-slash"
 								value="#{label.clear_filters}" 
-								oncomplete="reloadChartInvestments(); reloadChartExpenditures();" 
+								oncomplete="reloadChartInvestments(); reloadChartExpenditures(); reloadChartExpendituresByPayment();" 
 								action="#{MBHome.clearFilters}"
 								update="@form" />
 						</f:facet>
