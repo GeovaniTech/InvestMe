@@ -97,3 +97,22 @@
 	float: left;
 	box-sizing: border-box;
 }
+
+@media (max-width: 600px) { 
+	.ui-dataview-column {
+		width: 98.9% !important;
+	}
+	
+	.ui-dataview-row {
+		width: 100vw !important;
+		height: calc(100vh - 200px);
+	}
+	
+	.filters,.ui-dataview {
+		width: calc(100vw - 10px) !important;
+	}
+	
+	.filters input {
+		width: 100%;
+	}
+}
