@@ -15,7 +15,8 @@
 	
 	<p:remoteCommand 
 		name="clearFilters"
-		action="#{MBDashbordStocks.clearFilters()}" />
+		action="#{MBDashbordStocks.clearFilters()}"
+		update="formDashboard" />
 	
 	<p:dialog
 		id="dialogInvestmentsDashboard"
@@ -66,8 +67,9 @@
 							<div class="right">
 								<p class="price">#{MBAppConfigs.getBrazilianCurrency(stock.price)}</p>
 								<p:commandButton 
-									action="#{MBDashbordStocks.buyStock(stock.active)}"
+									action="#{MBDashbordStocks.buyStock(stock.active, stock.price)}"
 									oncomplete="PF('dialogInvestmentsDashboardWV').hide();"
+									resetValues="true"
 									value="#{label.buy}"
 									styleClass="button-buy" />
 							</div>

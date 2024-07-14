@@ -46,12 +46,17 @@ public class MBDashboardStocks extends AbstractMBean {
 		return this.getBrapiWebService().getTicker(symbol);
 	}
 	
-	public void buyStock(String symbol) {
+	public void buyStock(String symbol, Double price) {
 		TOTickerBrapiAPI stock = this.findStock(symbol);
 
-		this.getMBTransactionInfo().getTransaction().setActive(stock.getSymbol());
-		this.getMBTransactionInfo().getTransaction().setPrice(stock.getCurrentPrice());
-		
+		if (StringUtil.isNotNull(stock.getSymbol())) {
+			this.getMBTransactionInfo().getTransaction().setActive(stock.getSymbol());
+			this.getMBTransactionInfo().getTransaction().setPrice(stock.getCurrentPrice());
+		} else {
+			this.getMBTransactionInfo().getTransaction().setActive(symbol);
+			this.getMBTransactionInfo().getTransaction().setPrice(price);
+		}
+
 		PrimeFaces.current().ajax().update("dialogTransactionInfo:formTransactionInfo:name");
 		PrimeFaces.current().ajax().update("dialogTransactionInfo:formTransactionInfo:price");
 	}
