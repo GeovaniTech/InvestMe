@@ -13,8 +13,9 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("/transaction")
+@Path("/investme/transaction")
 public class WSTransaction implements Serializable {
+	
 	private static final long serialVersionUID = -5356669334984339402L;
 	
 	@Inject
