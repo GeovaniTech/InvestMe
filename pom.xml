@@ -24,11 +24,20 @@
 		<module>server-investme-webservice</module>
 	</modules>
 
+	<profiles>
+		<profile>
+			<id>services</id>
+			<modules>
+				<module>server-investme-api</module>
+			</modules>
+		</profile>
+	</profiles>
+
 	<distributionManagement>
           <repository>
      	   	 <id>investme-new-architecture</id>
      		 <name>investme-new-architecture</name>
-		 <url>file://.m2/repository</url>
+		 	 <url>file://.m2/repository</url>
   	  </repository>
  	</distributionManagement>
 
@@ -74,6 +83,12 @@
 			<dependency>
 				<groupId>br.com.devpree</groupId>
 				<artifactId>server-investme</artifactId>
+				<version>1.0.X-SNAPSHOT</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>br.com.devpree</groupId>
+				<artifactId>server-investme-api</artifactId>
 				<version>1.0.X-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
