@@ -155,6 +155,7 @@ public class MBTransactionInfo extends AbstractMBean {
 		
 		this.setIdCategorySelected(transaction.getCategory().getId());
 		this.setIdPaymentSelected(transaction.getPayment().getId());
+		this.setInvestment(transaction.getCategory().getType().equals("investment"));
 		
 		this.listAllCategories();
 		this.updateForm();
