@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.devpree.investme.api.category.service.CategoryService;
 import br.com.devpree.investme.api.category.transferobject.TOCategoryRestModel;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -24,6 +25,7 @@ public class WSCategory implements Serializable {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"User"}) 
 	@Path("/list")
 	public List<TOCategoryRestModel> list(@QueryParam("email") String email) {
 		return categoryService.list(email);

@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.devpree.investme.api.payments.service.PaymentService;
 import br.com.devpree.investme.api.payments.transferobject.TOPaymentRestModel;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -24,6 +25,7 @@ public class WSPayment implements Serializable {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"User"}) 
 	@Path("/list")
 	public List<TOPaymentRestModel> list(@QueryParam("email") String email) {
 		return paymentService.list(email);

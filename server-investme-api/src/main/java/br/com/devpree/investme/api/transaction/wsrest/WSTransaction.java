@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.com.devpree.investme.api.transaction.service.TransactionService;
 import br.com.devpree.investme.api.transaction.transferobject.TOTransactionRestModel;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -24,6 +25,7 @@ public class WSTransaction implements Serializable {
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"User"}) 
 	@Path("/list")
 	public List<TOTransactionRestModel> list(@QueryParam("email") String email) { 
 		return transactionService.list(email);
