@@ -9,7 +9,6 @@ import br.com.devpree.investme.api.notification.service.NotificationService;
 import br.com.devpree.investme.api.notification.transferobject.TONotificationRestModel;
 import br.com.devpree.investme.webservice.brapi.BrapiWebService;
 import br.com.devpree.investme.webservice.brapi.transferobject.TOTickerBrapiAPI;
-import io.netty.util.internal.StringUtil;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -40,16 +39,21 @@ public class WSNotification implements Serializable {
 		List<TONotificationRestModel> readyNotifications = new ArrayList<>();
 		
 		for(TONotificationRestModel transaction : transactions) {
-			TOTickerBrapiAPI ticker = brapiWebservice.getTicker(transaction.getActive());
-			
-			if (ticker == null || ticker.getCurrentPrice() == null) {
+			try {				
+				TOTickerBrapiAPI ticker = brapiWebservice.getTicker(transaction.getActive());
+
+				if (ticker == null || ticker.getCurrentPrice() == null) {
+					continue;
+				}
+				
+				transaction.setActualPrice(ticker.getCurrentPrice());
+				
+				if(transaction.getActualPrice() < transaction.getAvaragePrice()) {
+					readyNotifications.add(transaction);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 				continue;
-			}
-			
-			transaction.setActualPrice(ticker.getCurrentPrice());
-			
-			if(transaction.getActualPrice() < transaction.getAvaragePrice()) {
-				readyNotifications.add(transaction);
 			}
 		}
 		

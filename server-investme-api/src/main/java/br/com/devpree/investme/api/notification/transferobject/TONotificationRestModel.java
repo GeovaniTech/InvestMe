@@ -5,6 +5,13 @@ public class TONotificationRestModel {
 	private Double actualPrice;
 	private Double avaragePrice;
 	
+	public TONotificationRestModel(String active, Double actualPrice, Double avaragePrice) {
+		super();
+		this.active = active;
+		this.actualPrice = actualPrice;
+		this.avaragePrice = avaragePrice;
+	}
+	
 	public String getActive() {
 		return active;
 	}

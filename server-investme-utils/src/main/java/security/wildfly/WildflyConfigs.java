@@ -12,6 +12,8 @@ public class WildflyConfigs {
 		
 		if(base.equals("/")) {
 			return "/opt/wf-30/";
+		} else if (base.contains("C:")){
+			return "C://devpree/wildfly/wildfly-30/";
 		}
 		
 		return base.substring(0, base.length() -3);
