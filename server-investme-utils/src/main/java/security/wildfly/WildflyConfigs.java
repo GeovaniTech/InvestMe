@@ -10,12 +10,10 @@ public class WildflyConfigs {
 	private static String getBaseUrl() {
 		String base = System.getProperty("user.dir");
 		
-		if(base.equals("/")) {
+		if(base.equals("/") || base.contains("deploy")) {
 			return "/opt/wf-30/";
 		} else if (base.contains("C:")){
 			return "C://devpree/wildfly/wildfly-30/";
-		} else if (base.contains("deploy")) {
-			return "/opt/opt/wf-30/";
 		}
 		
 		return base.substring(0, base.length() -3);
