@@ -6,6 +6,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import br.com.devpree.investme.webservice.abstracts.AbstractWebService;
 import br.com.devpree.investme.webservice.brapi.response.QuoteListResponse;
 import br.com.devpree.investme.webservice.brapi.response.QuoteResponse;
@@ -22,7 +24,9 @@ public class BrapiWebService extends AbstractWebService {
 	private static final long serialVersionUID = -2849136246032960800L;
 	
 	private final String BASE_URL = "https://brapi.dev/api/";
-	private final String AUTH_TOKEN = WildflyConfigs.getConfig("brapi_token");
+	
+	@ConfigProperty(name = "brapi_token")
+	private String AUTH_TOKEN;
 	
 	public TOTickerBrapiAPI getTicker(String symbol) {
 		String url = BASE_URL + "quote/" + symbol + "?token=" + AUTH_TOKEN;
