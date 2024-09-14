@@ -53,15 +53,13 @@ public class MBNewPassword extends AbstractMBean {
 				this.setEmail(EncryptionUtil.decryptNormalText(encryptedEmail));
 				return true;
 			}
-			
-			return false;
 		}
 		
 		return false;
 	}
 	
 	public void saveChanges() {
-		if(this.getPassword().equals(this.getRepeatedPassword())) {
+		if(this.getPassword().equals(this.getRepeatedPassword()) && this.isTokenValid()) {
 			this.getClientSBean().setNewPassword(this.getEmail(), this.getPassword());
 		} else {
 			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("password_are_not_the_same"), FacesMessage.SEVERITY_WARN);
