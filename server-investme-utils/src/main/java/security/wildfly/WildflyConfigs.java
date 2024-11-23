@@ -11,7 +11,7 @@ public class WildflyConfigs {
 		String base = System.getProperty("user.dir");
 		
 		if(base.equals("/") || base.contains("deploy")) {
-			return "/opt/wf-30/";
+			return "/opt/wildfly-30/";
 		} else if (base.contains("C:")){
 			return "C://devpree/wildfly/wildfly-30/";
 		}
