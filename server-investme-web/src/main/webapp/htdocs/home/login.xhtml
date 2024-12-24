@@ -38,6 +38,10 @@
 					<p class="credentials">#{label.please_enter_your_crendentials}</p>
 					
 					<h:form id="formLogin">
+						<f:metadata>
+							<f:viewParam name="messageParam" value="#{MBLogin.messageParam}"></f:viewParam>
+						</f:metadata>
+					
 						<p:remoteCommand 
 							autoRun="true"
 							action="#{MBLogin.showFinishedRegisterMessage()}"

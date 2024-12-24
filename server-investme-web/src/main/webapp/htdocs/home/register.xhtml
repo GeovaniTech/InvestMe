@@ -36,14 +36,18 @@
 					</div>
 					
 					<p class="credentials">#{label.please_enter_your_crendentials}</p>
-					
+
 					<h:form id="formLogin">
+						<f:metadata>
+							<f:viewParam name="finished" value="#{MBRegister.token}"></f:viewParam>
+						</f:metadata>
+					
 						<p:remoteCommand 
 							autoRun="true"
-							action="#{MBLogin.showFinishedRegisterMessage()}"
+							action="#{MBRegister.finishRegister}"
 							update="formLogin:messages"
 							process="@this" />
-	
+							
 						<div class="container-login">
 				        	<p:messages 
 				        		id="messages" 
