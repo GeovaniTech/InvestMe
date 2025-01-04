@@ -13,9 +13,8 @@
 		<h:outputStylesheet library="css" name="/configs/configs.css?v=#{MBAppConfigs.cacheVersion}" />
 		
 		<script>
-		  // @see https://docs.headwayapp.co/widget for more configuration options.
 		  var HW_config = {
-		    selector: ".notifications", // CSS selector where to inject the badge
+		    selector: ".notifications",
 		    account:  "72bQq7"
 		  }
 		</script>
@@ -25,9 +24,7 @@
 		<div class="top-header" id="top-header">
 			<div class="left-items horizontal-center">
 				<div class="btn-menu" onclick="openMenu();">
-					<span class="material-symbols-outlined">
-						menu
-					</span>
+					<i class="pi pi-bars btn-menu"></i>
 				</div>
 				
 				<div class="name-page">
@@ -36,18 +33,18 @@
 			</div>
 			
 			<div class="right-items horizontal-center">
+				<a href="https://www.youtube.com/watch?v=w_gdQyD5FUI&amp;t=1s&amp;ab_channel=GeovaniDebastiani" class="horizontal-center" style="text-decoration: none;" target="_blank">
+				    <i class="pi pi-question header-icons"></i>
+				</a>
+
 				<p:commandLink id="my_account" style="text-decoration: none;">
 					<div class="horizontal-center">
-						<span class="material-symbols-outlined google-icons">
-							account_circle
-						</span>
+						<i class="pi pi-user header-icons"></i>
 					</div>			
 				</p:commandLink>
 			
-				<div class="horizontal-center ">
-					<span class="material-symbols-outlined google-icons notifications">
-						notifications
-					</span>
+				<div class="horizontal-center">
+					<i class="pi pi-bell header-icons notifications"></i>
 				</div>
 				
 				<div class="horizontal-center">
@@ -56,9 +53,7 @@
 						style="text-decoration: none;"
 						styleClass="horizontal-center">
 						
-						<span class="material-symbols-outlined google-icons">
-							settings
-						</span>
+						<i class="pi pi-cog header-icons"></i>
 					</p:commandLink>
 				</div>
 			</div>

@@ -33,22 +33,33 @@ h1, h1 a, h1 span {
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-}
-
-.btn-menu span {
-	font-size: 40px !important;
-	margin: 10px;
+	font-size: 30px !important;
 	color: var(--text);
 	transition: 0.4s;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
-.btn-menu span:hover {
+.btn-menu:hover {
 	color: var(--text-mouse);
 }
 
 .name-page {
 	font-size: 20px;
 	color: var(--text);
+}
+
+.header-icons {
+	font-size: 25px !important;
+	margin-right: 15px;
+	color: var(--text);
+	transition: 0.4s;
+}
+
+.header-icons:hover {
+	font-size: 25px !important;
+	margin-right: 15px;
+	color: var(--text-mouse);
 }
 
 /* ############## LEFT HEADER ############## */
@@ -79,40 +90,6 @@ h1, h1 a, h1 span {
 .logo a {
 	color: var(--text) !important;
 }
-
-/* .menu {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: left;
-	margin-top: 5px;
-}
-
-.menu a {
-	width: 90%;
-	padding: 10px;
-	padding-left: 12px;
-	color: var(--text);
-	transition: 0.4s;
-	font-size: 18px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	border-radius: 10px;
-	margin: 5px;
-	text-decoration: none !important;
-	font-family: 'Poppins', sans-serif !important;
-}
-
-.menu a span {
-	transition: 0.4s;
-}
-
-.menu a:hover {
-	color: var(--text-mouse);
-	background-color: var(--background-general-mouse);
-} */
 
 .menu a:hover span {
 	color: var(--text-mouse);
