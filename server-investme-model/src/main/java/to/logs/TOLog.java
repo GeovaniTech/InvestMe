@@ -1,8 +1,5 @@
 package to.logs;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.Date;
 
 import abstracts.AbstractTOObject;
@@ -16,7 +13,6 @@ public class TOLog extends AbstractTOObject {
 	private String stack;
 	private EnumLogCategory category;
 	private EnumLogType type;
-	private String ip;
 	
 	public TOLog() {
 		this.setCreationDate(new Date());
@@ -42,12 +38,5 @@ public class TOLog extends AbstractTOObject {
 	}
 	public void setType(EnumLogType type) {
 		this.type = type;
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	
+	}	
 }

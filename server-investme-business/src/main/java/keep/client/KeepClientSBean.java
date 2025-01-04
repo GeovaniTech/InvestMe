@@ -154,7 +154,6 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 				log.setStack("User is blocked. Credentials: \n Email: " + email);
 				log.setCategory(EnumLogCategory.USER_BLOCKED_LOGIN);
 				log.setType(EnumLogType.WARN);
-				log.setIp(this.getUserIpAddress());
 				
 				this.getLogSbean().save(log);
 				return false;
@@ -200,7 +199,6 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		log.setStack(message);
 		log.setCategory(EnumLogCategory.INVALID_LOGIN);
 		log.setType(EnumLogType.WARN);
-		log.setIp(this.getUserIpAddress());
 		
 		this.getLogSbean().save(log);
 		

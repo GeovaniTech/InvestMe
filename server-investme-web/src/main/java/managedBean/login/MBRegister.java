@@ -83,7 +83,6 @@ public class MBRegister extends AbstractMBean {
 		TOLog log = new TOLog();
 		log.setCategory(EnumLogCategory.REGISTER_EMAIL);
 		log.setCreationUser(email);
-		log.setIp(this.getUserIpAddress());
 		
 		try {
 			EmailUtil.sendMail(email, title, description.toString(), MessageUtil.getMessageFromProperties("confirmation_email_sent"));	

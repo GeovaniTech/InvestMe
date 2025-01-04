@@ -17,7 +17,6 @@ public class Log extends AbstractObject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String ip;
 	
 	@Enumerated(EnumType.STRING)
 	private EnumLogCategory category;
@@ -43,14 +42,6 @@ public class Log extends AbstractObject {
 
 	public void setStack(String stack) {
 		this.stack = stack;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
 	}
 
 	public EnumLogCategory getCategory() {

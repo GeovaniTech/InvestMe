@@ -147,7 +147,6 @@ public class MBAppConfigs extends AbstractMBean {
 			log.setStack("USER ACCOUNT DELETED SUCCESSFULLY. USER DELETE: " +  this.getClientSession().getEmail());
 			log.setCreationUser(this.getClientSession().getEmail());
 			log.setCreationDate(new Date());
-			log.setIp(this.getUserIpAddress());
 			
 			saveLog(log);
 			
@@ -161,7 +160,6 @@ public class MBAppConfigs extends AbstractMBean {
 			log.setStack(ExceptionUtils.getStackTrace(e));
 			log.setCreationUser(this.getClientSession().getEmail());
 			log.setCreationDate(new Date());
-			log.setIp(this.getUserIpAddress());
 			
 			saveLog(log);
 			
