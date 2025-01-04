@@ -504,67 +504,6 @@ public class KeepClientSBean extends AbstractKeep<Client, TOClient> implements I
 		this.getCategorySBean().save(cdi);
 		this.getCategorySBean().save(bdrs);
 		this.getCategorySBean().save(criptocurrencys);
-		
-		TOTransaction nvdc34 = new TOTransaction();
-		nvdc34.setActive("NVDC34 " + this.getLabel("example_you_can_delete"));
-		nvdc34.setPrice(90.51);
-		nvdc34.setAmount(3);
-		nvdc34.setCategory(actions);
-		nvdc34.setPayment(pix);
-		nvdc34.setDatePurchase(new Date());
-		nvdc34.setCreationDate(new Date());
-		nvdc34.setCreationUser(user);
-		nvdc34.setClient(client);
-		
-		TOTransaction tsla32 = new TOTransaction();
-		tsla32.setActive("TSLA32 " + this.getLabel("example_you_can_delete"));
-		tsla32.setPrice(25.43);
-		tsla32.setAmount(7);
-		tsla32.setCategory(actions);
-		tsla32.setPayment(creditCard);
-		tsla32.setDatePurchase(new Date());
-		tsla32.setCreationDate(new Date());
-		tsla32.setCreationUser(user);
-		tsla32.setClient(client);
-		
-		TOTransaction em = new TOTransaction();
-		em.setActive(this.getLabel("emergency_money") + " " + this.getLabel("example_you_can_delete"));
-		em.setPrice(698.0);
-		em.setAmount(1);
-		em.setCategory(emergencyMoney);
-		em.setPayment(pix);
-		em.setDatePurchase(new Date());
-		em.setCreationDate(new Date());
-		em.setCreationUser(user);
-		em.setClient(client);
-		
-		TOTransaction pizza = new TOTransaction();
-		pizza.setActive("Pizza " + this.getLabel("example_you_can_delete"));
-		pizza.setPrice(85.0);
-		pizza.setAmount(1);
-		pizza.setCategory(food);
-		pizza.setPayment(ticket);
-		pizza.setDatePurchase(new Date());
-		pizza.setCreationDate(new Date());
-		pizza.setCreationUser(user);
-		pizza.setClient(client);
-		
-		TOTransaction uber = new TOTransaction();
-		uber.setActive(this.getLabel("uber_to_work") + " " + this.getLabel("example_you_can_delete"));
-		uber.setPrice(21.0);
-		uber.setAmount(1);
-		uber.setCategory(transport);
-		uber.setPayment(money);
-		uber.setDatePurchase(new Date());
-		uber.setCreationDate(new Date());
-		uber.setCreationUser(user);
-		uber.setClient(client);
-		
-		this.getTransactionSBean().save(nvdc34);
-		this.getTransactionSBean().save(tsla32);
-		this.getTransactionSBean().save(em);
-		this.getTransactionSBean().save(pizza);
-		this.getTransactionSBean().save(uber);
 	}
 	
 	@Override
