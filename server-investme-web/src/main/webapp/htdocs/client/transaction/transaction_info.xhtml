@@ -17,9 +17,15 @@
 			widgetVar="dialogTransactionInfoVW"
 			header="#{label.transaction}"
 			onHide="updateTableAndCards();"
-			width="1024px">
+			width="1024px"
+			modal="true">
 			
-			<h:form id="formTransactionInfo">
+			<h:form id="formTransactionInfo">		
+				<p:remoteCommand 
+					name="updateAmountWithPayments"
+					action="#{MBTransactionInfo.updateAmountWithPayment}"
+					update="formTransactionInfo:containerInstallments, amount" 
+					process="@this" />			
 				<p:messages 
 	       			id="transactionInfoMessages" 
 	        		autoUpdate="true"
@@ -63,7 +69,12 @@
 								value="#{MBTransactionInfo.transaction.amount}"
 								required="true"
 								requiredMessage="#{label.amount_required}"
-								disabled="#{MBTransactionInfo.isRenderNumberInstallments() or (MBTransactionInfo.editing and MBTransactionInfo.transaction.payment.installmentable) or MBTransactionInfo.recurringPurchase}" />
+								disabled="#{MBTransactionInfo.isRenderNumberInstallments() or (MBTransactionInfo.editing and MBTransactionInfo.transaction.payment.installmentable) or MBTransactionInfo.recurringPurchase}">
+								
+								<p:ajax 
+									event="keyup" 
+									process="@this" />	
+							</p:inputNumber>
 						</div>
 						
 						<div class="ui-g-3 input-container">
@@ -109,8 +120,8 @@
 								disabled="#{(MBTransactionInfo.payments == null or MBTransactionInfo.payments.size() == 0) or (MBTransactionInfo.editing and MBTransactionInfo.transaction.payment.installmentable)}">
 								
 								<p:ajax 
-									event="change"
-									update="formTransactionInfo:containerInstallments, amount" />
+									event="valueChange"
+									oncomplete="updateAmountWithPayments();" />
 								
 								<f:selectItems 
 									var="payment"

@@ -210,18 +210,29 @@ public class MBTransactionInfo extends AbstractMBean {
 		if (!this.isEditing() && !this.isInvestment() && this.getTransaction() != null) {
 			TOPayment payment = null;
 			
-			if (this.getIdPaymentSelected() != null) {
-				payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
+			if (this.getTransaction().getPayment() != null) {
+				payment = this.getTransaction().getPayment();
 			} else {
 				payment = this.getPayments().isEmpty() ? null : this.getPayments().get(0);
 			}
 			
 			this.getTransaction().setPayment(payment);
-			
+
 			return payment != null && payment.isInstallmentable();
 		}
 
 		return false;
+	}
+	
+	public void updateAmountWithPayment() {
+		if (this.getIdPaymentSelected() != null) {
+			TOPayment payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
+			this.getTransaction().setPayment(payment);
+			
+			if (payment.isInstallmentable() && !this.isInvestment()) {
+				this.getTransaction().setAmount(1);
+			}
+		} 
 	}
 	
 	private void loadIntallments() {
