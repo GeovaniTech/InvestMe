@@ -27,3 +27,9 @@ h2 {
 .row-investment > * {
 	color: green !important;	
 }
+
+.background-icon-paid {
+	background-color: var(--background-general);
+    padding: 5px;
+    border-radius: 50%;
+}

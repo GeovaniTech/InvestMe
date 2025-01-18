@@ -1,8 +1,11 @@
 package managedBean.transaction;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
 
 import org.primefaces.PrimeFaces;
 
@@ -18,6 +21,8 @@ import keep.transaction.IKeepTransactionSBean;
 import to.category.TOCategory;
 import to.payment.TOPayment;
 import to.transaction.TOTransaction;
+import utils.ListUtil;
+import utils.StringUtil;
 
 @Named(MBTransactionInfo.MANAGED_BEAN_NAME)
 @ViewScoped
@@ -27,14 +32,17 @@ public class MBTransactionInfo extends AbstractMBean {
 	public static final String MANAGED_BEAN_NAME = "MBTransactionInfo";
 	
 	private TOTransaction transaction;
-	private boolean editing;
 	private Integer idCategorySelected;
 	private Integer idPaymentSelected;
+	
 	private boolean continueEntering;
 	private boolean investment;
+	private boolean editing;
+	private boolean recurringPurchase;
 	
 	private List<TOCategory> categories;
 	private List<TOPayment> payments;
+	private List<Integer> installments;
 	
 	@EJB
 	private IKeepTransactionSBean transactionSBean;
@@ -49,7 +57,9 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void init() {
 		this.setPayments(this.getPaymentSBean().listAll());
 		this.setCategories(new ArrayList<TOCategory>());
+		this.loadIntallments();
 		this.setContinueEntering(true);
+		this.setRecurringPurchase(false);
 	}
 	
 	public void initTransaction() {
@@ -61,6 +71,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void initInvestment() {
 		this.setCategories(this.getCategorySBean().searchAllCategories("investment"));
 		this.setInvestment(true);
+		this.setRecurringPurchase(false);
 		updateForm();
 	}
 	
@@ -76,13 +87,38 @@ public class MBTransactionInfo extends AbstractMBean {
 				TOCategory category = this.getCategorySBean().findById(this.getIdCategorySelected());
 				TOPayment payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
 				
-				this.getTransaction().setCreationDate(new Date());
-				this.getTransaction().setCreationUser(this.getClientSession().getEmail());
-				this.getTransaction().setCategory(category);
-				this.getTransaction().setPayment(payment);
-				this.getTransaction().setClient(this.getClientSession());
+				int installments = 1;
+				double pricePerTransaction = this.getTransaction().getPrice();
 				
-				this.getTransactionSBean().save(this.getTransaction());
+				Calendar purchaseDate = Calendar.getInstance();
+				purchaseDate.setTime(this.getTransaction().getDatePurchase());
+
+				if (payment.isInstallmentable() || this.isRecurringPurchase()) {					
+					this.getTransaction().setAmount(1);
+					installments = this.getTransaction().getInstallments();
+					
+					if (!this.isRecurringPurchase() && payment.isInstallmentable()) {
+						pricePerTransaction = pricePerTransaction / installments;
+						purchaseDate.add(Calendar.MONTH, purchaseDate.get(Calendar.DAY_OF_MONTH) > payment.getDueDate() ? 1 : 0);
+						purchaseDate.set(Calendar.DAY_OF_MONTH, payment.getDueDate());
+					}
+				}
+				
+				for (int i = 0; i < installments; i++) {
+					TOTransaction transaction = (TOTransaction) this.getTransaction().clone();
+					transaction.setCreationDate(new Date());
+					transaction.setCreationUser(this.getClientSession().getEmail());
+					transaction.setCategory(category);
+					transaction.setPayment(payment);
+					transaction.setClient(this.getClientSession());
+					transaction.setDatePurchase(purchaseDate.getTime());
+					transaction.setPaid((!payment.isInstallmentable() && !this.isRecurringPurchase()) || this.isInvestment() ? true : false);
+					transaction.setPrice(pricePerTransaction);
+					
+					this.getTransactionSBean().save(transaction);
+					purchaseDate.add(Calendar.MONTH, 1);
+				}
+				
 				this.showMessageItemSaved(this.getTransaction().getActive());
 
 				if(this.isContinueEntering()) {
@@ -168,6 +204,31 @@ public class MBTransactionInfo extends AbstractMBean {
 	
 	public void updateForm() {
 		PrimeFaces.current().ajax().update("dialogTransactionInfo:formTransactionInfo");
+	}
+	
+	public boolean isRenderNumberInstallments() {
+		if (!this.isEditing() && !this.isInvestment() && this.getTransaction() != null) {
+			TOPayment payment = null;
+			
+			if (this.getIdPaymentSelected() != null) {
+				payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
+			} else {
+				payment = this.getPayments().isEmpty() ? null : this.getPayments().get(0);
+			}
+			
+			this.getTransaction().setPayment(payment);
+			
+			return payment != null && payment.isInstallmentable();
+		}
+
+		return false;
+	}
+	
+	private void loadIntallments() {
+		this.setInstallments(new ArrayList<Integer>());
+		for (int i = 1; i <= 72; i++) {
+			this.getInstallments().add(i);
+		}
 	}
 	
 	public TOTransaction getTransaction() {
@@ -256,5 +317,21 @@ public class MBTransactionInfo extends AbstractMBean {
 
 	public void setInvestment(boolean investment) {
 		this.investment = investment;
+	}
+
+	public List<Integer> getInstallments() {
+		return installments;
+	}
+
+	public void setInstallments(List<Integer> installments) {
+		this.installments = installments;
+	}
+
+	public boolean isRecurringPurchase() {
+		return recurringPurchase;
+	}
+
+	public void setRecurringPurchase(boolean recurringPurchase) {
+		this.recurringPurchase = recurringPurchase;
 	}
 }

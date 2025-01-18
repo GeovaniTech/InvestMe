@@ -77,6 +77,14 @@
 					<p:column headerText="#{label.name}">
 						<h:outputText value="#{to.name}"/>
 					</p:column>
+					
+					<p:column headerText="#{label.installmentable}">
+						<h:outputText value="#{to.installmentable ? label.yes : label.no}"/>
+					</p:column>
+					
+					<p:column headerText="#{label.due_date}">
+						<h:outputText value="#{to.dueDate == null ? '-' : to.dueDate}"/>
+					</p:column>
 				</components:datatableSingleSelection>
 			</h:form>
 			

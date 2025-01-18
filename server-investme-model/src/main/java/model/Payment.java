@@ -12,6 +12,8 @@ public class Payment extends AbstractObject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	private boolean installmentable;
+	private Integer dueDate;
 	
 	public int getId() {
 		return id;
@@ -25,5 +27,16 @@ public class Payment extends AbstractObject {
 	public void setName(String name) {
 		this.name = name;
 	}
-	 
+	public boolean isInstallmentable() {
+		return installmentable;
+	}
+	public void setInstallmentable(boolean installmentable) {
+		this.installmentable = installmentable;
+	}
+	public Integer getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(Integer dueDate) {
+		this.dueDate = dueDate;
+	}
 }

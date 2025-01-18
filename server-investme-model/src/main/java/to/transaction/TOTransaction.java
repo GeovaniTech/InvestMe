@@ -7,7 +7,7 @@ import to.category.TOCategory;
 import to.client.TOClient;
 import to.payment.TOPayment;
 
-public class TOTransaction extends AbstractTOObject {
+public class TOTransaction extends AbstractTOObject implements Cloneable {
 
 	private static final long serialVersionUID = -1384422120365897196L;
 	
@@ -19,6 +19,8 @@ public class TOTransaction extends AbstractTOObject {
 	private TOCategory category;
 	private TOPayment payment;
 	private TOClient client;
+	private Integer installments = 1;
+	private boolean paid;
 	
 	public int getId() {
 		return id;
@@ -68,5 +70,21 @@ public class TOTransaction extends AbstractTOObject {
 	public void setClient(TOClient client) {
 		this.client = client;
 	}
+	public Integer getInstallments() {
+		return installments;
+	}
+	public void setInstallments(Integer installments) {
+		this.installments = installments;
+	}
+	public boolean isPaid() {
+		return paid;
+	}
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
 	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 }

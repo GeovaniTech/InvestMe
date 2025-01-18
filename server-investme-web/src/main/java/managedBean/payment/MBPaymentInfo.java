@@ -1,6 +1,8 @@
 package managedBean.payment;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.primefaces.PrimeFaces;
 
@@ -20,12 +22,14 @@ public class MBPaymentInfo extends AbstractMBean {
 	
 	private TOPayment payment;
 	private boolean editing;
+	private List<Integer> monthsDate;
 	
 	@EJB
 	private IKeepPaymentSBean paymentSBean;
 	
 	public MBPaymentInfo() {
 		this.initPayment();
+		this.loadMonthsDate();
 	}
 	
 	public void save() {
@@ -81,6 +85,14 @@ public class MBPaymentInfo extends AbstractMBean {
 	public void updateFormPayment() {
 		PrimeFaces.current().ajax().update("dialogPaymentInfo:formPaymentInfo");
 	}
+	
+	private void loadMonthsDate() {
+		this.setMonthsDate(new ArrayList<Integer>());
+		
+		for (int i = 1; i < 32; i++) {
+			this.getMonthsDate().add(i);
+		}
+	}
 
 	public boolean isEditing() {
 		return editing;
@@ -104,5 +116,13 @@ public class MBPaymentInfo extends AbstractMBean {
 
 	public void setPaymentSBean(IKeepPaymentSBean paymentSBean) {
 		this.paymentSBean = paymentSBean;
+	}
+
+	public List<Integer> getMonthsDate() {
+		return monthsDate;
+	}
+
+	public void setMonthsDate(List<Integer> monthsDate) {
+		this.monthsDate = monthsDate;
 	}
 }

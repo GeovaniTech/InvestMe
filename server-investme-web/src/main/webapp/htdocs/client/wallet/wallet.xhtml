@@ -160,6 +160,10 @@
 					oncomplete="PF('dialogTransactionInfoVW').show();"  
 					rowStyleClass="#{to.category.type eq 'investment' ? 'row-investment' : 'row-expense'}">
 					
+					<p:column headerText="#{label.paid}" width="50">
+						  <i class="#{to.paid ? 'pi pi-check' : 'pi pi-times'} background-icon-paid" style="color: #{to.paid ? 'green' : 'red'} !important"></i>
+					</p:column>
+					
 					<p:column headerText="#{label.active}">
 						<h:outputText value="#{to.active}"/>
 					</p:column>

@@ -7,7 +7,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-	xmlns:components="http://java.sun.com/jsf/composite/components">
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <h:body>
 	<ui:composition>
@@ -15,7 +16,8 @@
 			id="dialogPaymentInfo" 
 			widgetVar="dialogPaymentInfoVW"
 			header="#{label.payment}"
-			onHide="updateTablePayments();">
+			onHide="updateTablePayments();"
+			width="700px">
 			
 			<h:form id="formPaymentInfo">
 				<p:messages 
@@ -23,17 +25,56 @@
 	        		autoUpdate="true"
 	        		showIcon="false"
 	        		showDetail="false" />
-			
-				<div class="horizontal-left-center">
-					<div class="search-group">
-						<p:outputLabel for="name" value="#{label.name}" />
-						<p:inputText 	
-							id="name"
-							value="#{MBPaymentInfo.payment.name}"
-							required="true"
-							requiredMessage="#{label.name_required}" />
-					</div>
-				</div>
+	        		
+	        	<div class="ui-g">
+	        		<div class="ui-g-12">
+	        			<div class="ui-g-4 input-container">
+							<p:outputLabel for="name" value="#{label.name}" />
+							<p:inputText 	
+								id="name"
+								value="#{MBPaymentInfo.payment.name}"
+								required="true"
+								requiredMessage="#{label.name_required}" />
+	        			</div>	
+	        			
+	        			<div jsf:id="containerDueDate" class="ui-g-4">
+							<div jsf:rendered="#{MBPaymentInfo.payment.installmentable}" class="input-container">
+								<p:outputLabel for="dueDate" value="#{label.due_date}" />
+								<p:selectOneMenu 
+									id="dueDate"
+									value="#{MBPaymentInfo.payment.dueDate}">
+										
+									<f:selectItems 
+										var="date"
+										value="#{MBPaymentInfo.monthsDate}"
+										itemLabel="#{date}"
+										itemValue="#{date}" />
+								</p:selectOneMenu>
+		        			</div>
+	        			</div>
+	        		</div>
+	        		
+	        		<div class="ui-g-12 no-padding-top no-padding-bottom">
+						<div class="ui-g-4 input-container-horizontal">
+							<p:selectBooleanCheckbox
+								id="installmentable"
+								value="#{MBPaymentInfo.payment.installmentable}"
+								styleClass="mg-r-5">
+							
+								<p:ajax 
+									event="change"
+									update="containerDueDate" />	
+							</p:selectBooleanCheckbox>
+								
+							<p:outputLabel for="installmentable" value="#{label.installmentable}"/>
+							<p:tooltip 
+								for="installmentable" 
+								value="#{label.msg_installmentable_explanation}"
+								position="right"
+							    style="width: 500px" />
+						</div>
+	        		</div>
+	        	</div>
 				
 				<p:toolbar>
 					<f:facet name="left">

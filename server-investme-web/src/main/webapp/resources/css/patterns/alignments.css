@@ -118,6 +118,41 @@
 	margin: 10px 5px; 
 }
 
+.input-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	max-width: 100%;
+}
+
+.input-container-horizontal {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.input-container > * {
+  width: 100% !important;
+}
+
+.input-container > span > * {
+  width: 100% !important;
+}
+
+.no-padding-left {
+	padding-left: 0px !important;
+}
+
+.no-padding-top {
+	padding-top: 0px !important;
+}
+
+.no-padding-bottom {
+	padding-bottom: 0px !important;
+}
+
 .wrap {
 	flex-wrap: wrap;
 }

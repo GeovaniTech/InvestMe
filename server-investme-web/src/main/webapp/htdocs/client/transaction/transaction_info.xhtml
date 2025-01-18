@@ -16,7 +16,8 @@
 			id="dialogTransactionInfo" 
 			widgetVar="dialogTransactionInfoVW"
 			header="#{label.transaction}"
-			onHide="updateTableAndCards();">
+			onHide="updateTableAndCards();"
+			width="1024px">
 			
 			<h:form id="formTransactionInfo">
 				<p:messages 
@@ -26,106 +27,160 @@
 	        		showDetail="false"
 	        		escape="false" />
 			
-				<div class="line">
-					<div class="search-group">
+				<div class="ui-g">
+					<div class="ui-g-12 input-container">
 						<p:outputLabel for="name" value="#{label.active}" />
 						<p:inputText 	
 							id="name"
 							value="#{MBTransactionInfo.transaction.active}"
 							required="true"
 							requiredMessage="#{label.active_required}" />
-					</div>				
-					
-					<div class="search-group">
-						<p:outputLabel for="price" value="#{label.price}" />
-						<p:inputNumber	
-							id="price"
-							value="#{MBTransactionInfo.transaction.price}"
-							required="true"
-							requiredMessage="#{label.price_required}"
-							decimalSeparator="," 
-							thousandSeparator="." 
-							pattern="#.##0,00"/>
 					</div>
 					
-					<div class="search-group">
-						<p:outputLabel for="amount" value="#{label.amount}" />
-						<p:inputNumber	
-							id="amount"
-							value="#{MBTransactionInfo.transaction.amount}"
-							required="true"
-							requiredMessage="#{label.amount_required}" />
+					<div class="ui-g-12 no-padding-top no-padding-bottom" jsf:rendered="#{MBTransactionInfo.investment}">
+						<p:commandLink 
+							value="#{label.open_investment_dashboard}"
+							onclick="PF('dialogInvestmentsDashboardWV').show();" />
 					</div>
-				</div>
-				
-				<div class="line">
-					<p:commandLink 
-						value="#{label.open_investment_dashboard}"
-						onclick="PF('dialogInvestmentsDashboardWV').show();"
-						rendered="#{MBTransactionInfo.investment}"
-						style="margin-left: 5px;" />
-				</div>
-				
-				<div class="line">
-					<div class="search-group">
-						<p:outputLabel for="purchaseDate" value="#{label.purchase_date}" />
-						<p:calendar 
-							id="purchaseDate"
-							value="#{MBTransactionInfo.transaction.datePurchase}"
-							maxlength="10"
-							mask="99/99/9999"
-							required="true"
-							requiredMessage="#{label.purchase_date_required}"
-							pattern="dd/MM/yyyy" />
+					
+					<div class="ui-g-12">	
+						<div class="ui-g-4 input-container no-padding-left">
+							<p:outputLabel for="price" value="#{label.price}" />
+							<p:inputNumber	
+								id="price"
+								value="#{MBTransactionInfo.transaction.price}"
+								required="true"
+								requiredMessage="#{label.price_required}"
+								decimalSeparator="," 
+								thousandSeparator="." 
+								pattern="#.##0,00"/>
+						</div>
+						
+						<div class="ui-g-1 input-container">
+							<p:outputLabel for="amount" value="#{label.amount}" />
+							<p:inputNumber	
+								id="amount"
+								value="#{MBTransactionInfo.transaction.amount}"
+								required="true"
+								requiredMessage="#{label.amount_required}"
+								disabled="#{MBTransactionInfo.isRenderNumberInstallments() or (MBTransactionInfo.editing and MBTransactionInfo.transaction.payment.installmentable) or MBTransactionInfo.recurringPurchase}" />
+						</div>
+						
+						<div class="ui-g-3 input-container">
+							<p:outputLabel for="purchaseDate" value="#{label.purchase_date}" />
+							<p:calendar 
+								id="purchaseDate"
+								value="#{MBTransactionInfo.transaction.datePurchase}"
+								maxlength="10"
+								mask="99/99/9999"
+								required="true"
+								requiredMessage="#{label.purchase_date_required}"
+								pattern="dd/MM/yyyy" />
+						</div>
+						
+						<div class="ui-g-4 input-container">
+							<p:outputLabel for="category" value="#{label.category}" />
+							<p:selectOneMenu
+								id="category"
+								value="#{MBTransactionInfo.idCategorySelected}"
+								filter="true"
+								required="true"
+								requiredMessage="#{labe.required_category}"
+								disabled="#{MBTransactionInfo.categories == null or MBTransactionInfo.categories.size() == 0}">
+								
+								<f:selectItems 
+									var="category"
+									value="#{MBTransactionInfo.categories}"
+									itemLabel="#{category.name}"
+									itemValue="#{category.id}" />
+							</p:selectOneMenu>
+						</div>
 					</div>
-
-					<div class="search-group">
-						<p:outputLabel for="category" value="#{label.category}" />
-						<p:selectOneMenu
-							id="category"
-							value="#{MBTransactionInfo.idCategorySelected}"
-							filter="true"
-							style="width: 225px;"
-							required="true"
-							requiredMessage="#{labe.required_category}"
-							disabled="#{MBTransactionInfo.categories == null or MBTransactionInfo.categories.size() == 0}">
+				
+					<div class="ui-g-12 no-padding-top">
+						<div class="ui-g-4 input-container no-padding-left">
+							<p:outputLabel for="payment" value="#{label.payment}" />
+							<p:selectOneMenu
+								id="payment"
+								filter="true"
+								value="#{MBTransactionInfo.idPaymentSelected}"
+								required="true"
+								requiredMessage="#{labe.required_payment}"
+								disabled="#{(MBTransactionInfo.payments == null or MBTransactionInfo.payments.size() == 0) or (MBTransactionInfo.editing and MBTransactionInfo.transaction.payment.installmentable)}">
+								
+								<p:ajax 
+									event="change"
+									update="formTransactionInfo:containerInstallments, amount" />
+								
+								<f:selectItems 
+									var="payment"
+									value="#{MBTransactionInfo.payments}"
+									itemLabel="#{payment.name}"
+									itemValue="#{payment.id}" />
+							</p:selectOneMenu>
+						</div>
+						
+						<div jsf:id="containerInstallments">
+							<div class="ui-g-4 input-container" jsf:rendered="#{(MBTransactionInfo.isRenderNumberInstallments() || MBTransactionInfo.recurringPurchase) and !MBTransactionInfo.editing}">
+								<p:outputLabel for="installments" value="#{MBTransactionInfo.recurringPurchase ? label.months_to_repeat : label.number_installments}" />
+								<p:selectOneMenu
+									id="installments"
+									value="#{MBTransactionInfo.transaction.installments}"
+>
+									<f:selectItems 
+										var="installment"
+										value="#{MBTransactionInfo.installments}"
+										itemLabel="#{installment}"
+										itemValue="#{installment}" />
+								</p:selectOneMenu>
+							</div>
 							
-							<f:selectItems 
-								var="category"
-								value="#{MBTransactionInfo.categories}"
-								itemLabel="#{category.name}"
-								itemValue="#{category.id}" />
-						</p:selectOneMenu>
-					</div>
-					
-					<div class="search-group">
-						<p:outputLabel for="payment" value="#{label.payment}" />
-						<p:selectOneMenu
-							id="payment"
-							value="#{MBTransactionInfo.idPaymentSelected}"
-							filter="true"
-							style="width: 225px;"
-							required="true"
-							requiredMessage="#{labe.required_payment}"
-							disabled="#{MBTransactionInfo.payments == null or MBTransactionInfo.payments.size() == 0}">
-							
-							<f:selectItems 
-								var="payment"
-								value="#{MBTransactionInfo.payments}"
-								itemLabel="#{payment.name}"
-								itemValue="#{payment.id}" />
-						</p:selectOneMenu>
+							<div class="ui-g-4 input-container" jsf:rendered="#{MBTransactionInfo.transaction.payment.installmentable and !MBTransactionInfo.investment}">
+								<p:outputLabel for="dueDate" value="#{label.due_date}" />
+								<p:inputNumber 
+									id="dueDate"
+									value="#{MBTransactionInfo.transaction.payment.dueDate}"
+									disabled="true" />
+							</div>
+						</div>
 					</div>
 				</div>
 				
-				<div class="line" jsf:rendered="#{!MBTransactionInfo.editing}">
-					<div class="search-group-horizontal">
+				<div class="ui-g-12" jsf:rendered="#{!MBTransactionInfo.editing}">
+					<div class="ui-g-3 input-container-horizontal">
 						<p:selectBooleanCheckbox
 							id="continueEntering" 
 							value="#{MBTransactionInfo.continueEntering}"
 							styleClass="mg-r-5" />
 						
 						<p:outputLabel for="continueEntering" value="#{label.continue_entering}" />
+					</div>
+					
+					<div class="ui-g-3 input-container-horizontal" jsf:rendered="#{!MBTransactionInfo.investment}">
+						<p:selectBooleanCheckbox
+							id="recurringPurchase" 
+							value="#{MBTransactionInfo.recurringPurchase}"
+							styleClass="mg-r-5">
+							
+							<p:ajax 
+								event="change"
+								process="@this"
+								update="containerInstallments, amount" />
+						</p:selectBooleanCheckbox>
+							
+						<p:outputLabel id="recurringPurchaseLabel" for="recurringPurchase" value="#{label.recurring_purchase}" />
+						<p:tooltip for="recurringPurchaseLabel, recurringPurchase" value="#{label.msg_recurring_purchase_explanation}" position="right" style="width: 350px;" />
+					</div>
+				</div>
+				
+				<div class="ui-g-12 no-padding-top" jsf:rendered="#{MBTransactionInfo.editing}">
+					<div class="ui-g-4 input-container-horizontal no-padding-left">
+						<p:selectBooleanCheckbox
+							id="paid" 
+							value="#{MBTransactionInfo.transaction.paid}"
+							styleClass="mg-r-5" />
+						
+						<p:outputLabel for="paid" value="#{label.mark_paid}" />
 					</div>
 				</div>
 				

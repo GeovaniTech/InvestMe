@@ -20,6 +20,7 @@ public class Transaction extends AbstractObject {
 	private Double price;
 	private Integer amount;
 	private Date datePurchase;
+	private boolean paid;
 	
 	@ManyToOne
 	private Client client;
@@ -92,6 +93,14 @@ public class Transaction extends AbstractObject {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+
+	public boolean isPaid() {
+		return paid;
+	}
+
+	public void setPaid(boolean paid) {
+		this.paid = paid;
 	}
 
 }
