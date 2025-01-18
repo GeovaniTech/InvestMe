@@ -49,6 +49,10 @@ public class MBPaymentInfo extends AbstractMBean {
 		try {
 			this.getPayment().setChangeDate(new Date());
 			this.getPayment().setChangeUser(this.getClientSession().getEmail());
+			
+			if (!this.getPayment().isInstallmentable()) {
+				this.getPayment().setDueDate(null);
+			}
 
 			this.getPaymentSBean().change(this.getPayment());
 			showMessageItemChanged(this.getPayment().getName());
