@@ -122,8 +122,13 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		}
 		
 		if(filter.getIdPayment() != null) {
-			sql.append(" AND T.payment.id = : idPayment ");
+			sql.append(" AND T.payment.id = :idPayment ");
 			params.add(new TOParameter("idPayment", filter.getIdPayment()));
+		}
+		
+		if (filter.getPaid() != null) {
+			sql.append(" AND T.paid = :paid ");
+			params.add(new TOParameter("paid", filter.getPaid()));
 		}
 		
 		return sql.toString();

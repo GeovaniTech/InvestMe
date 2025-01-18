@@ -13,6 +13,7 @@ public class TOFilterTransaction extends AbstractTOFilter implements Cloneable {
 	private TOInputNumberFilter price;
 	private TODateRangeFilter datePurchase;
 	private String type;
+	private Boolean paid;
 	private Integer idCategory;
 	private Integer idPayment;
 	
@@ -58,6 +59,14 @@ public class TOFilterTransaction extends AbstractTOFilter implements Cloneable {
 	}
 	public void setIdPayment(Integer idPayment) {
 		this.idPayment = idPayment;
+	}
+
+	public Boolean getPaid() {
+		return paid;
+	}
+
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
 	}
 
 	@Override

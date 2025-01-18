@@ -120,11 +120,20 @@
 					
 					<div class="horizontal-left-center">
 						<div class="search-group">
-							<p:outputLabel for="type" value="#{label.type}"/>
+							<p:outputLabel for="type" value="#{label.type}" />
 							<p:selectOneRadio id="type" value="#{MBHome.filter.type}" layout="lineDirection">
 					            <f:selectItem itemLabel="#{label.all}" itemValue="#{null}" />
 					            <f:selectItem itemLabel="#{label.investment}" itemValue="investment" />
 					            <f:selectItem itemLabel="#{label.expense}" itemValue="expense" />
+					        </p:selectOneRadio>
+						</div>
+	
+						<div class="search-group">
+							<p:outputLabel for="paid" value="#{label.paid}" />
+							<p:selectOneRadio id="paid" value="#{MBHome.filter.paid}" layout="lineDirection">
+					            <f:selectItem itemLabel="#{label.all}" itemValue="#{null}" />
+					            <f:selectItem itemLabel="#{label.yes}" itemValue="#{true}" />
+					            <f:selectItem itemLabel="#{label.no}" itemValue="#{false}" />
 					        </p:selectOneRadio>
 						</div>
 					</div>
