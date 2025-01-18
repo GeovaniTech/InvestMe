@@ -158,7 +158,7 @@
 					mBean="#{MBHome}"
 					selection="#{MBHome.transaction}"
 					oncomplete="PF('dialogTransactionInfoVW').show();"  
-					rowStyleClass="#{to.category.type eq 'investment' ? 'row-investment' : 'row-expense'}">
+					rowStyleClass="#{to.category.type eq 'investment' ? 'row-investment' : ''}">
 					
 					<p:column headerText="#{label.paid}" width="50">
 						  <i class="#{to.paid ? 'pi pi-check' : 'pi pi-times'} background-icon-paid" style="color: #{to.paid ? 'green' : 'red'} !important"></i>
