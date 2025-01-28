@@ -53,7 +53,16 @@ public class MBMenuInvestme extends AbstractMBean {
                 .update("messages")
                 .build();
         
+        DefaultMenuItem stockExchange = DefaultMenuItem.builder()
+        		.styleClass("menu-dashboard")
+                .value(this.getLabel("stock_exchange"))
+                .icon("pi pi-dollar")
+                .url(this.createUrlMenu("client/stockexchange"))
+                .update("messages")
+                .build();
+        
         financialManagement.getElements().add(wallet);
+        financialManagement.getElements().add(stockExchange);
         financialManagement.getElements().add(categories);
         financialManagement.getElements().add(payments);
         

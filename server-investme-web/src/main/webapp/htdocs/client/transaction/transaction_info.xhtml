@@ -18,7 +18,8 @@
 			header="#{label.transaction}"
 			onHide="updateTableAndCards();"
 			width="1024px"
-			modal="true">
+			modal="true"
+			updateOnClose="formTransactionInfo">
 			
 			<h:form id="formTransactionInfo">		
 				<p:remoteCommand 
@@ -26,6 +27,7 @@
 					action="#{MBTransactionInfo.updateAmountWithPayment}"
 					update="formTransactionInfo:containerInstallments, amount" 
 					process="@this" />			
+				
 				<p:messages 
 	       			id="transactionInfoMessages" 
 	        		autoUpdate="true"
@@ -226,7 +228,7 @@
 				</p:toolbar>
 			</h:form>
 			
-			<ui:include src="/htdocs/client/investment/dashboard/investments_dashboard.xhtml" />
+			<ui:include src="/htdocs/client/investment/stockexchange/dialog_stock_exchange.xhtml" />
 		</components:dialog>
 	</ui:composition>
 </h:body>

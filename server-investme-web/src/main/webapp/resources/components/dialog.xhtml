@@ -20,6 +20,7 @@
 		<composite:attribute name="height" />
 		<composite:attribute name="onHide" />
 		<composite:attribute name="onShow" />
+		<composite:attribute name="updateOnClose" />
 		<composite:attribute name="closable" default="true" />
 	</composite:interface>
 	
@@ -39,6 +40,11 @@
 			onShow="#{cc.attrs.onShow}"
 			blockScroll="true"
 			closable="#{cc.attrs.closable}">
+	
+			<p:ajax 
+				event="close"
+				resetValues="true"
+				update="#{cc.attrs.updateOnClose}" />
 	
 			<p:scrollPanel 
 				mode="native" 

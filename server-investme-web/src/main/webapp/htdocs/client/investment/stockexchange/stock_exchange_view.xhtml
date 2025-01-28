@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+<ui:composition>
+	<h:outputStylesheet library="css" name="/client/investments/dashboard.css?v=#{MBAppConfigs.cacheVersion}" />
+
+	<h:form id="formDashboard">
+		<div class="line filters">
+			<p:inputText 
+				id="filter"
+				value="#{MBDashbordStocks.filter}"
+				placeholder="#{label.search_by_name_symbol_price}"
+				style="width: 400px;">
+				
+				<p:ajax 
+					event="keyup"
+					delay="500"
+					process="filter"
+					update="formDashboard:stockDateView" />
+			</p:inputText>
+		</div>
+
+		<p:dataView 
+			id="stockDateView"
+			widgetVar="stockDateViewVW"
+			var="stock" 
+			value="#{MBDashbordStocks.filteredStocks}"
+			rows="60" 
+			paginator="true"
+			paginatorPosition="top"
+			layout="grid"
+			rowsPerPageTemplate="6, 12, 16, 60"
+			paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+
+			<p:dataViewGridItem>
+				<div class="stock">
+					<img src="#{stock.logo}" />
+
+					<div class="infos">
+						<div>
+							<p>#{stock.active}</p>
+							<p>#{stock.name}</p>
+						</div>
+						
+						<div class="right">
+							<p class="price">#{MBAppConfigs.getBrazilianCurrency(stock.price)}</p>
+							<p:commandButton 
+								action="#{MBDashbordStocks.buyStock(stock.active, stock.price)}"
+								oncomplete="PF('dialogInvestmentsDashboardWV').hide(); PF('dialogTransactionInfoVW').show();;"
+								resetValues="true"
+								value="#{label.buy}"
+								styleClass="button-buy" />
+						</div>
+					</div>
+				</div>
+			</p:dataViewGridItem>
+		</p:dataView>
+	</h:form>
+</ui:composition>
+</html>

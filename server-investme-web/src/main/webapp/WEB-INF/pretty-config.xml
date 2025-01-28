@@ -30,6 +30,8 @@
 		<view-id value="/htdocs/home/new_password.xhtml?token=#{token}" />
 	</url-mapping>
 	
+	<!-- START CLIENT -->
+	
 	<url-mapping id="wallet">
 		<pattern value="/client/wallet" />
 		<view-id value="/htdocs/client/wallet/wallet.xhtml" />
@@ -44,6 +46,13 @@
 		<pattern value="/client/payments" />
 		<view-id value="/htdocs/client/payments/payments.xhtml" />
 	</url-mapping>
+	
+	<url-mapping id="stockexchange">
+		<pattern value="/client/stockexchange" />
+		<view-id value="/htdocs/client/investment/stockexchange/screen_stock_exchange.xhtml" />
+	</url-mapping>
+	
+	<!-- START ADMIN -->
 	
 	<url-mapping id="users">
 		<pattern value="/admin/users" />
