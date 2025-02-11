@@ -5,8 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
-
 import org.primefaces.PrimeFaces;
 
 import abstracts.AbstractMBean;
@@ -21,8 +19,6 @@ import keep.transaction.IKeepTransactionSBean;
 import to.category.TOCategory;
 import to.payment.TOPayment;
 import to.transaction.TOTransaction;
-import utils.ListUtil;
-import utils.StringUtil;
 
 @Named(MBTransactionInfo.MANAGED_BEAN_NAME)
 @ViewScoped
@@ -212,6 +208,8 @@ public class MBTransactionInfo extends AbstractMBean {
 			
 			if (this.getTransaction().getPayment() != null) {
 				payment = this.getTransaction().getPayment();
+			} else if (this.getIdPaymentSelected() != null) {
+				payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
 			} else {
 				payment = this.getPayments().isEmpty() ? null : this.getPayments().get(0);
 			}
