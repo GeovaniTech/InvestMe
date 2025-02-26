@@ -14,6 +14,7 @@ public interface IKeepTransactionSBean {
 	public void remove(TOTransaction transaction);
 	public TOTransaction findById(int id);
 	public List<TOTransaction> search(TOFilterTransaction filter);
+	public List<TOTransaction> listPendingPaymentTransactions();
 	public Integer getCount(TOFilterTransaction filter);
 	public Double getTotalSpentByCategory(TOFilterTransaction filter, TOCategory category);
 	public Double getTotalByType(TOFilterTransaction filter, String type);

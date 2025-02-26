@@ -16,6 +16,11 @@ public class MessageUtil {
 		 return bundle.getString(label);
 	}
 	
+	public static String getMessageFromProperties(String label, Locale locale) {
+		 ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
+		 return bundle.getString(label);
+	}
+	
 	public static String getMessageFromProperties(String label, Object... params) {
 		 FacesContext facesContext = FacesContext.getCurrentInstance(); 
 		 Locale locale = facesContext.getViewRoot().getLocale();

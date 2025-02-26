@@ -19,6 +19,7 @@ public class Transaction extends AbstractObject {
 	private Integer amount;
 	private Date datePurchase;
 	private boolean paid;
+	private boolean notify;
 	
 	@ManyToOne
 	private Client client;
@@ -99,6 +100,14 @@ public class Transaction extends AbstractObject {
 
 	public void setPaid(boolean paid) {
 		this.paid = paid;
+	}
+
+	public boolean isNotify() {
+		return notify;
+	}
+
+	public void setNotify(boolean notify) {
+		this.notify = notify;
 	}
 
 }

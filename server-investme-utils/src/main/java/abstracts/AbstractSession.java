@@ -3,15 +3,10 @@ package abstracts;
 import jakarta.el.ELContext;
 import jakarta.el.ExpressionFactory;
 import jakarta.faces.context.FacesContext;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import to.client.TOClient;
 
-public abstract class AbstractSession {
-	protected HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-	protected HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-	
+public abstract class AbstractSession {	
 	protected HttpSession getSession() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		
@@ -39,14 +34,5 @@ public abstract class AbstractSession {
 		T bean = (T) expressionFactory.createValueExpression(elcontext, "#" + "{" + beanName + "}", Object.class).getValue(elcontext);
 		
 		return bean;		
-	}
-	
-	//Setters and Getters
-	public HttpServletRequest getRequest() {
-		return request;
-	}
-
-	public HttpServletResponse getResponse() {
-		return response;
 	}
 }

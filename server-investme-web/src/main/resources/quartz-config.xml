@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData 
+        https://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+	version="1.8">
+	
+	<schedule>
+		<job>
+			<name>NotifyTransactionsDuoDateJob_ID</name>
+			<group>CLIENT_TRANSACTION_INFO_GROUP</group>
+			<job-class>schedulerjobs.NotifyTransactionsDuoDateJob</job-class>
+		</job>
+
+		<trigger>
+			<cron>
+				<name>TRG_NotifyTransactionsDuoDateJob_ID</name>
+				<job-name>NotifyTransactionsDuoDateJob_ID</job-name>
+				<job-group>CLIENT_TRANSACTION_INFO_GROUP</job-group>
+				<cron-expression>0 12 * * * ?</cron-expression>
+			</cron>
+		</trigger>
+	</schedule>
+</job-scheduling-data>

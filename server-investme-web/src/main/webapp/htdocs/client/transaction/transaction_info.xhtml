@@ -25,7 +25,7 @@
 				<p:remoteCommand 
 					name="updateAmountWithPayments"
 					action="#{MBTransactionInfo.updateAmountWithPayment}"
-					update="formTransactionInfo:containerInstallments, amount" 
+					update="formTransactionInfo:containerInstallments, amount, containerNotify, containerNotifyEditing" 
 					process="@this" />			
 				
 				<p:messages 
@@ -184,6 +184,18 @@
 						<p:outputLabel id="recurringPurchaseLabel" for="recurringPurchase" value="#{label.recurring_purchase}" />
 						<p:tooltip for="recurringPurchaseLabel, recurringPurchase" value="#{label.msg_recurring_purchase_explanation}" position="right" style="width: 350px;" />
 					</div>
+					
+					<div jsf:id="containerNotify">
+						<div class="ui-g-6 input-container-horizontal" jsf:rendered="#{MBTransactionInfo.isRenderNumberInstallments()}">
+							<p:selectBooleanCheckbox
+								id="notifyWhenCloseExpiration" 
+								value="#{MBTransactionInfo.transaction.notify}"
+								styleClass="mg-r-5" />
+							
+							<p:outputLabel id="notifyWhenCloseExpirationLabel" for="notifyWhenCloseExpiration" value="#{label.notify_when_close_expiration}" />
+							<p:tooltip for="notifyWhenCloseExpirationLabel, notifyWhenCloseExpiration" value="#{label.notify_email_info}" position="right" style="width: 350px;" />
+						</div>
+					</div>
 				</div>
 				
 				<div class="ui-g-12 no-padding-top" jsf:rendered="#{MBTransactionInfo.editing}">
@@ -194,6 +206,18 @@
 							styleClass="mg-r-5" />
 						
 						<p:outputLabel for="paid" value="#{label.mark_paid}" />
+					</div>
+					
+					<div jsf:id="containerNotifyEditing">
+						<div class="ui-g-6 input-container-horizontal" jsf:rendered="#{MBTransactionInfo.transaction.payment.installmentable}">
+							<p:selectBooleanCheckbox
+								id="notifyWhenCloseExpirationEditing" 
+								value="#{MBTransactionInfo.transaction.notify}"
+								styleClass="mg-r-5" />
+							
+							<p:outputLabel id="notifyWhenCloseExpirationLabelEditing" for="notifyWhenCloseExpirationEditing" value="#{label.notify_when_close_expiration}" />
+							<p:tooltip for="notifyWhenCloseExpirationLabelEditing, notifyWhenCloseExpirationEditing" value="#{label.notify_email_info}" position="right" style="width: 350px;" />
+						</div>
 					</div>
 				</div>
 				

@@ -7,8 +7,10 @@ import org.primefaces.model.menu.MenuModel;
 
 import abstracts.AbstractMBean;
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Named(MBMenuInvestme.MANAGED_BEAN_NAME)
 @ViewScoped
@@ -97,7 +99,8 @@ public class MBMenuInvestme extends AbstractMBean {
 	}
 	
 	private String createUrlMenu(String pageUrl) {
-		return this.getRequest().getContextPath() + "/" + pageUrl;
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		return request.getContextPath() + "/" + pageUrl;
 	}
 	
 	// Getters and Setters

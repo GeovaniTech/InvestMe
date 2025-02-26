@@ -24,7 +24,7 @@ public class EmailUtil {
         return matcher.matches();
     }
     
-    public static void sendMail(String to, String title, String description, String success_message) throws Exception {
+    public static void sendMail(String to, String title, String description, String success_message, Boolean showFacesMessage) throws Exception {
     	try {
         	Properties properties = new Properties();
         	
@@ -51,9 +51,13 @@ public class EmailUtil {
         	
         	Transport.send(message);
         	
-        	MessageUtil.sendMessage(success_message, FacesMessage.SEVERITY_INFO);        	
+        	if (showFacesMessage != null && showFacesMessage) {
+            	MessageUtil.sendMessage(success_message, FacesMessage.SEVERITY_INFO);   
+        	}
 		} catch (Exception e) {
-			MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("mail_server_error"), FacesMessage.SEVERITY_ERROR);
+			if (showFacesMessage != null && showFacesMessage) {
+				MessageUtil.sendMessage(MessageUtil.getMessageFromProperties("mail_server_error"), FacesMessage.SEVERITY_ERROR);
+			}
 			throw new Exception(e);
 
 		}

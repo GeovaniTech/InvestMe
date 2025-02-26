@@ -21,6 +21,7 @@ public class TOTransaction extends AbstractTOObject implements Cloneable {
 	private TOClient client;
 	private Integer installments = 1;
 	private boolean paid;
+	private boolean notify;
 	
 	public int getId() {
 		return id;
@@ -86,5 +87,11 @@ public class TOTransaction extends AbstractTOObject implements Cloneable {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
+	}
+	public boolean isNotify() {
+		return notify;
+	}
+	public void setNotify(boolean notify) {
+		this.notify = notify;
 	}
 }

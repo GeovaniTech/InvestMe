@@ -80,7 +80,7 @@ public class MBLogin extends AbstractMBean {
 		log.setCreationUser(this.getEmail());
 		
 		try {
-			EmailUtil.sendMail(this.getEmail(), title, description.toString(), MessageUtil.getMessageFromProperties("email_new_password"));
+			EmailUtil.sendMail(this.getEmail(), title, description.toString(), MessageUtil.getMessageFromProperties("email_new_password"), true);
 			log.setType(EnumLogType.INFO);
 			log.setStack("Email sent successfully. Credentials: " + this.getEmail());
 		} catch (Exception e) {

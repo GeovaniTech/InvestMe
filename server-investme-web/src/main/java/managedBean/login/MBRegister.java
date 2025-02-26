@@ -85,7 +85,7 @@ public class MBRegister extends AbstractMBean {
 		log.setCreationUser(email);
 		
 		try {
-			EmailUtil.sendMail(email, title, description.toString(), MessageUtil.getMessageFromProperties("confirmation_email_sent"));	
+			EmailUtil.sendMail(email, title, description.toString(), MessageUtil.getMessageFromProperties("confirmation_email_sent"), true);	
 			log.setStack("Email sent successfully. Credentials: " + email);
 			log.setType(EnumLogType.INFO);
 		} catch (Exception e) {

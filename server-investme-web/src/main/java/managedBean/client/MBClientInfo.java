@@ -99,7 +99,7 @@ public class MBClientInfo extends AbstractMBean {
 		log.setCategory(EnumLogCategory.WELCOME_EMAIL);
 		
 		try {
-			EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) ao InvestMe!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"));
+			EmailUtil.sendMail(this.getClient().getEmail(), "Bem-vindo(a) ao InvestMe!", description.toString(), MessageUtil.getMessageFromProperties("msg_email_successfully_sent"), true);
 			log.setStack("Email sent successfully. Credentials: " + this.getClient().getEmail());
 			log.setType(EnumLogType.INFO);
 		} catch (Exception e) {

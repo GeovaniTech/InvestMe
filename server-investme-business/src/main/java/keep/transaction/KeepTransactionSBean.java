@@ -9,6 +9,7 @@ import jakarta.ejb.TransactionManagement;
 import jakarta.ejb.TransactionManagementType;
 import jakarta.persistence.Query;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Tuple;
 import model.Transaction;
 import query.SimpleWhere;
 import to.TOParameter;
@@ -360,4 +361,31 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		return value != null ? value.doubleValue() : 0.0;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TOTransaction> listPendingPaymentTransactions() {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" SELECT t.active as active, t.creationuser as creationUser ")
+			.append(" FROM transaction t ")
+			.append(" INNER JOIN payment p ON p.id = t.payment_id ")
+			.append(" WHERE t.paid = false ")
+			.append(" AND p.duedate IS NOT NULL ")
+			.append(" AND t.notify = true ")
+			.append(" AND DATE((date_trunc('month', t.datepurchase) + p.duedate * INTERVAL '1 day' - INTERVAL '1 day')) = DATE((CURRENT_DATE + INTERVAL '1 day'))");
+	
+		Query query = this.getEntityManager().createNativeQuery(sql.toString(), Tuple.class);
+		List<TOTransaction> transactions = new ArrayList<TOTransaction>();
+		
+		for (Tuple transaction : (List<Tuple>) query.getResultList()) {
+			TOTransaction to = new TOTransaction();
+			
+			to.setActive((String) transaction.get(0));;
+			to.setCreationUser((String) transaction.get(1));
+			
+			transactions.add(to);
+		}
+		
+		return transactions;
+	}
 }
