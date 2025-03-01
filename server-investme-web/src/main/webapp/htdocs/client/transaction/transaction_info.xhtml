@@ -224,6 +224,7 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:commandButton
+							id="saveTransactionButton"
 							icon="pi pi-save" 
 							value="#{label.save}"
 							action="#{MBTransactionInfo.save}"
@@ -250,6 +251,8 @@
 							update="@form" />
 					</f:facet>
 				</p:toolbar>
+				
+				<p:defaultCommand target="saveTransactionButton" />
 			</h:form>
 			
 			<ui:include src="/htdocs/client/investment/stockexchange/dialog_stock_exchange.xhtml" />
