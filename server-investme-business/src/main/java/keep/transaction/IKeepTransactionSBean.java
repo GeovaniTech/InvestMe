@@ -21,6 +21,7 @@ public interface IKeepTransactionSBean {
 	public List<Integer> getYearsFromTransaction();
 	public Double getTotalExpensesChartByYear(Integer year, Integer month);
 	public Double getTotalInvestmentsChartByYear(Integer year, Integer month);
+	public Double getTotalExpectedExpensesChartByYear(Integer year, Integer month);
 	public List<Number> getTotalByCategoryChartInvestment(TOFilterTransaction filter);
 	public List<String> getCategoriesNameWithTransactions(TOFilterTransaction filter);
 	public List<String> getPaymentsNameWithTransactions(TOFilterTransaction filter);

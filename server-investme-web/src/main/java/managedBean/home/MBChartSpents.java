@@ -66,15 +66,19 @@ public class MBChartSpents extends AbstractMBean {
 		this.setLineModel(new LineChartModel());
 		
 		ChartData data = new ChartData();
+		
 		LineChartDataSet investments = new LineChartDataSet();
 		LineChartDataSet expenditures = new LineChartDataSet();
+		LineChartDataSet expectedExpenses = new LineChartDataSet();
 		
 		List<Object> valuesInvestments = new ArrayList<>();
 		List<Object> valuesExpenditures = new ArrayList<>();
+		List<Object> valuesExpectedExpenditures = new ArrayList<>();
 		
 		for(Integer value : this.getMonths()) {
 			valuesInvestments.add(this.getTransactionSBean().getTotalInvestmentsChartByYear(this.getYearSelected(), value));
 			valuesExpenditures.add(this.getTransactionSBean().getTotalExpensesChartByYear(this.getYearSelected(), value));
+			valuesExpectedExpenditures.add(this.getTransactionSBean().getTotalExpectedExpensesChartByYear(this.getYearSelected(), value));
 		}
 		
 		investments.setData(valuesInvestments);
@@ -88,9 +92,16 @@ public class MBChartSpents extends AbstractMBean {
 		expenditures.setLabel(MessageUtil.getMessageFromProperties("expenditures"));
 		expenditures.setBorderColor("rgb(255, 0, 0)"); // Red
 		expenditures.setTension(0.1);
+
+		expectedExpenses.setData(valuesExpectedExpenditures);
+		expectedExpenses.setFill(false);
+		expectedExpenses.setLabel(MessageUtil.getMessageFromProperties("expected_expenditures"));
+		expectedExpenses.setBorderColor("rgb(255, 255, 0)"); // Yellow
+		expectedExpenses.setTension(0.1);
 		
         data.addChartDataSet(investments);
         data.addChartDataSet(expenditures);
+        data.addChartDataSet(expectedExpenses);
         
         List<String> labels = new ArrayList<>();
         labels.add(MessageUtil.getMessageFromProperties("january"));
@@ -108,11 +119,12 @@ public class MBChartSpents extends AbstractMBean {
 
         data.setLabels(labels);
         
-        //Options
         LineChartOptions options = new LineChartOptions();        
+        
         Title title = new Title();
         title.setDisplay(true);
         title.setText(MessageUtil.getMessageFromProperties("expenses_by_type_of_transaction"));
+        
         options.setTitle(title);
         
         this.getLineModel().setOptions(options);

@@ -226,6 +226,33 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		
 		return 0.0;
 	}
+	
+	@Override
+	public Double getTotalExpectedExpensesChartByYear(Integer year, Integer month) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" SELECT SUM(T.amount * T.price) ")
+			.append(this.getFromTransactions())
+			.append(" WHERE T.client.id = :clientId ")
+			.append(" AND T.category.type = 'expense' ")
+			.append(" AND YEAR(T.datePurchase) = :year ")
+			.append(" AND MONTH(T.datePurchase) = :month ")
+			.append(" AND T.paid = false ")
+			.append(" GROUP BY MONTH(T.datePurchase) ");
+
+		Query query = this.getEntityManager().createQuery(sql.toString());
+		query.setParameter("clientId", this.getClientSession().getId());
+		query.setParameter("year", year);
+		query.setParameter("month", month);
+		
+		if(query.getResultList().size() > 0) {
+			Number number = (Number) query.getSingleResult();
+			
+			return number.doubleValue();
+		}
+		
+		return 0.0;
+	}
 
 	@Override
 	public Double getTotalInvestmentsChartByYear(Integer year, Integer month) {
