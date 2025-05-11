@@ -115,8 +115,7 @@ public class MBTransactionInfo extends AbstractMBean {
 			
 			if (!this.isRecurringPurchase() && payment.isInstallmentable()) {
 				pricePerTransaction = pricePerTransaction / installmentsToCreate;
-				purchaseDate.add(Calendar.MONTH, purchaseDate.get(Calendar.DAY_OF_MONTH) > payment.getDueDate() ? 1 : 0);
-				purchaseDate.set(Calendar.DAY_OF_MONTH, payment.getDueDate());
+				purchaseDate.add(Calendar.MONTH, purchaseDate.get(Calendar.DAY_OF_MONTH) > payment.getCloseDate() ? 1 : 0);
 			}
 		}
 		
@@ -124,6 +123,7 @@ public class MBTransactionInfo extends AbstractMBean {
 		
 		for (int i = 0; i < installmentsToCreate; i++) {
 			createInstallment(pricePerTransaction, purchaseDate, installmentsObjects);
+			purchaseDate.add(Calendar.MONTH, 1);
 		}
 		
 		return installmentsObjects;
@@ -132,8 +132,6 @@ public class MBTransactionInfo extends AbstractMBean {
 	private void createInstallment(double pricePerTransaction, Calendar purchaseDate,
 			List<TOInstallment> installmentsObjects) throws Exception {
 		TOInstallment installment = new TOInstallment();
-
-		purchaseDate.add(Calendar.MONTH, 1);
 		
 		installment.setReferenceDate(purchaseDate.getTime());
 		installment.setValue(pricePerTransaction);
