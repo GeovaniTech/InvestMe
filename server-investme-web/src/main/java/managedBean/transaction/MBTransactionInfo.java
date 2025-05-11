@@ -17,6 +17,7 @@ import keep.category.IKeepCategorySBean;
 import keep.payment.IKeepPaymentSBean;
 import keep.transaction.IKeepTransactionSBean;
 import to.category.TOCategory;
+import to.installment.TOInstallment;
 import to.payment.TOPayment;
 import to.transaction.TOTransaction;
 
@@ -30,6 +31,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	private TOTransaction transaction;
 	private Integer idCategorySelected;
 	private Integer idPaymentSelected;
+	private int installmentSelectedCombobox = 1;
 	
 	private boolean continueEntering;
 	private boolean investment;
@@ -38,7 +40,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	
 	private List<TOCategory> categories;
 	private List<TOPayment> payments;
-	private List<Integer> installments;
+	private List<Integer> installmentsComboBox;
 	
 	@EJB
 	private IKeepTransactionSBean transactionSBean;
@@ -53,7 +55,7 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void init() {
 		this.setPayments(this.getPaymentSBean().listAll());
 		this.setCategories(new ArrayList<TOCategory>());
-		this.loadIntallments();
+		this.loadIntallmentsComboBox();
 		this.setContinueEntering(true);
 		this.setRecurringPurchase(false);
 	}
@@ -82,50 +84,75 @@ public class MBTransactionInfo extends AbstractMBean {
 			try {
 				TOCategory category = this.getCategorySBean().findById(this.getIdCategorySelected());
 				TOPayment payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
-				
-				int installments = 1;
-				double pricePerTransaction = this.getTransaction().getPrice();
-				
-				Calendar purchaseDate = Calendar.getInstance();
-				purchaseDate.setTime(this.getTransaction().getDatePurchase());
 
-				if (payment.isInstallmentable() || this.isRecurringPurchase()) {					
-					this.getTransaction().setAmount(1);
-					installments = this.getTransaction().getInstallments();
-					
-					if (!this.isRecurringPurchase() && payment.isInstallmentable()) {
-						pricePerTransaction = pricePerTransaction / installments;
-						purchaseDate.add(Calendar.MONTH, purchaseDate.get(Calendar.DAY_OF_MONTH) > payment.getDueDate() ? 1 : 0);
-						purchaseDate.set(Calendar.DAY_OF_MONTH, payment.getDueDate());
-					}
-				}
-				
-				for (int i = 0; i < installments; i++) {
-					TOTransaction transaction = (TOTransaction) this.getTransaction().clone();
-					transaction.setCreationDate(new Date());
-					transaction.setCreationUser(this.getClientSession().getEmail());
-					transaction.setCategory(category);
-					transaction.setPayment(payment);
-					transaction.setClient(this.getClientSession());
-					transaction.setDatePurchase(purchaseDate.getTime());
-					transaction.setPaid((!payment.isInstallmentable() && !this.isRecurringPurchase()) || this.isInvestment() ? true : false);
-					transaction.setPrice(pricePerTransaction);
-					
-					this.getTransactionSBean().save(transaction);
-					purchaseDate.add(Calendar.MONTH, 1);
-				}
-				
-				this.showMessageItemSaved(this.getTransaction().getActive());
-
-				if(this.isContinueEntering()) {
-					this.initTransaction();
-				} else {
-					this.setEditing(true);
-				}
+				createTransaction(category, payment, getTransactionInstallments(payment));				
+				finishTransactionProcess();
 			} catch (Exception e) {
 				showMessageError(e);
 			}
 		}
+	}
+
+	private void finishTransactionProcess() {
+		this.showMessageItemSaved(this.getTransaction().getActive());
+
+		if(this.isContinueEntering()) {
+			this.initTransaction();
+		} else {
+			this.setEditing(true);
+		}
+	}
+
+	private List<TOInstallment> getTransactionInstallments(TOPayment payment) throws Exception {
+		int installmentsToCreate = 1;
+		double pricePerTransaction = this.getTransaction().getPrice();
+		
+		Calendar purchaseDate = Calendar.getInstance();
+		purchaseDate.setTime(this.getTransaction().getDatePurchase());
+
+		if (payment.isInstallmentable() || this.isRecurringPurchase()) {	
+			installmentsToCreate = this.getInstallmentSelectedCombobox();
+			
+			if (!this.isRecurringPurchase() && payment.isInstallmentable()) {
+				pricePerTransaction = pricePerTransaction / installmentsToCreate;
+				purchaseDate.add(Calendar.MONTH, purchaseDate.get(Calendar.DAY_OF_MONTH) > payment.getDueDate() ? 1 : 0);
+				purchaseDate.set(Calendar.DAY_OF_MONTH, payment.getDueDate());
+			}
+		}
+		
+		List<TOInstallment> installmentsObjects = new ArrayList<TOInstallment>();
+		
+		for (int i = 0; i < installmentsToCreate; i++) {
+			createInstallment(pricePerTransaction, purchaseDate, installmentsObjects);
+		}
+		
+		return installmentsObjects;
+	}
+
+	private void createInstallment(double pricePerTransaction, Calendar purchaseDate,
+			List<TOInstallment> installmentsObjects) throws Exception {
+		TOInstallment installment = new TOInstallment();
+
+		purchaseDate.add(Calendar.MONTH, 1);
+		
+		installment.setReferenceDate(purchaseDate.getTime());
+		installment.setValue(pricePerTransaction);
+		installment.setTransaction(this.getTransaction());
+		
+		installmentsObjects.add(installment);
+	}
+
+	private void createTransaction(TOCategory category, TOPayment payment, List<TOInstallment> installments) {
+		this.getTransaction().setCreationDate(new Date());
+		this.getTransaction().setCreationUser(this.getClientSession().getEmail());
+		this.getTransaction().setCategory(category);
+		this.getTransaction().setPayment(payment);
+		this.getTransaction().setClient(this.getClientSession());
+		this.getTransaction().setPaid((!payment.isInstallmentable() && !this.isRecurringPurchase()) || this.isInvestment() ? true : false);
+		this.getTransaction().setInstallments(installments);
+		this.getTransaction().setAmount(!this.isInvestment() ? 1 : this.getTransaction().getAmount());
+		
+		this.getTransactionSBean().save(this.getTransaction());
 	}
 	
 	public void change() {		
@@ -233,10 +260,11 @@ public class MBTransactionInfo extends AbstractMBean {
 		} 
 	}
 	
-	private void loadIntallments() {
-		this.setInstallments(new ArrayList<Integer>());
+	private void loadIntallmentsComboBox() {
+		this.setInstallmentsComboBox(new ArrayList<Integer>());
+		
 		for (int i = 1; i <= 72; i++) {
-			this.getInstallments().add(i);
+			this.getInstallmentsComboBox().add(i);
 		}
 	}
 	
@@ -327,20 +355,28 @@ public class MBTransactionInfo extends AbstractMBean {
 	public void setInvestment(boolean investment) {
 		this.investment = investment;
 	}
-
-	public List<Integer> getInstallments() {
-		return installments;
-	}
-
-	public void setInstallments(List<Integer> installments) {
-		this.installments = installments;
-	}
-
+	
 	public boolean isRecurringPurchase() {
 		return recurringPurchase;
 	}
 
 	public void setRecurringPurchase(boolean recurringPurchase) {
 		this.recurringPurchase = recurringPurchase;
+	}
+
+	public List<Integer> getInstallmentsComboBox() {
+		return installmentsComboBox;
+	}
+
+	public void setInstallmentsComboBox(List<Integer> installmentsComboBox) {
+		this.installmentsComboBox = installmentsComboBox;
+	}
+
+	public int getInstallmentSelectedCombobox() {
+		return installmentSelectedCombobox;
+	}
+
+	public void setInstallmentSelectedCombobox(int installmentSelectedCombobox) {
+		this.installmentSelectedCombobox = installmentSelectedCombobox;
 	}
 }

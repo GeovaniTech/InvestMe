@@ -138,11 +138,11 @@
 								<p:outputLabel for="installments" value="#{MBTransactionInfo.recurringPurchase ? label.months_to_repeat : label.number_installments}" />
 								<p:selectOneMenu
 									id="installments"
-									value="#{MBTransactionInfo.transaction.installments}"
+									value="#{MBTransactionInfo.installmentSelectedCombobox}"
 >
 									<f:selectItems 
 										var="installment"
-										value="#{MBTransactionInfo.installments}"
+										value="#{MBTransactionInfo.installmentsComboBox}"
 										itemLabel="#{installment}"
 										itemValue="#{installment}" />
 								</p:selectOneMenu>

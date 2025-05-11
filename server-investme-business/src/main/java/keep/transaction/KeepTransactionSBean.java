@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import abstracts.AbstractKeep;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionManagement;
 import jakarta.ejb.TransactionManagementType;
 import jakarta.persistence.Query;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Tuple;
+import keep.installment.IKeepInstallmentSBean;
 import model.Transaction;
 import query.SimpleWhere;
 import to.TOParameter;
@@ -21,6 +23,10 @@ import utils.StringUtil;
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransaction> implements IKeepTransactionSBean, IKeepTransactionRemoteSBean {
+
+	@EJB
+	private IKeepInstallmentSBean installmentSBean;
+	
 	public KeepTransactionSBean() {
 		super(Transaction.class, TOTransaction.class);
 	}
@@ -414,5 +420,13 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		}
 		
 		return transactions;
+	}
+
+	public IKeepInstallmentSBean getInstallmentSBean() {
+		return installmentSBean;
+	}
+
+	public void setInstallmentSBean(IKeepInstallmentSBean installmentSBean) {
+		this.installmentSBean = installmentSBean;
 	}
 }

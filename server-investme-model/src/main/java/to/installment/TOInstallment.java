@@ -1,22 +1,15 @@
-package model;
+package to.installment;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import to.transaction.TOTransaction;
 
-@Entity
-public class Installment {
-	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
+public class TOInstallment implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
-	
-	@ManyToOne
-	private Transaction transaction;
-	
+	private TOTransaction transaction;
 	private Date referenceDate;
 	private Double value;
 	private Boolean paid;
@@ -27,10 +20,10 @@ public class Installment {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Transaction getTransaction() {
+	public TOTransaction getTransaction() {
 		return transaction;
 	}
-	public void setTransaction(Transaction transaction) {
+	public void setTransaction(TOTransaction transaction) {
 		this.transaction = transaction;
 	}
 	public Date getReferenceDate() {
@@ -50,5 +43,5 @@ public class Installment {
 	}
 	public void setPaid(Boolean paid) {
 		this.paid = paid;
-	}
+	}	
 }

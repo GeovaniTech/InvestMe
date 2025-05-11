@@ -1,10 +1,12 @@
 package to.transaction;
 
 import java.util.Date;
+import java.util.List;
 
 import abstracts.AbstractTOObject;
 import to.category.TOCategory;
 import to.client.TOClient;
+import to.installment.TOInstallment;
 import to.payment.TOPayment;
 
 public class TOTransaction extends AbstractTOObject implements Cloneable {
@@ -19,9 +21,10 @@ public class TOTransaction extends AbstractTOObject implements Cloneable {
 	private TOCategory category;
 	private TOPayment payment;
 	private TOClient client;
-	private Integer installments = 1;
 	private boolean paid;
 	private boolean notify;
+	
+	private List<TOInstallment> installments;
 	
 	public int getId() {
 		return id;
@@ -71,19 +74,18 @@ public class TOTransaction extends AbstractTOObject implements Cloneable {
 	public void setClient(TOClient client) {
 		this.client = client;
 	}
-	public Integer getInstallments() {
-		return installments;
-	}
-	public void setInstallments(Integer installments) {
-		this.installments = installments;
-	}
 	public boolean isPaid() {
 		return paid;
 	}
 	public void setPaid(boolean paid) {
 		this.paid = paid;
 	}
-	
+	public List<TOInstallment> getInstallments() {
+		return installments;
+	}
+	public void setInstallments(List<TOInstallment> installments) {
+		this.installments = installments;
+	}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
