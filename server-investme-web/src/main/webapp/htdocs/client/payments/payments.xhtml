@@ -81,6 +81,10 @@
 					<p:column headerText="#{label.installmentable}">
 						<h:outputText value="#{to.installmentable ? label.yes : label.no}"/>
 					</p:column>
+
+					<p:column headerText="#{label.close_date}">
+						<h:outputText value="#{to.closeDate == null ? '-' : to.closeDate}"/>
+					</p:column>
 					
 					<p:column headerText="#{label.due_date}">
 						<h:outputText value="#{to.dueDate == null ? '-' : to.dueDate}"/>

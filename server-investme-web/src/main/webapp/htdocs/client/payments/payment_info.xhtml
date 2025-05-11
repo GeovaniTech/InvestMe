@@ -52,6 +52,22 @@
 								</p:selectOneMenu>
 		        			</div>
 	        			</div>
+	        			
+	        			<div jsf:id="containerCloseDate" class="ui-g-4">
+							<div jsf:rendered="#{MBPaymentInfo.payment.installmentable}" class="input-container">
+								<p:outputLabel for="closeDate" value="#{label.close_date}" />
+								<p:selectOneMenu 
+									id="closeDate"
+									value="#{MBPaymentInfo.payment.closeDate}">
+										
+									<f:selectItems 
+										var="date"
+										value="#{MBPaymentInfo.monthsDate}"
+										itemLabel="#{date}"
+										itemValue="#{date}" />
+								</p:selectOneMenu>
+		        			</div>
+	        			</div>
 	        		</div>
 	        		
 	        		<div class="ui-g-12 no-padding-top no-padding-bottom">
@@ -63,7 +79,7 @@
 							
 								<p:ajax 
 									event="change"
-									update="containerDueDate" />	
+									update="containerDueDate, containerCloseDate" />	
 							</p:selectBooleanCheckbox>
 								
 							<p:outputLabel for="installmentable" value="#{label.installmentable}"/>

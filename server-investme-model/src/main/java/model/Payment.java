@@ -14,6 +14,7 @@ public class Payment extends AbstractObject {
 	private String name;
 	private boolean installmentable;
 	private Integer dueDate;
+	private Integer closeDate;
 	
 	public int getId() {
 		return id;
@@ -38,5 +39,11 @@ public class Payment extends AbstractObject {
 	}
 	public void setDueDate(Integer dueDate) {
 		this.dueDate = dueDate;
+	}
+	public Integer getCloseDate() {
+		return closeDate;
+	}
+	public void setCloseDate(Integer closeDate) {
+		this.closeDate = closeDate;
 	}
 }

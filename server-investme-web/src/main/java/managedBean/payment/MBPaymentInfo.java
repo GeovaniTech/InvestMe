@@ -52,6 +52,7 @@ public class MBPaymentInfo extends AbstractMBean {
 			
 			if (!this.getPayment().isInstallmentable()) {
 				this.getPayment().setDueDate(null);
+				this.getPayment().setCloseDate(null);
 			}
 
 			this.getPaymentSBean().change(this.getPayment());
