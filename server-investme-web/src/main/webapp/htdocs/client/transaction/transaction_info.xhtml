@@ -17,6 +17,7 @@
 			widgetVar="dialogTransactionInfoVW"
 			header="#{label.transaction}"
 			onHide="updateTableAndCards();"
+			onShow="recenterDialog('dialogTransactionInfoVW');"
 			width="1024px"
 			modal="true"
 			updateOnClose="formTransactionInfo">
@@ -156,6 +157,18 @@
 									disabled="true" />
 							</div>
 						</div>
+					</div>
+					<div class="intallments ui-g-12" jsf:id="installmentsContainer">
+						<p:accordionPanel activeIndex="-1" onTabShow="recenterDialog('dialogTransactionInfoVW');" onTabClose="recenterDialog('dialogTransactionInfoVW');">
+							<p:tab title="#{label.installments}">
+								<ui:repeat var="installment" value="#{MBTransactionInfo.transaction.installments}">
+									<components:installment 
+										referenceDate="#{installment.referenceDate}"
+										value="#{installment.value}"
+										paid="#{installment.paid}" />	
+								</ui:repeat>
+							</p:tab>
+						</p:accordionPanel>
 					</div>
 				</div>
 				

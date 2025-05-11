@@ -76,7 +76,7 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		query.setMaxResults(filter.getMaxResults());
 		
 		setParameters(query, params);
-		
+
 		return this.convertModelResults(query.getResultList());
 	}
 
@@ -102,7 +102,8 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		StringBuilder sql = new StringBuilder();
 		sql.append(" FROM ")
 			.append(Transaction.class.getSimpleName())
-			.append(" T ");
+			.append(" T ")
+			.append(" JOIN T.installments installments ");
 		
 		return sql.toString();
 	}

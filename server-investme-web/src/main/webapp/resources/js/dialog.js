@@ -19,3 +19,7 @@ function hideBodyScroll() {
 function showBodyScroll() {
     document.body.style.overflow = 'auto';
 }
+
+function recenterDialog(widget) {
+	PF(widget).initPosition();
+}

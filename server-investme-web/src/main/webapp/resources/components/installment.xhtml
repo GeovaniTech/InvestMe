@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components">
+	
+	<composite:interface>
+		<composite:attribute name="referenceDate" />
+		<composite:attribute name="paid" />
+		<composite:attribute name="value" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<h:outputStylesheet library="css" name="/components/installment/installment.css" />
+
+		<div class="installment-inline-card">
+			<span class="reference-date">#{MBAppConfigs.formatToLongPortugueseDate(cc.attrs.referenceDate)}</span>
+			
+			<div class="installment-infos-container">
+				<div class="installment-info">
+					<div class="label">#{label.reference_date}</div>
+					<span>#{MBAppConfigs.formatToSimpleDate(cc.attrs.referenceDate)}</span>
+				</div>
+			
+				<div class="installment-info">
+					<div class="label">#{label.value}</div>
+					<span>#{MBAppConfigs.getBrazilianCurrency(cc.attrs.value)}</span>
+				</div>
+				
+				<div class="installment-info">
+					<div class="label">#{label.paid}</div>
+					<span>#{cc.attrs.paid ? label.yes : label.no}</span>
+				</div>
+			
+				<div class="status-badge #{cc.attrs.paid ? 'paid' : 'not-paid'}">#{cc.attrs.paid ? label.paid : label.pending}</div>
+			</div>
+		</div>
+	</composite:implementation>
+</html>

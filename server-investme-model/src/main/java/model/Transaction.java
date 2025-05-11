@@ -6,6 +6,7 @@ import java.util.List;
 import abstracts.AbstractObject;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +34,7 @@ public class Transaction extends AbstractObject {
 	@ManyToOne
 	private Payment payment;
 		
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Installment> installments;
 	
 	public int getId() {

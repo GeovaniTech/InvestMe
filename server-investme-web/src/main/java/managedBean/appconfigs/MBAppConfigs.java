@@ -1,6 +1,7 @@
 package managedBean.appconfigs;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -211,6 +212,23 @@ public class MBAppConfigs extends AbstractMBean {
 		
 		return systemVersion;
 	}
+	
+    public String formatToLongPortugueseDate(Date date) {
+        if (date == null) return "";
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("pt", "BR"));
+        return capitalizeFirst(formatter.format(date));
+    }
+    
+    public String formatToSimpleDate(Date date) {
+        if (date == null) return "";
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+        return formatter.format(date);
+    }
+
+    public String capitalizeFirst(String input) {
+        if (input == null || input.isEmpty()) return input;
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
 	
 	// Getters and Setters
 	public TOAppConfig getAppConfigs() {
