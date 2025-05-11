@@ -14,6 +14,7 @@
 		<class>model.Category</class>
 		<class>model.AppConfig</class>
 		<class>model.Log</class>
+		<class>model.Installment</class>
 		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

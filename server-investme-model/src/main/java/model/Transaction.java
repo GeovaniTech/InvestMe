@@ -1,13 +1,16 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 import abstracts.AbstractObject;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Transaction extends AbstractObject {
@@ -29,6 +32,9 @@ public class Transaction extends AbstractObject {
 
 	@ManyToOne
 	private Payment payment;
+		
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Installment> installments;
 	
 	public int getId() {
 		return id;
@@ -108,6 +114,14 @@ public class Transaction extends AbstractObject {
 
 	public void setNotify(boolean notify) {
 		this.notify = notify;
+	}
+
+	public List<Installment> getInstallments() {
+		return installments;
+	}
+
+	public void setInstallments(List<Installment> installments) {
+		this.installments = installments;
 	}
 
 }
