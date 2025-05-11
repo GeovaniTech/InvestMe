@@ -159,7 +159,12 @@
 						</div>
 					</div>
 					<div class="intallments ui-g-12" jsf:id="installmentsContainer">
-						<p:accordionPanel activeIndex="-1" onTabShow="recenterDialog('dialogTransactionInfoVW');" onTabClose="recenterDialog('dialogTransactionInfoVW');">
+						<p:accordionPanel 
+							activeIndex="-1" 
+							onTabShow="recenterDialog('dialogTransactionInfoVW');" 
+							onTabClose="recenterDialog('dialogTransactionInfoVW');"
+							rendered="#{MBTransactionInfo.transaction.payment.installmentable and MBTransactionInfo.transaction.installments.size() > 0}">
+							
 							<p:tab title="#{label.installments}">
 								<ui:repeat var="installment" value="#{MBTransactionInfo.transaction.installments}">
 									<components:installment 

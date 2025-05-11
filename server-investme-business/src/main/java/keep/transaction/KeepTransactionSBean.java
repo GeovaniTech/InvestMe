@@ -37,7 +37,6 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		
 		this.getEntityManager().persist(model);
 		this.getEntityManager().flush();
-		transaction.setId(model.getId());
 	}
 
 	@Override
