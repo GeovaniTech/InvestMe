@@ -20,6 +20,7 @@ import to.category.TOCategory;
 import to.installment.TOInstallment;
 import to.payment.TOPayment;
 import to.transaction.TOTransaction;
+import utils.ListUtil;
 
 @Named(MBTransactionInfo.MANAGED_BEAN_NAME)
 @ViewScoped
@@ -164,6 +165,22 @@ public class MBTransactionInfo extends AbstractMBean {
 				if(!this.getIdPaymentSelected().equals(this.getTransaction().getPayment().getId())) {
 					TOPayment payment = this.getPaymentSBean().findById(this.getIdPaymentSelected());
 					this.getTransaction().setPayment(payment);
+				}
+				
+				/**
+				 * If all installments are marked as paid, then will automatic set the transaction as paid as well.
+				 */
+				
+				boolean hasInstallmentsNotPaid = ListUtil.isNotNull(this.getTransaction().getInstallments()) && this.getTransaction().getInstallments().stream().filter(i -> i.getPaid() == false).toList().size() > 0;
+				
+				if (!hasInstallmentsNotPaid && !this.getTransaction().isPaid()) {
+					this.getTransaction().setPaid(true);
+				} else if (hasInstallmentsNotPaid && this.getTransaction().isPaid()) {
+					List<TOInstallment> installments = this.getTransaction().getInstallments().stream().filter(i -> i.getPaid() == false).toList();
+					
+					installments.forEach(installment -> {
+						installment.setPaid(true);
+					});;
 				}
 				
 				this.getTransaction().setChangeDate(new Date());

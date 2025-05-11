@@ -28,13 +28,6 @@
 					action="#{MBTransactionInfo.updateAmountWithPayment}"
 					update="formTransactionInfo:containerInstallments, amount, containerNotify, containerNotifyEditing" 
 					process="@this" />			
-				
-				<p:messages 
-	       			id="transactionInfoMessages" 
-	        		autoUpdate="true"
-	        		showIcon="false"
-	        		showDetail="false"
-	        		escape="false" />
 			
 				<div class="ui-g">
 					<div class="ui-g-12 input-container">
@@ -249,7 +242,7 @@
 							rendered="#{!MBTransactionInfo.editing}"
 							disabled="#{MBTransactionInfo.transaction == null}"
 							styleClass="mg-r-5"
-							update="@form" />
+							update="@form, growl" />
 							
 						<p:commandButton
 							icon="pi pi-save" 
@@ -258,7 +251,7 @@
 							rendered="#{MBTransactionInfo.editing}"
 							disabled="#{MBTransactionInfo.transaction == null}"
 							styleClass="mg-r-5"
-							update="@form" />
+							update="@form, growl" />
 							
 						<p:commandButton
 							icon="pi pi-trash" 
@@ -266,7 +259,7 @@
 							action="#{MBTransactionInfo.remove}"
 							disabled="#{MBTransactionInfo.transaction == null or !MBTransactionInfo.editing}"
 							styleClass="deleteStyle"
-							update="@form" />
+							update="@form, growl" />
 					</f:facet>
 				</p:toolbar>
 				

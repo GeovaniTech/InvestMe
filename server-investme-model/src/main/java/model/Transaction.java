@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 
 @Entity
 public class Transaction extends AbstractObject {
@@ -35,6 +36,7 @@ public class Transaction extends AbstractObject {
 	private Payment payment;
 		
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy("referenceDate")
 	private List<Installment> installments;
 	
 	public int getId() {

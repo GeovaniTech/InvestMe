@@ -54,6 +54,12 @@
     font-size: 0.9em;
   }
 
+  .installment-paid-container {
+	 display: flex;
+	 align-items: flex-end;
+	 flex-direction: column;
+  }
+
   .status-badge {
     padding: 6px 12px;
     border-radius: 12px;
@@ -61,6 +67,7 @@
     font-weight: bold;
     color: white;
     white-space: nowrap;
+    width: fit-content;
   }
 
   .paid {

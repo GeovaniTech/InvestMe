@@ -36,7 +36,17 @@
 					<span>#{cc.attrs.paid ? label.yes : label.no}</span>
 				</div>
 			
-				<div class="status-badge #{cc.attrs.paid ? 'paid' : 'not-paid'}">#{cc.attrs.paid ? label.paid : label.pending}</div>
+				<div class="installment-paid-container">
+					<div class="status-badge #{cc.attrs.paid ? 'paid' : 'not-paid'}">#{cc.attrs.paid ? label.paid : label.pending}</div>	
+					<div class="input-container-horizontal mg-t-10">
+						<p:selectBooleanCheckbox
+							id="mark"
+							value="#{installment.paid}"
+							class="mg-r-5" />	
+							
+						<p:outputLabel for="mark" value="#{label.mark_paid}"/>
+					</div>		
+				</div>
 			</div>
 		</div>
 	</composite:implementation>

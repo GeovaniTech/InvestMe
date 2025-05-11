@@ -370,3 +370,10 @@ body .ui-datepicker .ui-datepicker-calendar td>a, body .ui-datepicker .ui-datepi
 	background-color: var(--blue) !important;
 	color: #FFFFFF !important;
 }
+
+/* #################### GROWL #################### */
+.ui-growl-info {
+	background-color: #b3e5fc !important;
+	color: #01579b !important;
+}
+
