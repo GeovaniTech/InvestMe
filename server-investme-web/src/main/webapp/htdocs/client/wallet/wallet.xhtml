@@ -182,9 +182,7 @@
 					</p:column>
 					
 					<p:column headerText="#{label.purchase_date}">
-						<h:outputText value="#{to.datePurchase}">
-							<f:convertDateTime pattern="dd/MM/yyyy"/>
-						</h:outputText>
+						<h:outputText value="#{MBAppConfigs.formatToSimpleLocaleDate(to.datePurchase)}" />
 					</p:column>
 					
 					<p:column headerText="#{label.price}">

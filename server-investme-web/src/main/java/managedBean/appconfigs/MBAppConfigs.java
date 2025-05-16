@@ -213,18 +213,29 @@ public class MBAppConfigs extends AbstractMBean {
 		return systemVersion;
 	}
 	
-    public String formatToLongPortugueseDate(Date date) {
+    public String formatToLongLocaleDate(Date date) {
         if (date == null) return "";
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("pt", "BR"));
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Locale locale = facesContext != null ? facesContext.getViewRoot().getLocale() : Locale.getDefault();
+        
+        String pattern = this.getAppConfigs().getLanguage().equals("pt-BR") ? "EEEE, d 'de' MMMM 'de' yyyy" : "EEEE, MMMM d, yyyy";
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
+
         return capitalizeFirst(formatter.format(date));
     }
-    
-    public String formatToSimpleDate(Date date) {
+
+    public String formatToSimpleLocaleDate(Date date) {
         if (date == null) return "";
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Locale locale = facesContext != null ? facesContext.getViewRoot().getLocale() : Locale.getDefault();
+
+        String pattern = locale.getLanguage().equals("pt-BR") ? "dd/MM/yyyy" : "MM/dd/yyyy";
+        SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
+
         return formatter.format(date);
     }
-
     public String capitalizeFirst(String input) {
         if (input == null || input.isEmpty()) return input;
         return input.substring(0, 1).toUpperCase() + input.substring(1);

@@ -170,7 +170,6 @@ public class MBTransactionInfo extends AbstractMBean {
 				/**
 				 * If all installments are marked as paid, then will automatic set the transaction as paid as well.
 				 */
-				
 				boolean hasInstallmentsNotPaid = ListUtil.isNotNull(this.getTransaction().getInstallments()) && this.getTransaction().getInstallments().stream().filter(i -> i.getPaid() == false).toList().size() > 0;
 				
 				if (!hasInstallmentsNotPaid && !this.getTransaction().isPaid()) {
