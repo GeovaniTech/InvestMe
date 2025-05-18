@@ -88,7 +88,7 @@ h2 {
 }
 
 .ajax-loading:before {
-	background-color: var(--blue-mouse);
+	background-color: var(--inv-primary-color-mouse);
 	content: '';
 	-webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 	animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
@@ -139,7 +139,7 @@ h2 {
 }
 
 *::-webkit-scrollbar-thumb {
-	background-color: var(--blue);
+	background-color: var(--inv-primary-color);
 }
 
 /* MEDIA QUERIES */

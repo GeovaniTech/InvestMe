@@ -64,7 +64,7 @@ public class MBAppConfigs extends AbstractMBean {
 		this.getConfigsFromCookies();
 		
 		// Setting cache management
-		this.setCacheVersion(UUID.randomUUID().toString());
+		this.setCacheVersion(this.getSystemVersion());
 	}
 	
  	public boolean getConfigsFromCookies() {
@@ -203,16 +203,14 @@ public class MBAppConfigs extends AbstractMBean {
 	
 	public String getSystemVersion() {
 		if (systemVersion == null) {
-			 FacesContext facesContext = FacesContext.getCurrentInstance(); 
-			 Locale locale = facesContext.getViewRoot().getLocale();
-			 ResourceBundle bundle = ResourceBundle.getBundle("app-config", locale);
+			 ResourceBundle bundle = ResourceBundle.getBundle("app-config");
 
 			 this.setSystemVersion(bundle.getString("system_version"));
 		}
 		
 		return systemVersion;
 	}
-	
+	 
     public String formatToLongLocaleDate(Date date) {
         if (date == null) return "";
         

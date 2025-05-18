@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 .menu-payments {
-	background-color: var(--blue) !important;
+	background-color: var(--inv-primary-color) !important;
 }
 
 .menu-payments:hover {
-	background-color: var(--blue-mouse) !important;
+	background-color: var(--inv-primary-color-mouse) !important;
 }
 
 .menu-payments .ui-menuitem-text {

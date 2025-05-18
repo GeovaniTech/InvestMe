@@ -33,7 +33,7 @@
 }
 
 .stock:hover {
-	background-color: var(--blue);
+	background-color: var(--inv-primary-color);
 }
 
 .stock:hover p {

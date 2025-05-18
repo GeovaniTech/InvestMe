@@ -41,7 +41,7 @@
 }
 
 .card:hover {
-	background-color: var(--blue);
+	background-color: var(--inv-primary-color);
 	color: white;
 }
 

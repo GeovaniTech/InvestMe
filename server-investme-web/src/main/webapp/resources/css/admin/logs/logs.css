@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 .menu-logs {
-	background-color: var(--blue) !important;
+	background-color: var(--inv-primary-color) !important;
 }
 
 .menu-logs:hover {
-	background-color: var(--blue-mouse) !important;
+	background-color: var(--inv-primary-color-mouse) !important;
 }
 
 .menu-logs .ui-menuitem-text {

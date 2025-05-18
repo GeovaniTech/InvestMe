@@ -102,7 +102,7 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		sql.append(" FROM ")
 			.append(Transaction.class.getSimpleName())
 			.append(" T ")
-			.append(" JOIN T.installments installments ");
+			.append(" LEFT JOIN T.installments installments ");
 		
 		return sql.toString();
 	}
