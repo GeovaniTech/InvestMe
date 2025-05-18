@@ -219,7 +219,7 @@ public class MBAppConfigs extends AbstractMBean {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Locale locale = facesContext != null ? facesContext.getViewRoot().getLocale() : Locale.getDefault();
         
-        String pattern = this.getAppConfigs().getLanguage().equals("pt-BR") ? "EEEE, d 'de' MMMM 'de' yyyy" : "EEEE, MMMM d, yyyy";
+        String pattern = this.getAppConfigs().getLanguage().equals("pt_br") ? "EEEE, d 'de' MMMM 'de' yyyy" : "EEEE, MMMM d, yyyy";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern, locale);
 
         return capitalizeFirst(formatter.format(date));
