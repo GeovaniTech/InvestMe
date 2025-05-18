@@ -24,15 +24,9 @@ public class MBMenuInvestme extends AbstractMBean {
 	@PostConstruct
 	public void init() {
 		this.setMenu(new DefaultMenuModel());
-		
-        DefaultSubMenu financialManagement = DefaultSubMenu.builder()
-                .label(this.getLabel("financial_management"))
-                .styleClass("submenu")
-                .expanded(true)
-                .build();
         
         DefaultMenuItem wallet = DefaultMenuItem.builder()
-        		.styleClass("menu-wallet")
+        		.styleClass("left-menu-item menu-wallet")
                 .value(this.getLabel("wallet"))
                 .icon("pi pi-wallet")
                 .url(this.createUrlMenu("client/wallet"))
@@ -40,7 +34,7 @@ public class MBMenuInvestme extends AbstractMBean {
                 .build();
         
         DefaultMenuItem categories = DefaultMenuItem.builder()
-        		.styleClass("menu-categories")
+        		.styleClass("left-menu-item menu-categories")
                 .value(this.getLabel("categories"))
                 .icon("pi pi-box")
                 .url(this.createUrlMenu("client/categories"))
@@ -48,7 +42,7 @@ public class MBMenuInvestme extends AbstractMBean {
                 .build();
         
         DefaultMenuItem payments = DefaultMenuItem.builder()
-        		.styleClass("menu-payments")
+        		.styleClass("left-menu-item menu-payments")
                 .value(this.getLabel("payments"))
                 .icon("pi pi-credit-card")
                 .url(this.createUrlMenu("client/payments"))
@@ -56,20 +50,18 @@ public class MBMenuInvestme extends AbstractMBean {
                 .build();
         
         DefaultMenuItem stockExchange = DefaultMenuItem.builder()
-        		.styleClass("menu-dashboard")
+        		.styleClass("left-menu-item menu-dashboard")
                 .value(this.getLabel("stock_exchange"))
                 .icon("pi pi-dollar")
                 .url(this.createUrlMenu("client/stockexchange"))
                 .update("messages")
                 .build();
         
-        financialManagement.getElements().add(wallet);
-        financialManagement.getElements().add(stockExchange);
-        financialManagement.getElements().add(categories);
-        financialManagement.getElements().add(payments);
-        
-        this.getMenu().getElements().add(financialManagement);
-        
+        this.getMenu().getElements().add(wallet);
+        this.getMenu().getElements().add(stockExchange);
+        this.getMenu().getElements().add(categories);
+        this.getMenu().getElements().add(payments);
+                
         if(this.getClientSession().getSecurityLevel().equals("admin")) { 
             DefaultSubMenu admin = DefaultSubMenu.builder()
                     .label("Admin")

@@ -336,8 +336,16 @@ body .ui-datepicker .ui-datepicker-calendar td>a, body .ui-datepicker .ui-datepi
 	padding: 0px !important;
 }
 
+.ui-menu li {
+	background-color: var(--background-geneneral) !important;
+}
+
 .ui-menuitem-link  {
 	background-color: var(--background-general) !important;
+	border-radius: 15px !important;
+	margin: 10px !important;
+	padding: 20px !important;
+	width: 92% !important;
 }
 
 .ui-menuitem-link:hover {
