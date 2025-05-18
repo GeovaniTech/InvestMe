@@ -13,6 +13,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import keep.category.IKeepCategorySBean;
 import keep.transaction.IKeepTransactionSBean;
+import to.charts.TOChartByCategory;
 import to.transaction.TOFilterTransaction;
 import utils.ColorUtil;
 
@@ -54,23 +55,28 @@ public class MBChartInvestments extends AbstractMBean {
         
         filter.setType("investment");
         
-        List<String> labels = this.getTransactionSBean().getCategoriesNameWithTransactions(filter);
+        List<TOChartByCategory> chartData = this.getTransactionSBean().getChartByCategory(filter);
+        
+        List<String> labels = chartData.stream().map(t -> t.getCategoryName()).toList();
+        List<Number> values = chartData.stream().map(t -> t.getTotal()).toList();
+        
         data.setLabels(labels);
+        dataSet.setData(values);
         
-        List<Number> values = this.getTransactionSBean().getTotalByCategoryChartInvestment(filter);
+        dataSet.setBackgroundColor(ColorUtil.generateRandomColors(values.size()));
+        data.addChartDataSet(dataSet);
         
-        if(values.size() > 0) {
+        this.getPieModel().setData(data);
+        
+        updateHasData(values);   
+	}
+
+	private void updateHasData(List<Number> values) {
+		if(values.size() > 0) {
         	this.setHasData(true);
         } else {
         	this.setHasData(false);
         }
-        
-        dataSet.setData(values);
-        dataSet.setBackgroundColor(ColorUtil.generateRandomColors(values.size()));
-        
-        data.addChartDataSet(dataSet);
-        
-        this.getPieModel().setData(data);
 	}	
 	
 	public MBHome getMBHome() {

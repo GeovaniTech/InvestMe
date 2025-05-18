@@ -7,7 +7,7 @@ if (PrimeFaces.widget.Dialog) {
                 el.focus({
                     preventScroll: true
                 });
-            }, 1000);
+            }, 2000);
         }
     }
 };

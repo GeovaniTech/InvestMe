@@ -51,6 +51,16 @@ public class MBHome extends AbstractFilterMBean<TOTransaction, TOFilterTransacti
 		this.searchResults();
 	}
 
+	public void reloadAllCharts() {
+		MBChartExpenditures mbeanChartExpenditures = (MBChartExpenditures) this.getMBean(MBChartExpenditures.MANAGED_BEAN_NAME);
+		MBChartInvestments mbeanChartInvestments = (MBChartInvestments) this.getMBean(MBChartInvestments.MANAGED_BEAN_NAME);
+		MBChartExpendituresByPayment mbeanChartExpendituresByPayment = (MBChartExpendituresByPayment) this.getMBean(MBChartExpendituresByPayment.MANAGED_BEAN_NAME);
+		
+		mbeanChartInvestments.createChartInvestments();
+		mbeanChartExpenditures.createChartExpenditures();
+		mbeanChartExpendituresByPayment.createChartExpendituresByPayment();
+	}
+	
 	@Override
 	public List<TOTransaction> getData(TOFilterTransaction filter) {
 		return this.getTransactionSBean().search(filter);

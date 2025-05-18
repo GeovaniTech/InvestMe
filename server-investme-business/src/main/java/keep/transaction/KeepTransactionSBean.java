@@ -16,6 +16,8 @@ import model.Transaction;
 import query.SimpleWhere;
 import to.TOParameter;
 import to.category.TOCategory;
+import to.charts.TOChartByCategory;
+import to.charts.TOChartByPayment;
 import to.transaction.TOFilterTransaction;
 import to.transaction.TOTransaction;
 import utils.StringUtil;
@@ -286,45 +288,6 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 		return 0.0;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Number> getTotalByCategoryChartInvestment(TOFilterTransaction filter) {		
-		StringBuilder sql = new StringBuilder();
-		
-		List<TOParameter> params = new ArrayList<TOParameter>();
-		
-		sql.append(" SELECT SUM(T.price * T.amount) ")
-			.append(this.getFromTransactions())
-			.append(" RIGHT JOIN T.category category ")
-			.append(this.getWhereTransactions(filter, params))
-			.append(" GROUP BY category.name ")
-			.append(" ORDER BY category.name ");
-		
-		Query query = this.getEntityManager().createQuery(sql.toString(), Number.class);
-		setParameters(query, params);
-		
-		return query.getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<String> getCategoriesNameWithTransactions(TOFilterTransaction filter) {
-		StringBuilder sql = new StringBuilder();
-		
-		List<TOParameter> params = new ArrayList<TOParameter>();
-		
-		sql.append(" SELECT T.category.name FROM ");
-		sql.append(Transaction.class.getSimpleName()).append(" T ");
-		sql.append(this.getWhereTransactions(filter, params));
-		sql.append(" GROUP BY T.category.name ");
-		sql.append(" ORDER BY T.category.name");
-		
-		Query query = this.getEntityManager().createQuery(sql.toString(), String.class);
-		setParameters(query, params);
-		
-		return query.getResultList();
-	}
-
 	@Override
 	public void deleteTransactionsFromUser() throws Exception {
 		StringBuilder sql = new StringBuilder();
@@ -428,5 +391,65 @@ public class KeepTransactionSBean extends AbstractKeep<Transaction, TOTransactio
 
 	public void setInstallmentSBean(IKeepInstallmentSBean installmentSBean) {
 		this.installmentSBean = installmentSBean;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TOChartByCategory> getChartByCategory(TOFilterTransaction filter) {
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT category.name, SUM(T.price * T.amount) ")
+			.append(this.getFromTransactions())
+			.append(" RIGHT JOIN T.category category ")
+			.append(this.getWhereTransactions(filter, params))
+			.append(" GROUP BY category.name ")
+			.append(" ORDER BY category.name ");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString(), Tuple.class);
+		setParameters(query, params);
+		
+		List<TOChartByCategory> chartData = new ArrayList<TOChartByCategory>();
+		
+		for (Tuple tuple : (List<Tuple>) query.getResultList()) {
+			TOChartByCategory to = new TOChartByCategory();
+			to.setCategoryName((String) tuple.get(0));
+			to.setTotal((Number) tuple.get(1));
+			
+			chartData.add(to);
+		}
+		
+		return chartData;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TOChartByPayment> getChartByPayment(TOFilterTransaction filter) {
+		StringBuilder sql = new StringBuilder();
+		
+		List<TOParameter> params = new ArrayList<TOParameter>();
+		
+		sql.append(" SELECT payment.name, SUM(T.price * T.amount) ")
+			.append(this.getFromTransactions())
+			.append(" RIGHT JOIN T.payment payment ")
+			.append(this.getWhereTransactions(filter, params))
+			.append(" GROUP BY payment.name ")
+			.append(" ORDER BY payment.name ");
+		
+		Query query = this.getEntityManager().createQuery(sql.toString(), Tuple.class);
+		setParameters(query, params);
+		
+		List<TOChartByPayment> chartData = new ArrayList<TOChartByPayment>();
+		
+		for (Tuple tuple : (List<Tuple>) query.getResultList()) {
+			TOChartByPayment to = new TOChartByPayment();
+			to.setPaymentName((String) tuple.get(0));
+			to.setTotal((Number) tuple.get(1));
+			
+			chartData.add(to);
+		}
+		
+		return chartData;
 	}
 }

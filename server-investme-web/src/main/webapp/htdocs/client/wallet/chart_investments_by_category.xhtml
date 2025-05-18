@@ -11,18 +11,11 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <ui:composition>
-	<h:form id="formChartInvestments">
-		<h:inputHidden id="chartInvestmentsFilter" value="#{filter}" />
-		
-		<p:remoteCommand 
-			name="reloadChartInvestments"
-			action="#{MBChartInvestments.createChartInvestments}"
-			update="@form" />
+	<h:inputHidden id="chartInvestmentsFilter" value="#{filter}" />
 
-		<div class="container-chart-investments vertical-center" style="display: #{MBChartInvestments.hasData ? 'flex' : 'none'}">
-			<p:pieChart model="#{MBChartInvestments.pieModel}" rendered="#{MBChartInvestments.hasData}" />
-			<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalInvestment()) : '******'}</p>
-		</div>	
-	</h:form>
+	<div class="container-chart-investments vertical-center" style="display: #{MBChartInvestments.hasData ? 'flex' : 'none'}">
+		<p:pieChart model="#{MBChartInvestments.pieModel}" rendered="#{MBChartInvestments.hasData}" />
+		<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalInvestment()) : '******'}</p>
+	</div>	
 </ui:composition>
 </html>

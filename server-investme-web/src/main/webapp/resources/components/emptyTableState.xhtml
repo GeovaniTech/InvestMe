@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://java.sun.com/jsf/core"
+  	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:components="http://java.sun.com/jsf/composite/components"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
+	
+	<composite:interface>
+		<composite:attribute name="id" />
+		<composite:attribute name="label" />
+		<composite:attribute name="rendered" />
+	</composite:interface>
+	
+	<composite:implementation>
+		<h:outputStylesheet library="css" name="/components/empty-table-state/empty-table-state.css?v=#{MBAppConfigs.cacheVersion}" />
+
+		<div jsf:id="#{cc.attrs.id}">
+			<div class="container-empty-table-state" jsf:rendered="#{cc.attrs.rendered}">
+				<p:graphicImage 
+					library="images"
+					name="no-results-found.svg"
+					class="image-empty-state"/>
+					
+				<p class="label-empty-state">#{cc.attrs.label}</p>
+			
+				<div class="horizontal-input-container">
+					<composite:insertChildren />
+				</div>
+			</div>
+		</div>
+	</composite:implementation>
+</html>

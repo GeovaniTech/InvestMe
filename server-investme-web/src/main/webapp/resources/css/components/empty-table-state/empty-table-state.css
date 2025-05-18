@@ -1,0 +1,50 @@
+.container-empty-table-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+/* Image styling */
+.image-empty-state {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+/* Text label */
+.label-empty-state {
+  font-size: 1.25rem;
+  color: #555;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-empty-table-state {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .label-empty-state {
+    font-size: 1.1rem;
+  }
+
+  .image-empty-state {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .label-empty-state {
+    font-size: 1rem;
+  }
+
+  .image-empty-state {
+    max-width: 200px;
+  }
+}

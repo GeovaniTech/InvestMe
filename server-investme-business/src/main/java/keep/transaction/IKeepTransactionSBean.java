@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.ejb.Local;
 import to.category.TOCategory;
+import to.charts.TOChartByCategory;
+import to.charts.TOChartByPayment;
 import to.transaction.TOFilterTransaction;
 import to.transaction.TOTransaction;
 
@@ -22,10 +24,10 @@ public interface IKeepTransactionSBean {
 	public Double getTotalExpensesChartByYear(Integer year, Integer month);
 	public Double getTotalInvestmentsChartByYear(Integer year, Integer month);
 	public Double getTotalExpectedExpensesChartByYear(Integer year, Integer month);
-	public List<Number> getTotalByCategoryChartInvestment(TOFilterTransaction filter);
-	public List<String> getCategoriesNameWithTransactions(TOFilterTransaction filter);
 	public List<String> getPaymentsNameWithTransactions(TOFilterTransaction filter);
 	public List<Number> getTotalByPayment(TOFilterTransaction filter);
+	public List<TOChartByCategory> getChartByCategory(TOFilterTransaction filter);
+	public List<TOChartByPayment> getChartByPayment(TOFilterTransaction filter);
 	public Double getTotalValueByPayment(TOFilterTransaction filter);
 	public void deleteTransactionsFromUser() throws Exception;
 }

@@ -36,9 +36,13 @@ public class MBChartSpents extends AbstractMBean {
 	@PostConstruct
 	public void init() {
 		this.createMonths();
-		this.setYears(this.getTransactionSBean().getYearsFromTransaction());
+		this.loadYears();
 		this.selectLastYear();
 		this.createChartSpents();
+	}
+
+	private void loadYears() {
+		this.setYears(this.getTransactionSBean().getYearsFromTransaction());
 	}
 	
 	private void selectLastYear() {

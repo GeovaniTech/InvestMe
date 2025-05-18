@@ -18,18 +18,12 @@
 
 		<ui:define name="body">
 			<h:outputStylesheet library="css" name="/client/wallet/wallet.css?v=#{MBAppConfigs.cacheVersion}" />
-			
-			<div jsf:id="charts" class="horizontal-evenly">
-				<ui:include src="/htdocs/client/wallet/chart_investments_by_category.xhtml" />
-				<ui:include src="/htdocs/client/wallet/chart_expenditures_by_category.xhtml" />
-				<ui:include src="/htdocs/client/wallet/chart_expenditures_by_payment.xhtml" />
-			</div>
-			
+						
 			<h:form id="formTransactions">
 				<p:remoteCommand 
 					name="updateTableAndCards"
-					onstart="reloadChartInvestments(); reloadChartExpenditures(); reloadChartExpendituresByPayment();"
-					update="formTransactions:tableTransactions:tableTransactions" />
+					action="#{MBHome.reloadAllCharts()}"
+					update="formTransactions:containerData" />
 		
 				<h2>#{label.last_transactions}</h2>
 		
@@ -161,6 +155,13 @@
 					<p:defaultCommand target="btnSearchResults" />
 				</p:overlayPanel>
 				
+				<div jsf:id="containerData">
+					<div jsf:id="charts" class="horizontal-evenly">
+						<ui:include src="/htdocs/client/wallet/chart_investments_by_category.xhtml" />
+						<ui:include src="/htdocs/client/wallet/chart_expenditures_by_category.xhtml" />
+						<ui:include src="/htdocs/client/wallet/chart_expenditures_by_payment.xhtml" />
+					</div>
+					
 				<components:datatableSingleSelection
 					id="tableTransactions"
 					widgetVar="tableTransactionsVW"
@@ -201,6 +202,7 @@
 						<h:outputText value="#{to.payment.name}" />
 					</p:column>
 				</components:datatableSingleSelection>
+				</div>
 			</h:form>
 			
 			<ui:include src="/htdocs/client/transaction/transaction_info.xhtml" />

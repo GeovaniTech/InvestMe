@@ -11,16 +11,9 @@
 	xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <ui:composition>
-	<h:form id="formChartExpendituresByPayments">
-		<p:remoteCommand 
-			name="reloadChartExpendituresByPayment"
-			action="#{MBChartExpendituresByPayment.createChartExpendituresByPayment}"
-			update="@form" />
-
-		<div class="container-chart-investments vertical-center" style="display: #{MBChartExpendituresByPayment.hasData ? 'flex' : 'none'}">
-			<p:pieChart model="#{MBChartExpendituresByPayment.pieModel}" />	
-			<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalByPayment()) : '******'}</p>
-		</div>
-	</h:form>
+	<div class="container-chart-investments vertical-center" style="display: #{MBChartExpendituresByPayment.hasData ? 'flex' : 'none'}">
+		<p:pieChart model="#{MBChartExpendituresByPayment.pieModel}" />	
+		<p class="mg-t-10">#{MBAppConfigs.appConfigs.showValues ? MBAppConfigs.getBrazilianCurrency(MBHome.getTotalByPayment()) : '******'}</p>
+	</div>
 </ui:composition>
 </html>
