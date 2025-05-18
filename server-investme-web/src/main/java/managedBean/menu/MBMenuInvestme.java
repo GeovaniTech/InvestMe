@@ -63,12 +63,7 @@ public class MBMenuInvestme extends AbstractMBean {
         this.getMenu().getElements().add(payments);
                 
         if(this.getClientSession().getSecurityLevel().equals("admin")) { 
-            DefaultSubMenu admin = DefaultSubMenu.builder()
-                    .label("Admin")
-                    .styleClass("submenu")
-                    .expanded(true)
-                    .build();
-            
+          
             DefaultMenuItem users = DefaultMenuItem.builder()
             		.styleClass("menu-users")
                     .value(this.getLabel("users"))
@@ -83,10 +78,8 @@ public class MBMenuInvestme extends AbstractMBean {
                     .url(this.createUrlMenu("admin/logs"))
                     .build();
             
-            admin.getElements().add(users);
-            admin.getElements().add(logs);
-            
-            this.getMenu().getElements().add(admin);
+            this.getMenu().getElements().add(users);
+            this.getMenu().getElements().add(logs);
         }
 	}
 	
