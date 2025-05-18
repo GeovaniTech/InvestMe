@@ -19,4 +19,11 @@
 	--background-body: #E8E9EC;
 	--submenu: #F3F2F4;	
 	--landing-page: white;
+	
+	/* INTALLMENT CARD */
+	--intallment-card-bg: #ffffff;
+	--intallment-card-bg-hover: #f1f3f5;
+	--intallment-card-border: #dee2e6;
+	--intallment-card-border-hover:#ced4da;
+	--intallment-card-label: #6c757d;
 }	
